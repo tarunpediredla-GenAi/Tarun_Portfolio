@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { AnimatePresence, motion } from 'motion/react';
+import { Sparkles, Cpu, Bot, Layers, Database, Cloud, Code2 } from 'lucide-react';
 import {
   CAREER_TIMELINE,
   EDUCATION_HISTORY,
@@ -15,13 +18,189 @@ interface BuiltDifferentAndFlowSectionProps {
   onOpenResume: () => void;
 }
 
+const EDITORIAL_TICKER_ITEMS = [
+  'FULL STACK PYTHON DEVELOPER',
+  'GENERATIVE AI & AGENTIC AI',
+  'HYDERABAD, TELANGANA',
+  'DJANGO & REST APIS',
+  'REACT & JAVASCRIPT',
+  'GOOGLE GEMINI · N8N · VAPI',
+  'DOCKER & CI/CD PIPELINES',
+];
+
+interface RobotHandSkill {
+  id: string;
+  shortLabel: string;
+  badgeSub: string;
+  title: string;
+  category: string;
+  description: string;
+  pills: string[];
+  accentHex: string;
+}
+
+const ROBOT_HAND_SKILLS: RobotHandSkill[] = [
+  {
+    id: 'python-django',
+    shortLabel: 'PYTHON · DJANGO',
+    badgeSub: 'BACKEND CORE',
+    title: 'Python & Django Backend',
+    category: '01 · Core Backend Architecture',
+    description:
+      'Production REST APIs, authentication, Cashfree payments & scalable server workflows.',
+    pills: ['Python', 'Django', 'REST APIs', 'Express'],
+    accentHex: '#5E1726',
+  },
+  {
+    id: 'genai-gemini',
+    shortLabel: 'GEN AI · GEMINI',
+    badgeSub: 'LLM REASONING',
+    title: 'Generative AI & Gemini',
+    category: '02 · AI Intelligence Layer',
+    description:
+      'Multi-persona AI interview evaluation, structured JSON extraction & contextual reasoning.',
+    pills: ['Google Gemini', 'Prompt Eng', 'Multi-Agent', 'RAG'],
+    accentHex: '#751E31',
+  },
+  {
+    id: 'agentic-vapi-n8n',
+    shortLabel: 'N8N · VAPI VOICE',
+    badgeSub: 'AGENTIC AI',
+    title: 'Agentic AI & Voice Workflows',
+    category: '03 · Autonomous Orchestration',
+    description:
+      'Spoken voice agents via Vapi + n8n webhook pipelines syncing directly with Google Sheets.',
+    pills: ['n8n', 'Vapi Voice AI', 'Webhooks', 'Automation'],
+    accentHex: '#5E1726',
+  },
+  {
+    id: 'react-javascript',
+    shortLabel: 'REACT · JAVASCRIPT',
+    badgeSub: 'FRONTEND ENGINE',
+    title: 'React.js & JavaScript UI',
+    category: '04 · Interactive Frontend',
+    description:
+      'High-contrast editorial interfaces, 3D WebGL stages, and responsive full-stack web apps.',
+    pills: ['React.js', 'JavaScript', 'HTML5 & CSS3', 'Tailwind CSS'],
+    accentHex: '#35423C',
+  },
+  {
+    id: 'databases-storage',
+    shortLabel: 'POSTGRES · SQL',
+    badgeSub: 'DATA LAYER',
+    title: 'PostgreSQL, MySQL & Firebase',
+    category: '05 · Database & Persistence',
+    description:
+      'Relational schema design, real-time Firestore collections, and high-integrity data pipelines.',
+    pills: ['PostgreSQL', 'MySQL', 'SQL', 'Firestore'],
+    accentHex: '#5E1726',
+  },
+  {
+    id: 'devops-cloud',
+    shortLabel: 'DOCKER · CI/CD',
+    badgeSub: 'CLOUD & DEVOPS',
+    title: 'Docker, CI/CD & Cloud',
+    category: '06 · Deployment & Delivery',
+    description:
+      'Containerized services, automated Git & GitHub CI/CD pipelines, and zero-downtime Vercel hosting.',
+    pills: ['Docker', 'CI/CD', 'Git & GitHub', 'Vercel'],
+    accentHex: '#35423C',
+  },
+];
+
 /**
- * Interactive 3D WebGL Cybernetic AI Bot & Orbital Core for the right side of "Built Different."
- * Matches the interactive Spline robot stage from portfolio-cinematic-sage.vercel.app
- * with pointer tracking, drag rotation, and responsive holographic lighting.
+ * Helper to create a crisp retina 3D Canvas Texture for each floating skill holo-chip held in the robot's hands.
+ */
+function createSkillPlateTexture(
+  label: string,
+  sublabel: string,
+  isPrimary: boolean
+): THREE.CanvasTexture {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512;
+  canvas.height = 176;
+  const ctx = canvas.getContext('2d');
+  if (ctx) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Rounded pill background in Warm Cream Beige or Deep Burgundy
+    const radius = 34;
+    const x = 12;
+    const y = 12;
+    const w = canvas.width - 24;
+    const h = canvas.height - 24;
+
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + w - radius, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
+    ctx.lineTo(x + w, y + h - radius);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+    ctx.lineTo(x + radius, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+
+    ctx.fillStyle = isPrimary
+      ? 'rgba(94, 23, 38, 0.96)'
+      : 'rgba(250, 247, 242, 0.96)';
+    ctx.fill();
+
+    ctx.lineWidth = 6;
+    ctx.strokeStyle = isPrimary ? '#F6F1E7' : '#5E1726';
+    ctx.stroke();
+
+    // Left status dot
+    ctx.beginPath();
+    ctx.arc(58, canvas.height / 2, 13, 0, Math.PI * 2);
+    ctx.fillStyle = isPrimary ? '#F6F1E7' : '#5E1726';
+    ctx.fill();
+
+    // Sublabel
+    ctx.font = '700 20px "JetBrains Mono", monospace';
+    ctx.fillStyle = isPrimary ? '#EFE8DA' : '#687A70';
+    ctx.fillText(sublabel, 90, 68);
+
+    // Main Skill Label
+    ctx.font = '800 34px "Outfit", "DM Sans", sans-serif';
+    ctx.fillStyle = isPrimary ? '#FAF7F2' : '#232B27';
+    ctx.fillText(label, 90, 118);
+  }
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.needsUpdate = true;
+  return texture;
+}
+
+/**
+ * Interactive 3D WebGL Cybernetic AI Bot & Cinematic Hand-Held Skill Projector
+ * Sculpted in Warm Cream Beige ceramic armor, Muted Sage Grey chassis joints, and Deep Burgundy core/visor accents.
+ * The robot holds both articulated hands forward, projecting an orbiting 3D hologram of Tarun's skills right in its hands!
  */
 function CyberneticBotCanvas() {
   const mountRef = useRef<HTMLDivElement>(null);
+  const conjureTriggerRef = useRef<number>(0);
+  const [activeSkillIdx, setActiveSkillIdx] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const activeSkill = ROBOT_HAND_SKILLS[activeSkillIdx];
+
+  // Auto-cycle skills in the robot's hands every 3.0 seconds with a conjuring wave
+  useEffect(() => {
+    if (isPaused) return;
+    const id = window.setInterval(() => {
+      conjureTriggerRef.current = 1.35;
+      setActiveSkillIdx((prev) => (prev + 1) % ROBOT_HAND_SKILLS.length);
+    }, 3000);
+    return () => window.clearInterval(id);
+  }, [isPaused]);
+
+  const handleSelectSkill = (idx: number) => {
+    conjureTriggerRef.current = 1.5;
+    setActiveSkillIdx(idx);
+  };
 
   useEffect(() => {
     const container = mountRef.current;
@@ -34,7 +213,7 @@ function CyberneticBotCanvas() {
       0.1,
       100
     );
-    camera.position.set(0, 0.3, 6.2);
+    camera.position.set(0, 0.28, 6.55);
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -44,226 +223,425 @@ function CyberneticBotCanvas() {
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.25;
+    renderer.toneMappingExposure = 1.15;
     container.appendChild(renderer.domElement);
 
-    // Studio & Cybernetic Rim Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+    // Studio Environment Map for Realistic Ceramic & Brushed Sage Reflections
+    const pmremGenerator = new THREE.PMREMGenerator(renderer);
+    const envTexture = pmremGenerator.fromScene(
+      new RoomEnvironment(),
+      0.04
+    ).texture;
+    scene.environment = envTexture;
+
+    // Studio & Rim Lighting
+    const ambientLight = new THREE.AmbientLight(0xf6f1e7, 0.95);
     scene.add(ambientLight);
 
-    const keyLight = new THREE.DirectionalLight(0xfff5e6, 2.8);
+    const keyLight = new THREE.DirectionalLight(0xfaf7f2, 2.3);
     keyLight.position.set(4, 6, 5);
     scene.add(keyLight);
 
-    const cyanRim = new THREE.PointLight(0x38bdf8, 4.5, 14);
-    cyanRim.position.set(-4, 2, 3);
-    scene.add(cyanRim);
+    const sageRim = new THREE.PointLight(0x687a70, 3.8, 14);
+    sageRim.position.set(-4, 2, 3);
+    scene.add(sageRim);
 
-    const orangeRim = new THREE.PointLight(0xfd5200, 4.0, 14);
-    orangeRim.position.set(4, -2.5, 2.5);
-    scene.add(orangeRim);
+    const burgundyRim = new THREE.PointLight(0x751e31, 4.8, 14);
+    burgundyRim.position.set(4, -2.5, 2.5);
+    scene.add(burgundyRim);
 
-    // Root Robot Group
+    // Dedicated PointLight inside the robot's hands to illuminate the skill hologram
+    const palmHoloLight = new THREE.PointLight(0x8c253b, 3.5, 5);
+    palmHoloLight.position.set(0, 0.1, 1.8);
+    scene.add(palmHoloLight);
+
+    // Root Robot Group (raised slightly so head, torso, and extended hands are framed in full cinema view)
     const robotGroup = new THREE.Group();
+    robotGroup.position.set(0, 0.22, 0);
     scene.add(robotGroup);
 
-    // Materials
-    const darkChromeMat = new THREE.MeshStandardMaterial({
-      color: 0x16181d,
-      metalness: 0.88,
+    // Materials: Warm Cream Ceramic, Muted Sage Grey, and Deep Burgundy
+    const creamCeramicMat = new THREE.MeshStandardMaterial({
+      color: 0xf6f1e7,
+      metalness: 0.2,
       roughness: 0.18,
     });
-    const gunmetalMat = new THREE.MeshStandardMaterial({
-      color: 0x262932,
-      metalness: 0.78,
-      roughness: 0.25,
+    const mutedSageMat = new THREE.MeshStandardMaterial({
+      color: 0x687a70,
+      metalness: 0.6,
+      roughness: 0.28,
     });
     const visorMat = new THREE.MeshStandardMaterial({
-      color: 0x05070b,
-      metalness: 0.95,
+      color: 0x232b27,
+      metalness: 0.92,
       roughness: 0.08,
     });
-    const eyeGlowMat = new THREE.MeshBasicMaterial({
-      color: 0x38bdf8,
+    const burgundyGlowMat = new THREE.MeshStandardMaterial({
+      color: 0x751e31,
+      emissive: 0x5e1726,
+      emissiveIntensity: 0.75,
+      metalness: 0.4,
+      roughness: 0.2,
     });
-    const orangeAccentMat = new THREE.MeshBasicMaterial({
-      color: 0xfd5200,
+    const creamGlowMat = new THREE.MeshBasicMaterial({
+      color: 0xf6f1e7,
     });
     const holoWireMat = new THREE.MeshBasicMaterial({
-      color: 0xc8a882,
+      color: 0x5e1726,
       wireframe: true,
       transparent: true,
-      opacity: 0.22,
+      opacity: 0.16,
     });
 
-    // Head Group (tracks mouse)
+    // Head Group (tracks mouse + glances down slightly at the skills in its hands)
     const headGroup = new THREE.Group();
-    headGroup.position.set(0, 0.95, 0);
+    headGroup.position.set(0, 1.02, 0);
     robotGroup.add(headGroup);
 
     // Cranium
-    const headGeo = new THREE.BoxGeometry(1.55, 1.15, 1.25);
-    const headMesh = new THREE.Mesh(headGeo, darkChromeMat);
+    const headGeo = new THREE.BoxGeometry(1.52, 1.12, 1.22);
+    const headMesh = new THREE.Mesh(headGeo, creamCeramicMat);
     headGroup.add(headMesh);
 
     // Beveled Crown Plate
-    const crownGeo = new THREE.BoxGeometry(1.3, 0.16, 1.05);
-    const crownMesh = new THREE.Mesh(crownGeo, gunmetalMat);
-    crownMesh.position.set(0, 0.64, 0);
+    const crownGeo = new THREE.BoxGeometry(1.28, 0.16, 1.02);
+    const crownMesh = new THREE.Mesh(crownGeo, mutedSageMat);
+    crownMesh.position.set(0, 0.62, 0);
     headGroup.add(crownMesh);
 
     // Visor Faceplate
-    const visorGeo = new THREE.BoxGeometry(1.36, 0.62, 0.14);
+    const visorGeo = new THREE.BoxGeometry(1.34, 0.6, 0.14);
     const visorMesh = new THREE.Mesh(visorGeo, visorMat);
-    visorMesh.position.set(0, 0.02, 0.6);
+    visorMesh.position.set(0, 0.02, 0.59);
     headGroup.add(visorMesh);
 
     // Expressive Cybernetic Eyes
-    const leftEyeGeo = new THREE.CapsuleGeometry(0.09, 0.14, 8, 16);
+    const leftEyeGeo = new THREE.CapsuleGeometry(0.088, 0.14, 8, 16);
     leftEyeGeo.rotateZ(Math.PI / 2);
-    const leftEye = new THREE.Mesh(leftEyeGeo, eyeGlowMat);
-    leftEye.position.set(-0.32, 0.04, 0.68);
+    const leftEye = new THREE.Mesh(leftEyeGeo, creamGlowMat);
+    leftEye.position.set(-0.31, 0.04, 0.67);
     headGroup.add(leftEye);
 
-    const rightEye = new THREE.Mesh(leftEyeGeo, eyeGlowMat);
-    rightEye.position.set(0.32, 0.04, 0.68);
+    const rightEye = new THREE.Mesh(leftEyeGeo, creamGlowMat);
+    rightEye.position.set(0.31, 0.04, 0.67);
     headGroup.add(rightEye);
 
     // Side Audio/Sensor Pods
-    const earGeo = new THREE.CylinderGeometry(0.28, 0.28, 0.18, 24);
+    const earGeo = new THREE.CylinderGeometry(0.27, 0.27, 0.18, 24);
     earGeo.rotateZ(Math.PI / 2);
-    const leftEar = new THREE.Mesh(earGeo, gunmetalMat);
-    leftEar.position.set(-0.85, 0.02, 0);
+    const leftEar = new THREE.Mesh(earGeo, mutedSageMat);
+    leftEar.position.set(-0.84, 0.02, 0);
     headGroup.add(leftEar);
 
-    const rightEar = new THREE.Mesh(earGeo, gunmetalMat);
-    rightEar.position.set(0.85, 0.02, 0);
+    const rightEar = new THREE.Mesh(earGeo, mutedSageMat);
+    rightEar.position.set(0.84, 0.02, 0);
     headGroup.add(rightEar);
 
-    const earRingGeo = new THREE.TorusGeometry(0.2, 0.025, 12, 32);
+    const earRingGeo = new THREE.TorusGeometry(0.19, 0.025, 12, 32);
     earRingGeo.rotateY(Math.PI / 2);
-    const leftEarRing = new THREE.Mesh(earRingGeo, orangeAccentMat);
-    leftEarRing.position.set(-0.95, 0.02, 0);
+    const leftEarRing = new THREE.Mesh(earRingGeo, burgundyGlowMat);
+    leftEarRing.position.set(-0.94, 0.02, 0);
     headGroup.add(leftEarRing);
 
-    const rightEarRing = new THREE.Mesh(earRingGeo, orangeAccentMat);
-    rightEarRing.position.set(0.95, 0.02, 0);
+    const rightEarRing = new THREE.Mesh(earRingGeo, burgundyGlowMat);
+    rightEarRing.position.set(0.94, 0.02, 0);
     headGroup.add(rightEarRing);
 
     // Antenna
     const antennaStem = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.025, 0.025, 0.45, 12),
-      gunmetalMat
+      new THREE.CylinderGeometry(0.025, 0.025, 0.42, 12),
+      mutedSageMat
     );
-    antennaStem.position.set(0.45, 0.85, -0.1);
+    antennaStem.position.set(0.44, 0.82, -0.1);
     headGroup.add(antennaStem);
 
     const antennaTip = new THREE.Mesh(
-      new THREE.SphereGeometry(0.065, 16, 16),
-      orangeAccentMat
+      new THREE.SphereGeometry(0.075, 16, 16),
+      burgundyGlowMat
     );
-    antennaTip.position.set(0.45, 1.1, -0.1);
+    antennaTip.position.set(0.44, 1.06, -0.1);
     headGroup.add(antennaTip);
 
     // Neck Joint
     const neckMesh = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.28, 0.36, 0.35, 20),
-      gunmetalMat
+      new THREE.CylinderGeometry(0.26, 0.34, 0.34, 20),
+      mutedSageMat
     );
-    neckMesh.position.set(0, 0.22, 0);
+    neckMesh.position.set(0, 0.3, 0);
     robotGroup.add(neckMesh);
 
     // Torso Chassis
     const torsoGroup = new THREE.Group();
-    torsoGroup.position.set(0, -0.65, 0);
+    torsoGroup.position.set(0, -0.55, 0);
     robotGroup.add(torsoGroup);
 
     const chestMesh = new THREE.Mesh(
-      new THREE.BoxGeometry(1.75, 1.45, 1.1),
-      darkChromeMat
+      new THREE.BoxGeometry(1.7, 1.4, 1.08),
+      creamCeramicMat
     );
     torsoGroup.add(chestMesh);
 
     // Glowing AI Core Reactor on Chest
     const coreRing = new THREE.Mesh(
-      new THREE.TorusGeometry(0.32, 0.035, 16, 48),
-      orangeAccentMat
+      new THREE.TorusGeometry(0.3, 0.038, 16, 48),
+      burgundyGlowMat
     );
-    coreRing.position.set(0, 0.12, 0.57);
+    coreRing.position.set(0, 0.14, 0.56);
     torsoGroup.add(coreRing);
 
     const coreCenter = new THREE.Mesh(
-      new THREE.CircleGeometry(0.24, 32),
-      eyeGlowMat
+      new THREE.CircleGeometry(0.22, 32),
+      visorMat
     );
-    coreCenter.position.set(0, 0.12, 0.56);
+    coreCenter.position.set(0, 0.14, 0.55);
     torsoGroup.add(coreCenter);
 
-    // Floating Shoulder Guards & Arms
-    const shoulderGeo = new THREE.SphereGeometry(0.34, 24, 24);
-    const leftShoulder = new THREE.Mesh(shoulderGeo, gunmetalMat);
-    leftShoulder.position.set(-1.18, 0.38, 0);
+    // =========================================================================
+    // ARTICULATED DUAL ARMS & HANDS HOLDING THE HOLOGRAPHIC SKILL CORE FORWARD
+    // =========================================================================
+    const shoulderGeo = new THREE.SphereGeometry(0.33, 24, 24);
+    const leftShoulder = new THREE.Mesh(shoulderGeo, mutedSageMat);
+    leftShoulder.position.set(-1.14, 0.36, 0.08);
     torsoGroup.add(leftShoulder);
 
-    const rightShoulder = new THREE.Mesh(shoulderGeo, gunmetalMat);
-    rightShoulder.position.set(1.18, 0.38, 0);
+    const rightShoulder = new THREE.Mesh(shoulderGeo, mutedSageMat);
+    rightShoulder.position.set(1.14, 0.36, 0.08);
     torsoGroup.add(rightShoulder);
 
-    const armGeo = new THREE.CapsuleGeometry(0.18, 0.65, 12, 20);
-    const leftArm = new THREE.Mesh(armGeo, darkChromeMat);
-    leftArm.position.set(-1.25, -0.25, 0.15);
-    leftArm.rotation.z = 0.18;
-    leftArm.rotation.x = -0.25;
-    torsoGroup.add(leftArm);
+    // Left Arm + Forearm + Palm Emitter Group (posed reaching forward to hold hologram)
+    const leftArmPivot = new THREE.Group();
+    leftArmPivot.position.set(-1.14, 0.36, 0.08);
+    torsoGroup.add(leftArmPivot);
 
-    const rightArm = new THREE.Mesh(armGeo, darkChromeMat);
-    rightArm.position.set(1.25, -0.25, 0.15);
-    rightArm.rotation.z = -0.18;
-    rightArm.rotation.x = -0.25;
-    torsoGroup.add(rightArm);
+    const upperArmGeo = new THREE.CapsuleGeometry(0.16, 0.48, 12, 20);
+    const leftUpperArm = new THREE.Mesh(upperArmGeo, creamCeramicMat);
+    leftUpperArm.position.set(0.12, -0.26, 0.36);
+    leftUpperArm.rotation.x = -0.82;
+    leftUpperArm.rotation.z = -0.25;
+    leftArmPivot.add(leftUpperArm);
 
-    // Orbital Holographic Rings around the Robot
+    const leftElbow = new THREE.Mesh(
+      new THREE.SphereGeometry(0.18, 16, 16),
+      mutedSageMat
+    );
+    leftElbow.position.set(0.24, -0.46, 0.68);
+    leftArmPivot.add(leftElbow);
+
+    const forearmGeo = new THREE.CapsuleGeometry(0.15, 0.46, 12, 20);
+    const leftForearm = new THREE.Mesh(forearmGeo, creamCeramicMat);
+    leftForearm.position.set(0.42, -0.44, 1.05);
+    leftForearm.rotation.x = -1.35;
+    leftForearm.rotation.z = -0.42;
+    leftArmPivot.add(leftForearm);
+
+    // Left Cybernetic Hand & Glowing Palm Projector Disc
+    const leftPalmGroup = new THREE.Group();
+    leftPalmGroup.position.set(0.56, -0.4, 1.38);
+    leftArmPivot.add(leftPalmGroup);
+
+    const palmBaseGeo = new THREE.CylinderGeometry(0.22, 0.18, 0.1, 24);
+    const leftPalmBase = new THREE.Mesh(palmBaseGeo, mutedSageMat);
+    leftPalmBase.rotation.z = -0.35;
+    leftPalmBase.rotation.x = 0.25;
+    leftPalmGroup.add(leftPalmBase);
+
+    const leftPalmEmitter = new THREE.Mesh(
+      new THREE.TorusGeometry(0.19, 0.028, 12, 32),
+      burgundyGlowMat
+    );
+    leftPalmEmitter.rotation.x = Math.PI / 2 - 0.25;
+    leftPalmEmitter.rotation.y = 0.35;
+    leftPalmEmitter.position.set(0, 0.06, 0);
+    leftPalmGroup.add(leftPalmEmitter);
+
+    // Right Arm + Forearm + Palm Emitter Group (mirror pose reaching forward)
+    const rightArmPivot = new THREE.Group();
+    rightArmPivot.position.set(1.14, 0.36, 0.08);
+    torsoGroup.add(rightArmPivot);
+
+    const rightUpperArm = new THREE.Mesh(upperArmGeo, creamCeramicMat);
+    rightUpperArm.position.set(-0.12, -0.26, 0.36);
+    rightUpperArm.rotation.x = -0.82;
+    rightUpperArm.rotation.z = 0.25;
+    rightArmPivot.add(rightUpperArm);
+
+    const rightElbow = new THREE.Mesh(
+      new THREE.SphereGeometry(0.18, 16, 16),
+      mutedSageMat
+    );
+    rightElbow.position.set(-0.24, -0.46, 0.68);
+    rightArmPivot.add(rightElbow);
+
+    const rightForearm = new THREE.Mesh(forearmGeo, creamCeramicMat);
+    rightForearm.position.set(-0.42, -0.44, 1.05);
+    rightForearm.rotation.x = -1.35;
+    rightForearm.rotation.z = 0.42;
+    rightArmPivot.add(rightForearm);
+
+    // Right Cybernetic Hand & Glowing Palm Projector Disc
+    const rightPalmGroup = new THREE.Group();
+    rightPalmGroup.position.set(-0.56, -0.4, 1.38);
+    rightArmPivot.add(rightPalmGroup);
+
+    const rightPalmBase = new THREE.Mesh(palmBaseGeo, mutedSageMat);
+    rightPalmBase.rotation.z = 0.35;
+    rightPalmBase.rotation.x = 0.25;
+    rightPalmGroup.add(rightPalmBase);
+
+    const rightPalmEmitter = new THREE.Mesh(
+      new THREE.TorusGeometry(0.19, 0.028, 12, 32),
+      burgundyGlowMat
+    );
+    rightPalmEmitter.rotation.x = Math.PI / 2 - 0.25;
+    rightPalmEmitter.rotation.y = -0.35;
+    rightPalmEmitter.position.set(0, 0.06, 0);
+    rightPalmGroup.add(rightPalmEmitter);
+
+    // Volumetric Hologram Projection Cones shooting from both palms into the skill core
+    const beamConeGeo = new THREE.ConeGeometry(0.42, 0.85, 24, 1, true);
+    const beamConeMat = new THREE.MeshBasicMaterial({
+      color: 0x5e1726,
+      transparent: true,
+      opacity: 0.16,
+      side: THREE.DoubleSide,
+      wireframe: true,
+    });
+    const leftHoloBeam = new THREE.Mesh(beamConeGeo, beamConeMat);
+    leftHoloBeam.position.set(-0.32, 0.28, 1.48);
+    leftHoloBeam.rotation.z = 0.48;
+    leftHoloBeam.rotation.x = Math.PI;
+    torsoGroup.add(leftHoloBeam);
+
+    const rightHoloBeam = new THREE.Mesh(beamConeGeo, beamConeMat);
+    rightHoloBeam.position.set(0.32, 0.28, 1.48);
+    rightHoloBeam.rotation.z = -0.48;
+    rightHoloBeam.rotation.x = Math.PI;
+    torsoGroup.add(rightHoloBeam);
+
+    // =========================================================================
+    // 3D SKILL HOLOGRAM CONSTELLATION LEVITATING DIRECTLY IN THE ROBOT'S HANDS
+    // =========================================================================
+    const handHologramGroup = new THREE.Group();
+    // Positioned right above and between the two palms in front of the chest
+    handHologramGroup.position.set(0, 0.58, 1.56);
+    torsoGroup.add(handHologramGroup);
+
+    // Central Levitating Skill Core Crystal held between the hands
+    const holoCrystal = new THREE.Mesh(
+      new THREE.OctahedronGeometry(0.28, 0),
+      burgundyGlowMat
+    );
+    handHologramGroup.add(holoCrystal);
+
+    const holoCrystalWire = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(0.42, 1),
+      new THREE.MeshBasicMaterial({
+        color: 0xf6f1e7,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.65,
+      })
+    );
+    handHologramGroup.add(holoCrystalWire);
+
+    const palmOrbitRing = new THREE.Mesh(
+      new THREE.TorusGeometry(1.18, 0.012, 12, 96),
+      new THREE.MeshBasicMaterial({
+        color: 0x5e1726,
+        transparent: true,
+        opacity: 0.6,
+      })
+    );
+    palmOrbitRing.rotation.x = Math.PI / 2.15;
+    handHologramGroup.add(palmOrbitRing);
+
+    // 6 Orbiting 3D Skill Holo-Plates in the Robot's Hands
+    const skillCarouselGroup = new THREE.Group();
+    handHologramGroup.add(skillCarouselGroup);
+
+    const skillSprites: THREE.Sprite[] = [];
+    const skillTextures: THREE.CanvasTexture[] = [];
+
+    ROBOT_HAND_SKILLS.forEach((sk, idx) => {
+      const tex = createSkillPlateTexture(
+        sk.shortLabel,
+        sk.badgeSub,
+        idx % 2 === 0
+      );
+      skillTextures.push(tex);
+      const mat = new THREE.SpriteMaterial({
+        map: tex,
+        transparent: true,
+        depthTest: false,
+      });
+      const sprite = new THREE.Sprite(mat);
+      const angle = (idx / ROBOT_HAND_SKILLS.length) * Math.PI * 2;
+      const radiusX = 1.22;
+      const radiusZ = 0.92;
+      sprite.position.set(
+        Math.cos(angle) * radiusX,
+        Math.sin(angle * 2) * 0.14,
+        Math.sin(angle) * radiusZ
+      );
+      sprite.scale.set(0.98, 0.34, 1);
+      skillCarouselGroup.add(sprite);
+      skillSprites.push(sprite);
+    });
+
+    // Outer Gyroscope Orbital Rings around the Robot Stage
     const orbitGroup = new THREE.Group();
     scene.add(orbitGroup);
 
     const outerRing = new THREE.Mesh(
-      new THREE.TorusGeometry(2.35, 0.012, 12, 96),
+      new THREE.TorusGeometry(2.45, 0.014, 12, 96),
       new THREE.MeshBasicMaterial({
-        color: 0xc8a882,
+        color: 0x5e1726,
         transparent: true,
-        opacity: 0.35,
+        opacity: 0.42,
       })
     );
     outerRing.rotation.x = Math.PI / 2.3;
     outerRing.rotation.y = 0.32;
     orbitGroup.add(outerRing);
 
+    const secondaryRing = new THREE.Mesh(
+      new THREE.TorusGeometry(2.22, 0.011, 12, 96),
+      new THREE.MeshBasicMaterial({
+        color: 0x687a70,
+        transparent: true,
+        opacity: 0.38,
+      })
+    );
+    secondaryRing.rotation.x = -Math.PI / 3;
+    secondaryRing.rotation.z = 0.5;
+    orbitGroup.add(secondaryRing);
+
     const innerSphereWire = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(2.05, 1),
+      new THREE.IcosahedronGeometry(2.1, 1),
       holoWireMat
     );
     orbitGroup.add(innerSphereWire);
 
-    // Floating Particles
+    // Floating Energy Particles rising from the Robot's Hands
     const particleCount = 90;
     const positions = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 7;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 5;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 4;
+      positions[i * 3] = (Math.random() - 0.5) * 6.5;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 5.0;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 4.0;
     }
     const particleGeo = new THREE.BufferGeometry();
     particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     const particleMat = new THREE.PointsMaterial({
-      color: 0x38bdf8,
-      size: 0.045,
+      color: 0x5e1726,
+      size: 0.048,
       transparent: true,
-      opacity: 0.65,
+      opacity: 0.55,
     });
     const particles = new THREE.Points(particleGeo, particleMat);
     scene.add(particles);
 
-    // Pointer & Drag interaction
+    // Pointer, Drag & Conjure Energy Pulse interaction
     let targetX = 0;
     let targetY = 0;
     let isDragging = false;
@@ -278,7 +656,7 @@ function CyberneticBotCanvas() {
       targetY = Math.max(-1, Math.min(1, ny));
 
       if (isDragging) {
-        dragOffsetX += (e.clientX - prevPointerX) * 0.01;
+        dragOffsetX += (e.clientX - prevPointerX) * 0.012;
         prevPointerX = e.clientX;
       }
     };
@@ -286,6 +664,8 @@ function CyberneticBotCanvas() {
     const onPointerDown = (e: PointerEvent) => {
       isDragging = true;
       prevPointerX = e.clientX;
+      conjureTriggerRef.current = 1.5;
+      setActiveSkillIdx((prev) => (prev + 1) % ROBOT_HAND_SKILLS.length);
     };
 
     const onPointerUp = () => {
@@ -306,33 +686,106 @@ function CyberneticBotCanvas() {
 
     let rafId = 0;
     const clock = new THREE.Clock();
+    const worldSpritePos = new THREE.Vector3();
 
     const animate = () => {
       rafId = requestAnimationFrame(animate);
-      const t = clock.getElapsedTime();
+      const dt = Math.min(clock.getDelta(), 0.1);
+      const t = clock.elapsedTime;
 
-      // Gentle hover bobbing
-      robotGroup.position.y = Math.sin(t * 1.8) * 0.12;
-      robotGroup.rotation.y +=
-        (targetX * 0.45 + dragOffsetX - robotGroup.rotation.y) * 0.08;
-      robotGroup.rotation.x += (-targetY * 0.18 - robotGroup.rotation.x) * 0.08;
+      conjureTriggerRef.current = THREE.MathUtils.damp(
+        conjureTriggerRef.current,
+        0,
+        4.2,
+        dt
+      );
+      const conjureEnergy = conjureTriggerRef.current;
 
-      // Head tracks cursor more responsively
-      headGroup.rotation.y += (targetX * 0.65 - headGroup.rotation.y) * 0.12;
-      headGroup.rotation.x += (-targetY * 0.38 - headGroup.rotation.x) * 0.12;
+      // Smooth floating hover & gentle breathing
+      robotGroup.position.y = 0.22 + Math.sin(t * 2.0) * 0.11;
+      robotGroup.rotation.y = THREE.MathUtils.damp(
+        robotGroup.rotation.y,
+        targetX * 0.38 + dragOffsetX,
+        6,
+        dt
+      );
+      robotGroup.rotation.x = THREE.MathUtils.damp(
+        robotGroup.rotation.x,
+        -targetY * 0.16,
+        6,
+        dt
+      );
 
-      // Subtle blink every ~4 seconds
-      const blinkWave = Math.sin(t * 0.8);
-      const eyeScaleY = blinkWave > 0.985 ? 0.1 : 1;
+      // Expressive head tracking (slightly looking toward the conjured skills in its hands)
+      headGroup.rotation.y = THREE.MathUtils.damp(
+        headGroup.rotation.y,
+        targetX * 0.62,
+        8,
+        dt
+      );
+      headGroup.rotation.x = THREE.MathUtils.damp(
+        headGroup.rotation.x,
+        0.14 - targetY * 0.34,
+        8,
+        dt
+      );
+      headGroup.rotation.z = THREE.MathUtils.damp(
+        headGroup.rotation.z,
+        -targetX * 0.1,
+        6,
+        dt
+      );
+
+      // Cinematic Hand-Conjuring Motion: both arms cradle and pulse the skill hologram
+      const handWave = Math.sin(t * 2.6) * 0.06;
+      leftArmPivot.rotation.x = handWave - conjureEnergy * 0.24;
+      leftArmPivot.rotation.z = Math.cos(t * 2.1) * 0.04 + conjureEnergy * 0.12;
+      rightArmPivot.rotation.x = -handWave - conjureEnergy * 0.24;
+      rightArmPivot.rotation.z =
+        -Math.cos(t * 2.1) * 0.04 - conjureEnergy * 0.12;
+
+      leftPalmEmitter.scale.setScalar(1 + conjureEnergy * 0.28);
+      rightPalmEmitter.scale.setScalar(1 + conjureEnergy * 0.28);
+
+      // Levitate & spin the 3D Skill Constellation inside the robot's hands
+      handHologramGroup.position.y =
+        0.58 + Math.sin(t * 3.0) * 0.07 + conjureEnergy * 0.12;
+      holoCrystal.rotation.y += dt * (1.8 + conjureEnergy * 4.5);
+      holoCrystal.rotation.x += dt * 1.1;
+      holoCrystal.scale.setScalar(1 + conjureEnergy * 0.32);
+      holoCrystalWire.rotation.y -= dt * 1.4;
+      palmOrbitRing.rotation.z += dt * (0.9 + conjureEnergy * 2.5);
+
+      // Orbit the 6 3D Skill Plates smoothly around the robot's hands
+      skillCarouselGroup.rotation.y += dt * (0.55 + conjureEnergy * 1.8);
+
+      skillSprites.forEach((sprite) => {
+        sprite.getWorldPosition(worldSpritePos);
+        // Scale up and brighten skill plates as they pass in front of the robot's hands toward the viewer
+        const depthFactor = THREE.MathUtils.clamp(
+          (worldSpritePos.z - 0.5) / 2.2,
+          0,
+          1
+        );
+        const s = 0.78 + depthFactor * 0.42;
+        sprite.scale.set(s * 1.05, s * 0.36, 1);
+        sprite.material.opacity = 0.45 + depthFactor * 0.55;
+      });
+
+      // Natural eye blink + conjure excitement
+      const blinkWave = Math.sin(t * 0.85);
+      const eyeScaleY = blinkWave > 0.985 ? 0.1 : 1 + conjureEnergy * 0.3;
       leftEye.scale.y = eyeScaleY;
       rightEye.scale.y = eyeScaleY;
 
-      // Core & orbital rotation
-      coreRing.rotation.z = t * 1.2;
-      outerRing.rotation.z = -t * 0.35;
-      innerSphereWire.rotation.y = t * 0.18;
-      innerSphereWire.rotation.x = t * 0.11;
-      particles.rotation.y = t * 0.05;
+      // Gyroscope & Core rotations
+      const speedBoost = 1 + conjureEnergy * 3.0;
+      coreRing.rotation.z += dt * 1.4 * speedBoost;
+      outerRing.rotation.z -= dt * 0.38 * speedBoost;
+      secondaryRing.rotation.y += dt * 0.48 * speedBoost;
+      innerSphereWire.rotation.y += dt * 0.18 * speedBoost;
+      innerSphereWire.rotation.x += dt * 0.12 * speedBoost;
+      particles.rotation.y += dt * 0.06 * speedBoost;
 
       renderer.render(scene, camera);
     };
@@ -345,6 +798,9 @@ function CyberneticBotCanvas() {
       container.removeEventListener('pointerdown', onPointerDown);
       window.removeEventListener('pointerup', onPointerUp);
       window.removeEventListener('resize', onResize);
+      skillTextures.forEach((tex) => tex.dispose());
+      envTexture.dispose();
+      pmremGenerator.dispose();
       renderer.dispose();
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
@@ -354,13 +810,99 @@ function CyberneticBotCanvas() {
 
   return (
     <div
-      ref={mountRef}
-      className="w-full h-full cursor-grab active:cursor-grabbing relative"
-      title="Move cursor or drag to interact with 3D AI Core"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      className="w-full h-full relative select-none overflow-hidden"
     >
-      <div className="pointer-events-none absolute bottom-5 right-6 flex items-center gap-2 rounded-full border border-white/10 bg-black/50 backdrop-blur-md px-3.5 py-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">
-        <span className="h-1.5 w-1.5 rounded-full bg-sky-400 animate-pulse" />
-        Interactive 3D Stage · Drag / Move
+      {/* 3D WebGL Canvas where the Robot holds & orbits the 3D Skill Plates in its hands */}
+      <div
+        ref={mountRef}
+        className="w-full h-full cursor-grab active:cursor-grabbing"
+        title="Click or drag the robot to conjure the next skill in its hands"
+      />
+
+      {/* Cinematic Hand-Projected Skill Hologram HUD Dock (Anchored over the Robot's Hands) */}
+      <div className="pointer-events-none absolute inset-x-4 bottom-4 sm:bottom-6 z-20 flex flex-col items-center">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeSkill.id}
+            initial={{ opacity: 0, y: 18, scale: 0.94, rotateX: 14 }}
+            animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+            exit={{ opacity: 0, y: -12, scale: 0.95 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="pointer-events-auto w-full max-w-md rounded-2xl border-2 border-[#5E1726]/65 bg-[#FAF7F2]/94 backdrop-blur-md p-4 shadow-2xl"
+          >
+            {/* Top Hologram Emitter Bar */}
+            <div className="flex items-center justify-between gap-2 pb-2 mb-2 border-b border-[#687A70]/35">
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#5E1726] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#5E1726]" />
+                </span>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-[#5E1726]">
+                  Palm Holo-Projection · {activeSkill.category}
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() =>
+                  handleSelectSkill(
+                    (activeSkillIdx + 1) % ROBOT_HAND_SKILLS.length
+                  )
+                }
+                className="px-2.5 py-0.5 rounded-full bg-[#5E1726] hover:bg-[#751E31] text-[#F6F1E7] text-[9.5px] font-mono font-bold uppercase tracking-wider transition-colors cursor-pointer"
+              >
+                Conjure Next ↻
+              </button>
+            </div>
+
+            {/* Active Skill Title & Description */}
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h3 className="text-base sm:text-lg font-extrabold text-[#232B27] leading-snug">
+                  {activeSkill.title}
+                </h3>
+                <p className="text-xs text-[#35423C] mt-0.5 leading-relaxed font-medium">
+                  {activeSkill.description}
+                </p>
+              </div>
+            </div>
+
+            {/* Skill Pills Projected From the Robot's Hands */}
+            <div className="flex flex-wrap items-center gap-1.5 mt-3">
+              {activeSkill.pills.map((pill) => (
+                <span
+                  key={pill}
+                  className="px-2.5 py-1 rounded-lg bg-[#EFE8DA] border border-[#5E1726]/35 text-[11px] font-mono font-bold text-[#5E1726]"
+                >
+                  {pill}
+                </span>
+              ))}
+            </div>
+
+            {/* Interactive Skill Selector Dots */}
+            <div className="flex items-center justify-between gap-2 mt-3 pt-2.5 border-t border-[#687A70]/25">
+              <div className="flex items-center gap-1.5">
+                {ROBOT_HAND_SKILLS.map((s, idx) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() => handleSelectSkill(idx)}
+                    aria-label={`Project ${s.title}`}
+                    className={`h-2 rounded-full transition-all cursor-pointer ${
+                      idx === activeSkillIdx
+                        ? 'w-6 bg-[#5E1726]'
+                        : 'w-2 bg-[#687A70]/50 hover:bg-[#5E1726]/70'
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="text-[9.5px] font-mono font-bold uppercase tracking-[0.18em] text-[#35423C]">
+                Click Robot Hands or Dots
+              </span>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );
@@ -369,33 +911,12 @@ function CyberneticBotCanvas() {
 export const BuiltDifferentAndFlowSection: React.FC<
   BuiltDifferentAndFlowSectionProps
 > = ({ onOpenResume }) => {
-  const curtainWrapRef = useRef<HTMLDivElement>(null);
-  const bgContentRef = useRef<HTMLDivElement>(null);
-  const curtainRef = useRef<HTMLDivElement>(null);
   const flowTriggerRef = useRef<HTMLDivElement>(null);
   const [activeSkillCategory, setActiveSkillCategory] = useState<string>('all');
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. ScrollRevealCurtain animation (matches portfolio-cinematic-sage.vercel.app)
-      if (curtainWrapRef.current && curtainRef.current && bgContentRef.current) {
-        gsap.set(curtainRef.current, { yPercent: 100 });
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: curtainWrapRef.current,
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 0.6,
-          },
-        });
-        tl.to(curtainRef.current, { yPercent: 0, ease: 'none' }, 0).to(
-          bgContentRef.current,
-          { scale: 0.92, ease: 'none' },
-          0
-        );
-      }
-
-      // 2. Flow Art Container 5-chapter diagonal rotation/scale sweep
+      // Flow Art Container chapter subtle motion
       if (flowTriggerRef.current) {
         const sections = gsap.utils.toArray<HTMLElement>(
           flowTriggerRef.current.querySelectorAll('.flow-art-section')
@@ -406,23 +927,21 @@ export const BuiltDifferentAndFlowSection: React.FC<
           gsap.fromTo(
             textBlock,
             {
-              rotation: 12,
-              scale: 0.88,
-              opacity: 0,
-              y: 80,
-              transformOrigin: 'bottom left',
+              scale: 0.96,
+              opacity: 1,
+              y: 26,
+              transformOrigin: 'center center',
             },
             {
-              rotation: 0,
               scale: 1,
               opacity: 1,
               y: 0,
-              ease: 'power3.out',
+              ease: 'power2.out',
               scrollTrigger: {
                 trigger: sec,
-                start: 'top 82%',
-                end: 'top 25%',
-                scrub: 0.5,
+                start: 'top 90%',
+                end: 'top 30%',
+                scrub: 0.4,
               },
             }
           );
@@ -438,415 +957,396 @@ export const BuiltDifferentAndFlowSection: React.FC<
       ? SKILL_CATEGORIES
       : SKILL_CATEGORIES.filter((c) => c.id === activeSkillCategory);
 
+  const skillDomainIcons = [Cpu, Bot, Sparkles, Code2, Database, Cloud];
+
   return (
     <>
       {/* =====================================================================
-          SECTION 2 — ScrollRevealCurtain ("Built Different." + 3D Robot Stage + #fd5200 Curtain)
+          KINETIC EDITORIAL MARQUEE RIBBON (Deep Burgundy & Warm Cream Beige)
          ===================================================================== */}
-      <div
-        ref={curtainWrapRef}
-        id="about"
-        style={{ height: '220vh', position: 'relative' }}
-      >
-        <div
-          style={{
-            position: 'sticky',
-            top: 0,
-            height: '100vh',
-            overflow: 'hidden',
-          }}
-        >
-          {/* Background Dark Split Stage */}
-          <div
-            ref={bgContentRef}
-            style={{
-              width: '100%',
-              height: '100%',
-              transformOrigin: 'center center',
-              willChange: 'transform',
-            }}
-          >
-            <div className="w-full h-screen bg-[#080808] relative overflow-hidden flex items-center">
-              {/* Ambient SVG Spotlight */}
-              <svg
-                className="animate-spotlight pointer-events-none absolute z-[1] h-[169%] w-[138%] lg:w-[84%] opacity-100 -top-40 left-0 md:left-60 md:-top-20"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 3787 2842"
-                fill="none"
+      <div className="w-full bg-[#5E1726] border-y border-[#F6F1E7]/20 py-3 overflow-hidden select-none">
+        <div className="animate-editorial-marquee items-center gap-8">
+          {[...EDITORIAL_TICKER_ITEMS, ...EDITORIAL_TICKER_ITEMS].map(
+            (item, idx) => (
+              <div
+                key={`${item}-${idx}`}
+                className="flex items-center gap-8 shrink-0"
               >
-                <g filter="url(#spotlight-filter)">
-                  <ellipse
-                    cx="1924.71"
-                    cy="273.501"
-                    rx="1924.71"
-                    ry="273.501"
-                    transform="matrix(-0.822377 -0.568943 -0.568943 0.822377 3631.88 2291.09)"
-                    fill="white"
-                    fillOpacity="0.18"
-                  />
-                </g>
-                <defs>
-                  <filter
-                    id="spotlight-filter"
-                    x="0.860352"
-                    y="0.838989"
-                    width="3785.16"
-                    height="2840.26"
-                    filterUnits="userSpaceOnUse"
-                    colorInterpolationFilters="sRGB"
-                  >
-                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                    <feBlend
-                      mode="normal"
-                      in="SourceGraphic"
-                      in2="BackgroundImageFix"
-                      result="shape"
-                    />
-                    <feGaussianBlur
-                      stdDeviation="151"
-                      result="effect1_foregroundBlur"
-                    />
-                  </filter>
-                </defs>
-              </svg>
-
-              <div className="flex flex-col md:flex-row w-full h-full">
-                {/* Left Column: Built Different Editorial Copy */}
-                <div className="flex-1 p-8 md:p-16 relative z-10 flex flex-col justify-center">
-                  <p className="text-xs uppercase tracking-[0.4em] text-neutral-500 mb-4 font-mono">
-                    Interactive 3D · Full Stack Python &amp; AI
-                  </p>
-                  <h2 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 leading-tight">
-                    Built Different.
-                  </h2>
-                  <p className="mt-4 text-neutral-400 max-w-lg text-base md:text-lg leading-relaxed">
-                    Every pixel has purpose. Move your cursor to interact with
-                    this 3D scene — a taste of the craft behind everything I
-                    build across{' '}
-                    <span className="text-neutral-200 font-medium">
-                      Python, Django, React, Generative AI, and Agentic
-                      workflows
-                    </span>
-                    .
-                  </p>
-                  <div className="mt-8 flex flex-wrap items-center gap-3">
-                    <a
-                      href="#showcase"
-                      className="px-5 py-2.5 rounded-full bg-white text-black text-xs font-mono uppercase tracking-[0.2em] font-semibold hover:bg-neutral-200 transition-colors"
-                    >
-                      Explore My Work
-                    </a>
-                    <button
-                      type="button"
-                      onClick={onOpenResume}
-                      className="px-5 py-2.5 rounded-full border border-white/20 bg-white/5 text-white text-xs font-mono uppercase tracking-[0.2em] hover:bg-white/10 transition-colors cursor-pointer"
-                    >
-                      Download Resume
-                    </button>
-                    <a
-                      href={TARUN_PROFILE.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-5 py-2.5 rounded-full border border-white/15 text-neutral-300 text-xs font-mono uppercase tracking-[0.2em] hover:border-white/40 hover:text-white transition-colors"
-                    >
-                      View GitHub ↗
-                    </a>
-                  </div>
-                </div>
-
-                {/* Right Column: Interactive 3D WebGL Stage */}
-                <div className="flex-1 relative min-h-[360px] md:min-h-full">
-                  <CyberneticBotCanvas />
-                </div>
+                <span className="text-xs font-mono font-bold tracking-[0.28em] text-[#F6F1E7] uppercase">
+                  {item}
+                </span>
+                <span className="w-2 h-2 rounded-full bg-[#DCE3DF]" />
               </div>
-            </div>
-          </div>
-
-          {/* Rising #fd5200 Orange Curtain */}
-          <div
-            ref={curtainRef}
-            style={{
-              position: 'absolute',
-              inset: 0,
-              backgroundColor: '#fd5200',
-              zIndex: 10,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              willChange: 'transform',
-            }}
-          >
-            <div style={{ textAlign: 'center', color: '#fff' }}>
-              <p
-                style={{
-                  fontSize: '0.85rem',
-                  letterSpacing: '0.4em',
-                  textTransform: 'uppercase',
-                  opacity: 0.7,
-                  marginBottom: '1rem',
-                  fontFamily: 'monospace',
-                }}
-              >
-                Chapter 01
-              </p>
-              <h2
-                style={{
-                  fontSize: 'clamp(2.5rem, 7vw, 6rem)',
-                  fontWeight: 900,
-                  letterSpacing: '-0.03em',
-                  lineHeight: 1,
-                  textTransform: 'uppercase',
-                }}
-              >
-                Who I Am
-              </h2>
-            </div>
-          </div>
+            )
+          )}
         </div>
       </div>
 
       {/* =====================================================================
-          SECTION 3 — 5 Stacked Full-Screen Flow-Art Editorial Chapters
+          FLOW-ART CHAPTERS & PAGE 4 INTERACTIVE 3D ROBOT SKILL STAGE
          ===================================================================== */}
       <div ref={flowTriggerRef} className="flow-art-container">
-        {/* CHAPTER 01 — WHO I AM (#fd5200) */}
+        {/* PAGE 2: CHAPTER 01 — WHO I AM (Deep Burgundy #5E1726 + Warm Cream Beige #F6F1E7) */}
         <section
-          className="flow-art-section relative overflow-hidden"
+          id="about"
+          className="flow-art-section relative overflow-hidden flex flex-col justify-center"
           style={{
-            backgroundColor: '#fd5200',
-            color: '#fff',
+            backgroundColor: '#5E1726',
+            color: '#F6F1E7',
             minHeight: '100vh',
             height: 'auto',
             paddingTop: '6rem',
             paddingBottom: '6rem',
           }}
         >
-          <div
-            className="flow-art-text w-full max-w-6xl mx-auto px-6 md:px-14"
-            style={{ transformOrigin: 'bottom left' }}
-          >
-            <div className="flow-art-label">
+          {/* Monumental Centered "Chapter 01 / WHO I AM" Header */}
+          <div className="w-full max-w-6xl mx-auto px-6 md:px-14 text-center mb-16 pb-14 border-b border-[#F6F1E7]/25">
+            <p
+              style={{
+                fontSize: '0.9rem',
+                letterSpacing: '0.4em',
+                textTransform: 'uppercase',
+                marginBottom: '1rem',
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                color: '#EFE8DA',
+              }}
+            >
+              Chapter 01
+            </p>
+            <h2
+              style={{
+                fontSize: 'clamp(2.8rem, 7.5vw, 6.2rem)',
+                fontWeight: 900,
+                letterSpacing: '-0.03em',
+                lineHeight: 1,
+                textTransform: 'uppercase',
+                color: '#F6F1E7',
+              }}
+            >
+              Who I Am
+            </h2>
+          </div>
+
+          <div className="flow-art-text w-full max-w-6xl mx-auto px-6 md:px-14">
+            <div className="flow-art-label text-[#EFE8DA]">
               <span className="flow-art-num">01</span>
               <span className="flow-art-Title">WHO I AM</span>
             </div>
-            <h2 className="flow-art-heading mb-10">BUILD WITHOUT LIMITS</h2>
+            <h3 className="flow-art-heading mb-10 text-[#F6F1E7]">
+              BUILD WITHOUT LIMITS
+            </h3>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-8 pt-8 border-t border-white/25">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-8 pt-8 border-t border-[#F6F1E7]/30">
               <div className="lg:col-span-7 space-y-4">
-                <p className="text-xs font-mono uppercase tracking-[0.28em] text-white/80">
+                <p className="text-xs font-mono uppercase tracking-[0.24em] text-[#EFE8DA] font-bold">
                   {TARUN_PROFILE.name} · {TARUN_PROFILE.role}
                 </p>
-                <p className="text-lg md:text-2xl font-medium leading-relaxed text-white">
+                <p className="text-lg md:text-2xl font-semibold leading-relaxed text-[#F6F1E7]">
                   {TARUN_PROFILE.summary}
                 </p>
-                <p className="text-sm md:text-base leading-relaxed text-white/85">
+                <p className="text-sm md:text-base leading-relaxed text-[#EFE8DA]">
                   {TARUN_PROFILE.philosophy}
                 </p>
               </div>
               <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-                <div className="rounded-2xl bg-black/20 backdrop-blur-sm border border-white/20 p-5">
-                  <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-white/70 block mb-1">
-                    Current Role
-                  </span>
-                  <p className="text-base font-bold text-white">
-                    Full Stack Python Developer
-                  </p>
-                  <p className="text-xs text-white/80 mt-1">
-                    Finite HR &amp; IT Solution
-                  </p>
-                </div>
-                <div className="rounded-2xl bg-black/20 backdrop-blur-sm border border-white/20 p-5">
-                  <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-white/70 block mb-1">
-                    Location
-                  </span>
-                  <p className="text-base font-bold text-white">
-                    Visakhapatnam, India
-                  </p>
-                  <p className="text-xs text-white/80 mt-1">
-                    Open to Global &amp; Remote
-                  </p>
-                </div>
-                <div className="rounded-2xl bg-black/20 backdrop-blur-sm border border-white/20 p-5">
-                  <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-white/70 block mb-1">
-                    AI Focus
-                  </span>
-                  <p className="text-base font-bold text-white">
-                    GenAI &amp; Agentic AI
-                  </p>
-                  <p className="text-xs text-white/80 mt-1">
-                    Gemini · n8n · Vapi
-                  </p>
-                </div>
-                <div className="rounded-2xl bg-black/20 backdrop-blur-sm border border-white/20 p-5">
-                  <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-white/70 block mb-1">
-                    Core Stack
-                  </span>
-                  <p className="text-base font-bold text-white">
-                    Python · Django · React
-                  </p>
-                  <p className="text-xs text-white/80 mt-1">
-                    PostgreSQL · MySQL · Docker
-                  </p>
-                </div>
+                {[
+                  {
+                    label: 'Current Role',
+                    title: 'Full Stack Python Developer',
+                    sub: 'Finite HR & IT Solution',
+                  },
+                  {
+                    label: 'Location',
+                    title: 'Hyderabad, Telangana',
+                    sub: 'India · Open to Global & Remote',
+                  },
+                  {
+                    label: 'AI Focus',
+                    title: 'Gen AI & Agentic AI',
+                    sub: 'Gemini · n8n · Vapi',
+                  },
+                  {
+                    label: 'Core Stack',
+                    title: 'Python · Django · React',
+                    sub: 'PostgreSQL · MySQL · Docker',
+                  },
+                ].map((card, i) => (
+                  <motion.div
+                    key={card.label}
+                    initial={{ opacity: 0.9, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    whileHover={{ y: -6, scale: 1.02 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{
+                      duration: 0.4,
+                      delay: i * 0.06,
+                      ease: 'easeOut',
+                    }}
+                    className="rounded-2xl bg-[#F6F1E7] text-[#232B27] p-5 shadow-md"
+                  >
+                    <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#5E1726] font-bold block mb-1">
+                      {card.label}
+                    </span>
+                    <p className="text-base font-bold text-[#232B27]">
+                      {card.title}
+                    </p>
+                    <p className="text-xs text-[#35423C] font-medium mt-1">
+                      {card.sub}
+                    </p>
+                  </motion.div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* CHAPTER 02 — THE MISSION + VERIFIED CAREER TIMELINE & EDUCATION (#000) */}
+        {/* PAGE 3: VERIFIED CAREER TIMELINE & EDUCATION (Warm Cream Beige #F6F1E7) */}
         <section
           id="journey"
           className="flow-art-section relative overflow-hidden"
           style={{
-            backgroundColor: '#000',
-            color: '#fff',
+            backgroundColor: '#F6F1E7',
+            color: '#232B27',
             minHeight: '100vh',
             height: 'auto',
             paddingTop: '6rem',
             paddingBottom: '6rem',
           }}
         >
-          <div
-            className="flow-art-text w-full max-w-6xl mx-auto px-6 md:px-14"
-            style={{ transformOrigin: 'bottom left' }}
-          >
-            <div className="flow-art-label">
-              <span className="flow-art-num">02</span>
-              <span className="flow-art-Title">The mission</span>
-            </div>
-            <h2 className="flow-art-heading">IMPACT OVER NOISE</h2>
-            <div className="flow-art-sub">
-              <span>CURIOSITY</span>
-              <span>CRAFT</span>
-              <span>IMPACT</span>
-            </div>
-
+          <div className="flow-art-text w-full max-w-6xl mx-auto px-6 md:px-14">
             {/* Verified Career Timeline */}
-            <div className="mt-14 pt-10 border-t border-white/15">
+            <div>
               <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
                 <div>
-                  <span className="text-xs font-mono uppercase tracking-[0.35em] text-[#fd5200] block mb-2">
-                    Chapter 03 · Professional Journey
+                  <span className="text-xs font-mono uppercase tracking-[0.35em] text-[#5E1726] font-bold block mb-2">
+                    Chapter 02 · Professional Journey
                   </span>
-                  <h3 className="text-2xl md:text-4xl font-bold tracking-tight text-white">
+                  <h3 className="text-2xl md:text-4xl font-bold tracking-tight text-[#232B27]">
                     Career Experience &amp; Education
                   </h3>
                 </div>
-                <p className="text-xs font-mono text-neutral-400 uppercase tracking-[0.2em]">
-                  Verified Resume Record · Source of Truth
+                <p className="text-xs font-mono text-[#35423C] font-semibold uppercase tracking-[0.2em]">
+                  Verified Resume Record · Hyderabad, Telangana
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {CAREER_TIMELINE.map((role, index) => (
-                  <div
+                  <motion.div
                     key={role.id}
-                    className="group relative rounded-2xl border border-white/12 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/25 transition-all duration-300 p-6 flex flex-col justify-between"
+                    initial={{ opacity: 0.9, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    whileHover={{ y: -8, scale: 1.015 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{
+                      duration: 0.45,
+                      delay: index * 0.08,
+                      ease: 'easeOut',
+                    }}
+                    className="group relative rounded-2xl border border-[#687A70]/40 bg-[#E6ECE8] hover:border-[#5E1726] transition-colors duration-300 p-6 flex flex-col justify-between shadow-sm"
                   >
                     <div>
                       <div className="flex items-center justify-between gap-2 mb-4">
-                        <span className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-500">
+                        <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-[#5E1726]">
                           0{index + 1}
                         </span>
                         <span
-                          className={`px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-[0.18em] ${
+                          className={`px-3 py-1 rounded-full text-[10.5px] font-mono font-bold uppercase tracking-[0.12em] ${
                             role.current
-                              ? 'bg-[#fd5200]/20 text-[#fd5200] border border-[#fd5200]/40'
-                              : 'bg-white/10 text-neutral-300'
+                              ? 'bg-[#5E1726] text-[#F6F1E7]'
+                              : 'bg-[#FAF7F2] text-[#232B27] border border-[#687A70]/40'
                           }`}
                         >
                           {role.period}
                         </span>
                       </div>
 
-                      <h4 className="text-xl font-bold text-white mb-1">
+                      <h4 className="text-xl font-bold text-[#232B27] mb-1">
                         {role.company}
                       </h4>
-                      <p className="text-sm font-medium text-sky-400 mb-4">
+                      <p className="text-sm font-bold text-[#5E1726] mb-4">
                         {role.role}
                       </p>
 
-                      <ul className="space-y-2 text-xs md:text-sm text-neutral-300 leading-relaxed mb-6">
+                      <ul className="space-y-2 text-xs md:text-sm text-[#232B27] leading-relaxed mb-6">
                         {role.highlights.map((item) => (
                           <li key={item} className="flex items-start gap-2">
-                            <span className="text-[#fd5200] mt-1">▹</span>
+                            <span className="text-[#5E1726] mt-0.5 font-bold">▹</span>
                             <span>{item}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/10">
+                    <div className="flex flex-wrap gap-1.5 pt-4 border-t border-[#687A70]/30">
                       {role.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[10px] font-mono text-neutral-300"
+                          className="px-2.5 py-0.5 rounded bg-[#FAF7F2] border border-[#687A70]/35 text-[10.5px] font-mono font-semibold text-[#232B27]"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
 
               {/* Verified Education Strip */}
               <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-                {EDUCATION_HISTORY.map((edu) => (
-                  <div
+                {EDUCATION_HISTORY.map((edu, idx) => (
+                  <motion.div
                     key={edu.id}
-                    className="rounded-xl border border-white/10 bg-white/[0.02] px-5 py-4 flex flex-col justify-between"
+                    initial={{ opacity: 0.9, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    whileHover={{ y: -4 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.4, delay: idx * 0.06 }}
+                    className="rounded-xl border border-[#687A70]/40 hover:border-[#5E1726] bg-[#EFE8DA] px-5 py-4 flex flex-col justify-between transition-colors"
                   >
                     <div>
-                      <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#c8a882] block mb-1">
+                      <span className="text-[10.5px] font-mono font-bold uppercase tracking-[0.22em] text-[#5E1726] block mb-1">
                         Education · {edu.completion}
                       </span>
-                      <h5 className="text-sm font-bold text-white">
+                      <h5 className="text-sm font-bold text-[#232B27]">
                         {edu.degree}
                       </h5>
                     </div>
-                    <p className="text-xs text-neutral-400 mt-1.5">
+                    <p className="text-xs text-[#35423C] font-medium mt-1.5">
                       {edu.institution}
                     </p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* CHAPTER 03 — HOW I WORK + TECHNOLOGY UNIVERSE (#F5F0E8) */}
+        {/* PAGE 4: "BUILT DIFFERENT." 3D INTERACTIVE ROBOT SKILL STAGE (Muted Sage Grey #DCE3DF) */}
         <section
           id="skills"
+          className="w-full min-h-screen bg-[#DCE3DF] relative overflow-hidden flex items-center border-y border-[#84968B]/40"
+        >
+          <div className="flex flex-col md:flex-row w-full min-h-screen">
+            {/* Left Column: Built Different Editorial Copy + Live Hand-Projected Skill Matrix */}
+            <motion.div
+              initial={{ opacity: 0.9, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              className="flex-1 p-6 sm:p-8 md:p-14 lg:p-16 relative z-10 flex flex-col justify-center"
+            >
+              <p className="text-xs uppercase tracking-[0.32em] text-[#5E1726] font-bold mb-3 font-mono">
+                Interactive 3D · Full Stack Python, Gen AI &amp; Agentic AI
+              </p>
+              <h2 className="text-4xl md:text-6xl font-extrabold text-[#232B27] leading-tight tracking-tight">
+                Built Different.
+              </h2>
+              <p className="mt-3.5 text-[#35423C] max-w-lg text-sm sm:text-base md:text-lg leading-relaxed font-medium">
+                Watch the cybernetic AI core conjure and orbit my core
+                engineering skills right in its hands — or click its palms
+                to cycle through{' '}
+                <span className="text-[#5E1726] font-bold underline decoration-[#5E1726] underline-offset-4">
+                  Python, Django, React, Generative AI, and Agentic AI
+                  workflows
+                </span>
+                .
+              </p>
+
+              {/* Compact Interactive Skill Badges Grid synced with the Robot's Hands */}
+              <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-2 max-w-lg">
+                {ROBOT_HAND_SKILLS.map((sk, idx) => {
+                  const IconComp =
+                    skillDomainIcons[idx % skillDomainIcons.length] ||
+                    Layers;
+                  return (
+                    <div
+                      key={sk.id}
+                      className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#FAF7F2]/90 border border-[#687A70]/45 shadow-2xs"
+                    >
+                      <span className="w-6 h-6 rounded-lg bg-[#5E1726] text-[#F6F1E7] flex items-center justify-center shrink-0">
+                        <IconComp className="w-3.5 h-3.5" />
+                      </span>
+                      <div className="min-w-0">
+                        <span className="block text-[10px] font-mono font-extrabold text-[#232B27] truncate">
+                          {sk.shortLabel}
+                        </span>
+                        <span className="block text-[9px] font-mono text-[#5E1726] font-semibold truncate">
+                          {sk.badgeSub}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <motion.a
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  href="#showcase"
+                  className="px-6 py-3 rounded-full bg-[#5E1726] text-[#F6F1E7] text-xs font-mono uppercase tracking-[0.2em] font-bold hover:bg-[#751E31] transition-colors shadow-sm"
+                >
+                  Explore My Work
+                </motion.a>
+                <motion.button
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  type="button"
+                  onClick={onOpenResume}
+                  className="px-6 py-3 rounded-full bg-[#FAF7F2] border border-[#687A70]/50 text-[#232B27] text-xs font-mono uppercase tracking-[0.2em] font-bold hover:border-[#5E1726] transition-colors cursor-pointer"
+                >
+                  Download Resume
+                </motion.button>
+                <motion.a
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  href={TARUN_PROFILE.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3 rounded-full border border-[#687A70]/60 text-[#232B27] text-xs font-mono font-bold uppercase tracking-[0.2em] hover:bg-[#FAF7F2] transition-colors"
+                >
+                  View GitHub ↗
+                </motion.a>
+              </div>
+            </motion.div>
+
+            {/* Right Column: Interactive 3D WebGL Stage with Hand-Held Skill Hologram */}
+            <div className="flex-1 relative min-h-[460px] md:min-h-screen">
+              <CyberneticBotCanvas />
+            </div>
+          </div>
+        </section>
+
+        {/* CHAPTER 03 — HOW I WORK + TECHNOLOGY UNIVERSE (Muted Sage Grey #DCE3DF) */}
+        <section
           className="flow-art-section relative overflow-hidden"
           style={{
-            backgroundColor: '#F5F0E8',
-            color: '#000',
+            backgroundColor: '#DCE3DF',
+            color: '#232B27',
             minHeight: '100vh',
             height: 'auto',
             paddingTop: '6rem',
             paddingBottom: '6rem',
           }}
         >
-          <div
-            className="flow-art-text w-full max-w-6xl mx-auto px-6 md:px-14"
-            style={{ transformOrigin: 'bottom left' }}
-          >
-            <div className="flow-art-label">
+          <div className="flow-art-text w-full max-w-6xl mx-auto px-6 md:px-14">
+            <div className="flow-art-label text-[#5E1726]">
               <span className="flow-art-num">03</span>
               <span className="flow-art-Title">HOW I WORK</span>
             </div>
-            <h2 className="flow-art-heading">THINK. BUILD. SHIP.</h2>
+            <h2 className="flow-art-heading text-[#232B27]">THINK. BUILD. SHIP.</h2>
 
             {/* Interactive Technology Universe Matrix */}
-            <div className="mt-12 pt-10 border-t border-black/15">
+            <div className="mt-12 pt-10 border-t border-[#687A70]/40">
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
                 <div>
-                  <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#fd5200] block mb-2">
+                  <span className="text-xs font-mono font-bold uppercase tracking-[0.3em] text-[#5E1726] block mb-2">
                     Chapter 04 · Technology Universe
                   </span>
-                  <h3 className="text-2xl md:text-4xl font-bold tracking-tight text-black">
-                    Full Stack Python, AI &amp; Cloud Ecosystem
+                  <h3 className="text-2xl md:text-4xl font-bold tracking-tight text-[#232B27]">
+                    Full Stack Python, Gen AI &amp; Cloud Ecosystem
                   </h3>
                 </div>
 
@@ -855,10 +1355,10 @@ export const BuiltDifferentAndFlowSection: React.FC<
                   <button
                     type="button"
                     onClick={() => setActiveSkillCategory('all')}
-                    className={`px-3 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-wider transition-colors cursor-pointer ${
+                    className={`px-3.5 py-1.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider transition-all cursor-pointer ${
                       activeSkillCategory === 'all'
-                        ? 'bg-black text-[#F5F0E8]'
-                        : 'bg-black/10 text-black hover:bg-black/20'
+                        ? 'bg-[#5E1726] text-[#F6F1E7] scale-105 shadow-xs'
+                        : 'bg-[#FAF7F2] text-[#232B27] border border-[#687A70]/40 hover:border-[#5E1726]'
                     }`}
                   >
                     All Domains
@@ -868,10 +1368,10 @@ export const BuiltDifferentAndFlowSection: React.FC<
                       key={cat.id}
                       type="button"
                       onClick={() => setActiveSkillCategory(cat.id)}
-                      className={`px-3 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-wider transition-colors cursor-pointer ${
+                      className={`px-3.5 py-1.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider transition-all cursor-pointer ${
                         activeSkillCategory === cat.id
-                          ? 'bg-black text-[#F5F0E8]'
-                          : 'bg-black/10 text-black hover:bg-black/20'
+                          ? 'bg-[#5E1726] text-[#F6F1E7] scale-105 shadow-xs'
+                          : 'bg-[#FAF7F2] text-[#232B27] border border-[#687A70]/40 hover:border-[#5E1726]'
                       }`}
                     >
                       {cat.title}
@@ -880,86 +1380,61 @@ export const BuiltDifferentAndFlowSection: React.FC<
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {filteredCategories.map((cat) => (
-                  <div
-                    key={cat.id}
-                    className="rounded-2xl border border-black/15 bg-black/[0.03] p-6 flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <span
-                          className="h-2.5 w-2.5 rounded-full"
-                          style={{ backgroundColor: cat.accent }}
-                        />
-                        <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-black/60">
-                          {cat.skills.length} Technologies
-                        </span>
-                      </div>
-                      <h4 className="text-lg font-bold text-black mb-1">
-                        {cat.title}
-                      </h4>
-                      <p className="text-xs text-black/70 mb-5">
-                        {cat.subtitle}
-                      </p>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2">
-                      {cat.skills.map((skill) => (
-                        <div
-                          key={skill.name}
-                          className="group relative px-3 py-1.5 rounded-lg bg-white border border-black/12 text-xs font-mono font-medium text-black flex items-center gap-1.5 shadow-xs"
-                        >
-                          <span>{skill.name}</span>
-                          {skill.contextNote && (
-                            <span
-                              title={skill.contextNote}
-                              className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-[#fd5200]/15 text-[#fd5200] font-semibold"
-                            >
-                              Project Tech
-                            </span>
-                          )}
+              <motion.div
+                layout
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+              >
+                <AnimatePresence mode="popLayout">
+                  {filteredCategories.map((cat) => (
+                    <motion.div
+                      layout
+                      key={cat.id}
+                      initial={{ opacity: 0.85, scale: 0.95, y: 14 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.94 }}
+                      whileHover={{ y: -6 }}
+                      transition={{ duration: 0.3, ease: 'easeOut' }}
+                      className="rounded-2xl border border-[#687A70]/45 hover:border-[#5E1726] bg-[#FAF7F2] p-6 flex flex-col justify-between shadow-xs transition-colors"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="h-3 w-3 rounded-full bg-[#5E1726]" />
+                          <span className="text-[10.5px] font-mono font-bold uppercase tracking-[0.2em] text-[#5E1726]">
+                            {cat.skills.length} Technologies
+                          </span>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+                        <h4 className="text-lg font-bold text-[#232B27] mb-1">
+                          {cat.title}
+                        </h4>
+                        <p className="text-xs text-[#35423C] mb-5 font-medium">
+                          {cat.subtitle}
+                        </p>
+                      </div>
 
-        {/* CHAPTER 04 — THE VISION (#1A3DE8) */}
-        <section
-          className="flow-art-section"
-          style={{ backgroundColor: '#1A3DE8', color: '#fff' }}
-        >
-          <div
-            className="flow-art-text"
-            style={{ transformOrigin: 'bottom left' }}
-          >
-            <div className="flow-art-label">
-              <span className="flow-art-num">04</span>
-              <span className="flow-art-Title">The vision</span>
+                      <div className="flex flex-wrap gap-2">
+                        {cat.skills.map((skill) => (
+                          <motion.div
+                            whileHover={{ scale: 1.05, y: -2 }}
+                            key={skill.name}
+                            className="group relative px-3 py-1.5 rounded-lg bg-[#EFE8DA] border border-[#687A70]/35 hover:border-[#5E1726] text-xs font-mono font-bold text-[#232B27] flex items-center gap-1.5 transition-colors"
+                          >
+                            <span>{skill.name}</span>
+                            {skill.contextNote && (
+                              <span
+                                title={skill.contextNote}
+                                className="text-[9.5px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-[#5E1726] text-[#F6F1E7] font-bold"
+                              >
+                                Project Tech
+                              </span>
+                            )}
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
             </div>
-            <h2 className="flow-art-heading">BUILT TO LEAD.</h2>
-          </div>
-        </section>
-
-        {/* CHAPTER 05 — LET'S TALK (#000) */}
-        <section
-          className="flow-art-section"
-          style={{ backgroundColor: '#000', color: '#fff' }}
-        >
-          <div
-            className="flow-art-text"
-            style={{ transformOrigin: 'bottom left' }}
-          >
-            <div className="flow-art-label">
-              <span className="flow-art-num">05</span>
-              <span className="flow-art-Title">LET&apos;S TALK</span>
-            </div>
-            <h2 className="flow-art-heading">GOT AN IDEA? LET&apos;S BUILD.</h2>
           </div>
         </section>
       </div>

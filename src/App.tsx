@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FeaturedProject,
   ProjectCaseStudy,
@@ -22,12 +22,19 @@ export default function App() {
     useState<ProjectCaseStudy | null>(null);
   const [resumeOpen, setResumeOpen] = useState(false);
 
+  useEffect(() => {
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname);
+      window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    }
+  }, []);
+
   const handleSelectFeaturedProject = (proj: FeaturedProject) => {
     setActiveProjectModal(proj.caseStudy);
   };
 
   return (
-    <main className="relative bg-[#080808] text-white min-h-screen selection:bg-[#fd5200] selection:text-white overflow-x-clip">
+    <main className="relative bg-[#F6F1E7] text-[#232B27] min-h-screen selection:bg-[#5E1726] selection:text-[#F6F1E7] overflow-x-clip">
       {/* Global Film Noise, Custom Dual-Dot Cursor, ⌘K Command Palette & Project Case Study Modal */}
       <GlobalOverlays
         searchOpen={searchOpen}

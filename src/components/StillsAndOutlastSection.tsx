@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from 'motion/react';
+import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 import {
   COMMAND_BACKDROP_IMAGE,
   FEATURED_PROJECTS,
@@ -18,7 +20,7 @@ const TWINKLE_STARS = Array.from({ length: 28 }, (_, i) => ({
   id: i,
   top: `${(i * 37) % 94}%`,
   left: `${(i * 53) % 96}%`,
-  size: i % 3 === 0 ? 2.5 : 1.5,
+  size: i % 3 === 0 ? 3 : 2,
   dur: `${2.4 + (i % 5) * 0.6}s`,
   delay: `${(i % 7) * 0.35}s`,
 }));
@@ -35,8 +37,10 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
   const zoomPortalWrapRef = useRef<HTMLDivElement>(null);
   const [zoomProgress, setZoomProgress] = useState(0);
 
-  // 3D Coverflow Carousel state
+  // 3D Coverflow Carousel state + auto-play
   const [activeCarouselIdx, setActiveCarouselIdx] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isHoveringCarousel, setIsHoveringCarousel] = useState(false);
 
   // Flagship Projects hover preview state
   const [hoveredFlagship, setHoveredFlagship] =
@@ -44,12 +48,11 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const flagshipListRef = useRef<HTMLDivElement>(null);
 
-  // Build 6 gallery stills from Tarun's generated project & command center assets
   const galleryStills = [
     {
       num: '01',
       title: "Satya's Education Platform",
-      tag: 'React · TypeScript · Django · Cashfree',
+      tag: 'React · JavaScript · Django · Cashfree',
       image: FEATURED_PROJECTS[0].image,
       project: FEATURED_PROJECTS[0],
       side: 'left' as const,
@@ -98,9 +101,18 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
     },
   ];
 
+  // Auto-advance 3D Coverflow Carousel
+  useEffect(() => {
+    if (!isAutoPlaying || isHoveringCarousel) return;
+    const timer = window.setInterval(() => {
+      setActiveCarouselIdx((prev) => (prev + 1) % carouselSlides.length);
+    }, 4200);
+    return () => window.clearInterval(timer);
+  }, [isAutoPlaying, isHoveringCarousel, carouselSlides.length]);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. PageFoldTransition (top/bottom halves fold open revealing Chapter 03 / DESIGNED WITH INTENT)
+      // 1. PageFoldTransition
       if (
         foldWrapRef.current &&
         topHalfRef.current &&
@@ -140,9 +152,9 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
           )
           .fromTo(
             revealContentRef.current,
-            { opacity: 0, scale: 0.9 },
-            { opacity: 1, scale: 1, duration: 0.6, ease: 'power3.out' },
-            0.32
+            { opacity: 0.35, scale: 0.92 },
+            { opacity: 1, scale: 1, duration: 0.55, ease: 'power3.out' },
+            0.18
           );
       }
 
@@ -175,7 +187,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
   return (
     <>
       {/* =====================================================================
-          SECTION 6A — PageFoldTransition (280vh, Chapter 03 / DESIGNED WITH INTENT)
+          SECTION 6A — PageFoldTransition (260vh, Chapter 03 / DESIGNED WITH INTENT)
          ===================================================================== */}
       <div
         ref={foldWrapRef}
@@ -187,11 +199,11 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
             top: 0,
             height: '100vh',
             overflow: 'hidden',
-            backgroundColor: '#050505',
+            backgroundColor: '#5E1726',
             perspective: '1200px',
           }}
         >
-          {/* Top Folding Half */}
+          {/* Top Folding Half (Warm Cream Beige) */}
           <div
             ref={topHalfRef}
             style={{
@@ -200,7 +212,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
               left: 0,
               right: 0,
               height: '50%',
-              backgroundColor: '#0a0a0a',
+              backgroundColor: '#EFE8DA',
               transformOrigin: 'top center',
               transformStyle: 'preserve-3d',
               zIndex: 5,
@@ -208,16 +220,16 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
               alignItems: 'flex-end',
               justifyContent: 'center',
               paddingBottom: '1rem',
-              borderBottom: '1px solid rgba(200,168,130,0.15)',
+              borderBottom: '1px solid rgba(94, 23, 38, 0.25)',
               willChange: 'transform, opacity',
             }}
           >
             <p
               style={{
-                fontSize: 'clamp(1.5rem, 4vw, 3.5rem)',
+                fontSize: 'clamp(1.75rem, 4.5vw, 3.75rem)',
                 fontWeight: 900,
-                color: 'rgba(255,255,255,0.08)',
-                letterSpacing: '0.2em',
+                color: '#5E1726',
+                letterSpacing: '0.24em',
                 textTransform: 'uppercase',
                 userSelect: 'none',
               }}
@@ -226,7 +238,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
             </p>
           </div>
 
-          {/* Bottom Folding Half */}
+          {/* Bottom Folding Half (Muted Sage Grey) */}
           <div
             ref={bottomHalfRef}
             style={{
@@ -235,7 +247,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
               left: 0,
               right: 0,
               height: '50%',
-              backgroundColor: '#0a0a0a',
+              backgroundColor: '#DCE3DF',
               transformOrigin: 'bottom center',
               transformStyle: 'preserve-3d',
               zIndex: 5,
@@ -243,16 +255,16 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
               alignItems: 'flex-start',
               justifyContent: 'center',
               paddingTop: '1rem',
-              borderTop: '1px solid rgba(200,168,130,0.15)',
+              borderTop: '1px solid rgba(94, 23, 38, 0.25)',
               willChange: 'transform, opacity',
             }}
           >
             <p
               style={{
-                fontSize: 'clamp(1.5rem, 4vw, 3.5rem)',
+                fontSize: 'clamp(1.75rem, 4.5vw, 3.75rem)',
                 fontWeight: 900,
-                color: 'rgba(255,255,255,0.08)',
-                letterSpacing: '0.2em',
+                color: '#232B27',
+                letterSpacing: '0.24em',
                 textTransform: 'uppercase',
                 userSelect: 'none',
               }}
@@ -261,7 +273,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
             </p>
           </div>
 
-          {/* Gold Horizon Seam Line */}
+          {/* Deep Burgundy Horizon Seam Line */}
           <div
             ref={horizonLineRef}
             style={{
@@ -269,18 +281,16 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
               top: '50%',
               left: '5%',
               right: '5%',
-              height: '2px',
+              height: '3px',
               background:
-                'linear-gradient(90deg, transparent, #c8a882, #fff, #c8a882, transparent)',
+                'linear-gradient(90deg, transparent, #5E1726, #FAF7F2, #5E1726, transparent)',
               transform: 'translateY(-50%) scaleX(0)',
               zIndex: 10,
-              boxShadow:
-                '0 0 30px rgba(200,168,130,0.6), 0 0 80px rgba(200,168,130,0.3)',
               willChange: 'transform, opacity',
             }}
           />
 
-          {/* Revealed Chapter 03 Centerpiece */}
+          {/* Revealed Chapter 03 Centerpiece on Deep Burgundy */}
           <div
             ref={revealContentRef}
             style={{
@@ -297,11 +307,12 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
           >
             <p
               style={{
-                fontSize: '0.75rem',
+                fontSize: '0.82rem',
                 letterSpacing: '0.5em',
                 textTransform: 'uppercase',
-                color: '#c8a882',
+                color: '#EFE8DA',
                 fontFamily: 'monospace',
+                fontWeight: 700,
                 marginBottom: '1rem',
               }}
             >
@@ -311,7 +322,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
               style={{
                 fontSize: 'clamp(2.5rem, 6.5vw, 5.5rem)',
                 fontWeight: 900,
-                color: '#fff',
+                color: '#F6F1E7',
                 letterSpacing: '-0.03em',
                 lineHeight: 1.05,
                 textAlign: 'center',
@@ -320,25 +331,25 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
             >
               DESIGNED WITH
               <br />
-              <span style={{ color: '#c8a882' }}>INTENT</span>
+              <span style={{ color: '#DCE3DF' }}>INTENT</span>
             </h2>
           </div>
         </div>
       </div>
 
       {/* =====================================================================
-          SECTION 6B — #gallery ("Ch · 04 — Field of Stills" + 3D Skewed Gallery + Coverflow Carousel)
+          SECTION 6B — #gallery ("Ch · 04 — Field of Stills" on Warm Cream Beige #F6F1E7)
          ===================================================================== */}
       <section
         id="gallery"
         style={{
           position: 'relative',
-          background: '#080808',
+          background: '#F6F1E7',
           overflow: 'hidden',
           padding: '0 0 4rem',
         }}
       >
-        {/* Corner Viewfinder Brackets (#c8a882) */}
+        {/* Corner Viewfinder Brackets (#5E1726) */}
         <div
           aria-hidden="true"
           style={{
@@ -347,8 +358,8 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
             left: 28,
             width: 28,
             height: 28,
-            borderTop: '1px solid rgba(200,168,130,0.28)',
-            borderLeft: '1px solid rgba(200,168,130,0.28)',
+            borderTop: '2px solid rgba(94, 23, 38, 0.45)',
+            borderLeft: '2px solid rgba(94, 23, 38, 0.45)',
             pointerEvents: 'none',
             zIndex: 3,
           }}
@@ -361,8 +372,8 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
             right: 28,
             width: 28,
             height: 28,
-            borderTop: '1px solid rgba(200,168,130,0.28)',
-            borderRight: '1px solid rgba(200,168,130,0.28)',
+            borderTop: '2px solid rgba(94, 23, 38, 0.45)',
+            borderRight: '2px solid rgba(94, 23, 38, 0.45)',
             pointerEvents: 'none',
             zIndex: 3,
           }}
@@ -375,8 +386,8 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
             left: 28,
             width: 28,
             height: 28,
-            borderBottom: '1px solid rgba(200,168,130,0.28)',
-            borderLeft: '1px solid rgba(200,168,130,0.28)',
+            borderBottom: '2px solid rgba(94, 23, 38, 0.45)',
+            borderLeft: '2px solid rgba(94, 23, 38, 0.45)',
             pointerEvents: 'none',
             zIndex: 3,
           }}
@@ -389,14 +400,14 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
             right: 28,
             width: 28,
             height: 28,
-            borderBottom: '1px solid rgba(200,168,130,0.28)',
-            borderRight: '1px solid rgba(200,168,130,0.28)',
+            borderBottom: '2px solid rgba(94, 23, 38, 0.45)',
+            borderRight: '2px solid rgba(94, 23, 38, 0.45)',
             pointerEvents: 'none',
             zIndex: 3,
           }}
         />
 
-        {/* Twinkling Stars */}
+        {/* Subtle Burgundy & Sage Dots */}
         <div
           aria-hidden="true"
           style={{
@@ -419,7 +430,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
                   width: star.size,
                   height: star.size,
                   borderRadius: '50%',
-                  background: '#ffffff',
+                  background: '#5E1726',
                   '--dur': star.dur,
                   '--delay': star.delay,
                 } as React.CSSProperties
@@ -443,7 +454,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              borderBottom: '1px solid rgba(255,255,255,0.08)',
+              borderBottom: '1px solid rgba(104, 122, 112, 0.35)',
               paddingBottom: '1.25rem',
               marginBottom: 'clamp(2.5rem, 5vw, 4.5rem)',
               flexWrap: 'wrap',
@@ -454,20 +465,20 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
               <span
                 style={{
                   display: 'inline-block',
-                  width: 7,
-                  height: 7,
+                  width: 8,
+                  height: 8,
                   borderRadius: '50%',
-                  background: '#c8a882',
-                  boxShadow: '0 0 10px rgba(200,168,130,0.8)',
+                  background: '#5E1726',
                 }}
               />
               <span
                 style={{
                   fontFamily: '"JetBrains Mono", monospace',
-                  fontSize: '0.68rem',
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
                   letterSpacing: '0.32em',
                   textTransform: 'uppercase',
-                  color: '#c8a882',
+                  color: '#5E1726',
                 }}
               >
                 Ch · 04 — Field of Stills
@@ -476,10 +487,11 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
             <span
               style={{
                 fontFamily: '"JetBrains Mono", monospace',
-                fontSize: '0.65rem',
+                fontSize: '0.72rem',
+                fontWeight: 600,
                 letterSpacing: '0.24em',
                 textTransform: 'uppercase',
-                color: 'rgba(255,255,255,0.38)',
+                color: '#35423C',
               }}
             >
               [ Perspective · Depth · Motion ]
@@ -487,12 +499,13 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
             <span
               style={{
                 fontFamily: '"JetBrains Mono", monospace',
-                fontSize: '0.68rem',
+                fontSize: '0.75rem',
+                fontWeight: 700,
                 letterSpacing: '0.24em',
-                color: 'rgba(255,255,255,0.55)',
+                color: '#232B27',
               }}
             >
-              04 <span style={{ color: 'rgba(200,168,130,0.5)' }}>/</span> 07
+              04 <span style={{ color: '#5E1726' }}>/</span> 07
             </span>
           </div>
 
@@ -510,10 +523,11 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
               <div
                 style={{
                   fontFamily: '"JetBrains Mono", monospace',
-                  fontSize: '0.68rem',
-                  letterSpacing: '0.36em',
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.32em',
                   textTransform: 'uppercase',
-                  color: 'rgba(255,255,255,0.42)',
+                  color: '#5E1726',
                   marginBottom: '1rem',
                 }}
               >
@@ -522,11 +536,11 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
               <h2
                 style={{
                   fontFamily: '"Cormorant Garamond", Georgia, serif',
-                  fontWeight: 500,
-                  fontSize: 'clamp(2.6rem, 6vw, 5.25rem)',
-                  lineHeight: 0.96,
-                  letterSpacing: '-0.025em',
-                  color: '#f5f1ea',
+                  fontWeight: 700,
+                  fontSize: 'clamp(2.8rem, 6vw, 5.25rem)',
+                  lineHeight: 0.98,
+                  letterSpacing: '-0.02em',
+                  color: '#232B27',
                   margin: 0,
                 }}
               >
@@ -534,11 +548,8 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
                 <em
                   style={{
                     fontStyle: 'italic',
-                    fontWeight: 400,
-                    background:
-                      'linear-gradient(135deg, #f5f1ea 0%, #c8a882 55%, #8a6d4b 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
+                    fontWeight: 700,
+                    color: '#5E1726',
                   }}
                 >
                   Thinks
@@ -552,9 +563,10 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
               <p
                 style={{
                   fontFamily: '"DM Sans", sans-serif',
-                  fontSize: 'clamp(0.92rem, 1.05vw, 1.02rem)',
+                  fontSize: 'clamp(0.95rem, 1.05vw, 1.05rem)',
                   lineHeight: 1.7,
-                  color: 'rgba(245,241,234,0.62)',
+                  color: '#35423C',
+                  fontWeight: 500,
                   margin: 0,
                 }}
               >
@@ -569,9 +581,14 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
           <div className="w-full py-8">
             <div className="max-w-5xl mx-auto px-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-24">
-                {galleryStills.map((still) => (
-                  <div
+                {galleryStills.map((still, idx) => (
+                  <motion.div
                     key={still.num}
+                    initial={{ opacity: 0.9, y: 28 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    whileHover={{ y: -8 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.5, delay: idx * 0.06 }}
                     onClick={() => onSelectProject(still.project)}
                     style={{ perspective: '1000px' }}
                     className={`flex flex-col items-center cursor-pointer group ${
@@ -586,23 +603,23 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
                             : 'rotateY(14deg) rotateX(4deg)',
                         transformStyle: 'preserve-3d',
                       }}
-                      className="relative w-full aspect-video rounded-xl overflow-hidden shadow-2xl border border-white/15 transition-transform duration-500 group-hover:scale-[1.03]"
+                      className="relative w-full aspect-video rounded-xl overflow-hidden shadow-2xl border-2 border-[#5E1726]/35 group-hover:border-[#5E1726] transition-all duration-500 group-hover:scale-[1.04]"
                     >
                       <img
                         src={still.image}
                         alt={still.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end justify-between p-4">
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#232B27]/90 via-transparent to-transparent flex items-end justify-between p-4">
                         <div>
-                          <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c8a882] block">
+                          <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#EFE8DA] block">
                             Frame {still.num}
                           </span>
-                          <h4 className="text-base font-bold text-white">
+                          <h4 className="text-base font-bold text-[#F6F1E7]">
                             {still.title}
                           </h4>
                         </div>
-                        <span className="text-[10px] font-mono text-neutral-300 bg-black/60 px-2.5 py-1 rounded-full border border-white/10">
+                        <span className="text-[10px] font-mono font-semibold text-[#F6F1E7] bg-[#5E1726] px-2.5 py-1 rounded-full">
                           {still.tag}
                         </span>
                       </div>
@@ -622,7 +639,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
                         WebkitMaskImage:
                           'linear-gradient(to bottom, rgba(0,0,0,0.35), transparent 75%)',
                       }}
-                      className="w-4/5 h-16 mt-2 rounded-xl overflow-hidden opacity-55 pointer-events-none"
+                      className="w-4/5 h-16 mt-2 rounded-xl overflow-hidden opacity-45 pointer-events-none"
                     >
                       <img
                         src={still.image}
@@ -630,27 +647,23 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
                         className="w-full h-full object-cover transform -scale-y-100"
                       />
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* 3D Coverflow Carousel with Volumetric Light Rays */}
-          <div className="relative mt-20 rounded-3xl border border-white/10 bg-[#050507] py-16 px-6 overflow-hidden">
-            <div
-              className="light-rays-container"
-              style={{
-                background:
-                  'radial-gradient(ellipse 65% 50% at 50% 0%, rgba(200,168,130,0.16), transparent 75%)',
-              }}
-            />
-
+          {/* 3D Coverflow Carousel on Deep Burgundy Stage (#5E1726) */}
+          <div
+            onMouseEnter={() => setIsHoveringCarousel(true)}
+            onMouseLeave={() => setIsHoveringCarousel(false)}
+            className="relative mt-20 rounded-3xl border border-[#5E1726] bg-[#5E1726] py-16 px-6 overflow-hidden shadow-xl"
+          >
             <div className="relative z-10 text-center mb-10">
-              <span className="text-[11px] font-mono uppercase tracking-[0.35em] text-[#c8a882] block mb-2">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-[0.35em] text-[#EFE8DA] block mb-2">
                 Interactive Deck · 3D Coverflow
               </span>
-              <h3 className="text-2xl md:text-4xl font-bold text-white">
+              <h3 className="text-2xl md:text-4xl font-bold text-[#F6F1E7]">
                 System Reel &amp; Interactive Architecture
               </h3>
             </div>
@@ -683,22 +696,24 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
                       transform: `translate3d(${translateX}px, 0, ${translateZ}px) rotateY(${rotateY}deg)`,
                       zIndex: isCenter ? 20 : 10 - Math.abs(offset),
                       opacity: isCenter ? 1 : 0.45,
+                      transition:
+                        'transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease',
                     }}
-                    className="cc-card rounded-2xl overflow-hidden border border-white/15 bg-[#111319] shadow-2xl cursor-pointer"
+                    className="cc-card rounded-2xl overflow-hidden border-2 border-[#F6F1E7]/45 bg-[#232B27] shadow-2xl cursor-pointer"
                   >
                     <img
                       src={slide.project.image}
                       alt={slide.project.title}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent p-6 flex flex-col justify-end">
-                      <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c8a882] mb-1">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#232B27]/95 via-[#232B27]/35 to-transparent p-6 flex flex-col justify-end">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#EFE8DA] mb-1">
                         {slide.badge}
                       </span>
-                      <h4 className="text-xl md:text-2xl font-bold text-white">
+                      <h4 className="text-xl md:text-2xl font-bold text-[#F6F1E7]">
                         {slide.project.title}
                       </h4>
-                      <p className="text-xs text-neutral-300 mt-1">
+                      <p className="text-xs text-[#DCE3DF] mt-1">
                         {slide.caption}
                       </p>
                     </div>
@@ -707,22 +722,68 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
               })}
             </div>
 
-            {/* Carousel Controls */}
-            <div className="relative z-10 flex items-center justify-center gap-3 mt-6">
+            {/* Carousel Controls + Auto-Play Toggle */}
+            <div className="relative z-10 flex flex-wrap items-center justify-center gap-3 mt-6">
+              <button
+                type="button"
+                aria-label="Previous slide"
+                onClick={() =>
+                  setActiveCarouselIdx(
+                    (prev) =>
+                      (prev - 1 + carouselSlides.length) % carouselSlides.length
+                  )
+                }
+                className="w-9 h-9 rounded-full bg-[#4A111D] text-[#F6F1E7] border border-[#F6F1E7]/30 hover:bg-[#FAF7F2] hover:text-[#5E1726] flex items-center justify-center transition-colors cursor-pointer"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+
               {carouselSlides.map((s, idx) => (
                 <button
                   key={s.project.id}
                   type="button"
                   onClick={() => setActiveCarouselIdx(idx)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all cursor-pointer ${
+                  className={`px-4 py-1.5 rounded-full text-xs font-mono font-bold transition-all cursor-pointer ${
                     activeCarouselIdx === idx
-                      ? 'bg-[#c8a882] text-black font-semibold'
-                      : 'bg-white/10 text-neutral-300 hover:bg-white/20'
+                      ? 'bg-[#F6F1E7] text-[#5E1726] scale-105 shadow-sm'
+                      : 'bg-[#4A111D] text-[#EFE8DA] border border-[#F6F1E7]/25 hover:bg-[#751E31]'
                   }`}
                 >
                   0{idx + 1} · {s.project.title.split(' ')[0]}
                 </button>
               ))}
+
+              <button
+                type="button"
+                aria-label="Next slide"
+                onClick={() =>
+                  setActiveCarouselIdx(
+                    (prev) => (prev + 1) % carouselSlides.length
+                  )
+                }
+                className="w-9 h-9 rounded-full bg-[#4A111D] text-[#F6F1E7] border border-[#F6F1E7]/30 hover:bg-[#FAF7F2] hover:text-[#5E1726] flex items-center justify-center transition-colors cursor-pointer"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsAutoPlaying((p) => !p)}
+                title={isAutoPlaying ? 'Pause auto-play' : 'Resume auto-play'}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#4A111D] text-[#EFE8DA] border border-[#F6F1E7]/25 hover:bg-[#FAF7F2] hover:text-[#5E1726] text-[11px] font-mono font-bold transition-colors cursor-pointer"
+              >
+                {isAutoPlaying ? (
+                  <>
+                    <Pause className="w-3 h-3" />
+                    <span>Auto</span>
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-3 h-3" />
+                    <span>Paused</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
         </div>
@@ -733,7 +794,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
          ===================================================================== */}
       <div
         ref={zoomPortalWrapRef}
-        className="relative h-[260vh] bg-[#09090B]"
+        className="relative h-[260vh] bg-[#DCE3DF] border-t border-[#687A70]/35"
       >
         <div className="sticky top-0 h-screen overflow-hidden flex items-center justify-center">
           {/* Headline above portal */}
@@ -741,11 +802,11 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
             className="absolute top-12 inset-x-0 text-center z-20 pointer-events-none px-4 transition-opacity duration-300"
             style={{ opacity: Math.max(0, 1 - zoomProgress * 2.5) }}
           >
-            <p className="text-[11px] font-mono uppercase tracking-[0.4em] text-[#c8a882] mb-2">
+            <p className="text-[11px] font-mono font-bold uppercase tracking-[0.4em] text-[#5E1726] mb-2">
               Visual Immersion
             </p>
-            <h2 className="text-2xl md:text-4xl font-serif text-white">
-              Built to <em className="italic text-[#c8a882]">Outlast</em> the
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-[#232B27]">
+              Built to <em className="italic text-[#5E1726]">Outlast</em> the
               Moment.
             </h2>
           </div>
@@ -756,15 +817,15 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
               transform: `scale(${1 + zoomProgress * 2.8})`,
               willChange: 'transform',
             }}
-            className="relative w-[34vw] min-w-[260px] h-[34vh] min-h-[200px] rounded-2xl overflow-hidden border border-white/15 shadow-2xl z-10"
+            className="relative w-[34vw] min-w-[260px] h-[34vh] min-h-[200px] rounded-2xl overflow-hidden border-2 border-[#5E1726]/40 shadow-2xl z-10"
           >
             <img
               src={COMMAND_BACKDROP_IMAGE}
               alt="Tarun AI Command Center"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black/35 flex items-center justify-center">
-              <span className="text-xs font-mono uppercase tracking-[0.3em] text-white/90 px-3 py-1 rounded-full bg-black/50 backdrop-blur-xs border border-white/15">
+            <div className="absolute inset-0 bg-[#232B27]/35 flex items-center justify-center">
+              <span className="text-xs font-mono font-bold uppercase tracking-[0.3em] text-[#F6F1E7] px-3.5 py-1.5 rounded-full bg-[#5E1726] shadow-md">
                 Tarun Pediredla · Systems
               </span>
             </div>
@@ -785,7 +846,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
                   transform: `scale(${scaleFactor})`,
                   opacity: Math.max(0, 1 - zoomProgress * 1.35),
                 }}
-                className={`hidden md:block absolute ${positions[idx]} w-[20vw] h-[20vh] rounded-xl overflow-hidden border border-white/10 shadow-xl pointer-events-none`}
+                className={`hidden md:block absolute ${positions[idx]} w-[20vw] h-[20vh] rounded-xl overflow-hidden border border-[#687A70]/45 shadow-xl pointer-events-none`}
               >
                 <img
                   src={proj.image}
@@ -799,69 +860,49 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
       </div>
 
       {/* =====================================================================
-          SECTION 7B — Cyan Conic Lamp ("Engineering Reality From Imagination.")
+          SECTION 7C — #flagship ("Flagship Projects" + Kinetic Role List on Warm Cream Beige)
          ===================================================================== */}
-      <div className="relative flex min-h-[75vh] flex-col items-center justify-center overflow-hidden bg-slate-950 w-full z-0 py-24 px-6">
-        {/* Cyan Glow Conic Lamp Beam */}
-        <div className="relative flex w-full items-center justify-center mb-10">
-          <div className=" h-36 w-[28rem] max-w-full rounded-full bg-cyan-500 opacity-35 blur-3xl" />
-          <div className="absolute h-24 w-64 rounded-full bg-cyan-400 opacity-60 blur-2xl" />
-          <div className="absolute h-0.5 w-[26rem] max-w-full bg-cyan-400 shadow-[0_0_25px_#22d3ee]" />
-        </div>
-
-        <h2 className="bg-gradient-to-br from-slate-200 to-slate-500 py-4 bg-clip-text text-center text-4xl font-bold tracking-tight text-transparent md:text-7xl">
-          Engineering Reality <br /> From Imagination.
-        </h2>
-        <p className="mt-4 text-slate-400 text-center max-w-xl text-sm md:text-base">
-          Bridging clean Python &amp; Django backend architecture with modern
-          React interfaces and autonomous AI workflows.
-        </p>
-      </div>
-
-      {/* =====================================================================
-          SECTION 7C — #flagship ("Flagship Projects" Interactive Hover-Preview List + Kinetic Role List)
-         ===================================================================== */}
-      <div id="flagship" className="bg-[#080808] py-20">
+      <div id="flagship" className="bg-[#F6F1E7] py-20">
         <section
           ref={flagshipListRef}
           onMouseMove={handleFlagshipMouseMove}
           className="relative w-full mx-auto max-w-5xl px-6 py-12"
         >
-          <p className="text-xs uppercase tracking-[0.35em] text-neutral-500 mb-3 font-mono">
+          <p className="text-xs uppercase tracking-[0.35em] text-[#5E1726] font-bold mb-3 font-mono">
             Quick Index · Verified Repositories
           </p>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-12 tracking-tight">
+          <h2 className="text-3xl md:text-5xl font-bold text-[#232B27] mb-12 tracking-tight">
             Flagship Projects
           </h2>
 
-          <div className="divide-y divide-white/8 border-y border-white/8">
+          <div className="divide-y divide-[#687A70]/35 border-y border-[#687A70]/35">
             {FEATURED_PROJECTS.map((proj) => (
               <div
                 key={proj.id}
                 onMouseEnter={() => setHoveredFlagship(proj)}
                 onMouseLeave={() => setHoveredFlagship(null)}
                 onClick={() => onSelectProject(proj)}
-                className="group block py-8 cursor-pointer"
+                className="group relative block py-8 px-4 -mx-4 rounded-2xl hover:bg-[#EFE8DA] transition-colors duration-300 cursor-pointer"
               >
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div className="flex items-baseline gap-6">
-                    <span className="text-xs font-mono text-neutral-600 group-hover:text-white transition-colors duration-300">
+                    <span className="text-xs font-mono font-bold text-[#5E1726]">
                       {proj.number}
                     </span>
                     <div>
-                      <h3 className="text-2xl md:text-4xl font-semibold text-neutral-300 group-hover:text-white group-hover:translate-x-2 transition-all duration-300">
+                      <h3 className="text-2xl md:text-4xl font-bold text-[#232B27] group-hover:text-[#5E1726] group-hover:translate-x-2 transition-all duration-300">
                         {proj.title}
                       </h3>
-                      <p className="text-xs text-neutral-500 mt-1">
+                      <p className="text-xs md:text-sm text-[#35423C] font-medium mt-1">
                         {proj.subtitle}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4 self-end md:self-center">
-                    <span className="text-xs text-neutral-500 font-mono tracking-wider uppercase group-hover:text-neutral-300 transition-colors duration-300">
+                    <span className="text-xs text-[#35423C] font-mono font-bold tracking-wider uppercase group-hover:text-[#5E1726] transition-colors duration-300">
                       {proj.technologies.slice(0, 4).join(' · ')}
                     </span>
-                    <span className="text-neutral-600 group-hover:text-white group-hover:translate-x-1 transition-all duration-300 text-lg">
+                    <span className="text-[#5E1726] group-hover:translate-x-1.5 transition-all duration-300 text-lg font-bold">
                       →
                     </span>
                   </div>
@@ -883,17 +924,17 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
             }}
           >
             {hoveredFlagship && (
-              <div className="relative w-full h-full bg-neutral-950 border border-white/15 rounded-xl overflow-hidden">
+              <div className="relative w-full h-full bg-[#232B27] border-2 border-[#5E1726] rounded-xl overflow-hidden">
                 <img
                   src={hoveredFlagship.image}
                   alt={hoveredFlagship.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-3">
-                  <p className="text-xs font-bold text-white">
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#5E1726]/95 to-transparent p-3">
+                  <p className="text-xs font-bold text-[#F6F1E7]">
                     {hoveredFlagship.title}
                   </p>
-                  <p className="text-[10px] font-mono text-amber-300">
+                  <p className="text-[10px] font-mono text-[#EFE8DA]">
                     Click to open case study
                   </p>
                 </div>
@@ -902,22 +943,28 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
           </div>
         </section>
 
-        {/* Kinetic Typography Roles List (ENGINEER, DESIGNER, BUILDER...) */}
-        <div className="min-h-[60vh] w-full flex items-center justify-center bg-[#080808] text-white py-16 px-6 md:px-16 overflow-hidden">
+        {/* Kinetic Typography Roles List (ENGINEER, DESIGNER, BUILDER...) with Burgundy Sweep Fill */}
+        <div className="min-h-[60vh] w-full flex items-center justify-center bg-[#F6F1E7] text-[#232B27] py-16 px-6 md:px-16 overflow-hidden">
           <div className="w-full max-w-6xl">
-            <p className="text-xs font-mono uppercase tracking-[0.35em] text-neutral-500 mb-6">
-              Identity · Disciplines
+            <p className="text-xs font-mono font-bold uppercase tracking-[0.35em] text-[#5E1726] mb-6">
+              Identity · Disciplines (Hover to activate)
             </p>
-            <ul className="flex flex-col">
+            <ul className="flex flex-col border-t border-[#687A70]/35">
               {KINETIC_ROLES.map((item) => (
                 <li
                   key={item.role}
-                  className="group relative border-b border-white/8 py-3 flex items-center justify-between cursor-default"
+                  className="group relative overflow-hidden border-b border-[#687A70]/35 py-4 px-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 cursor-default"
                 >
-                  <span className="text-4xl md:text-7xl font-black tracking-tight text-white/25 group-hover:text-white group-hover:translate-x-3 transition-all duration-300">
+                  {/* Animated Deep Burgundy Sweep Background */}
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-[#5E1726] scale-y-0 group-hover:scale-y-100 origin-bottom transition-transform duration-300 ease-out z-0"
+                  />
+
+                  <span className="relative z-10 text-3xl sm:text-5xl md:text-7xl font-black tracking-tight text-[#232B27] group-hover:text-[#F6F1E7] group-hover:translate-x-4 transition-all duration-300">
                     {item.role}
                   </span>
-                  <span className="text-xs md:text-sm font-mono uppercase tracking-[0.22em] text-neutral-500 group-hover:text-[#fd5200] transition-colors">
+                  <span className="relative z-10 text-xs md:text-sm font-mono font-bold uppercase tracking-[0.2em] text-[#5E1726] group-hover:text-[#EFE8DA] group-hover:-translate-x-2 transition-all duration-300">
                     {item.caption}
                   </span>
                 </li>

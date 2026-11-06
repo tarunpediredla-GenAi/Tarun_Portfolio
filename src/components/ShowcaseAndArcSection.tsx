@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from 'motion/react';
 import { FEATURED_PROJECTS, FeaturedProject } from '../data/content';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -17,13 +18,10 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
   const warpWrapRef = useRef<HTMLDivElement>(null);
   const warpFramesRef = useRef<(HTMLDivElement | null)[]>([]);
   const warpContentRef = useRef<HTMLDivElement>(null);
-  const arcSectionRef = useRef<HTMLDivElement>(null);
-  const [arcProgress, setArcProgress] = useState(0);
-  const [flippedCardIndex, setFlippedCardIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. WarpTransition 3D wireframe frames flying toward camera
+      // WarpTransition 3D wireframe frames flying toward camera
       if (warpWrapRef.current) {
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -57,55 +55,25 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
         if (warpContentRef.current) {
           tl.fromTo(
             warpContentRef.current,
-            { opacity: 0.25, scale: 0.86 },
+            { opacity: 0.95, scale: 0.94 },
             { opacity: 1, scale: 1, ease: 'power2.out' },
-            0.15
+            0.05
           );
         }
-      }
-
-      // 2. Sticky #FAFAFA 3D Flip-Card Arc Morph progress tracker
-      if (arcSectionRef.current) {
-        ScrollTrigger.create({
-          trigger: arcSectionRef.current,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 0.4,
-          onUpdate: (self) => {
-            setArcProgress(self.progress);
-          },
-        });
       }
     });
 
     return () => ctx.revert();
   }, []);
 
-  // Build 20 cards cycling through Tarun's 3 verified featured projects and architectural highlights
-  const arcCards = Array.from({ length: 20 }, (_, i) => {
-    const proj = FEATURED_PROJECTS[i % FEATURED_PROJECTS.length];
-    const badgeLabels = [
-      'Full Stack System',
-      'Architecture Flow',
-      'AI Orchestration',
-      'Database Layer',
-      'Live Interface',
-    ];
-    return {
-      index: i,
-      project: proj,
-      badge: badgeLabels[i % badgeLabels.length],
-    };
-  });
-
   return (
     <>
       {/* =====================================================================
-          SECTION 4A — WarpTransition (270vh, 7 #c8a882 3D Wireframe Frames)
+          SECTION 4A — WarpTransition (240vh, Muted Sage Grey & Deep Burgundy 3D Wireframe Tunnel)
          ===================================================================== */}
       <div
         ref={warpWrapRef}
-        style={{ height: '270vh', position: 'relative' }}
+        style={{ height: '240vh', position: 'relative' }}
       >
         <div
           style={{
@@ -113,7 +81,7 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
             top: 0,
             height: '100vh',
             overflow: 'hidden',
-            backgroundColor: '#050505',
+            backgroundColor: '#DCE3DF',
             perspective: '1000px',
           }}
         >
@@ -138,13 +106,13 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                   position: 'absolute',
                   width: '70vw',
                   height: '65vh',
-                  border: '1px solid rgba(200, 168, 130, 0.28)',
-                  borderRadius: '8px',
+                  border: '1.5px solid rgba(94, 23, 38, 0.28)',
+                  borderRadius: '10px',
                   transformStyle: 'preserve-3d',
                   willChange: 'transform, opacity',
                   boxShadow:
                     idx === 0
-                      ? '0 0 60px rgba(200, 168, 130, 0.08), inset 0 0 60px rgba(200, 168, 130, 0.04)'
+                      ? '0 16px 60px rgba(94, 23, 38, 0.12)'
                       : 'none',
                 }}
               >
@@ -153,10 +121,10 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                     position: 'absolute',
                     top: '-1px',
                     left: '-1px',
-                    width: '12px',
-                    height: '12px',
-                    borderTop: '2px solid #c8a882',
-                    borderLeft: '2px solid #c8a882',
+                    width: '14px',
+                    height: '14px',
+                    borderTop: '2.5px solid #5E1726',
+                    borderLeft: '2.5px solid #5E1726',
                   }}
                 />
                 <div
@@ -164,10 +132,10 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                     position: 'absolute',
                     top: '-1px',
                     right: '-1px',
-                    width: '12px',
-                    height: '12px',
-                    borderTop: '2px solid #c8a882',
-                    borderRight: '2px solid #c8a882',
+                    width: '14px',
+                    height: '14px',
+                    borderTop: '2.5px solid #5E1726',
+                    borderRight: '2.5px solid #5E1726',
                   }}
                 />
                 <div
@@ -175,10 +143,10 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                     position: 'absolute',
                     bottom: '-1px',
                     left: '-1px',
-                    width: '12px',
-                    height: '12px',
-                    borderBottom: '2px solid #c8a882',
-                    borderLeft: '2px solid #c8a882',
+                    width: '14px',
+                    height: '14px',
+                    borderBottom: '2.5px solid #5E1726',
+                    borderLeft: '2.5px solid #5E1726',
                   }}
                 />
                 <div
@@ -186,10 +154,10 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                     position: 'absolute',
                     bottom: '-1px',
                     right: '-1px',
-                    width: '12px',
-                    height: '12px',
-                    borderBottom: '2px solid #c8a882',
-                    borderRight: '2px solid #c8a882',
+                    width: '14px',
+                    height: '14px',
+                    borderBottom: '2.5px solid #5E1726',
+                    borderRight: '2.5px solid #5E1726',
                   }}
                 />
               </div>
@@ -213,11 +181,12 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
           >
             <p
               style={{
-                fontSize: '0.75rem',
-                letterSpacing: '0.5em',
+                fontSize: '0.82rem',
+                letterSpacing: '0.45em',
                 textTransform: 'uppercase',
-                color: '#c8a882',
+                color: '#5E1726',
                 fontFamily: 'monospace',
+                fontWeight: 700,
                 marginBottom: '1.2rem',
               }}
             >
@@ -227,7 +196,7 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
               style={{
                 fontSize: 'clamp(2.5rem, 7vw, 6rem)',
                 fontWeight: 900,
-                color: '#fff',
+                color: '#232B27',
                 letterSpacing: '-0.03em',
                 lineHeight: 1,
                 textTransform: 'uppercase',
@@ -238,11 +207,10 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
             </h2>
             <div
               style={{
-                width: '40px',
-                height: '2px',
-                background: '#c8a882',
+                width: '56px',
+                height: '3px',
+                background: '#5E1726',
                 marginTop: '1.5rem',
-                opacity: 0.6,
               }}
             />
           </div>
@@ -250,54 +218,64 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
       </div>
 
       {/* =====================================================================
-          SECTION 4B — #showcase ("Building products with intelligence." + 3 Real Projects)
+          SECTION 4B — #showcase ("Building products with intelligence." on Warm Cream Beige)
          ===================================================================== */}
-      <div id="showcase" className="bg-[#080808] py-24 md:py-32 px-6 md:px-14">
+      <div
+        id="showcase"
+        className="bg-[#F6F1E7] py-24 md:py-32 px-6 md:px-14 border-t border-[#687A70]/35"
+      >
         <div className="max-w-7xl mx-auto">
           {/* Editorial Header */}
-          <div className="max-w-4xl mx-auto text-center mb-20">
-            <p className="text-xs uppercase tracking-[0.35em] text-neutral-500 mb-3 font-mono">
+          <motion.div
+            initial={{ opacity: 0.9, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.25 }}
+            transition={{ duration: 0.55, ease: 'easeOut' }}
+            className="max-w-4xl mx-auto text-center mb-20"
+          >
+            <p className="text-xs uppercase tracking-[0.35em] text-[#5E1726] font-bold mb-3 font-mono">
               Selected Work · Chapter 05
             </p>
-            <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+            <h2 className="text-4xl md:text-6xl font-bold text-[#232B27] leading-tight">
               Building products <br />
-              <span className="text-5xl md:text-[5.5rem] font-extrabold mt-1 leading-none block bg-gradient-to-r from-[#a78bfa] via-[#38bdf8] to-[#fd5200] bg-clip-text text-transparent italic font-serif">
+              <span className="text-5xl md:text-[5.5rem] font-extrabold mt-1 leading-none block text-[#5E1726] italic font-serif">
                 with intelligence.
               </span>
             </h2>
-            <p className="mt-6 text-neutral-400 text-base md:text-lg max-w-2xl mx-auto">
+            <p className="mt-6 text-[#35423C] font-medium text-base md:text-lg max-w-2xl mx-auto">
               Three verified full-stack and AI systems engineered by Tarun
               Pediredla — complete with real repository links, architecture
               flows, and transparent engineering scope.
             </p>
-          </div>
+          </motion.div>
 
           {/* 3 Cinematic Project Showcases */}
           <div className="space-y-16">
-            {FEATURED_PROJECTS.map((project) => (
-              <div
+            {FEATURED_PROJECTS.map((project, projIdx) => (
+              <motion.div
                 key={project.id}
-                className="group relative rounded-3xl border border-white/10 bg-[#0d0e12] overflow-hidden shadow-2xl hover:border-white/25 transition-all duration-500"
+                initial={{ opacity: 0.92, y: 36 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{
+                  duration: 0.55,
+                  delay: projIdx * 0.05,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="group relative rounded-3xl border border-[#687A70]/45 bg-[#FAF7F2] overflow-hidden shadow-xl hover:border-[#5E1726] transition-all duration-500"
               >
-                {/* Top macOS Window Chrome Bar */}
-                <div className="flex items-center justify-between px-6 py-3.5 border-b border-white/10 bg-[#13151b]">
+                {/* Top Window Chrome Bar in Deep Burgundy */}
+                <div className="flex items-center justify-between px-6 py-3.5 bg-[#5E1726] text-[#F6F1E7]">
                   <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-                    <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
-                    <span className="w-3 h-3 rounded-full bg-[#28c840]" />
-                    <span className="ml-3 text-xs font-mono text-neutral-400">
+                    <span className="w-3 h-3 rounded-full bg-[#F6F1E7]" />
+                    <span className="w-3 h-3 rounded-full bg-[#DCE3DF]" />
+                    <span className="w-3 h-3 rounded-full bg-[#84968B]" />
+                    <span className="ml-3 text-xs font-mono font-bold text-[#F6F1E7]">
                       {project.number} — {project.title}
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span
-                      className="text-[11px] font-mono uppercase tracking-[0.2em] px-2.5 py-0.5 rounded-full"
-                      style={{
-                        backgroundColor: `${project.accentColor}20`,
-                        color: project.accentColor,
-                        border: `1px solid ${project.accentColor}50`,
-                      }}
-                    >
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-[0.18em] px-3 py-0.5 rounded-full bg-[#F6F1E7] text-[#5E1726]">
                       {project.category}
                     </span>
                   </div>
@@ -305,57 +283,64 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
 
                 {/* Main Split Showcase Body */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 md:p-10 items-center">
-                  {/* Left: Project Screenshot + Architecture Pipeline */}
+                  {/* Left: Project Screenshot + Animated Architecture Pipeline */}
                   <div className="lg:col-span-6 space-y-5">
-                    <div
+                    <motion.div
+                      whileHover={{ scale: 1.015 }}
+                      transition={{ duration: 0.35 }}
                       onClick={() => onSelectProject(project)}
-                      className="relative rounded-2xl overflow-hidden border border-white/10 cursor-pointer group/img aspect-video bg-black"
+                      className="relative rounded-2xl overflow-hidden border border-[#687A70]/45 cursor-pointer group/img aspect-video bg-[#232B27] shadow-md"
                     >
                       <img
                         src={project.image}
                         alt={project.title}
                         className="w-full h-full object-cover object-top group-hover/img:scale-105 transition-transform duration-700"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover/img:opacity-40 transition-opacity" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#232B27]/80 via-transparent to-transparent" />
                       <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                        <span className="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-[11px] font-mono text-white">
-                          Click to inspect full architecture
+                        <span className="px-3.5 py-1.5 rounded-full bg-[#FAF7F2]/95 text-[11px] font-mono font-bold text-[#232B27] shadow-sm group-hover/img:bg-[#5E1726] group-hover/img:text-[#F6F1E7] transition-colors">
+                          Click to inspect full architecture →
                         </span>
                         {project.liveUrl && (
-                          <span className="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-[11px] font-mono text-emerald-300">
-                            ● Live Verified
+                          <span className="px-3.5 py-1.5 rounded-full bg-[#5E1726] text-[11px] font-mono font-bold text-[#F6F1E7] shadow-sm flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#F6F1E7] animate-ping" />
+                            <span>Live Verified</span>
                           </span>
                         )}
                       </div>
-                    </div>
+                    </motion.div>
 
-                    {/* Visual Architecture Pipeline */}
-                    <div className="rounded-xl border border-white/10 bg-black/50 p-4">
-                      <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-400 block mb-3">
-                        System Architecture Flow
-                      </span>
+                    {/* Visual Architecture Pipeline with Animated Signal Pulse */}
+                    <div className="relative rounded-xl border border-[#687A70]/40 bg-[#E6ECE8] p-4 overflow-hidden">
+                      {/* Animated signal bar along top edge */}
+                      <div className="absolute top-0 left-0 right-0 h-0.5 bg-[#687A70]/25 overflow-hidden">
+                        <div className="w-1/3 h-full bg-[#5E1726] animate-signal-flow" />
+                      </div>
+
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-[10.5px] font-mono font-bold uppercase tracking-[0.25em] text-[#5E1726]">
+                          System Architecture Flow
+                        </span>
+                        <span className="text-[10px] font-mono font-semibold text-[#35423C]">
+                          {project.architectureFlow.length} Stages
+                        </span>
+                      </div>
                       <div className="flex flex-wrap items-center gap-1.5">
                         {project.architectureFlow.map((step, idx) => (
                           <React.Fragment key={step}>
-                            <span
-                              className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-white/[0.06] border border-white/10 text-neutral-200"
-                              style={
+                            <motion.span
+                              whileHover={{ y: -2, scale: 1.04 }}
+                              className={`px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold border transition-colors ${
                                 idx === 0 ||
                                 idx === project.architectureFlow.length - 1
-                                  ? {
-                                      borderColor: `${project.accentColor}66`,
-                                      color: '#fff',
-                                    }
-                                  : undefined
-                              }
+                                  ? 'bg-[#5E1726] border-[#5E1726] text-[#F6F1E7]'
+                                  : 'bg-[#FAF7F2] border-[#687A70]/40 text-[#232B27] hover:border-[#5E1726]'
+                              }`}
                             >
                               {step}
-                            </span>
+                            </motion.span>
                             {idx < project.architectureFlow.length - 1 && (
-                              <span
-                                className="text-xs font-mono font-bold px-0.5"
-                                style={{ color: project.accentColor }}
-                              >
+                              <span className="text-xs font-mono font-bold px-0.5 text-[#5E1726]">
                                 →
                               </span>
                             )}
@@ -369,47 +354,42 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                   <div className="lg:col-span-6 space-y-5">
                     <div>
                       <div className="flex items-center gap-3 mb-2">
-                        <span
-                          className="text-xs font-mono uppercase tracking-[0.25em]"
-                          style={{ color: project.accentColor }}
-                        >
+                        <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-[#5E1726]">
                           Project {project.number}
                         </span>
-                        <span className="text-neutral-600">•</span>
-                        <span className="text-xs font-mono text-neutral-400">
+                        <span className="text-[#687A70]">•</span>
+                        <span className="text-xs font-mono font-semibold text-[#35423C]">
                           {project.subtitle}
                         </span>
                       </div>
-                      <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight">
+                      <h3 className="text-2xl md:text-4xl font-bold text-[#232B27] tracking-tight">
                         {project.title}
                       </h3>
                     </div>
 
-                    <p className="text-sm md:text-base text-neutral-300 leading-relaxed">
+                    <p className="text-sm md:text-base text-[#35423C] font-medium leading-relaxed">
                       {project.summary}
                     </p>
 
                     {/* Key Capabilities */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
                       {project.features.map((feat) => (
-                        <div
+                        <motion.div
+                          whileHover={{ x: 3 }}
                           key={feat}
-                          className="rounded-lg border border-white/8 bg-white/[0.02] px-3.5 py-2.5 text-xs text-neutral-300 flex items-start gap-2"
+                          className="rounded-lg border border-[#687A70]/35 bg-[#EFE8DA] px-3.5 py-2.5 text-xs font-medium text-[#232B27] flex items-start gap-2"
                         >
-                          <span
-                            className="mt-0.5 font-bold"
-                            style={{ color: project.accentColor }}
-                          >
+                          <span className="mt-0.5 font-bold text-[#5E1726]">
                             ✓
                           </span>
                           <span>{feat}</span>
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
 
                     {/* Honest Implementation & Runtime Scope Note */}
-                    <div className="rounded-xl border border-amber-500/25 bg-amber-500/[0.05] px-4 py-3 text-xs text-amber-200/90 leading-relaxed">
-                      <span className="font-mono uppercase tracking-wider text-[10px] text-amber-400 font-semibold block mb-0.5">
+                    <div className="rounded-xl border border-[#5E1726]/30 bg-[#E6ECE8] px-4 py-3 text-xs text-[#232B27] leading-relaxed">
+                      <span className="font-mono uppercase tracking-wider text-[10.5px] text-[#5E1726] font-bold block mb-0.5">
                         Engineering &amp; Runtime Scope
                       </span>
                       {project.implementationNote}
@@ -420,7 +400,7 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 rounded-full bg-white/5 border border-white/12 text-xs font-mono text-neutral-200"
+                          className="px-3 py-1 rounded-full bg-[#DCE3DF] border border-[#687A70]/45 text-xs font-mono font-bold text-[#232B27]"
                         >
                           {tech}
                         </span>
@@ -429,172 +409,42 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
 
                     {/* Action Buttons */}
                     <div className="flex flex-wrap items-center gap-3 pt-3">
-                      <button
+                      <motion.button
+                        whileHover={{ scale: 1.04, y: -2 }}
+                        whileTap={{ scale: 0.97 }}
                         type="button"
                         onClick={() => onSelectProject(project)}
-                        className="px-5 py-2.5 rounded-full bg-white text-black text-xs font-mono uppercase tracking-[0.2em] font-semibold hover:bg-neutral-200 transition-colors cursor-pointer"
+                        className="px-5 py-2.5 rounded-full bg-[#5E1726] text-[#F6F1E7] text-xs font-mono uppercase tracking-[0.2em] font-bold hover:bg-[#751E31] transition-colors cursor-pointer shadow-xs"
                       >
                         Case Study Modal
-                      </button>
-                      <a
+                      </motion.button>
+                      <motion.a
+                        whileHover={{ scale: 1.04, y: -2 }}
+                        whileTap={{ scale: 0.97 }}
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-5 py-2.5 rounded-full border border-white/20 bg-white/5 text-white text-xs font-mono uppercase tracking-[0.2em] hover:bg-white/15 transition-colors"
+                        className="px-5 py-2.5 rounded-full bg-[#DCE3DF] border border-[#687A70]/50 text-[#232B27] text-xs font-mono font-bold uppercase tracking-[0.2em] hover:border-[#5E1726] transition-colors"
                       >
                         GitHub Repository ↗
-                      </a>
+                      </motion.a>
                       {project.liveUrl && (
-                        <a
+                        <motion.a
+                          whileHover={{ scale: 1.04, y: -2 }}
+                          whileTap={{ scale: 0.97 }}
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-5 py-2.5 rounded-full border border-emerald-400/40 bg-emerald-500/15 text-emerald-300 text-xs font-mono uppercase tracking-[0.2em] hover:bg-emerald-500/25 transition-colors"
+                          className="px-5 py-2.5 rounded-full border border-[#5E1726] bg-[#FAF7F2] text-[#5E1726] text-xs font-mono font-bold uppercase tracking-[0.2em] hover:bg-[#5E1726] hover:text-[#F6F1E7] transition-colors"
                         >
                           Live Demo ↗
-                        </a>
+                        </motion.a>
                       )}
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
-      </div>
-
-      {/* =====================================================================
-          SECTION 5 — Sticky #FAFAFA 20-Card 3D Flip-Card Arc Morph
-          ("Every line of code has a story." -> "Explore My Work")
-         ===================================================================== */}
-      <div
-        ref={arcSectionRef}
-        style={{ height: '380vh', position: 'relative' }}
-      >
-        <div
-          style={{
-            position: 'sticky',
-            top: 0,
-            height: '100vh',
-            width: '100%',
-            overflow: 'hidden',
-            backgroundColor: '#FAFAFA',
-          }}
-        >
-          <div className="relative w-full h-full flex flex-col items-center justify-center perspective-1000">
-            {/* Phase 1 Headline ("Every line of code has a story.") */}
-            <div
-              className="flex flex-col items-center justify-center text-center pointer-events-none z-10 px-6 transition-all duration-300"
-              style={{
-                opacity: Math.max(0, 1 - arcProgress * 3.2),
-                transform: `translateY(${-arcProgress * 60}px)`,
-              }}
-            >
-              <h2 className="text-3xl md:text-5xl font-semibold text-gray-900 tracking-tight mb-4">
-                Every line of code has a story.
-              </h2>
-              <p className="text-xs font-bold text-gray-400 tracking-[0.3em] uppercase">
-                Keep scrolling to watch them unfold
-              </p>
-            </div>
-
-            {/* Phase 2 Headline ("Explore My Work" inside the rotating arc) */}
-            <div
-              className="absolute flex flex-col items-center justify-center text-center pointer-events-none z-10 px-6 transition-all duration-300"
-              style={{
-                opacity:
-                  arcProgress > 0.25
-                    ? Math.min(1, (arcProgress - 0.25) * 3)
-                    : 0,
-                transform: `translateY(${Math.max(0, (1 - arcProgress) * 20)}px)`,
-              }}
-            >
-              <h2 className="text-3xl md:text-5xl font-semibold text-gray-900 tracking-tight mb-2">
-                Explore My Work
-              </h2>
-              <p className="text-sm text-gray-500 max-w-md">
-                Hover or click any card in the arc to flip &amp; inspect
-                Tarun&apos;s verified engineering systems.
-              </p>
-            </div>
-
-            {/* 20 Morphing 3D Flip Cards */}
-            <div className="relative w-full h-full flex items-center justify-center">
-              {arcCards.map(({ index, project, badge }) => {
-                // Morph from horizontal strip at bottom into a wide circular arc
-                const total = arcCards.length;
-                const normalized = index / (total - 1) - 0.5; // -0.5 to 0.5
-                const arcAngleDeg =
-                  normalized * 170 + (arcProgress - 0.5) * 55;
-                const arcAngleRad = (arcAngleDeg * Math.PI) / 180;
-                const radius = 420;
-
-                // Linear position (initial)
-                const lineX = normalized * 1150;
-                const lineY = 180 + (index % 2 === 0 ? -18 : 18);
-                const lineRot = normalized * 16;
-
-                // Arc position (morphed)
-                const circleX = Math.sin(arcAngleRad) * radius * 1.35;
-                const circleY = -Math.cos(arcAngleRad) * radius * 0.68 + 110;
-                const circleRot = arcAngleDeg * 0.75;
-
-                const morphT = Math.min(1, Math.max(0, arcProgress * 1.6));
-                const x = lineX * (1 - morphT) + circleX * morphT;
-                const y = lineY * (1 - morphT) + circleY * morphT;
-                const rot = lineRot * (1 - morphT) + circleRot * morphT;
-                const isFlipped = flippedCardIndex === index;
-
-                return (
-                  <div
-                    key={index}
-                    onClick={() => {
-                      setFlippedCardIndex(isFlipped ? null : index);
-                      onSelectProject(project);
-                    }}
-                    style={{
-                      position: 'absolute',
-                      width: 112,
-                      height: 158,
-                      transform: `translate3d(${x}px, ${y}px, 0) rotate(${rot}deg) scale(${
-                        isFlipped ? 1.18 : 0.92
-                      })`,
-                      transition:
-                        'transform 0.18s cubic-bezier(0.22, 1, 0.36, 1)',
-                      zIndex: isFlipped ? 40 : 10 + index,
-                    }}
-                    className="cursor-pointer group"
-                  >
-                    <div
-                      className="relative w-full h-full rounded-xl overflow-hidden shadow-xl border border-black/10 bg-gray-900 transition-transform duration-500"
-                      style={{
-                        transform: isFlipped
-                          ? 'rotateY(180deg)'
-                          : 'rotateY(0deg)',
-                        transformStyle: 'preserve-3d',
-                      }}
-                    >
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex flex-col justify-end p-2.5">
-                        <span className="text-[8px] font-mono uppercase tracking-wider text-amber-300">
-                          {badge}
-                        </span>
-                        <p className="text-[10px] font-bold text-white leading-tight truncate">
-                          {project.title}
-                        </p>
-                        <p className="text-[9px] text-white/75 mt-0.5">
-                          Click Me ↗
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
           </div>
         </div>
       </div>

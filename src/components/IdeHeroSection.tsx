@@ -1,19 +1,20 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import * as THREE from 'three';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from 'motion/react';
 import {
-  Folder,
-  FileCode2,
-  ChevronRight,
-  Search,
-  Sparkles,
   ExternalLink,
-  Briefcase,
-  Layers,
-  Code2,
   ArrowDown,
+  Download,
+  ArrowUpRight,
+  MapPin,
 } from 'lucide-react';
-import { portfolioContent, type ProjectCaseStudy } from '../data/content';
+import {
+  portfolioContent,
+  TARUN_PORTRAIT_IMAGE,
+  type ProjectCaseStudy,
+} from '../data/content';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,914 +24,548 @@ interface IdeHeroSectionProps {
   onOpenResume: () => void;
 }
 
-interface ExplorerFile {
-  id: string;
-  name: string;
-  folder: string;
-  url: string;
-  lines: string[];
-}
-
-const EXPLORER_FILES: ExplorerFile[] = [
-  {
-    id: 'components/Hero.tsx',
-    name: 'Hero.tsx',
-    folder: 'components',
-    url: 'tarunpediredla.dev/developer.ts',
-    lines: [
-      'const developer = {',
-      '  name: "Tarun Pediredla",',
-      '  role: "Full Stack Python Developer | Generative AI & Agentic AI",',
-      '  location: "Visakhapatnam, India",',
-      '  skills: ["Python", "Django", "React.js", "TypeScript", "Gemini", "n8n", "Vapi", "Docker"],',
-      '  focus: "Building intelligent web applications & AI-powered automations",',
-      '  email: "tarunpediredla9966@gmail.com",',
-      '};',
-      '',
-      "// Let's build something extraordinary",
-    ],
-  },
-  {
-    id: 'components/CareerTimeline.tsx',
-    name: 'CareerTimeline.tsx',
-    folder: 'components',
-    url: 'tarunpediredla.dev/experience.ts',
-    lines: [
-      'export const careerTimeline = [',
-      '  { company: "Finite HR & IT Solution", role: "Full Stack Python Developer", period: "1 Apr 2025 – Present" },',
-      '  { company: "CP Academy", role: "Full Stack Python Developer", period: "Duration: 9 months" },',
-      '  { company: "Saras India Systems Pvt Ltd", role: "Frontend Developer", period: "May 2022 – 10 Jul 2024" },',
-      '  { education: "B.Sc. Computer Science — Gayatri Vidya Parishad College (Completed Aug 2021)" },',
-      '];',
-    ],
-  },
-  {
-    id: 'components/ProjectCard.tsx',
-    name: 'ProjectCard.tsx',
-    folder: 'components',
-    url: 'tarunpediredla.dev/projects.ts',
-    lines: [
-      'export const featuredProjects = [',
-      '  { name: "Satya\'s Education", stack: ["React", "TypeScript", "Django", "Firebase", "Cashfree", "Vercel"] },',
-      '  { name: "Alex AI Mock Interviewer", stack: ["React", "TypeScript", "Express", "Gemini", "Firebase"] },',
-      '  { name: "AI Voice Task Planner", stack: ["n8n", "Vapi", "Google Gemini", "Google Sheets", "Webhooks"] },',
-      '];',
-    ],
-  },
-  {
-    id: 'components/Footer.tsx',
-    name: 'Footer.tsx',
-    folder: 'components',
-    url: 'tarunpediredla.dev/contact.ts',
-    lines: [
-      'export const contactChannels = {',
-      '  email: "tarunpediredla9966@gmail.com",',
-      '  phone: "+91 8074080773",',
-      '  github: "https://github.com/tarunpediredla-GenAi",',
-      '  location: "Visakhapatnam, India",',
-      '};',
-    ],
-  },
-  {
-    id: 'hooks/useScroll.ts',
-    name: 'useScroll.ts',
-    folder: 'hooks',
-    url: 'tarunpediredla.dev/hooks/useScroll.ts',
-    lines: [
-      'import gsap from "gsap";',
-      'import { ScrollTrigger } from "gsap/ScrollTrigger";',
-      '// Smooth 60fps scroll-driven 3D perspective & curtain choreography',
-      'gsap.registerPlugin(ScrollTrigger);',
-    ],
-  },
-  {
-    id: 'hooks/useMouse.ts',
-    name: 'useMouse.ts',
-    folder: 'hooks',
-    url: 'tarunpediredla.dev/hooks/useMouse.ts',
-    lines: [
-      '// Tracks normalized pointer coordinates for 3D holographic tilt & spotlight',
-      'export const updatePointer = (x: number, y: number) => ({ x, y });',
-    ],
-  },
+const HERO_STACK_PILLS = [
+  'Python',
+  'Django',
+  'React.js',
+  'JavaScript',
+  'GenAI · Gemini',
+  'Agentic AI · n8n & Vapi',
 ];
 
-const DAILY_DRIVER_BADGES = [
-  { label: 'Python', color: '#3776AB' },
-  { label: 'Django', color: '#10b981' },
-  { label: 'React.js', color: '#61DAFB' },
-  { label: 'TypeScript', color: '#3178C6' },
-  { label: 'Google Gemini', color: '#a78bfa' },
-  { label: 'n8n', color: '#EA4B71' },
-  { label: 'Vapi Voice AI', color: '#22d3ee' },
-  { label: 'PostgreSQL', color: '#60a5fa' },
-  { label: 'MySQL', color: '#f59e0b' },
-  { label: 'Firestore', color: '#fbbf24' },
-  { label: 'Express', color: '#e2e8f0' },
-  { label: 'Docker', color: '#2496ED' },
-  { label: 'CI/CD', color: '#c084fc' },
-  { label: 'Vercel', color: '#ffffff' },
+const NAV_LINKS = [
+  { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#journey' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Projects', href: '#showcase' },
+  { label: 'Gallery', href: '#gallery' },
+  { label: 'Contact', href: '#contact' },
 ];
 
 export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
   onOpenSearch,
-  onSelectProject,
   onOpenResume,
 }) => {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const stickyRef = useRef<HTMLDivElement | null>(null);
-  const titleWrapRef = useRef<HTMLDivElement | null>(null);
-  const frameOuterRef = useRef<HTMLDivElement | null>(null);
-  const charsRef = useRef<(HTMLSpanElement | null)[]>([]);
+  const heroSectionRef = useRef<HTMLElement | null>(null);
+  const heroLeftRef = useRef<HTMLDivElement | null>(null);
+  const heroPortraitWrapRef = useRef<HTMLDivElement | null>(null);
+  const particleCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  const [activeFileId, setActiveFileId] = useState<string>('components/Hero.tsx');
-  const [typedName, setTypedName] = useState<string>('');
-  const [clockText, setClockText] = useState<string>('');
-  const [macMenuOpen, setMacMenuOpen] = useState<string | null>(null);
+  const [pointerNormalized, setPointerNormalized] = useState({ x: 0, y: 0 });
+  const [scrolledDown, setScrolledDown] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
-  const fullName = portfolioContent.profile.name; // "Tarun Pediredla"
-  const activeFile =
-    EXPLORER_FILES.find((f) => f.id === activeFileId) ?? EXPLORER_FILES[0];
-
-  // Typewriter effect for "Tarun Pediredla"
+  // Detect reduced-motion preference for accessibility
   useEffect(() => {
-    let idx = 0;
-    const timer = window.setInterval(() => {
-      idx += 1;
-      setTypedName(fullName.slice(0, idx));
-      if (idx >= fullName.length) {
-        window.clearInterval(timer);
-      }
-    }, 110);
-    return () => window.clearInterval(timer);
-  }, [fullName]);
-
-  // Live macOS menu clock
-  useEffect(() => {
-    const updateClock = () => {
-      const now = new Date();
-      setClockText(
-        now.toLocaleTimeString('en-US', {
-          hour: '2-digit',
-          minute: '2-digit',
-          weekday: 'short',
-          month: 'short',
-          day: 'numeric',
-        })
-      );
-    };
-    updateClock();
-    const id = window.setInterval(updateClock, 15000);
-    return () => window.clearInterval(id);
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
   }, []);
 
-  // GSAP FrameToFullscreen + ScrollFloat "Come Alive" animation matching reference
+  // Track scroll for floating top navbar style
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolledDown(window.scrollY > 120);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Three.js Ambient Starlight & Electric-Blue/Violet Particle Stage in Hero Background
+  useEffect(() => {
+    const canvas = particleCanvasRef.current;
+    if (!canvas) return;
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance',
+    });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
+    camera.position.z = 14;
+
+    const particleCount = 130;
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    const colorBlue = new THREE.Color('#38BDF8');
+    const colorViolet = new THREE.Color('#8B5CF6');
+    const colorIce = new THREE.Color('#E0F2FE');
+
+    for (let i = 0; i < particleCount; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 32;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 18;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 12;
+
+      const pick = i % 3 === 0 ? colorBlue : i % 3 === 1 ? colorViolet : colorIce;
+      colors[i * 3] = pick.r;
+      colors[i * 3 + 1] = pick.g;
+      colors[i * 3 + 2] = pick.b;
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.PointsMaterial({
+      size: 0.11,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.68,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    const resize = () => {
+      const parent = canvas.parentElement;
+      if (!parent) return;
+      const w = parent.clientWidth || window.innerWidth;
+      const h = parent.clientHeight || window.innerHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / Math.max(h, 1);
+      camera.updateProjectionMatrix();
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    let pointerTargetX = 0;
+    let pointerTargetY = 0;
+    const onPointerMove = (e: MouseEvent) => {
+      pointerTargetX = (e.clientX / Math.max(window.innerWidth, 1) - 0.5) * 1.4;
+      pointerTargetY = -(e.clientY / Math.max(window.innerHeight, 1) - 0.5) * 1.0;
+    };
+    window.addEventListener('mousemove', onPointerMove, { passive: true });
+
+    let rafId = 0;
+    const clock = new THREE.Clock();
+
+    const animate = () => {
+      rafId = window.requestAnimationFrame(animate);
+      const elapsed = clock.getElapsedTime();
+
+      if (!prefersReducedMotion) {
+        points.rotation.y = elapsed * 0.035 + pointerTargetX * 0.18;
+        points.rotation.x = Math.sin(elapsed * 0.2) * 0.05 + pointerTargetY * 0.12;
+      }
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+    return () => {
+      window.cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', onPointerMove);
+      geometry.dispose();
+      material.dispose();
+      renderer.dispose();
+    };
+  }, [prefersReducedMotion]);
+
+  // GSAP + ScrollTrigger Entrance & Scroll-Driven Depth Transitions
   useLayoutEffect(() => {
-    const section = sectionRef.current;
-    const sticky = stickyRef.current;
-    const titleWrap = titleWrapRef.current;
-    const frameOuter = frameOuterRef.current;
-    if (!section || !sticky || !frameOuter || !titleWrap) return;
+    const heroEl = heroSectionRef.current;
+    const leftEl = heroLeftRef.current;
+    const portraitEl = heroPortraitWrapRef.current;
+
+    if (!heroEl || !leftEl || !portraitEl) return;
 
     const ctx = gsap.context(() => {
-      const chars = charsRef.current.filter(Boolean);
+      if (!prefersReducedMotion) {
+        // 1. Entrance reveal for left text items
+        const textItems = leftEl.querySelectorAll('.hero-reveal-item');
+        gsap.fromTo(
+          textItems,
+          { y: 28, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.85,
+            stagger: 0.1,
+            ease: 'power3.out',
+          }
+        );
 
-      gsap.set(chars, {
-        yPercent: 120,
-        opacity: 0,
-        scaleX: 0.7,
-        scaleY: 2.3,
-        transformOrigin: '50% 0%',
-      });
+        // 2. Cinematic entrance for the 3D portrait stage
+        gsap.fromTo(
+          portraitEl,
+          { opacity: 0, scale: 0.92, y: 26, rotateY: -8 },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            rotateY: 0,
+            duration: 1.1,
+            delay: 0.15,
+            ease: 'power3.out',
+          }
+        );
 
-      gsap.set(frameOuter, {
-        scaleX: 0.74,
-        scaleY: 0.72,
-        yPercent: 18,
-        rotateX: 18,
-        borderRadius: 24,
-        borderWidth: 4,
-      });
+        // 3. Scroll-driven depth parallax on the hero section
+        gsap.to(portraitEl, {
+          yPercent: -8,
+          scale: 0.97,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: heroEl,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 0.5,
+          },
+        });
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 0.4,
-          pin: sticky,
-          pinSpacing: true,
-          anticipatePin: 1,
-        },
-      });
-
-      // Phase 1 (0 -> 0.35): "Come Alive" characters float into place
-      tl.to(
-        chars,
-        {
-          yPercent: 0,
-          opacity: 1,
-          scaleX: 1,
-          scaleY: 1,
-          stagger: 0.025,
-          duration: 0.35,
-          ease: 'back.out(1.6)',
-        },
-        0
-      );
-
-      // Phase 2 (0.25 -> 0.85): Title fades up while 3D VS Code window zooms to fullscreen
-      tl.to(
-        titleWrap,
-        {
-          yPercent: -65,
-          opacity: 0,
-          duration: 0.4,
-          ease: 'power2.inOut',
-        },
-        0.28
-      );
-
-      tl.to(
-        frameOuter,
-        {
-          scaleX: 1,
-          scaleY: 1,
-          yPercent: 0,
-          rotateX: 0,
-          borderRadius: 0,
-          borderWidth: 0,
-          duration: 0.65,
-          ease: 'power3.inOut',
-        },
-        0.22
-      );
-    }, section);
+        gsap.to(leftEl, {
+          yPercent: -5,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: heroEl,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 0.5,
+          },
+        });
+      }
+    }, heroEl);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
-  const comeAliveChars = 'Come Alive'.split('');
-  const { projects, profile } = portfolioContent;
+  // Subtle mouse-following 3D parallax handler for the portrait stage
+  const handleHeroMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (prefersReducedMotion) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const nx = ((e.clientX - rect.left) / Math.max(rect.width, 1) - 0.5) * 2;
+    const ny = ((e.clientY - rect.top) / Math.max(rect.height, 1) - 0.5) * 2;
+    setPointerNormalized({ x: nx, y: ny });
+  };
+
+  const handleHeroMouseLeave = () => {
+    setPointerNormalized({ x: 0, y: 0 });
+  };
+
+  const { profile } = portfolioContent;
+
+  const portraitRotateY = pointerNormalized.x * 8;
+  const portraitRotateX = -pointerNormalized.y * 6;
+  const portraitTranslateX = pointerNormalized.x * 12;
+  const portraitTranslateY = pointerNormalized.y * 9;
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative w-full bg-[#080808]"
-      style={{ height: '340vh' }}
-    >
-      <div
-        ref={stickyRef}
-        className="relative w-full h-screen overflow-hidden flex items-end justify-center"
+    <>
+      {/* =====================================================================
+          TOP FLOATING NAVIGATION BAR (Adaptive Glassmorphism)
+         ===================================================================== */}
+      <header className="fixed top-3.5 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-4 pointer-events-none flex justify-center">
+        <nav
+          aria-label="Primary portfolio navigation"
+          className={`pointer-events-auto flex items-center gap-1 sm:gap-1.5 px-3 py-1.5 rounded-full border backdrop-blur-xl transition-all duration-300 shadow-2xl ${
+            scrolledDown
+              ? 'border-[#687A70]/45 bg-[#FAF7F2]/92 text-[#232B27]'
+              : 'border-sky-400/25 bg-[#050A1F]/80 text-slate-100 shadow-[0_10px_40px_rgba(2,6,23,0.75)]'
+          }`}
+        >
+          <a
+            href="#"
+            className={`px-3 py-1 rounded-full text-[11px] font-mono font-bold tracking-wider transition-colors ${
+              scrolledDown
+                ? 'bg-[#5E1726] text-[#F6F1E7]'
+                : 'bg-gradient-to-r from-sky-500 to-violet-600 text-white'
+            }`}
+          >
+            TP
+          </a>
+          <div className="hidden md:flex items-center gap-1">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                  scrolledDown
+                    ? 'text-[#232B27] hover:bg-[#DCE3DF] hover:text-[#5E1726]'
+                    : 'text-slate-200 hover:bg-white/10 hover:text-sky-300'
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={onOpenResume}
+            className={`px-3 py-1 rounded-full text-xs font-mono font-bold transition-colors cursor-pointer ${
+              scrolledDown
+                ? 'bg-[#EFE8DA] border border-[#687A70]/40 text-[#5E1726] hover:bg-[#5E1726] hover:text-[#F6F1E7]'
+                : 'bg-white/10 border border-sky-400/30 text-sky-300 hover:bg-sky-500 hover:text-slate-950'
+            }`}
+          >
+            Resume
+          </button>
+          <button
+            type="button"
+            onClick={onOpenSearch}
+            className={`px-2.5 py-1 rounded-full text-[11px] font-mono font-bold transition-colors cursor-pointer ${
+              scrolledDown
+                ? 'bg-[#DCE3DF] text-[#232B27] hover:bg-[#5E1726] hover:text-[#F6F1E7]'
+                : 'bg-violet-500/20 border border-violet-400/30 text-violet-200 hover:bg-violet-500 hover:text-white'
+            }`}
+          >
+            ⌘K
+          </button>
+        </nav>
+      </header>
+
+      {/* =====================================================================
+          CINEMATIC DARK NAVY & ELECTRIC-BLUE/VIOLET 3D PORTRAIT HERO
+         ===================================================================== */}
+      <section
+        ref={heroSectionRef}
+        onMouseMove={handleHeroMouseMove}
+        onMouseLeave={handleHeroMouseLeave}
+        aria-label="Tarun Pediredla Developer Hero"
+        className="relative w-full min-h-screen overflow-hidden flex items-center pt-24 pb-16 lg:py-24"
         style={{
-          perspective: '1600px',
-          willChange: 'transform',
-          transformStyle: 'preserve-3d',
+          background:
+            'radial-gradient(ellipse 90% 70% at 72% 38%, rgba(56, 189, 248, 0.16) 0%, rgba(139, 92, 246, 0.14) 36%, rgba(5, 9, 26, 0.98) 72%, #02040A 100%)',
+          backgroundColor: '#030614',
         }}
       >
-        {/* Top Floating Title ("Crafting digital experiences that Come Alive") */}
-        <div
-          ref={titleWrapRef}
-          className="absolute top-[7vh] left-1/2 -translate-x-1/2 z-10 w-full max-w-5xl px-4 text-center pointer-events-none"
-        >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white mt-[2vh]">
-            Crafting digital experiences that <br />
-            <span
-              className="inline-block font-bold tracking-tight text-white mt-4"
-              style={{ fontSize: 'clamp(3.8rem, 9.5vw, 9rem)', lineHeight: 1 }}
-            >
-              {comeAliveChars.map((ch, idx) => (
-                <span
-                  key={idx}
-                  ref={(el) => {
-                    charsRef.current[idx] = el;
-                  }}
-                  className="inline-block"
-                >
-                  {ch === ' ' ? '\u00A0' : ch}
-                </span>
-              ))}
-            </span>
-          </h1>
-        </div>
+        {/* Three.js Ambient Particle & Starlight Canvas */}
+        <canvas
+          ref={particleCanvasRef}
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full pointer-events-none z-0"
+        />
 
-        {/* 3D Tilted Frame -> Fullscreen macOS + VS Code Portfolio IDE */}
+        {/* Ambient Deep Navy, Electric-Blue & Violet Volumetric Light Fields */}
         <div
-          ref={frameOuterRef}
-          className="absolute left-0 bottom-0 bg-[#222222] border-[#6C6C6C] shadow-2xl overflow-hidden"
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-32 -left-32 w-[34rem] h-[34rem] rounded-full blur-[130px] opacity-30"
           style={{
-            width: '100vw',
-            height: '100vh',
-            borderStyle: 'solid',
-            boxShadow:
-              '0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026',
-            willChange: 'transform, borderRadius',
-            backfaceVisibility: 'hidden',
-            transformStyle: 'preserve-3d',
+            background:
+              'radial-gradient(circle, rgba(56, 189, 248, 0.45) 0%, rgba(139, 92, 246, 0.15) 60%, transparent 100%)',
           }}
-        >
-          <div className="w-full h-full bg-[#0a0a0a] text-[#cccccc] flex flex-col overflow-hidden">
-            {/* 1. macOS Top Glass Menu Bar */}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-1/4 right-[-8%] w-[38rem] h-[38rem] rounded-full blur-[140px] opacity-40"
+          style={{
+            background:
+              'radial-gradient(circle, rgba(139, 92, 246, 0.52) 0%, rgba(56, 189, 248, 0.3) 55%, transparent 100%)',
+          }}
+        />
+
+        {/* Subtle Architectural Grid Overlay */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.07] z-0"
+          style={{
+            backgroundImage:
+              'linear-gradient(to right, rgba(148, 163, 184, 0.35) 1px, transparent 1px), linear-gradient(to bottom, rgba(148, 163, 184, 0.35) 1px, transparent 1px)',
+            backgroundSize: '56px 56px',
+          }}
+        />
+
+        {/* Main Responsive Container: Left Content (Desktop) / Stacked (Mobile) */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            {/* LEFT COLUMN: Typography, Tagline, CTAs & Verified Stack */}
             <div
-              className="shrink-0 backdrop-blur-md flex items-center justify-between px-4 sm:px-7 relative z-30"
-              style={{
-                height: '36px',
-                background: 'rgba(40, 40, 40, 0.65)',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-                boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.10)',
-              }}
+              ref={heroLeftRef}
+              className="lg:col-span-7 flex flex-col items-center text-center lg:items-start lg:text-left order-2 lg:order-1"
             >
-              <div className="flex items-center gap-4 sm:gap-5 text-xs text-white/90">
-                {/* Apple Logo */}
-                <button
-                  type="button"
-                  onClick={() =>
-                    setMacMenuOpen((prev) => (prev === 'apple' ? null : 'apple'))
-                  }
-                  className="font-bold text-white hover:opacity-80 cursor-pointer"
-                >
-                  
-                </button>
-                <span className="font-semibold text-white">Portfolio</span>
-                <div className="hidden md:flex items-center gap-4 text-white/75">
-                  {['File', 'Edit', 'View', 'Go', 'Window', 'Help'].map((item) => (
-                    <button
-                      key={item}
-                      type="button"
-                      onClick={() =>
-                        setMacMenuOpen((prev) => (prev === item ? null : item))
-                      }
-                      className="hover:text-white transition-colors cursor-pointer"
-                    >
-                      {item}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* macOS Dropdown Menu */}
-              {macMenuOpen && (
-                <div
-                  onMouseLeave={() => setMacMenuOpen(null)}
-                  className="absolute left-6 top-9 z-50 w-56 rounded-xl border border-white/20 bg-[#222222]/95 backdrop-blur-md p-1.5 text-xs text-white shadow-2xl"
-                >
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMacMenuOpen(null);
-                      onOpenSearch();
-                    }}
-                    className="w-full flex items-center justify-between px-3 py-1.5 rounded-lg hover:bg-white/10"
-                  >
-                    <span>Command Palette…</span>
-                    <span className="font-mono text-white/50">⌘K</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMacMenuOpen(null);
-                      onOpenResume();
-                    }}
-                    className="w-full flex items-center justify-between px-3 py-1.5 rounded-lg hover:bg-white/10"
-                  >
-                    <span>Download Resume</span>
-                    <span className="font-mono text-white/50">⌘R</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMacMenuOpen(null);
-                      document
-                        .getElementById('showcase')
-                        ?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="w-full flex items-center justify-between px-3 py-1.5 rounded-lg hover:bg-white/10"
-                  >
-                    <span>Go to Showcase</span>
-                    <span className="font-mono text-white/50">⌘P</span>
-                  </button>
-                </div>
-              )}
-
-              <div className="flex items-center gap-4 text-[11px] text-white/80 font-mono">
-                <span className="hidden sm:inline text-[#a78bfa]">
-                  Visakhapatnam · IST
+              {/* Location & Availability Badge */}
+              <div className="hero-reveal-item inline-flex flex-wrap items-center justify-center lg:justify-start gap-2.5 px-4 py-1.5 rounded-full border border-sky-400/30 bg-[#0A122C]/85 backdrop-blur-md text-[11px] font-mono font-semibold uppercase tracking-[0.2em] text-slate-200 mb-6 shadow-[0_0_25px_rgba(56,189,248,0.15)]">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-400" />
                 </span>
-                <span>{clockText}</span>
-              </div>
-            </div>
-
-            {/* 2. VS Code Window Header & Search Bar */}
-            <div className="flex items-center h-[38px] px-4 bg-[#0a0a0a] border-b border-[#1a1a1a] shrink-0 gap-3">
-              <div className="flex items-center gap-1.5 mr-2">
-                <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-                <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
-                <span className="w-3 h-3 rounded-full bg-[#28c840]" />
+                <MapPin className="w-3.5 h-3.5 text-sky-400" />
+                <span>Hyderabad, Telangana</span>
+                <span aria-hidden="true" className="text-slate-500">
+                  ·
+                </span>
+                <span className="text-sky-300">Available for Full-Time Roles</span>
               </div>
 
-              <div className="flex-1 max-w-[420px] mx-auto h-[24px] flex items-center">
-                <button
-                  type="button"
-                  onClick={onOpenSearch}
-                  className="w-full h-full flex items-center gap-2 px-3 rounded-[5px] text-[11px] text-[#bdbdbd] bg-[#161616] border border-[#222] hover:border-[#a78bfa]/50 hover:bg-[#1a1424] hover:text-white transition-colors cursor-pointer"
-                >
-                  <Search className="w-3 h-3 text-[#a78bfa]" />
-                  <span className="truncate">Search portfolio… (Tarun Pediredla)</span>
-                  <span className="ml-auto flex items-center gap-1 text-[10px] text-[#7a7a7a]">
-                    <kbd className="px-1 py-px rounded-[3px] bg-[#0d0a14] border border-[#2a2240] font-mono">
-                      ⌘
-                    </kbd>
-                    <kbd className="px-1 py-px rounded-[3px] bg-[#0d0a14] border border-[#2a2240] font-mono">
-                      K
-                    </kbd>
-                  </span>
-                </button>
-              </div>
+              {/* Eyebrow Greeting */}
+              <p className="hero-reveal-item font-mono text-xs sm:text-sm uppercase tracking-[0.32em] text-sky-400/90 font-semibold mb-2.5">
+                Hi, I&apos;m Tarun Pediredla · Full Stack &amp; AI Engineer
+              </p>
 
-              <div className="hidden sm:flex items-center gap-2 text-[11px] text-[#7a7a7a]">
-                <span className="w-2 h-2 rounded-full bg-[#3b82f6]" />
-                <span>3 Repos Verified</span>
-              </div>
-            </div>
+              {/* Primary Display Name: TARUN PEDIREDLA */}
+              <h1
+                className="hero-reveal-item font-display font-black tracking-tight leading-[1.03] text-white mb-4"
+                style={{ fontSize: 'clamp(2.5rem, 5.6vw, 4.85rem)' }}
+              >
+                <span className="block bg-gradient-to-r from-white via-slate-100 to-sky-200 bg-clip-text text-transparent drop-shadow-[0_8px_30px_rgba(56,189,248,0.2)]">
+                  TARUN PEDIREDLA
+                </span>
+              </h1>
 
-            {/* 3. Main IDE 3-Pane Body */}
-            <div className="flex flex-1 min-h-0 overflow-hidden">
-              {/* Left Activity Bar (44px) */}
-              <div className="hidden sm:flex w-[44px] bg-[#0a0a0a] border-r border-[#1a1a1a] flex-col items-center py-2 shrink-0 text-[#6f6f6f]">
-                <button
-                  type="button"
-                  onClick={onOpenSearch}
-                  title="Explorer"
-                  className="relative w-full flex justify-center py-2.5 text-white border-l-2 border-[#a78bfa]"
-                >
-                  <Folder className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={onOpenSearch}
-                  title="Search (⌘K)"
-                  className="py-2.5 hover:text-white transition-colors"
-                >
-                  <Search className="w-4 h-4" />
-                </button>
-                <button
+              {/* Subtitle: Python Full Stack Developer | GenAI & Agentic AI Enthusiast */}
+              <h2 className="hero-reveal-item text-base sm:text-xl md:text-2xl font-display font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-indigo-200 to-violet-300 mb-5">
+                Python Full Stack Developer | GenAI &amp; Agentic AI Enthusiast
+              </h2>
+
+              {/* Quote / Tagline */}
+              <blockquote className="hero-reveal-item relative max-w-2xl text-sm sm:text-lg md:text-xl text-slate-300/95 font-normal italic leading-relaxed mb-8 px-4 lg:px-0 lg:pl-5 lg:border-l-2 lg:border-sky-400/60">
+                &ldquo;Building intelligent, scalable, and visually stunning digital
+                experiences.&rdquo;
+              </blockquote>
+
+              {/* Primary CTA Buttons: View My Projects & Download Resume */}
+              <div className="hero-reveal-item flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-9 w-full sm:w-auto">
+                <motion.button
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
                   type="button"
                   onClick={() =>
                     document
                       .getElementById('showcase')
                       ?.scrollIntoView({ behavior: 'smooth' })
                   }
-                  title="Featured Projects"
-                  className="py-2.5 text-[#f59e0b] hover:opacity-80 transition-opacity"
+                  className="group relative inline-flex items-center justify-center gap-2.5 h-12 sm:h-13 px-7 rounded-full font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-slate-950 bg-gradient-to-r from-sky-400 via-sky-300 to-violet-300 hover:from-sky-300 hover:to-violet-200 shadow-[0_0_32px_rgba(56,189,248,0.45)] transition-all cursor-pointer"
                 >
-                  <Sparkles className="w-4 h-4" />
-                </button>
-                <button
+                  <span>View My Projects</span>
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </motion.button>
+
+                <motion.button
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
                   type="button"
                   onClick={onOpenResume}
-                  title="Resume"
-                  className="py-2.5 hover:text-white transition-colors"
+                  className="inline-flex items-center justify-center gap-2.5 h-12 sm:h-13 px-7 rounded-full font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-white bg-white/[0.06] hover:bg-white/[0.12] border border-sky-400/40 hover:border-sky-300 backdrop-blur-md shadow-[0_0_24px_rgba(139,92,246,0.2)] transition-all cursor-pointer"
                 >
-                  <Briefcase className="w-4 h-4" />
-                </button>
+                  <Download className="w-4 h-4 text-sky-300" />
+                  <span>Download Resume</span>
+                </motion.button>
 
-                <div className="mt-auto flex flex-col items-center gap-3 pb-1">
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#a78bfa] to-[#6366f1] flex items-center justify-center text-[10px] font-bold text-white">
-                    TP
-                  </div>
-                </div>
+                <motion.a
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  href={profile.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 h-12 sm:h-13 px-5 rounded-full font-mono text-xs font-bold uppercase tracking-wider text-slate-200 hover:text-white bg-[#091026]/80 border border-slate-700/80 hover:border-violet-400/60 transition-all"
+                >
+                  <span>GitHub</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-violet-300" />
+                </motion.a>
               </div>
 
-              {/* Left File Explorer Sidebar (210px) */}
-              <div className="hidden lg:flex w-[210px] bg-[#0a0a0a] border-r border-[#1a1a1a] shrink-0 flex-col">
-                <div className="flex items-center justify-between px-3 pt-3 pb-2">
-                  <span className="text-[11px] tracking-[0.12em] text-[#9a9a9a]">
-                    EXPLORER
+              {/* Core Technology Stack Pills */}
+              <div className="hero-reveal-item flex flex-wrap items-center justify-center lg:justify-start gap-2 max-w-2xl">
+                {HERO_STACK_PILLS.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold text-slate-200 bg-[#0A132E]/90 border border-slate-700/70 hover:border-sky-400/50 transition-colors"
+                  >
+                    {tech}
                   </span>
-                  <span className="text-[#6f6f6f]">⋯</span>
-                </div>
-
-                <div className="px-2 flex-1 overflow-y-auto">
-                  <div className="flex items-center px-1 py-[3px] text-[11px] text-[#cfcfcf] font-medium">
-                    <ChevronRight className="w-3 h-3 mr-1 rotate-90 text-[#9a9a9a]" />
-                    <span>PORTFOLIO.TARUN</span>
-                  </div>
-
-                  <div
-                    role="tree"
-                    aria-label="Portfolio file explorer"
-                    className="font-mono text-[#cfcfcf] mt-1 pb-2 space-y-0.5"
-                  >
-                    {['components', 'hooks'].map((folderName) => (
-                      <div key={folderName} className="select-none">
-                        <div className="flex items-center gap-1.5 py-[3px] px-2 text-[11px] text-[#9a9a9a]">
-                          <ChevronRight className="w-3 h-3 rotate-90" />
-                          <Folder className="w-3.5 h-3.5 text-[#a78bfa]" />
-                          <span>{folderName}</span>
-                        </div>
-                        <div className="pl-4 space-y-0.5">
-                          {EXPLORER_FILES.filter((f) => f.folder === folderName).map(
-                            (file) => {
-                              const isSelected = activeFileId === file.id;
-                              return (
-                                <button
-                                  key={file.id}
-                                  type="button"
-                                  onClick={() => setActiveFileId(file.id)}
-                                  className={`w-full flex items-center gap-1.5 py-[4px] px-2 rounded-[4px] text-left text-[11.5px] transition-colors cursor-pointer ${
-                                    isSelected
-                                      ? 'bg-[#1a1428] text-white shadow-[inset_2px_0_0_0_#a78bfa]'
-                                      : 'text-[#bfbfbf] hover:text-white hover:bg-white/5'
-                                  }`}
-                                >
-                                  <FileCode2 className="w-3.5 h-3.5 text-[#38bdf8] shrink-0" />
-                                  <span className="truncate">{file.name}</span>
-                                  {isSelected && (
-                                    <span className="ml-auto w-1.5 h-1.5 rounded-full bg-[#a78bfa] shadow-[0_0_6px_#a78bfa]" />
-                                  )}
-                                </button>
-                              );
-                            }
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="px-3 py-2 border-t border-[#161616] text-[10px] tracking-[0.12em] text-[#9a9a9a] flex items-center gap-1">
-                  <ChevronRight className="w-3 h-3" />
-                  <span>OUTLINE · 6 CHAPTERS</span>
-                </div>
-                <div className="px-3 py-2 border-t border-[#161616] text-[10px] tracking-[0.12em] text-[#9a9a9a] flex items-center gap-1">
-                  <ChevronRight className="w-3 h-3" />
-                  <span>TIMELINE · 2022–2026</span>
-                </div>
+                ))}
               </div>
-
-              {/* Center Welcome & Code Editor Canvas */}
-              <div className="flex-1 flex flex-col min-w-0 bg-[#0d0d0d]">
-                {/* Editor Tab Bar */}
-                <div className="h-[30px] bg-[#0a0a0a] border-b border-[#1a1a1a] flex items-center text-[11px] shrink-0 overflow-x-auto">
-                  <div className="h-full flex items-center gap-2 px-3 bg-[#0d0d0d] border-r border-[#1a1a1a] text-white">
-                    <Code2 className="w-3.5 h-3.5 text-[#519aba]" />
-                    <span>Welcome — {activeFile.name}</span>
-                  </div>
-                </div>
-
-                {/* Editor Scrollable Body */}
-                <div className="flex-1 overflow-y-auto px-6 sm:px-12 lg:px-16 pt-10 pb-12 min-w-0">
-                  <p className="text-lg sm:text-[22px] text-[#cfcfcf] mb-1">
-                    Hi, I&apos;m
-                  </p>
-
-                  {/* Giant Gradient Typewriter Name */}
-                  <h2
-                    className="font-bold tracking-tight leading-[1.05] mb-4"
-                    style={{ fontSize: 'clamp(2.6rem, 5.8vw, 5.75rem)' }}
-                  >
-                    <span
-                      className="bg-clip-text text-transparent"
-                      style={{
-                        backgroundImage:
-                          'linear-gradient(90deg, #a78bfa 0%, #c4b5fd 50%, #f0abfc 100%)',
-                      }}
-                    >
-                      {typedName || fullName}
-                    </span>
-                    <span
-                      aria-hidden="true"
-                      className="inline-block align-middle animate-pulse"
-                      style={{
-                        width: '4px',
-                        height: '0.78em',
-                        marginLeft: '8px',
-                        marginBottom: '-0.08em',
-                        borderRadius: '2px',
-                        background:
-                          'linear-gradient(180deg, #f5f0ff 0%, #a78bfa 60%, #7c3aed 100%)',
-                        boxShadow:
-                          '0 0 18px rgba(167,139,250,0.7), 0 0 38px rgba(167,139,250,0.3)',
-                      }}
-                    />
-                  </h2>
-
-                  <div className="flex flex-wrap items-center text-sm sm:text-[15px] text-[#cfcfcf] gap-2 mb-1">
-                    <span className="text-[#a78bfa] font-medium">
-                      Full Stack Python Developer
-                    </span>
-                    <span className="text-[#6f6f6f]">•</span>
-                    <span>Generative AI &amp; Agentic AI</span>
-                  </div>
-                  <p className="text-xs sm:text-[14px] text-[#9a9a9a] max-w-[640px] mb-7">
-                    {profile.tagline}
-                  </p>
-
-                  {/* Browser / Code Preview Window (`tarunpediredla.dev/developer.ts`) */}
-                  <div className="rounded-xl border border-[#222222] bg-[#070707] overflow-hidden mb-8 max-w-[820px] shadow-xl">
-                    <div className="h-8 px-3.5 bg-[#121212] border-b border-[#1f1f1f] flex items-center justify-between text-[11px] text-[#8a8a8a] font-mono">
-                      <div className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]/80" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]/80" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]/80" />
-                      </div>
-                      <span className="text-[#bdbdbd]">{activeFile.url}</span>
-                      <span className="text-[#a78bfa]">TS</span>
-                    </div>
-                    <pre className="p-5 sm:p-7 leading-[1.9] overflow-x-auto font-mono text-xs sm:text-[13px] text-[#e2e8f0]">
-                      {activeFile.lines.map((line, idx) => (
-                        <div key={idx} className="flex items-start gap-4">
-                          <span className="text-[#4b5563] select-none w-5 text-right shrink-0 tabular-nums">
-                            {idx + 1}
-                          </span>
-                          <span
-                            className={
-                              line.startsWith('//')
-                                ? 'text-[#6b7280] italic'
-                                : line.includes(':')
-                                ? 'text-[#c4b5fd]'
-                                : 'text-[#f8fafc]'
-                            }
-                          >
-                            {line}
-                          </span>
-                        </div>
-                      ))}
-                    </pre>
-                  </div>
-
-                  {/* Spinning Conic-Gradient Action Buttons matching H() component */}
-                  <div className="flex flex-wrap items-center gap-4 mb-10">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        document
-                          .getElementById('showcase')
-                          ?.scrollIntoView({ behavior: 'smooth' })
-                      }
-                      className="group relative inline-flex items-center justify-center h-11 px-7 rounded-[11px] overflow-hidden cursor-pointer isolate shadow-[0_10px_30px_-14px_rgba(0,0,0,0.7),0_0_0_1px_rgba(167,139,250,0.2)] hover:shadow-[0_22px_60px_-14px_rgba(167,139,250,0.55)] transition-all"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="absolute inset-[1.5px] rounded-[9.5px] bg-[#120d24] border border-[#a78bfa]/40"
-                      />
-                      <span className="relative flex items-center gap-2 text-sm font-medium text-[#f5f0ff]">
-                        <span>Explore My Work</span>
-                        <Sparkles className="w-3.5 h-3.5 text-[#d8b4fe]" />
-                      </span>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={onOpenResume}
-                      className="group relative inline-flex items-center justify-center h-11 px-7 rounded-[11px] overflow-hidden cursor-pointer isolate bg-[#141418] border border-white/15 hover:border-[#a78bfa]/50 text-sm font-medium text-white transition-all"
-                    >
-                      <span>Download Resume</span>
-                    </button>
-
-                    <a
-                      href={profile.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-[11px] bg-[#0f0f12] border border-white/10 hover:border-white/30 text-xs font-mono text-[#cfcfcf] hover:text-white transition-colors"
-                    >
-                      <span>GitHub</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  </div>
-
-                  {/* Scroll to Explore Shimmer & Beam */}
-                  <div className="flex flex-col items-center gap-2 pt-2">
-                    <span className="text-[10px] font-semibold tracking-[0.42em] uppercase vp-scroll-shimmer">
-                      Scroll to Explore
-                    </span>
-                    <span
-                      aria-hidden="true"
-                      className="relative w-px h-8 overflow-hidden bg-[#a78bfa]/15"
-                    >
-                      <span
-                        className="absolute top-0 left-0 w-full h-2/5 vp-scroll-beam"
-                        style={{
-                          background:
-                            'linear-gradient(180deg, transparent 0%, #a78bfa 50%, transparent 100%)',
-                        }}
-                      />
-                    </span>
-                    <ArrowDown className="w-3.5 h-3.5 text-[#c4b5fd] vp-scroll-chevron" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Dashboard Sidebar (400px) matching reference */}
-              <aside
-                className="hidden xl:block w-[390px] bg-[#0a0a0a] border-l border-[#1a1a1a] shrink-0 overflow-y-auto"
-                style={{ padding: '32px 26px' }}
-              >
-                <div className="flex flex-col gap-9">
-                  {/* CURRENT STATUS */}
-                  <section>
-                    <div className="text-[10px] tracking-[0.22em] text-[#7a7a7a] font-mono uppercase mb-3">
-                      CURRENT STATUS
-                    </div>
-                    <a
-                      href={`mailto:${profile.email}`}
-                      className="group relative block overflow-hidden rounded-[16px] border border-[#1a1a1a] hover:border-[#a78bfa]/35 transition-all p-5"
-                      style={{
-                        background:
-                          'linear-gradient(180deg, rgba(20,17,30,0.7) 0%, rgba(10,8,16,0.85) 100%)',
-                      }}
-                    >
-                      <div className="flex items-center justify-between mb-2.5">
-                        <div className="flex items-center gap-2.5">
-                          <span className="w-2 h-2 rounded-full bg-[#22c55e] shadow-[0_0_10px_rgba(34,197,94,0.6)]" />
-                          <span className="text-[13px] text-white font-medium">
-                            Available for work
-                          </span>
-                        </div>
-                        <span className="text-[9px] tracking-[0.18em] text-[#7a7a7a] uppercase">
-                          Online
-                        </span>
-                      </div>
-                      <p className="text-[11.5px] text-[#9a9a9a] leading-[1.55] mb-3.5">
-                        Full Stack Python Developer @ Finite HR &amp; IT Solution · Open to full-time AI &amp; software engineering roles.
-                      </p>
-                      <div className="flex items-center justify-between pt-3 border-t border-white/[0.05] text-[10px]">
-                        <span className="text-[#6a6a6a]">
-                          {profile.phone}
-                        </span>
-                        <span className="text-[#a78bfa] flex items-center gap-1">
-                          Get in touch →
-                        </span>
-                      </div>
-                    </a>
-                  </section>
-
-                  {/* TECH STACK AUTO-SCROLL */}
-                  <section>
-                    <div className="text-[10px] tracking-[0.22em] text-[#7a7a7a] font-mono uppercase mb-3">
-                      TECH STACK
-                    </div>
-                    <div
-                      className="relative rounded-[16px] overflow-hidden py-4 border border-white/[0.05]"
-                      style={{
-                        background:
-                          'linear-gradient(180deg, rgba(20,17,30,0.7) 0%, rgba(10,8,16,0.85) 100%)',
-                      }}
-                    >
-                      <div className="animate-tech-marquee gap-3 px-3">
-                        {[...DAILY_DRIVER_BADGES, ...DAILY_DRIVER_BADGES].map(
-                          (b, i) => (
-                            <span
-                              key={`${b.label}-${i}`}
-                              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#141022] border border-white/10 text-xs font-medium text-white shrink-0"
-                            >
-                              <span
-                                className="w-2 h-2 rounded-full"
-                                style={{ backgroundColor: b.color }}
-                              />
-                              <span>{b.label}</span>
-                            </span>
-                          )
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between px-1 mt-2 text-[10px]">
-                      <span className="text-[#6a6a6a] tracking-[0.12em] uppercase">
-                        Daily Drivers
-                      </span>
-                      <span className="text-[#a78bfa]">auto-scroll</span>
-                    </div>
-                  </section>
-
-                  {/* FEATURED WORK STACK */}
-                  <section>
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="text-[10px] tracking-[0.22em] text-[#7a7a7a] font-mono uppercase shrink-0">
-                        FEATURED WORK
-                      </span>
-                      <span className="flex-1 h-px bg-[#a78bfa]/20" />
-                      <span className="text-[9px] font-mono uppercase tracking-[0.16em] text-[#c4b5fd] px-2.5 py-1 rounded-full bg-[#181426] border border-[#a78bfa]/25">
-                        Click to inspect
-                      </span>
-                    </div>
-
-                    <div className="space-y-3">
-                      {projects.map((proj) => (
-                        <div
-                          key={proj.id}
-                          role="button"
-                          tabIndex={0}
-                          onClick={() => onSelectProject(proj)}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                              e.preventDefault();
-                              onSelectProject(proj);
-                            }
-                          }}
-                          className="group relative overflow-hidden rounded-[16px] border border-white/[0.06] hover:border-[#a78bfa]/40 p-4 transition-all cursor-pointer"
-                          style={{
-                            background:
-                              'linear-gradient(180deg, rgba(24,20,38,0.75) 0%, rgba(12,10,20,0.92) 100%)',
-                          }}
-                        >
-                          <div className="flex items-center justify-between text-[10px] font-mono mb-1.5">
-                            <span className="text-[#c4b5fd]">
-                              ★ FEATURED · {proj.index}
-                            </span>
-                            <span className="text-[#7a7a7a]">2025</span>
-                          </div>
-                          <h3 className="text-sm font-bold text-white group-hover:text-[#d8b4fe] transition-colors">
-                            {proj.title}
-                          </h3>
-                          <p className="text-[11px] text-[#9a9a9a] line-clamp-2 mt-1 mb-3 leading-relaxed">
-                            {proj.description}
-                          </p>
-                          <div className="flex items-center justify-between gap-2 pt-2 border-t border-white/[0.05]">
-                            <div className="flex flex-wrap gap-1">
-                              {proj.technologies.slice(0, 3).map((t) => (
-                                <span
-                                  key={t}
-                                  className="text-[9.5px] font-mono text-[#cfcfcf] px-2 py-0.5 rounded bg-white/[0.05]"
-                                >
-                                  {t}
-                                </span>
-                              ))}
-                            </div>
-                            <span className="text-[10px] font-mono text-[#a78bfa] group-hover:translate-x-0.5 transition-transform">
-                              View →
-                            </span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </section>
-
-                  {/* QUICK STATS */}
-                  <section>
-                    <div className="text-[10px] tracking-[0.22em] text-[#7a7a7a] font-mono uppercase mb-3">
-                      QUICK STATS
-                    </div>
-                    <div className="grid grid-cols-3 gap-2.5">
-                      {[
-                        { n: '3', suffix: '+', l: 'Flagships' },
-                        { n: '3', suffix: ' Roles', l: 'Experience' },
-                        { n: '20', suffix: '+', l: 'Tech Skills' },
-                      ].map((st) => (
-                        <div
-                          key={st.l}
-                          className="rounded-[14px] p-3.5 border border-white/[0.05]"
-                          style={{
-                            background:
-                              'linear-gradient(180deg, rgba(20,17,30,0.6) 0%, rgba(10,8,16,0.85) 100%)',
-                          }}
-                        >
-                          <div className="flex items-baseline gap-0.5">
-                            <span className="text-lg font-semibold text-white">
-                              {st.n}
-                            </span>
-                            <span className="text-[11px] text-[#a78bfa]">
-                              {st.suffix}
-                            </span>
-                          </div>
-                          <div className="text-[9.5px] text-[#7a7a7a] uppercase tracking-wider mt-1">
-                            {st.l}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="pt-4 mt-4 border-t border-white/[0.05] flex items-center justify-between text-[10px]">
-                      <span className="text-[#5a5a5a] tracking-[0.18em] uppercase">
-                        Crafted in
-                      </span>
-                      <span className="text-[#9a9a9a] font-mono">
-                        Visakhapatnam · IST
-                      </span>
-                    </div>
-                  </section>
-                </div>
-              </aside>
             </div>
 
-            {/* 4. Bottom VS Code Status Bar (26px) */}
-            <div className="h-[26px] bg-[#0a0a0a] border-t border-[#1a1a1a] flex items-center justify-between text-[11px] text-[#bdbdbd] px-4 shrink-0 font-mono">
-              <div className="flex items-center gap-4">
-                <span className="text-[#9a9a9a]">main*</span>
-                <span className="px-2 py-[1px] rounded-[3px] bg-[#1a1a1a] text-[#cfcfcf]">
-                  Tarun Pediredla Workspace
-                </span>
-              </div>
-              <div className="hidden sm:flex items-center gap-5 text-[#9a9a9a]">
-                <span>Ln 1, Col 1</span>
-                <span>Spaces: 2</span>
-                <span>UTF-8</span>
-                <span>{`{ } Python · TypeScript JSX`}</span>
-                <span className="text-[#a78bfa]">⚡ Prettier</span>
+            {/* RIGHT COLUMN: 3D Parallax Studio Portrait with Glowing Rim Light */}
+            <div className="lg:col-span-5 flex justify-center items-center order-1 lg:order-2">
+              <div
+                ref={heroPortraitWrapRef}
+                style={{
+                  perspective: '1400px',
+                  transformStyle: 'preserve-3d',
+                }}
+                className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[460px]"
+              >
+                {/* 3D Interactive Tilt Stage */}
+                <div
+                  style={{
+                    transform: prefersReducedMotion
+                      ? 'none'
+                      : `rotateX(${portraitRotateX.toFixed(2)}deg) rotateY(${portraitRotateY.toFixed(2)}deg) translate3d(${portraitTranslateX.toFixed(1)}px, ${portraitTranslateY.toFixed(1)}px, 0)`,
+                    transition: 'transform 0.22s cubic-bezier(0.22, 1, 0.36, 1)',
+                    transformStyle: 'preserve-3d',
+                  }}
+                  className="relative flex flex-col items-center animate-float-slow"
+                >
+                  {/* Soft Glowing Rim Light Behind Head and Shoulders */}
+                  <div
+                    aria-hidden="true"
+                    className="animate-rim-pulse pointer-events-none absolute -inset-4 sm:-inset-6 rounded-[40px] blur-2xl z-0"
+                    style={{
+                      background:
+                        'radial-gradient(ellipse 68% 64% at 50% 34%, rgba(56, 189, 248, 0.52) 0%, rgba(139, 92, 246, 0.44) 48%, rgba(3, 6, 20, 0) 80%)',
+                    }}
+                  />
+
+                  {/* Secondary Rim Halo Ring Behind Shoulders */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute top-6 inset-x-4 bottom-8 rounded-[34px] border border-sky-400/30 shadow-[0_0_65px_rgba(56,189,248,0.28),inset_0_0_45px_rgba(139,92,246,0.22)] z-0"
+                    style={{
+                      background:
+                        'linear-gradient(165deg, rgba(14, 25, 58, 0.72) 0%, rgba(5, 9, 24, 0.92) 70%, rgba(3, 6, 20, 0) 100%)',
+                    }}
+                  />
+
+                  {/* Portrait Container with Smooth Lower-Part Background Blending */}
+                  <div className="relative z-10 w-full aspect-[3/4] rounded-[32px] overflow-hidden hero-portrait-blend hero-portrait-radial-feather">
+                    {/* Top Rim Specular Edge Highlight */}
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 z-20 rounded-[32px]"
+                      style={{
+                        boxShadow:
+                          'inset 0 1px 2px rgba(186, 230, 253, 0.35), inset 0 0 38px rgba(3, 6, 20, 0.65)',
+                      }}
+                    />
+
+                    {/* Enhanced Studio Portrait of Tarun Pediredla */}
+                    <img
+                      src={TARUN_PORTRAIT_IMAGE}
+                      alt="Tarun Pediredla — Python Full Stack Developer | GenAI & Agentic AI Enthusiast"
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="async"
+                      className="w-full h-full object-cover object-top select-none transition-transform duration-700 ease-out"
+                    />
+
+                    {/* Smooth Lower-Torso Gradient Blend into Hero Background */}
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 z-20"
+                      style={{
+                        background:
+                          'linear-gradient(to top, #030614 4%, rgba(3, 6, 20, 0.72) 38%, rgba(3, 6, 20, 0) 100%)',
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+
+          {/* Bottom Scroll Indicator inside Hero */}
+          <div className="mt-10 lg:mt-12 flex flex-col items-center justify-center gap-1.5 text-center">
+            <a
+              href="#about"
+              className="group inline-flex flex-col items-center gap-1.5 text-[11px] font-mono font-semibold uppercase tracking-[0.3em] text-slate-400 hover:text-sky-300 transition-colors"
+            >
+              <span>Scroll to Explore 3D Portfolio</span>
+              <ArrowDown className="w-4 h-4 text-sky-400 vp-scroll-chevron" />
+            </a>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };

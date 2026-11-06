@@ -115,15 +115,15 @@ export const portfolioContent: PortfolioContent = {
   profile: {
     name: 'Tarun Pediredla',
     openingHeadline: 'TARUN PEDIREDLA',
-    role: 'FULL STACK PYTHON DEVELOPER',
-    secondaryTitle: 'GENERATIVE AI · AGENTIC AI · WEB APPLICATIONS',
-    professionalTitle: 'Full Stack Python Developer | Generative AI & Agentic AI',
-    tagline: 'Building intelligent applications. From frontend experiences to AI-powered automation.',
+    role: 'Python Full Stack Developer | GenAI & Agentic AI Enthusiast',
+    secondaryTitle: 'PYTHON FULL STACK · GENAI · AGENTIC AI',
+    professionalTitle: 'Python Full Stack Developer | GenAI & Agentic AI Enthusiast',
+    tagline: 'Building intelligent, scalable, and visually stunning digital experiences.',
     email: 'tarunpediredla9966@gmail.com',
     phone: '+91 8074080773',
-    location: 'Visakhapatnam, India',
+    location: 'Hyderabad, Telangana',
     github: 'https://github.com/tarunpediredla-GenAi',
-    fallbackBackdrop: '/src/assets/images/tarun_command_backdrop_1793895972254.jpg',
+    fallbackBackdrop: '/assets/aistudio/Warm_Rim-Lit_Developer_Portrait_3ff9f2c3.png',
   },
 
   chapters: [
@@ -174,7 +174,7 @@ export const portfolioContent: PortfolioContent = {
   about: {
     heading: 'Full Stack Python & AI Systems Engineering',
     summaryParagraphs: [
-      'I am a Full Stack Python Developer based in Visakhapatnam, India, building web applications that connect responsive React interfaces with structured Python and Django backends, relational and document databases, and practical Generative AI workflows.',
+      'I am a Full Stack Python Developer based in Hyderabad, Telangana, building web applications that connect responsive React interfaces with structured Python and Django backends, relational and document databases, and practical Generative AI workflows.',
       'My career began with solid frontend foundations in HTML, CSS, JavaScript, and React.js at Saras India Systems Private Limited, progressed into end-to-end Python full stack engineering at CP Academy, and now encompasses Full Stack Python, Generative AI, Agentic AI, Docker workflows, and CI/CD pipelines at Finite HR & IT Solution.',
       'Across my engineering work and portfolio systems, I focus on reliable state management, clean API contracts, voice-first and conversational AI interfaces powered by Google Gemini and Vapi, and automated n8n orchestration pipelines.',
     ],
@@ -207,7 +207,7 @@ export const portfolioContent: PortfolioContent = {
       company: 'Finite HR & IT Solution',
       role: 'Full Stack Python Developer',
       period: '1 April 2025 – Present',
-      location: 'India',
+      location: 'Hyderabad, Telangana',
       summary:
         'Developing full stack Python web applications and integrating Generative AI and Agentic AI workflows with containerized deployment pipelines.',
       responsibilities: [
@@ -223,7 +223,7 @@ export const portfolioContent: PortfolioContent = {
       company: 'CP Academy',
       role: 'Full Stack Python Developer',
       period: 'Duration: 9 months',
-      location: 'India',
+      location: 'Hyderabad, Telangana',
       summary:
         'Focused on Python full stack application development and bridging client-side interfaces with backend service logic.',
       responsibilities: [
@@ -250,7 +250,7 @@ export const portfolioContent: PortfolioContent = {
   ],
 
   skills: {
-    note: 'TypeScript and Express are used in my portfolio projects (Satya’s Education and Alex AI Mock Technical Interviewer) and are presented here as project technologies rather than technologies claimed across every employment role.',
+    note: 'Express and Firebase Firestore are used in my portfolio projects (Satya’s Education and Alex AI Mock Technical Interviewer) alongside my core Full Stack Python, Django, JavaScript, and React.js stack.',
     categories: ['All', 'Frontend', 'Backend', 'Databases', 'AI & Automation', 'Dev & Deployment'],
     items: [
       {
@@ -281,7 +281,7 @@ export const portfolioContent: PortfolioContent = {
         category: 'Frontend',
         scopeNote: 'Professional Role & Projects',
         description: 'Asynchronous client logic, DOM events, Web Speech & Audio APIs, and REST consumption.',
-        projectsUsedIn: ['Saras India Systems', 'CP Academy', 'Finite HR & IT Solution'],
+        projectsUsedIn: ['Saras India Systems', 'CP Academy', 'Finite HR & IT Solution', 'Satya’s Education', 'Alex AI Interviewer'],
         orbitRadius: 2.3,
         orbitAngle: 2.6,
         accentColor: '#38bdf8',
@@ -295,17 +295,6 @@ export const portfolioContent: PortfolioContent = {
         projectsUsedIn: ['Saras India Systems', 'Finite HR & IT Solution', 'Satya’s Education', 'Alex AI Interviewer'],
         orbitRadius: 2.3,
         orbitAngle: 3.8,
-        accentColor: '#06b6d4',
-      },
-      {
-        id: 'typescript',
-        name: 'TypeScript',
-        category: 'Frontend',
-        scopeNote: 'Portfolio Project Technology',
-        description: 'Used in portfolio projects for strict data contracts, API payload typing, and component props.',
-        projectsUsedIn: ['Satya’s Education', 'Alex AI Mock Technical Interviewer'],
-        orbitRadius: 2.3,
-        orbitAngle: 5.0,
         accentColor: '#06b6d4',
       },
       {
@@ -486,17 +475,17 @@ export const portfolioContent: PortfolioContent = {
       liveUrl: 'https://satyaeducationinstitute.vercel.app',
       liveUrlNote: 'Verified live deployment on Vercel (HTTP 200)',
       heroImage: '/src/assets/images/project_satya_education_1793895968852.jpg',
-      technologies: ['React', 'TypeScript', 'Django', 'Firebase', 'Firestore', 'Cashfree', 'Vercel'],
+      technologies: ['React', 'JavaScript', 'Django', 'Firebase', 'Firestore', 'Cashfree', 'Vercel'],
       description:
         'An e-commerce and digital-learning platform supporting physical/digital books, recorded video courses, and separate student and administrator experiences.',
       problemStatement:
         'Educational institutions selling both physical books and recorded video courses often struggle with fragmented tools—using one platform for storefront checkout and another for student course playback and entitlement management. Satya’s Education unifies product browsing, shopping cart checkout, payment verification, student course progress tracking, and administrator catalogue controls in a single platform.',
       architectureOverview:
-        'The client application is built with React and TypeScript (`App.tsx`, `ProductDetailView.tsx`, `CartCheckoutView.tsx`, `UserDashboardView.tsx`, `AdminDashboardView.tsx`). Authentication and document persistence use Firebase Authentication and Cloud Firestore with strict role-based security rules (`firestore.rules` and `security_spec.md`). Backend order creation, price recalculation, and Cashfree payment verification are handled through server-side API endpoints (`src/serverApp.ts` & Vercel `/api` serverless integration alongside Django backend modeling).',
+        'The client application is built with React and JavaScript (`App.jsx`, `ProductDetailView.jsx`, `CartCheckoutView.jsx`, `UserDashboardView.jsx`, `AdminDashboardView.jsx`). Authentication and document persistence use Firebase Authentication and Cloud Firestore with strict role-based security rules (`firestore.rules` and `security_spec.md`). Backend order creation, price recalculation, and Cashfree payment verification are handled through server-side API endpoints (`src/serverApp.js` & Vercel `/api` serverless integration alongside Django backend modeling).',
       architectureFlow: [
         {
           step: '01',
-          node: 'React + TypeScript Storefront',
+          node: 'React + JavaScript Storefront',
           detail: 'Catalogue filtering across engineering books, storybooks, and recorded courses with cart state management.',
         },
         {
@@ -521,18 +510,18 @@ export const portfolioContent: PortfolioContent = {
         },
       ],
       implementationExplanation:
-        'Implemented a multi-view React + TypeScript storefront with category filtering, custom SVG cover artwork rendering (`CoverArtwork.tsx`), a persistent shopping cart and address management workflow (`CartCheckoutView.tsx`), a dedicated student learning dashboard with lesson completion tracking (`UserDashboardView.tsx`), and an administrator console (`AdminDashboardView.tsx`). Firestore rules enforce owner-only reads on user profiles and admin-only mutations on catalogue products and banners.',
+        'Implemented a multi-view React + JavaScript storefront with category filtering, custom SVG cover artwork rendering (`CoverArtwork.jsx`), a persistent shopping cart and address management workflow (`CartCheckoutView.jsx`), a dedicated student learning dashboard with lesson completion tracking (`UserDashboardView.jsx`), and an administrator console (`AdminDashboardView.jsx`). Firestore rules enforce owner-only reads on user profiles and admin-only mutations on catalogue products and banners.',
       implementedFeatures: [
         'Product catalogue for technical books, children’s storybooks, and recorded video courses with search and category filtering',
-        'Shopping cart, saved shipping address management, and order summary calculation (`commerceRules.ts`)',
-        'Firebase Authentication modal (`AuthModal.tsx`) with session synchronization and bearer token headers (`apiAuth.ts`)',
+        'Shopping cart, saved shipping address management, and order summary calculation (`commerceRules.js`)',
+        'Firebase Authentication modal (`AuthModal.jsx`) with session synchronization and bearer token headers (`apiAuth.js`)',
         'Separate Student Dashboard (purchased course curriculum, video lesson progress) and Admin Dashboard (product, category, banner, and order management)',
-        'Server-side API validation (`serverApp.ts`) and Cashfree payment gateway integration with order verification',
-        'Comprehensive Firestore & Storage security rules (`firestore.rules`, `storage.rules`) with automated rule tests (`firestore.rules.test.ts`)',
+        'Server-side API validation (`serverApp.js`) and Cashfree payment gateway integration with order verification',
+        'Comprehensive Firestore & Storage security rules (`firestore.rules`, `storage.rules`) with automated rule tests (`firestore.rules.test.js`)',
       ],
       plannedOrPartialFeatures: [
-        'Repository ships with a pre-populated initial sample catalogue (`sampleCatalog.ts`) as fallback/seed data alongside live Firestore collection syncing',
-        'Serverless deployment on Vercel uses the Express/Node API adapter (`api/index.js` + `src/serverApp.ts`) to run cleanly in Vercel’s runtime while aligning with Django REST domain conventions',
+        'Repository ships with a pre-populated initial sample catalogue (`sampleCatalog.js`) as fallback/seed data alongside live Firestore collection syncing',
+        'Serverless deployment on Vercel uses the Express/Node API adapter (`api/index.js` + `src/serverApp.js`) to run cleanly in Vercel’s runtime while aligning with Django REST domain conventions',
       ],
       screens: [
         {
@@ -565,13 +554,13 @@ export const portfolioContent: PortfolioContent = {
       subtitle: 'Conversational Voice & Text AI Technical Interview Practice Platform',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/hiringmanager',
       heroImage: '/src/assets/images/project_alex_interviewer_1793895970870.jpg',
-      technologies: ['React', 'TypeScript', 'Express', 'Gemini', 'Firebase'],
+      technologies: ['React', 'JavaScript', 'Express', 'Gemini', 'Firebase'],
       description:
         'A conversational AI technical interview practice application featuring spoken and typed interaction, a 50-question Full Stack Python & GenAI curriculum, an interactive system-design whiteboard, and structured hiring-rubric evaluations.',
       problemStatement:
         'Developers preparing for Full Stack Python and Generative AI interviews rarely get realistic practice explaining architecture trade-offs out loud or defending system designs under follow-up questioning. Static flashcard apps cannot probe vague answers or evaluate spoken technical depth.',
       architectureOverview:
-        'The frontend is a React 19 and TypeScript workspace combining a live interview studio, dual-channel speech recognition (Web Speech API with raw audio fallback), an interactive system-design architecture whiteboard, and a real-time transcript drawer. The backend Express server (`server.ts`) integrates the official `@google/genai` SDK (`GoogleGenAI`) with grounded system instructions across a curated 50-question curriculum (`interviewQuestions.ts`) and persists completed interview debriefs to Firebase Firestore.',
+        'The frontend is a React 19 and JavaScript workspace combining a live interview studio, dual-channel speech recognition (Web Speech API with raw audio fallback), an interactive system-design architecture whiteboard, and a real-time transcript drawer. The backend Express server (`server.js`) integrates the official `@google/genai` SDK (`GoogleGenAI`) with grounded system instructions across a curated 50-question curriculum (`interviewQuestions.js`) and persists completed interview debriefs to Firebase Firestore.',
       architectureFlow: [
         {
           step: '01',
@@ -600,17 +589,17 @@ export const portfolioContent: PortfolioContent = {
         },
       ],
       implementationExplanation:
-        'Engineered `server.ts` with dedicated endpoints for conversational turns (`/api/interview/chat`), fallback audio transcription (`/api/interview/transcribe`), high-definition voice synthesis (`/api/interview/tts` supporting Fenrir, Puck, Zephyr, and Kore personas), and structured Hiring Committee evaluation (`/api/interview/evaluate`). Built the client workspace with adjustable speech pacing (0.75x–1.1x), live transcript tracking, and an architecture node whiteboard.',
+        'Engineered `server.js` with dedicated endpoints for conversational turns (`/api/interview/chat`), fallback audio transcription (`/api/interview/transcribe`), high-definition voice synthesis (`/api/interview/tts` supporting Fenrir, Puck, Zephyr, and Kore personas), and structured Hiring Committee evaluation (`/api/interview/evaluate`). Built the client workspace with adjustable speech pacing (0.75x–1.1x), live transcript tracking, and an architecture node whiteboard.',
       implementedFeatures: [
         'AI interview interface with selectable interviewer voice personas (Fenrir, Puck, Zephyr, Kore) and configurable speaking speed',
         'Live conversational transcript experience supporting both spoken (microphone) and typed candidate responses',
         'Interactive system-design architecture whiteboard synchronized with the interviewer prompt context',
-        'Curated 50-question Full Stack Python, Django, React, SQL, and GenAI canonical curriculum (`src/data/interviewQuestions.ts`)',
+        'Curated 50-question Full Stack Python, Django, React, SQL, and GenAI canonical curriculum (`src/data/interviewQuestions.js`)',
         'AI-powered Hiring Committee evaluation generating structured scores, strengths, gaps, and history persistence in Firebase',
       ],
       plannedOrPartialFeatures: [
-        'Live Gemini voice/chat synthesis requires a runtime `GEMINI_API_KEY` on the Express server (`server.ts`); no public multi-tenant hosted URL is published in the repository to protect API quotas',
-        'README illustrates a target enterprise architecture with Django/Celery/pgvector concepts, while the shipped repository implements the server tier via the full-stack Express + Vite server (`server.ts`) and Firebase Firestore',
+        'Live Gemini voice/chat synthesis requires a runtime `GEMINI_API_KEY` on the Express server (`server.js`); no public multi-tenant hosted URL is published in the repository to protect API quotas',
+        'README illustrates a target enterprise architecture with Django/Celery/pgvector concepts, while the shipped repository implements the server tier via the full-stack Express + Vite server (`server.js`) and Firebase Firestore',
       ],
       screens: [
         {
@@ -745,10 +734,15 @@ export const portfolioContent: PortfolioContent = {
   ],
 };
 
-export const COMMAND_BACKDROP_IMAGE = portfolioContent.profile.fallbackBackdrop;
+export const COMMAND_BACKDROP_IMAGE =
+  '/src/assets/images/tarun_command_backdrop_1793895972254.jpg';
+
+export const TARUN_PORTRAIT_IMAGE =
+  '/assets/aistudio/Warm_Rim-Lit_Developer_Portrait_3ff9f2c3.png';
 
 export const TARUN_PROFILE = {
   name: portfolioContent.profile.name,
+  displayName: 'TARUN PEDIREDLA',
   role: portfolioContent.profile.professionalTitle,
   tagline: portfolioContent.profile.tagline,
   email: portfolioContent.profile.email,
@@ -758,6 +752,7 @@ export const TARUN_PROFILE = {
   github: portfolioContent.profile.github,
   handle: '@tarunpediredla',
   status: 'Online',
+  portraitImage: TARUN_PORTRAIT_IMAGE,
   summary: portfolioContent.about.summaryParagraphs[0],
   philosophy: portfolioContent.about.summaryParagraphs[2],
 };
@@ -779,24 +774,19 @@ export const SKILL_CATEGORIES = [
     id: 'frontend',
     title: 'Frontend',
     subtitle: 'Responsive component architectures & interactive web UIs',
-    accent: '#38bdf8',
+    accent: '#6B1D2F',
     skills: [
       { name: 'HTML' },
       { name: 'CSS' },
       { name: 'JavaScript' },
       { name: 'React.js' },
-      {
-        name: 'TypeScript',
-        contextNote:
-          'Used in portfolio projects (Satya’s Education & Alex AI Mock Interviewer)',
-      },
     ],
   },
   {
     id: 'backend',
     title: 'Backend',
     subtitle: 'Python service layers, REST APIs & full-stack servers',
-    accent: '#fd5200',
+    accent: '#4E5E56',
     skills: [
       { name: 'Python' },
       { name: 'Django' },
@@ -811,7 +801,7 @@ export const SKILL_CATEGORIES = [
     id: 'databases',
     title: 'Databases',
     subtitle: 'Relational SQL engines & real-time cloud document stores',
-    accent: '#10b981',
+    accent: '#85243A',
     skills: [
       { name: 'MySQL' },
       { name: 'PostgreSQL' },
@@ -822,7 +812,7 @@ export const SKILL_CATEGORIES = [
     id: 'ai-automation',
     title: 'AI & Automation',
     subtitle: 'Conversational voice agents, LLM reasoning & webhook pipelines',
-    accent: '#a78bfa',
+    accent: '#6B1D2F',
     skills: [
       { name: 'Generative AI' },
       { name: 'Agentic AI' },
@@ -835,7 +825,7 @@ export const SKILL_CATEGORIES = [
     id: 'dev-deployment',
     title: 'Dev & Deployment',
     subtitle: 'Containerized workflows, version control & cloud hosting',
-    accent: '#c8a882',
+    accent: '#7A8B82',
     skills: [
       { name: 'GitHub' },
       { name: 'Docker' },
@@ -863,7 +853,7 @@ export interface FeaturedProject {
   caseStudy: ProjectCaseStudy;
 }
 
-const ACCENT_COLORS = ['#38bdf8', '#a78bfa', '#fd5200'];
+const ACCENT_COLORS = ['#D8CBB8', '#9E334B', '#B6C2BB'];
 const CATEGORIES = [
   'Full Stack EdTech & E-Commerce',
   'Conversational Voice & Text AI',
@@ -877,7 +867,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] =
     title: p.title,
     subtitle: p.subtitle,
     category: CATEGORIES[idx] || 'Full Stack & AI',
-    accentColor: ACCENT_COLORS[idx] || '#38bdf8',
+    accentColor: ACCENT_COLORS[idx] || '#D8CBB8',
     image: p.heroImage,
     githubUrl: p.githubUrl,
     liveUrl: p.liveUrl,
