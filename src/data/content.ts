@@ -115,9 +115,9 @@ export const portfolioContent: PortfolioContent = {
   profile: {
     name: 'Tarun Pediredla',
     openingHeadline: 'TARUN PEDIREDLA',
-    role: 'Python Full Stack Developer | GenAI & Agentic AI Enthusiast',
+    role: 'Python Full Stack Developer | GenAI & Agentic AI',
     secondaryTitle: 'PYTHON FULL STACK · GENAI · AGENTIC AI',
-    professionalTitle: 'Python Full Stack Developer | GenAI & Agentic AI Enthusiast',
+    professionalTitle: 'Python Full Stack Developer | GenAI & Agentic AI',
     tagline: 'Building intelligent, scalable, and visually stunning digital experiences.',
     email: 'tarunpediredla9966@gmail.com',
     phone: '+91 8074080773',

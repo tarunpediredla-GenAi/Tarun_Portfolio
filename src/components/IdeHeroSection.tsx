@@ -396,24 +396,22 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
                 <span className="text-sky-300">Available for Full-Time Roles</span>
               </div>
 
-              {/* Eyebrow Greeting */}
-              <p className="hero-reveal-item font-mono text-xs sm:text-sm uppercase tracking-[0.32em] text-sky-400/90 font-semibold mb-2.5">
-                Hi, I&apos;m Tarun Pediredla · Full Stack &amp; AI Engineer
-              </p>
-
-              {/* Primary Display Name: TARUN PEDIREDLA */}
+              {/* Primary Display Name: HI, I'M TARUN PEDIREDLA */}
               <h1
                 className="hero-reveal-item font-display font-black tracking-tight leading-[1.03] text-white mb-4"
                 style={{ fontSize: 'clamp(2.5rem, 5.6vw, 4.85rem)' }}
               >
-                <span className="block bg-gradient-to-r from-white via-slate-100 to-sky-200 bg-clip-text text-transparent drop-shadow-[0_8px_30px_rgba(56,189,248,0.2)]">
+                <span className="block text-white drop-shadow-[0_8px_30px_rgba(56,189,248,0.2)]">
+                  HI, I&apos;M
+                </span>
+                <span className="block text-white drop-shadow-[0_8px_30px_rgba(56,189,248,0.2)]">
                   TARUN PEDIREDLA
                 </span>
               </h1>
 
-              {/* Subtitle: Python Full Stack Developer | GenAI & Agentic AI Enthusiast */}
+              {/* Subtitle: Python Full Stack Developer | GenAI & Agentic AI */}
               <h2 className="hero-reveal-item text-base sm:text-xl md:text-2xl font-display font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-indigo-200 to-violet-300 mb-5">
-                Python Full Stack Developer | GenAI &amp; Agentic AI Enthusiast
+                Python Full Stack Developer | GenAI &amp; Agentic AI
               </h2>
 
               {/* Quote / Tagline */}
@@ -532,7 +530,7 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
                     {/* Enhanced Studio Portrait of Tarun Pediredla */}
                     <img
                       src={TARUN_PORTRAIT_IMAGE}
-                      alt="Tarun Pediredla — Python Full Stack Developer | GenAI & Agentic AI Enthusiast"
+                      alt="Tarun Pediredla — Python Full Stack Developer | GenAI & Agentic AI"
                       loading="eager"
                       fetchPriority="high"
                       decoding="async"
