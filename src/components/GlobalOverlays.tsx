@@ -80,12 +80,30 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
 
   const searchItems = [
     {
+      label: 'InsureSphere AI (Enterprise Reinsurance & Claims AI)',
+      description: 'Python · Django · React 19 · Google Gemini · Recharts · Treaty Risk Analytics',
+      category: 'Flagship Project',
+      action: () => {
+        setSearchOpen(false);
+        setActiveProjectModal(projects[0]);
+      },
+    },
+    {
+      label: 'SLT Culture (Land Screening & Transforming - LST)',
+      description: 'React · TypeScript · Express · Firebase · Google Maps Platform · 10-Stage Pipeline',
+      category: 'Flagship Project',
+      action: () => {
+        setSearchOpen(false);
+        setActiveProjectModal(projects[1]);
+      },
+    },
+    {
       label: "Satya's Education (Case Study & Live Demo)",
       description: 'React · JavaScript · Django · Firebase · Cashfree · Vercel',
       category: 'Flagship Project',
       action: () => {
         setSearchOpen(false);
-        setActiveProjectModal(projects[0]);
+        setActiveProjectModal(projects[2]);
       },
     },
     {
@@ -94,7 +112,7 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
       category: 'Flagship Project',
       action: () => {
         setSearchOpen(false);
-        setActiveProjectModal(projects[1]);
+        setActiveProjectModal(projects[3]);
       },
     },
     {
@@ -103,7 +121,7 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
       category: 'Flagship Project',
       action: () => {
         setSearchOpen(false);
-        setActiveProjectModal(projects[2]);
+        setActiveProjectModal(projects[4]);
       },
     },
     {

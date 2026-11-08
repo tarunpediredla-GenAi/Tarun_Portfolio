@@ -250,7 +250,7 @@ export const portfolioContent: PortfolioContent = {
   ],
 
   skills: {
-    note: 'Express and Firebase Firestore are used in my portfolio projects (Satya’s Education and Alex AI Mock Technical Interviewer) alongside my core Full Stack Python, Django, JavaScript, and React.js stack.',
+    note: 'Express, Google Maps Platform, Recharts, and Firebase Firestore are used across my portfolio projects (InsureSphere AI, SLT Culture, Satya’s Education, and Alex AI Interviewer) alongside my core Full Stack Python, Django, JavaScript, and React.js stack.',
     categories: ['All', 'Frontend', 'Backend', 'Databases', 'AI & Automation', 'Dev & Deployment'],
     items: [
       {
@@ -259,7 +259,7 @@ export const portfolioContent: PortfolioContent = {
         category: 'Frontend',
         scopeNote: 'Professional Role & Projects',
         description: 'Semantic document structure, accessible landmarks, forms, and SEO-ready markup.',
-        projectsUsedIn: ['Saras India Systems', 'Satya’s Education', 'Alex AI Interviewer'],
+        projectsUsedIn: ['Saras India Systems', 'Satya’s Education', 'Alex AI Interviewer', 'InsureSphere AI', 'SLT Culture'],
         orbitRadius: 2.3,
         orbitAngle: 0.2,
         accentColor: '#38bdf8',
@@ -270,7 +270,7 @@ export const portfolioContent: PortfolioContent = {
         category: 'Frontend',
         scopeNote: 'Professional Role & Projects',
         description: 'Responsive grid/flex layouts, modular styling, custom animations, and mobile adaptation.',
-        projectsUsedIn: ['Saras India Systems', 'Satya’s Education', 'Alex AI Interviewer'],
+        projectsUsedIn: ['Saras India Systems', 'Satya’s Education', 'Alex AI Interviewer', 'InsureSphere AI', 'SLT Culture'],
         orbitRadius: 2.3,
         orbitAngle: 1.4,
         accentColor: '#38bdf8',
@@ -281,9 +281,20 @@ export const portfolioContent: PortfolioContent = {
         category: 'Frontend',
         scopeNote: 'Professional Role & Projects',
         description: 'Asynchronous client logic, DOM events, Web Speech & Audio APIs, and REST consumption.',
-        projectsUsedIn: ['Saras India Systems', 'CP Academy', 'Finite HR & IT Solution', 'Satya’s Education', 'Alex AI Interviewer'],
+        projectsUsedIn: ['Saras India Systems', 'CP Academy', 'Finite HR & IT Solution', 'Satya’s Education', 'Alex AI Interviewer', 'InsureSphere AI'],
         orbitRadius: 2.3,
         orbitAngle: 2.6,
+        accentColor: '#38bdf8',
+      },
+      {
+        id: 'typescript',
+        name: 'TypeScript',
+        category: 'Frontend',
+        scopeNote: 'Production Web Applications',
+        description: 'Strict type safety, generic interfaces, typed state stores, and scalable architectural boundaries.',
+        projectsUsedIn: ['SLT Culture', 'Tarun Portfolio', 'hiringmanager'],
+        orbitRadius: 2.3,
+        orbitAngle: 3.5,
         accentColor: '#38bdf8',
       },
       {
@@ -291,10 +302,21 @@ export const portfolioContent: PortfolioContent = {
         name: 'React.js',
         category: 'Frontend',
         scopeNote: 'Professional Role & Projects',
-        description: 'Component architecture, custom hooks, state management, and interactive client views.',
-        projectsUsedIn: ['Saras India Systems', 'Finite HR & IT Solution', 'Satya’s Education', 'Alex AI Interviewer'],
+        description: 'Component architecture, custom hooks, state management, and interactive client views (React 19).',
+        projectsUsedIn: ['Saras India Systems', 'Finite HR & IT Solution', 'Satya’s Education', 'Alex AI Interviewer', 'InsureSphere AI', 'SLT Culture'],
         orbitRadius: 2.3,
-        orbitAngle: 3.8,
+        orbitAngle: 4.4,
+        accentColor: '#06b6d4',
+      },
+      {
+        id: 'recharts',
+        name: 'Recharts & Data Viz',
+        category: 'Frontend',
+        scopeNote: 'Analytics & Financial Visualizers',
+        description: 'Dynamic charts for treaty loss ratios, gross written premium distributions, and portfolio risk segments.',
+        projectsUsedIn: ['InsureSphere AI'],
+        orbitRadius: 2.3,
+        orbitAngle: 5.3,
         accentColor: '#06b6d4',
       },
       {
@@ -303,7 +325,7 @@ export const portfolioContent: PortfolioContent = {
         category: 'Backend',
         scopeNote: 'Core Professional Stack',
         description: 'Primary backend language for full stack web applications, data processing, and AI integration.',
-        projectsUsedIn: ['Finite HR & IT Solution', 'CP Academy', 'AI Workflows'],
+        projectsUsedIn: ['Finite HR & IT Solution', 'CP Academy', 'InsureSphere AI', 'AI Workflows'],
         orbitRadius: 3.1,
         orbitAngle: 0.7,
         accentColor: '#22d3ee',
@@ -314,9 +336,20 @@ export const portfolioContent: PortfolioContent = {
         category: 'Backend',
         scopeNote: 'Core Professional Stack',
         description: 'Full-featured Python web framework for ORM modeling, authentication, REST APIs, and admin workflows.',
-        projectsUsedIn: ['Finite HR & IT Solution', 'CP Academy', 'Satya’s Education Architecture'],
+        projectsUsedIn: ['Finite HR & IT Solution', 'CP Academy', 'InsureSphere AI', 'Satya’s Education Architecture'],
         orbitRadius: 3.1,
-        orbitAngle: 2.8,
+        orbitAngle: 2.3,
+        accentColor: '#22d3ee',
+      },
+      {
+        id: 'drf',
+        name: 'Django REST Framework',
+        category: 'Backend',
+        scopeNote: 'Enterprise REST APIs',
+        description: 'Model serializers, viewsets, authentication tokens, and API endpoints for insurance & learning platforms.',
+        projectsUsedIn: ['InsureSphere AI', 'Finite HR & IT Solution'],
+        orbitRadius: 3.1,
+        orbitAngle: 3.9,
         accentColor: '#22d3ee',
       },
       {
@@ -325,9 +358,9 @@ export const portfolioContent: PortfolioContent = {
         category: 'Backend',
         scopeNote: 'Portfolio Project Technology',
         description: 'Used in portfolio projects to serve API proxy routes, Cashfree checkout endpoints, and Gemini SDK streams.',
-        projectsUsedIn: ['Satya’s Education', 'Alex AI Mock Technical Interviewer'],
+        projectsUsedIn: ['Satya’s Education', 'Alex AI Mock Technical Interviewer', 'SLT Culture'],
         orbitRadius: 3.1,
-        orbitAngle: 4.9,
+        orbitAngle: 5.2,
         accentColor: '#22d3ee',
       },
       {
@@ -357,8 +390,8 @@ export const portfolioContent: PortfolioContent = {
         name: 'Firebase Firestore',
         category: 'Databases',
         scopeNote: 'Portfolio Project Database',
-        description: 'Document collections, security rules (`firestore.rules`), user entitlements, orders, and interview history.',
-        projectsUsedIn: ['Satya’s Education', 'Alex AI Mock Technical Interviewer'],
+        description: 'Document collections, security rules (`firestore.rules`), user entitlements, orders, land inspections, and interview history.',
+        projectsUsedIn: ['Satya’s Education', 'Alex AI Mock Technical Interviewer', 'SLT Culture'],
         orbitRadius: 3.8,
         orbitAngle: 5.3,
         accentColor: '#60a5fa',
@@ -368,8 +401,8 @@ export const portfolioContent: PortfolioContent = {
         name: 'Generative AI',
         category: 'AI & Automation',
         scopeNote: 'Professional Role & Projects',
-        description: 'Prompt engineering, structured JSON output generation, conversational persona design, and RAG.',
-        projectsUsedIn: ['Finite HR & IT Solution', 'Alex AI Interviewer', 'AI Voice Task Planner'],
+        description: 'Prompt engineering, structured JSON output generation, policy RAG, and conversational persona design.',
+        projectsUsedIn: ['Finite HR & IT Solution', 'Alex AI Interviewer', 'AI Voice Task Planner', 'InsureSphere AI'],
         orbitRadius: 4.5,
         orbitAngle: 0.4,
         accentColor: '#f59e0b',
@@ -379,8 +412,8 @@ export const portfolioContent: PortfolioContent = {
         name: 'Agentic AI',
         category: 'AI & Automation',
         scopeNote: 'Professional Role & Projects',
-        description: 'Tool-calling agents, multi-step decision workflows, autonomous day planning, and interview evaluation.',
-        projectsUsedIn: ['Finite HR & IT Solution', 'Alex AI Interviewer', 'AI Voice Task Planner'],
+        description: 'Tool-calling agents, multi-step decision workflows, autonomous day planning, and claims triage.',
+        projectsUsedIn: ['Finite HR & IT Solution', 'Alex AI Interviewer', 'AI Voice Task Planner', 'InsureSphere AI'],
         orbitRadius: 4.5,
         orbitAngle: 1.65,
         accentColor: '#f59e0b',
@@ -390,8 +423,8 @@ export const portfolioContent: PortfolioContent = {
         name: 'Google Gemini',
         category: 'AI & Automation',
         scopeNote: 'AI Foundation Model SDK',
-        description: 'Server-side `@google/genai` integration for technical interview dialogues, TTS, transcription, and task planning.',
-        projectsUsedIn: ['Alex AI Mock Technical Interviewer', 'AI Voice Task Planner'],
+        description: 'Server-side `@google/genai` integration for technical interview dialogues, TTS, claims severity triage, and task planning.',
+        projectsUsedIn: ['Alex AI Mock Technical Interviewer', 'AI Voice Task Planner', 'InsureSphere AI'],
         orbitRadius: 4.5,
         orbitAngle: 2.9,
         accentColor: '#f59e0b',
@@ -426,7 +459,7 @@ export const portfolioContent: PortfolioContent = {
         description: 'Source control, repository workflows, branch management, and technical documentation.',
         projectsUsedIn: ['All Repositories'],
         orbitRadius: 5.2,
-        orbitAngle: 0.9,
+        orbitAngle: 0.7,
         accentColor: '#94a3b8',
       },
       {
@@ -437,7 +470,7 @@ export const portfolioContent: PortfolioContent = {
         description: 'Containerizing full stack applications for consistent local development and production environments.',
         projectsUsedIn: ['Finite HR & IT Solution'],
         orbitRadius: 5.2,
-        orbitAngle: 2.4,
+        orbitAngle: 1.9,
         accentColor: '#94a3b8',
       },
       {
@@ -448,7 +481,18 @@ export const portfolioContent: PortfolioContent = {
         description: 'Automated build, lint, test, and deployment pipelines for reliable software delivery.',
         projectsUsedIn: ['Finite HR & IT Solution', 'Alex AI Interviewer'],
         orbitRadius: 5.2,
-        orbitAngle: 3.9,
+        orbitAngle: 3.1,
+        accentColor: '#94a3b8',
+      },
+      {
+        id: 'google-maps',
+        name: 'Google Maps Platform',
+        category: 'Dev & Deployment',
+        scopeNote: 'Geospatial & Location APIs',
+        description: 'Interactive map views, land parcel geocoding, boundary screening, and agent GPS field verification.',
+        projectsUsedIn: ['SLT Culture'],
+        orbitRadius: 5.2,
+        orbitAngle: 4.3,
         accentColor: '#94a3b8',
       },
       {
@@ -457,9 +501,9 @@ export const portfolioContent: PortfolioContent = {
         category: 'Dev & Deployment',
         scopeNote: 'Cloud Hosting & Serverless',
         description: 'Production SPA and serverless API route deployment with environment configuration.',
-        projectsUsedIn: ['Satya’s Education'],
+        projectsUsedIn: ['Satya’s Education', 'Tarun Portfolio'],
         orbitRadius: 5.2,
-        orbitAngle: 5.4,
+        orbitAngle: 5.5,
         accentColor: '#94a3b8',
       },
     ],
@@ -467,8 +511,162 @@ export const portfolioContent: PortfolioContent = {
 
   projects: [
     {
-      id: 'satya-education',
+      id: 'insuresphere-ai',
       index: '01',
+      title: 'InsureSphere AI',
+      subtitle: 'Enterprise Insurance & Reinsurance Platform with AI-Assisted Claims & Risk-Sharing Analytics',
+      githubUrl: 'https://github.com/tarunpediredla-GenAi/insuresphere-ai',
+      heroImage: '/src/assets/images/insuresphere_platform_1794149818979.jpg',
+      technologies: ['Python', 'Django', 'React 19', 'Gemini', 'Recharts', 'Tailwind CSS'],
+      description:
+        'An enterprise insurance and reinsurance management platform featuring Django REST Framework backend services, an interactive React 19 analytics dashboard, automated policy RAG retrieval, treaty risk-sharing analytics (Quota Share & Excess of Loss), and Gemini-assisted claims severity scoring.',
+      problemStatement:
+        'Insurance carriers and reinsurance syndicates manage multi-million-dollar treaties and high-volume claims across disconnected legacy systems. Underwriters and claims adjusters lack unified tools to model multi-tier risk distributions, query dense policy wording through AI semantic retrieval, and visualize treaty loss ratios in real time.',
+      architectureOverview:
+        'The architecture marries a Django backend with modular apps for policies, claims, and reinsurance treaties with a React 19 + Vite frontend. Underwriting risk metrics and treaty allocations are calculated deterministically on the server, while an embedded Gemini AI assistant retrieves policy clauses and drafts claims assessment recommendations through grounded prompt engineering.',
+      architectureFlow: [
+        {
+          step: '01',
+          node: 'React 19 Executive Dashboard',
+          detail: 'Dashboard displaying Total GWP ($845M), Net Income ($128M), Loss Ratios, and segment breakdown with Recharts visualizers.',
+        },
+        {
+          step: '02',
+          node: 'Django REST Treaty & Policy API',
+          detail: 'Calculates Quota Share and Excess of Loss treaty allocation matrices and manages multi-tier policy structures.',
+        },
+        {
+          step: '03',
+          node: 'Gemini AI Claims Triage Engine',
+          detail: 'Analyzes claimant loss narratives, photographic evidence, and coverage thresholds to assign automated risk scores.',
+        },
+        {
+          step: '04',
+          node: 'Policy RAG Assistant Workspace',
+          detail: 'Semantic retrieval interface (`AIAssistant.jsx`) providing instant clause lookups and underwriter debriefs.',
+        },
+        {
+          step: '05',
+          node: 'Enterprise RBAC & Audit Trails',
+          detail: 'Role segregation separating Underwriters, Claims Adjusters, and System Administrators with compliance logging.',
+        },
+      ],
+      implementationExplanation:
+        'Engineered Django REST Framework backend apps for policies, claims, and reinsurance calculations alongside an interactive React 19 client. Integrated Recharts for dynamic loss ratio curves and GWP vs. NPW distributions, and designed grounded Gemini prompts to triage high-severity claims and answer complex policy terms.',
+      implementedFeatures: [
+        'Executive overview dashboard with real-time KPI metrics (GWP, Net Income, Claims Ratio, Renewal Rate) and interactive Recharts risk visualizers',
+        'Claims management studio with automated AI severity scoring, status tracking, and claimant detail records',
+        'Reinsurance treaty workspace with Quota Share and Excess of Loss risk-sharing calculation models',
+        'AI Policy Assistant (`AIAssistant.jsx`) powered by Google Gemini for natural-language policy queries and underwriter debriefs',
+        'Role-based user management and architectural blueprint viewer for enterprise compliance audit',
+      ],
+      plannedOrPartialFeatures: [
+        'Django backend (`django_backend/`) provides API routes for claims, policies, and reinsurance modeling with local SQLite/PostgreSQL support, paired with Vite-powered frontend mock fallback for seamless client testing.',
+      ],
+      screens: [
+        {
+          id: 'insuresphere-overview',
+          title: 'Executive Overview & Treaty Analytics',
+          caption: 'Real-time executive dashboard displaying Total GWP ($845M), Loss Ratio Trends (68.2%), and segment breakdowns with Recharts.',
+          type: 'showcase',
+          highlights: ['Real-Time KPI Metric Cards', 'Interactive Recharts Loss Ratio Curve', 'GWP & NPW Segment Distribution'],
+        },
+        {
+          id: 'insuresphere-claims',
+          title: 'Claims Intelligence & AI Severity Triage',
+          caption: 'AI-assisted claims table with automated risk predictions (High/Moderate/Low) and direct policyholder claim inspection.',
+          type: 'interface',
+          highlights: ['Automated Severity Prediction', 'Claims Lifecycle Management', 'Policyholder Detail Inspection'],
+        },
+        {
+          id: 'insuresphere-treaty',
+          title: 'Reinsurance Treaty & Risk-Sharing Flow',
+          caption: 'End-to-end architecture connecting React analytics to Django REST service logic and Gemini policy reasoning.',
+          type: 'architecture',
+          highlights: ['Quota Share & Excess of Loss Engines', 'Gemini Underwriter Assistant', 'Django REST Service Blueprint'],
+        },
+      ],
+    },
+    {
+      id: 'slt-culture',
+      index: '02',
+      title: 'SLT Culture (LST)',
+      subtitle: 'Real-Time Land Screening, Testing, Verification & Multi-Role Real Estate Transaction Platform',
+      githubUrl: 'https://github.com/tarunpediredla-GenAi/SLT',
+      heroImage: '/src/assets/images/project_slt_culture.png',
+      technologies: ['React', 'TypeScript', 'Express', 'Firebase', 'Google Maps Platform', 'Tailwind CSS'],
+      description:
+        'A production-oriented land transformation platform designed to identify, evaluate, screen, and register land parcels through an automated 10-stage testing pipeline, Google Maps Platform geocoding, 12 Cloud Firestore collections, and 4 role-protected portals (Buyer, Seller, Agent, Admin).',
+      problemStatement:
+        'Agricultural, commercial, and residential land transactions are plagued by unclear boundary demarcations, fraudulent title claims, and manual on-site verification. Landowners and prospective buyers lack a verified, transparent platform to track soil testing, legal document audits, and registration progress.',
+      architectureOverview:
+        'Built with React, TypeScript, and Tailwind CSS on the client, backed by an Express server (`server.ts`), Firebase Authentication, and 12 Cloud Firestore collections with granular security rules. Google Maps Platform provides interactive parcel boundary mapping and GPS check-ins for field agents conducting on-site verifications.',
+      architectureFlow: [
+        {
+          step: '01',
+          node: 'Multi-Role Onboarding',
+          detail: 'Firebase Auth with Google Sign-In and role assignment for Buyers, Sellers, Agents, and Administrators.',
+        },
+        {
+          step: '02',
+          node: 'Seller Parcel Submission',
+          detail: 'Submission portal (`/seller`) capturing survey numbers, acreage, soil types, and deed uploads.',
+        },
+        {
+          step: '03',
+          node: 'Google Maps Geocoding & Boundary Inspection',
+          detail: 'Geospatial visualization of land parcels with boundary mapping and GPS coordinates.',
+        },
+        {
+          step: '04',
+          node: '10-Stage LST Pipeline & Agent Field Visits',
+          detail: 'Real-time progress tracker from Initial Review through Soil Testing to Verified Listing.',
+        },
+        {
+          step: '05',
+          node: 'Firestore Rules & Admin Governance',
+          detail: '12 collections governed by strict security rules and administrative audit logs.',
+        },
+      ],
+      implementationExplanation:
+        'Implemented 4 dedicated role-protected dashboards (`/buyer`, `/seller`, `/agent`, `/admin`), an interactive 10-stage land screening stepper, and complete Firebase Firestore integration across 12 distinct collections. Integrated Google Maps Platform for parcel exploration and drafted comprehensive Firestore security rules for role-segregated read/write access.',
+      implementedFeatures: [
+        '10-Stage Land Screening & Testing (LST) lifecycle pipeline with real-time progress tracking',
+        '4 Dedicated role-protected dashboards: Buyer, Seller, Field Agent, and System Administrator',
+        'Google Maps Platform integration for interactive land parcel exploration, boundary mapping, and agent GPS check-in',
+        'Firebase Authentication (Google & Email/Password) with first-login role selection and persistent sessions',
+        '12 Cloud Firestore collections with production-grade security rules (`firestore.rules`) and audit logging',
+      ],
+      plannedOrPartialFeatures: [
+        'Shipped with complete Express server (`server.ts`), Firebase configuration blueprints, and seed properties ready for local development or cloud deployment.',
+      ],
+      screens: [
+        {
+          id: 'slt-pipeline',
+          title: '10-Stage Land Screening & Testing Pipeline',
+          caption: 'Visual step-by-step verification pipeline tracking land parcels from initial submission to soil testing and official listing.',
+          type: 'showcase',
+          highlights: ['10-Stage Verification Stepper', 'Real-Time Status Synchronization', 'Document Audit Indicators'],
+        },
+        {
+          id: 'slt-dashboards',
+          title: '4 Role-Segregated Portals (Buyer/Seller/Agent/Admin)',
+          caption: 'Tailored dashboards enabling buyers to schedule site visits, sellers to track listings, and agents to submit GPS field reports.',
+          type: 'interface',
+          highlights: ['Role-Based Route Guards', 'Agent Field Visit Checklist', 'Admin Approval Center'],
+        },
+        {
+          id: 'slt-maps',
+          title: 'Google Maps Geospatial Boundary Inspection',
+          caption: 'Geocoding and interactive mapping architecture overlaying parcel coordinates with Firestore property records.',
+          type: 'architecture',
+          highlights: ['Google Maps Platform Coordinates', '12 Firestore Collections', 'Express + Firebase Backend'],
+        },
+      ],
+    },
+    {
+      id: 'satya-education',
+      index: '03',
       title: "Satya's Education",
       subtitle: 'E-Commerce & Digital-Learning Platform for Books and Recorded Courses',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/SatyaEducationinstitute',
@@ -549,7 +747,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'alex-interviewer',
-      index: '02',
+      index: '04',
       title: 'Alex AI Mock Technical Interviewer',
       subtitle: 'Conversational Voice & Text AI Technical Interview Practice Platform',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/hiringmanager',
@@ -627,7 +825,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'voice-task-planner',
-      index: '03',
+      index: '05',
       title: 'AI Voice Task Planner',
       subtitle: 'Voice-Driven Task Management & AI Day-Planning Automation Pipeline',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/n8n-ai-automations',
@@ -779,7 +977,9 @@ export const SKILL_CATEGORIES = [
       { name: 'HTML' },
       { name: 'CSS' },
       { name: 'JavaScript' },
+      { name: 'TypeScript' },
       { name: 'React.js' },
+      { name: 'Recharts & Data Viz' },
     ],
   },
   {
@@ -790,10 +990,11 @@ export const SKILL_CATEGORIES = [
     skills: [
       { name: 'Python' },
       { name: 'Django' },
+      { name: 'Django REST Framework' },
       {
         name: 'Express',
         contextNote:
-          'Used in portfolio project backend (Alex AI Mock Technical Interviewer)',
+          'Used in portfolio project backend (Alex AI & SLT Culture)',
       },
     ],
   },
@@ -830,6 +1031,7 @@ export const SKILL_CATEGORIES = [
       { name: 'GitHub' },
       { name: 'Docker' },
       { name: 'CI/CD' },
+      { name: 'Google Maps Platform' },
       { name: 'Vercel' },
     ],
   },
@@ -853,8 +1055,10 @@ export interface FeaturedProject {
   caseStudy: ProjectCaseStudy;
 }
 
-const ACCENT_COLORS = ['#D8CBB8', '#9E334B', '#B6C2BB'];
+const ACCENT_COLORS = ['#38bdf8', '#82B440', '#D8CBB8', '#9E334B', '#B6C2BB'];
 const CATEGORIES = [
+  'Enterprise Insurance & Reinsurance AI',
+  'Multi-Role Real Estate & Land Transformation',
   'Full Stack EdTech & E-Commerce',
   'Conversational Voice & Text AI',
   'Agentic Voice Automation',

@@ -243,7 +243,7 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
               </span>
             </h2>
             <p className="mt-6 text-[#35423C] font-medium text-base md:text-lg max-w-2xl mx-auto">
-              Three verified full-stack and AI systems engineered by Tarun
+              Five verified full-stack and AI systems engineered by Tarun
               Pediredla — complete with real repository links, architecture
               flows, and transparent engineering scope.
             </p>

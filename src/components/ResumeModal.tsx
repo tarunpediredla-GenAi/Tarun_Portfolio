@@ -26,11 +26,11 @@ export function generateResumeMarkdown(): string {
       '',
     ]),
     '## Technical Skills',
-    '- **Frontend**: HTML, CSS, JavaScript, React.js',
-    '- **Backend**: Python, Django, Express (Portfolio Projects)',
+    '- **Frontend**: HTML, CSS, JavaScript, TypeScript, React.js, Recharts, Responsive Design',
+    '- **Backend**: Python, Django, Django REST Framework, Express, REST APIs, Webhooks',
     '- **Databases**: MySQL, PostgreSQL, Firebase Firestore',
-    '- **AI & Automation**: Generative AI, Agentic AI, Google Gemini, n8n, Vapi',
-    '- **Development & Deployment**: GitHub, Docker, CI/CD, Vercel',
+    '- **AI & Automation**: Generative AI, Agentic AI, Google Gemini, Policy RAG, n8n, Vapi',
+    '- **Development & Deployment**: GitHub, Docker, CI/CD, Google Maps Platform, Vercel',
     `> Note: ${skills.note}`,
     '',
     '## Featured Projects',
@@ -181,11 +181,11 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#232D28]">
               <div>
                 <span className="font-semibold text-[#1B231F]">Frontend: </span>
-                HTML, CSS, JavaScript, React.js
+                HTML, CSS, JavaScript, TypeScript, React.js, Recharts
               </div>
               <div>
                 <span className="font-semibold text-[#1B231F]">Backend: </span>
-                Python, Django, Express (Portfolio Projects)
+                Python, Django, Django REST Framework, Express
               </div>
               <div>
                 <span className="font-semibold text-[#1B231F]">Databases: </span>
@@ -193,11 +193,11 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               </div>
               <div>
                 <span className="font-semibold text-[#1B231F]">AI &amp; Automation: </span>
-                Generative AI, Agentic AI, Google Gemini, n8n, Vapi
+                Generative AI, Agentic AI, Google Gemini, Policy RAG, n8n, Vapi
               </div>
               <div className="sm:col-span-2">
                 <span className="font-semibold text-[#1B231F]">Development &amp; Deployment: </span>
-                GitHub, Docker, CI/CD, Vercel
+                GitHub, Docker, CI/CD, Google Maps Platform, Vercel
               </div>
             </div>
           </div>

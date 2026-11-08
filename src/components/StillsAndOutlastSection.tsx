@@ -51,51 +51,69 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
   const galleryStills = [
     {
       num: '01',
-      title: "Satya's Education Platform",
-      tag: 'React · JavaScript · Django · Cashfree',
+      title: 'InsureSphere AI Platform',
+      tag: 'Python · Django · React 19 · Gemini · Recharts',
       image: FEATURED_PROJECTS[0].image,
       project: FEATURED_PROJECTS[0],
       side: 'left' as const,
     },
     {
       num: '02',
-      title: 'Alex AI Mock Interviewer',
-      tag: 'React · Express · Google Gemini · Voice AI',
+      title: 'SLT Culture (LST) Platform',
+      tag: 'React · TypeScript · Express · Google Maps',
       image: FEATURED_PROJECTS[1].image,
       project: FEATURED_PROJECTS[1],
       side: 'right' as const,
     },
     {
       num: '03',
-      title: 'AI Voice Task Planner',
-      tag: 'n8n · Vapi · Gemini · Google Sheets',
+      title: "Satya's Education Platform",
+      tag: 'React · JavaScript · Django · Cashfree',
       image: FEATURED_PROJECTS[2].image,
       project: FEATURED_PROJECTS[2],
       side: 'left' as const,
     },
     {
       num: '04',
+      title: 'Alex AI Mock Interviewer',
+      tag: 'React · Express · Google Gemini · Voice AI',
+      image: FEATURED_PROJECTS[3].image,
+      project: FEATURED_PROJECTS[3],
+      side: 'right' as const,
+    },
+    {
+      num: '05',
       title: 'AI Command Architecture',
       tag: 'Python · Agentic Workflows · Docker · CI/CD',
       image: COMMAND_BACKDROP_IMAGE,
-      project: FEATURED_PROJECTS[1],
-      side: 'right' as const,
+      project: FEATURED_PROJECTS[4],
+      side: 'left' as const,
     },
   ];
 
   const carouselSlides = [
     {
       project: FEATURED_PROJECTS[0],
+      badge: 'Enterprise Reinsurance AI',
+      caption: 'Django REST Framework + Gemini Policy RAG & Treaty Risk Analytics',
+    },
+    {
+      project: FEATURED_PROJECTS[1],
+      badge: 'Real Estate & Verification',
+      caption: '10-stage screening pipeline with Google Maps Platform & Firebase',
+    },
+    {
+      project: FEATURED_PROJECTS[2],
       badge: 'E-Commerce & EdTech',
       caption: 'Live production portal on Vercel with Cashfree checkout',
     },
     {
-      project: FEATURED_PROJECTS[1],
+      project: FEATURED_PROJECTS[3],
       badge: 'Conversational Voice AI',
       caption: '50-question bank, system design whiteboard & Hiring Committee',
     },
     {
-      project: FEATURED_PROJECTS[2],
+      project: FEATURED_PROJECTS[4],
       badge: 'Agentic Automation',
       caption: 'Voice request → Vapi → n8n → Gemini → Google Sheets',
     },
@@ -832,11 +850,12 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
           </div>
 
           {/* Surrounding Satellite Panels */}
-          {FEATURED_PROJECTS.map((proj, idx) => {
+          {FEATURED_PROJECTS.slice(0, 4).map((proj, idx) => {
             const positions = [
               '-top-[18vh] -left-[26vw]',
               '-top-[16vh] left-[26vw]',
               'top-[22vh] -left-[25vw]',
+              'top-[20vh] left-[25vw]',
             ];
             const scaleFactor = 1 + zoomProgress * (1.8 + idx * 0.4);
             return (

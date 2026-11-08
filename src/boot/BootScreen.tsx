@@ -9,7 +9,7 @@ const BOOT_SEQUENCE = [
   { progress: 18, step: 'Initializing WebGL 2.0 PBR Studio Environment & ACES Tone Mapping' },
   { progress: 42, step: 'Loading Cybernetic Cheetah & Holographic AI Core Geometry' },
   { progress: 68, step: 'Calibrating GSAP ScrollTrigger 6-Chapter Camera Choreography' },
-  { progress: 91, step: 'Mounting Verified Case Studies: Satya’s Education · Alex AI · Voice Planner' },
+  { progress: 91, step: 'Mounting Verified Case Studies: InsureSphere AI · SLT Culture · Satya’s Education · Alex AI · Voice Planner' },
   { progress: 100, step: 'Command Center Ready — Tarun Pediredla Portfolio' },
 ];
 
