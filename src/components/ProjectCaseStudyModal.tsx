@@ -26,7 +26,6 @@ import {
   INSURESPHERE_TECH_STACK,
   CORE_ENGINEERING_STACK,
   AI_VERIFICATION_FEATURES,
-  AI_ASSISTED_DEV_TOOLS,
 } from '../data/content';
 
 interface ProjectCaseStudyModalProps {
@@ -553,20 +552,6 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                   </div>
                 </div>
 
-                {/* AI-Assisted Development Tools */}
-                <div className="p-3.5 rounded-xl bg-violet-950/25 border border-violet-500/30 text-xs font-mono text-violet-200 flex flex-wrap items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-violet-400 font-bold uppercase tracking-wider">
-                      🛠️ AI-Assisted Dev Tools:
-                    </span>
-                    <span className="text-white font-semibold">
-                      Google Antigravity · Google AI Studio
-                    </span>
-                  </div>
-                  <span className="text-[11px] text-violet-300/80 italic font-sans">
-                    (Used during engineering for architectural scaffolding and prompt prototyping — not technologies that run the application)
-                  </span>
-                </div>
               </div>
 
               {/* Transparent Scope Notes */}
@@ -811,46 +796,6 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                     </div>
                   ))}
                 </div>
-              </div>
-
-              {/* AI-Assisted Development Tools */}
-              <div className="p-4 rounded-2xl bg-violet-950/25 border border-violet-500/35 space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-violet-400 text-sm font-bold">🛠️</span>
-                    <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-violet-300">
-                      AI-Assisted Development Tools
-                    </h4>
-                  </div>
-                  <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-violet-500/20 text-violet-200 border border-violet-400/35 font-semibold">
-                    Developer Tooling
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {AI_ASSISTED_DEV_TOOLS.map((tool) => (
-                    <div
-                      key={tool.name}
-                      className="p-3 rounded-xl bg-violet-900/20 border border-violet-500/25 space-y-1"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-mono font-bold text-violet-200 text-xs">
-                          {tool.name}
-                        </span>
-                        <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-violet-500/20 text-violet-300 border border-violet-400/30">
-                          {tool.category}
-                        </span>
-                      </div>
-                      <p className="text-xs text-violet-100/80 leading-relaxed font-sans">
-                        {tool.role}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                <p className="text-[11px] text-violet-300/80 italic font-sans border-t border-violet-500/20 pt-2">
-                  * Note: Google Antigravity and Google AI Studio were used as AI-assisted developer environments for architecture design and prompt schema prototyping, not as technologies that run the application.
-                </p>
               </div>
             </div>
           )}

@@ -34,7 +34,6 @@ export function generateResumeMarkdown(): string {
     '- **Databases**: PostgreSQL, MySQL, Firebase Firestore',
     '- **AI-Assisted Analysis & RAG (Verification Ongoing)**: Claims analysis triage, policy RAG retrieval',
     '- **Testing & Dev**: Vitest, Git and GitHub, Docker, CI/CD, Vercel',
-    '- **AI-Assisted Dev Tools**: Google Antigravity, Google AI Studio (developer tooling, not runtime dependencies)',
     `> Note: ${skills.note}`,
     '',
     '## Featured Projects',
@@ -211,10 +210,6 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               <div>
                 <span className="font-semibold text-[#1B231F]">Testing &amp; Deployment: </span>
                 Vitest, Git and GitHub, Docker, CI/CD, Vercel
-              </div>
-              <div>
-                <span className="font-semibold text-[#1B231F]">AI-Assisted Dev Tools: </span>
-                Google Antigravity, Google AI Studio (developer tooling)
               </div>
             </div>
           </div>

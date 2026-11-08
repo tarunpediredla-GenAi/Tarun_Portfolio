@@ -113,10 +113,6 @@ export interface ProjectCaseStudy {
     status: string;
     description: string;
   }[];
-  aiDevTools?: {
-    name: string;
-    role: string;
-  }[];
   modules?: ProjectModuleItem[];
   workflowSteps?: ProjectWorkflowStep[];
   apiEndpoints?: ProjectApiEndpoint[];
@@ -681,16 +677,6 @@ export const portfolioContent: PortfolioContent = {
           status: 'Under Integration Verification',
           description:
             'Document retrieval workflow for complex commercial policy schedules, reinsurance treaty clauses, and endorsements.',
-        },
-      ],
-      aiDevTools: [
-        {
-          name: 'Google Antigravity',
-          role: 'AI-assisted development & intelligent workflow orchestration tool (not a runtime application dependency).',
-        },
-        {
-          name: 'Google AI Studio',
-          role: 'Rapid prompt prototyping & schema structuring developer environment (not a runtime application dependency).',
         },
       ],
       description:
@@ -1701,23 +1687,6 @@ export const AI_VERIFICATION_FEATURES = [
       'Document retrieval workflow for searching commercial insurance policy clauses, reinsurance treaty schedules, and endorsement terms.',
   },
 ];
-
-/**
- * AI-Assisted Development Tools (Used during development, not runtime application dependencies)
- */
-export const AI_ASSISTED_DEV_TOOLS = [
-  {
-    name: 'Google Antigravity',
-    category: 'AI-Assisted Development Tool',
-    role: 'AI-assisted development & intelligent workflow orchestration tool (not a runtime application dependency).',
-  },
-  {
-    name: 'Google AI Studio',
-    category: 'AI-Assisted Development Tool',
-    role: 'Rapid prompt prototyping & schema structuring developer environment (not a runtime application dependency).',
-  },
-];
-
 export interface FeaturedProject {
   id: string;
   number: string;
@@ -1739,10 +1708,6 @@ export interface FeaturedProject {
     name: string;
     status: string;
     description: string;
-  }[];
-  aiDevTools?: {
-    name: string;
-    role: string;
   }[];
   caseStudy: ProjectCaseStudy;
   isFlagship?: boolean;
@@ -1775,7 +1740,6 @@ export const FEATURED_PROJECTS: FeaturedProject[] =
     flagshipTechStack: p.flagshipTechStack,
     coreEngineeringStack: p.coreEngineeringStack,
     aiVerificationFeatures: p.aiVerificationFeatures,
-    aiDevTools: p.aiDevTools,
     caseStudy: p,
     isFlagship: p.isFlagship || idx === 0,
   }));

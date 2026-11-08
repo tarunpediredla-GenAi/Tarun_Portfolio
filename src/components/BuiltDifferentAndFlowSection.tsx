@@ -13,7 +13,6 @@ import {
   INSURESPHERE_TECH_STACK,
   CORE_ENGINEERING_STACK,
   AI_VERIFICATION_FEATURES,
-  AI_ASSISTED_DEV_TOOLS,
   TARUN_PROFILE,
 } from '../data/content';
 
@@ -1529,21 +1528,6 @@ export const BuiltDifferentAndFlowSection: React.FC<
                       </div>
                     ))}
                   </div>
-                </div>
-
-                {/* AI-Assisted Development Tools */}
-                <div className="p-3 rounded-xl bg-[#EFE8DA]/70 border border-[#687A70]/30 text-xs font-mono text-[#232B27] flex flex-wrap items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold uppercase tracking-wider text-[#5E1726]">
-                      🛠️ AI-Assisted Dev Tools:
-                    </span>
-                    <span className="font-semibold text-[#232B27]">
-                      Google Antigravity · Google AI Studio
-                    </span>
-                  </div>
-                  <span className="text-[11px] text-[#4E5E56] italic">
-                    (Used during development for architectural prototyping — not technologies that run the application)
-                  </span>
                 </div>
               </div>
             </div>
