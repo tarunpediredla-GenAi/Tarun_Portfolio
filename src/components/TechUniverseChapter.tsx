@@ -186,6 +186,12 @@ export const TechUniverseChapter: React.FC = () => {
               <h3 className="font-display text-lg font-bold text-white">
                 {activeSkill.name}
               </h3>
+              {activeSkill.purpose && (
+                <div className="text-xs font-mono text-cyan-300 font-semibold bg-cyan-950/50 border border-cyan-800/60 px-2.5 py-1.5 rounded-lg flex items-start gap-1.5">
+                  <span className="text-cyan-400 shrink-0">🎯</span>
+                  <span>{activeSkill.purpose}</span>
+                </div>
+              )}
               <p className="text-xs text-slate-300 leading-relaxed">
                 {activeSkill.description}
               </p>
@@ -207,7 +213,7 @@ export const TechUniverseChapter: React.FC = () => {
                   onMouseEnter={() => handleSelectSkill(skill)}
                   className={`text-left rounded-xl border p-5 transition-colors flex flex-col justify-between gap-3 ${
                     isSelected
-                      ? 'border-cyan-500/70 bg-[#0a1428]/95'
+                      ? 'border-cyan-500/70 bg-[#0a1428]/95 shadow-[0_0_20px_rgba(6,182,212,0.15)]'
                       : 'border-slate-800/90 bg-[#070c18]/90 hover:border-slate-700'
                   }`}
                 >
@@ -228,6 +234,11 @@ export const TechUniverseChapter: React.FC = () => {
                         <Layers className="h-4 w-4 text-slate-500 shrink-0" />
                       )}
                     </div>
+                    {skill.purpose && (
+                      <div className="text-[11px] font-mono text-cyan-300 font-semibold bg-cyan-950/40 border border-cyan-800/40 px-2 py-1 rounded-md">
+                        {skill.purpose}
+                      </div>
+                    )}
                     <p className="text-xs text-slate-300 leading-relaxed">
                       {skill.description}
                     </p>

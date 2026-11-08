@@ -7,6 +7,7 @@ import {
   ArrowUpRight,
 } from 'lucide-react';
 import { portfolioContent, type ProjectCaseStudy } from '../data/content';
+import { ProjectCaseStudyModal } from './ProjectCaseStudyModal';
 
 interface GlobalOverlaysProps {
   searchOpen: boolean;
@@ -80,48 +81,40 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
 
   const searchItems = [
     {
-      label: 'InsureSphere AI (Enterprise Reinsurance & Claims AI)',
-      description: 'Python · Django · React 19 · Google Gemini · Recharts · Treaty Risk Analytics',
-      category: 'Flagship Project',
+      label: 'InsureSphere AI (Flagship · Enterprise SaaS & Reinsurance Platform)',
+      description:
+        'React.js · Python · Django REST Framework · PostgreSQL · Quota-Share Treaties · Claims AI',
+      category: '★ Flagship Project',
       action: () => {
         setSearchOpen(false);
         setActiveProjectModal(projects[0]);
       },
     },
     {
-      label: 'SLT Culture (Land Screening & Transforming - LST)',
-      description: 'React · TypeScript · Express · Firebase · Google Maps Platform · 10-Stage Pipeline',
-      category: 'Flagship Project',
+      label: "Satya's Education (Case Study & Live Demo)",
+      description: 'React · JavaScript · Django · Firebase · Cashfree · Vercel',
+      category: 'Featured Project',
       action: () => {
         setSearchOpen(false);
         setActiveProjectModal(projects[1]);
       },
     },
     {
-      label: "Satya's Education (Case Study & Live Demo)",
-      description: 'React · JavaScript · Django · Firebase · Cashfree · Vercel',
-      category: 'Flagship Project',
+      label: 'Alex AI Mock Technical Interviewer',
+      description: 'React · JavaScript · Express · Google Gemini · Firebase',
+      category: 'Featured Project',
       action: () => {
         setSearchOpen(false);
         setActiveProjectModal(projects[2]);
       },
     },
     {
-      label: 'Alex AI Mock Technical Interviewer',
-      description: 'React · JavaScript · Express · Google Gemini · Firebase',
-      category: 'Flagship Project',
+      label: 'AI Voice Task Planner (n8n + Vapi + Gemini)',
+      description: 'Voice request → Vapi → n8n automation → Gemini → Google Sheets',
+      category: 'Featured Project',
       action: () => {
         setSearchOpen(false);
         setActiveProjectModal(projects[3]);
-      },
-    },
-    {
-      label: 'AI Voice Task Planner (n8n + Vapi + Gemini)',
-      description: 'Voice request → Vapi → n8n automation → Gemini → Google Sheets',
-      category: 'Flagship Project',
-      action: () => {
-        setSearchOpen(false);
-        setActiveProjectModal(projects[4]);
       },
     },
     {
@@ -301,204 +294,10 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
       )}
 
       {/* Rich Project Case Study Detail Modal */}
-      {activeProjectModal && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="project-modal-title"
-          onClick={() => setActiveProjectModal(null)}
-          className="fixed inset-0 z-[9992] flex items-center justify-center bg-[#232B27]/75 backdrop-blur-md p-4 sm:p-6 overflow-y-auto"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-3xl rounded-[22px] overflow-hidden border-2 border-[#687A70]/50 bg-[#FAF7F2] shadow-2xl my-auto max-h-[90vh] overflow-y-auto"
-          >
-            {/* Close Button */}
-            <button
-              type="button"
-              onClick={() => setActiveProjectModal(null)}
-              aria-label="Close project detail modal"
-              className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full flex items-center justify-center bg-[#FAF7F2] border border-[#687A70]/50 text-[#232B27] hover:bg-[#5E1726] hover:text-[#F6F1E7] transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
-
-            {/* Top Artwork Banner */}
-            <div
-              className="relative w-full overflow-hidden"
-              style={{
-                height: '220px',
-                background: '#232B27',
-                borderBottom: '1px solid rgba(104, 122, 112, 0.35)',
-              }}
-            >
-              <img
-                src={activeProjectModal.heroImage}
-                alt={activeProjectModal.title}
-                referrerPolicy="no-referrer"
-                className="absolute inset-0 w-full h-full object-cover object-top"
-              />
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    'linear-gradient(180deg, rgba(35,43,39,0.15) 20%, rgba(35,43,39,0.85) 100%)',
-                }}
-              />
-              <span className="absolute top-5 left-5 text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-[#232B27] bg-[#FAF7F2] rounded-full px-3 py-[5px]">
-                Case Study {activeProjectModal.index}
-              </span>
-              <span className="absolute top-5 right-16 text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-[#F6F1E7] bg-[#5E1726] rounded-full px-3 py-[5px]">
-                ★ Featured
-              </span>
-            </div>
-
-            {/* Modal Content Body */}
-            <div className="p-6 sm:p-9 space-y-6">
-              <div>
-                <div className="flex items-center gap-2.5 text-[10px] font-mono font-bold uppercase tracking-[0.26em] text-[#5E1726] mb-2">
-                  <span>Verified Repository</span>
-                  <span
-                    aria-hidden="true"
-                    className="w-1.5 h-1.5 rounded-full bg-[#5E1726]"
-                  />
-                  <span>{activeProjectModal.subtitle}</span>
-                </div>
-
-                <h2
-                  id="project-modal-title"
-                  className="font-bold tracking-tight text-2xl sm:text-3xl text-[#232B27]"
-                >
-                  {activeProjectModal.title}
-                </h2>
-                <p className="mt-3 text-sm text-[#35423C] font-medium leading-relaxed">
-                  {activeProjectModal.description}
-                </p>
-              </div>
-
-              {/* Problem & Architecture */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-[#687A70]/30">
-                <div className="rounded-xl bg-[#EFE8DA] border border-[#687A70]/35 p-4 space-y-1.5">
-                  <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#5E1726] font-bold">
-                    Problem Statement
-                  </div>
-                  <p className="text-xs text-[#232B27] leading-relaxed">
-                    {activeProjectModal.problemStatement}
-                  </p>
-                </div>
-                <div className="rounded-xl bg-[#E6ECE8] border border-[#687A70]/35 p-4 space-y-1.5">
-                  <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#5E1726] font-bold">
-                    Architecture Overview
-                  </div>
-                  <p className="text-xs text-[#232B27] leading-relaxed">
-                    {activeProjectModal.architectureOverview}
-                  </p>
-                </div>
-              </div>
-
-              {/* Visual System Architecture Flow */}
-              <div className="space-y-2.5">
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-6 h-px bg-[#5E1726]" />
-                  <span className="text-[10px] font-bold tracking-[0.32em] uppercase text-[#5E1726]">
-                    System Architecture Pipeline
-                  </span>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                  {activeProjectModal.architectureFlow.map((node) => (
-                    <div
-                      key={node.step}
-                      className="rounded-xl bg-[#EFE8DA] border border-[#687A70]/35 p-3 space-y-1"
-                    >
-                      <div className="text-[10px] font-mono font-bold text-[#5E1726]">
-                        Step {node.step} · {node.node}
-                      </div>
-                      <p className="text-[11px] text-[#232B27] leading-snug">
-                        {node.detail}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Implemented Features Checklist */}
-              <div className="space-y-2.5">
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-6 h-px bg-[#5E1726]" />
-                  <span className="text-[10px] font-bold tracking-[0.32em] uppercase text-[#5E1726]">
-                    Implemented Repository Features
-                  </span>
-                </div>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  {activeProjectModal.implementedFeatures.map((feat) => (
-                    <li
-                      key={feat}
-                      className="flex items-start gap-2 text-xs text-[#232B27] font-medium leading-snug"
-                    >
-                      <span className="w-4 h-4 rounded-full shrink-0 mt-0.5 bg-[#5E1726] inline-flex items-center justify-center text-[#F6F1E7]">
-                        <Check className="w-2.5 h-2.5" />
-                      </span>
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Scope Notes */}
-              <div className="rounded-xl bg-[#E6ECE8] border border-[#5E1726]/35 p-3.5 space-y-1">
-                <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#5E1726] font-bold">
-                  Repository &amp; Runtime Scope Notes
-                </div>
-                {activeProjectModal.plannedOrPartialFeatures.map((note) => (
-                  <p key={note} className="text-xs text-[#232B27] leading-relaxed">
-                    • {note}
-                  </p>
-                ))}
-              </div>
-
-              {/* Tech Stack & Action Links */}
-              <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-[#687A70]/30">
-                <div className="flex flex-wrap gap-1.5">
-                  {activeProjectModal.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-[11px] font-bold text-[#232B27] px-3 py-1 rounded-full bg-[#DCE3DF] border border-[#687A70]/40"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap items-center gap-3">
-                  {activeProjectModal.liveUrl && (
-                    <a
-                      href={activeProjectModal.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-[#F6F1E7] bg-[#5E1726] hover:bg-[#751E31] hover:-translate-y-0.5 transition-all"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#F6F1E7]" />
-                      <span>Visit Live</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </a>
-                  )}
-                  <a
-                    href={activeProjectModal.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-[#232B27] bg-[#DCE3DF] border border-[#687A70]/50 hover:border-[#5E1726] hover:-translate-y-0.5 transition-all"
-                  >
-                    <GitBranch className="w-3.5 h-3.5" />
-                    <span>View on GitHub</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <ProjectCaseStudyModal
+        project={activeProjectModal}
+        onClose={() => setActiveProjectModal(null)}
+      />
     </>
   );
 };

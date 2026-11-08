@@ -1,0 +1,299 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" fill="none">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#050B1A"/>
+      <stop offset="45%" stop-color="#091432"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </linearGradient>
+
+    <radialGradient id="electric-glow" cx="600" cy="120" r="550" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.18"/>
+      <stop offset="60%" stop-color="#1D4ED8" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#020617" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="cyan-glow-right" cx="1050" cy="400" r="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#020617" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Glass Panel Gradients -->
+    <linearGradient id="panel-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.9"/>
+    </linearGradient>
+
+    <linearGradient id="card-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0B1329" stop-opacity="0.95"/>
+    </linearGradient>
+
+    <linearGradient id="accent-cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+
+    <linearGradient id="metric-emerald" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <linearGradient id="metric-amber" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+
+    <!-- Filter for glow effects -->
+    <filter id="soft-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <filter id="badge-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Base Canvas -->
+  <rect width="1200" height="675" fill="url(#bg-grad)"/>
+  <rect width="1200" height="675" fill="url(#electric-glow)"/>
+  <rect width="1200" height="675" fill="url(#cyan-glow-right)"/>
+
+  <!-- Architectural Blueprint Grid -->
+  <g opacity="0.08" stroke="#38BDF8" stroke-width="1">
+    <line x1="0" y1="75" x2="1200" y2="75"/>
+    <line x1="0" y1="175" x2="1200" y2="175"/>
+    <line x1="0" y1="275" x2="1200" y2="275"/>
+    <line x1="0" y1="375" x2="1200" y2="375"/>
+    <line x1="0" y1="475" x2="1200" y2="475"/>
+    <line x1="0" y1="575" x2="1200" y2="575"/>
+
+    <line x1="80" y1="0" x2="80" y2="675"/>
+    <line x1="240" y1="0" x2="240" y2="675"/>
+    <line x1="480" y1="0" x2="480" y2="675"/>
+    <line x1="720" y1="0" x2="720" y2="675"/>
+    <line x1="960" y1="0" x2="960" y2="675"/>
+    <line x1="1120" y1="0" x2="1120" y2="675"/>
+  </g>
+
+  <!-- Main Top Chrome Bar -->
+  <g transform="translate(60, 40)">
+    <rect width="1080" height="52" rx="14" fill="#0E1A38" stroke="#2563EB" stroke-width="1.2" stroke-opacity="0.45"/>
+
+    <!-- Traffic lights -->
+    <circle cx="28" cy="26" r="6" fill="#EF4444"/>
+    <circle cx="48" cy="26" r="6" fill="#F59E0B"/>
+    <circle cx="68" cy="26" r="6" fill="#10B981"/>
+
+    <!-- Project Identifier -->
+    <text x="96" y="32" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700" fill="#F8FAFC" letter-spacing="1">
+      INSURESPHERE AI
+    </text>
+    <text x="245" y="32" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500" fill="#94A3B8" letter-spacing="0.5">
+      / Enterprise Insurance &amp; Reinsurance Platform
+    </text>
+
+    <!-- Flagship Pill -->
+    <rect x="760" y="12" width="145" height="28" rx="14" fill="#1D4ED8" fill-opacity="0.35" stroke="#38BDF8" stroke-width="1"/>
+    <circle cx="778" cy="26" r="3.5" fill="#38BDF8"/>
+    <text x="790" y="30" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" fill="#38BDF8" letter-spacing="1.5">
+      ★ FLAGSHIP
+    </text>
+
+    <!-- Stack Pill -->
+    <rect x="918" y="12" width="142" height="28" rx="14" fill="#0F172A" stroke="#334155" stroke-width="1"/>
+    <text x="932" y="30" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#E2E8F0">
+      Django REST · React
+    </text>
+  </g>
+
+  <!-- Metric KPI Cards Row -->
+  <g transform="translate(60, 110)">
+    <!-- Card 1: Gross Claims Exposure -->
+    <rect x="0" y="0" width="255" height="92" rx="14" fill="url(#card-grad)" stroke="#38BDF8" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="20" y="28" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#94A3B8" letter-spacing="0.8">
+      GROSS CLAIMS REGISTERED
+    </text>
+    <text x="20" y="62" font-family="'Outfit', 'DM Sans', sans-serif" font-size="28" font-weight="800" fill="#FFFFFF">
+      $14,850,000
+    </text>
+    <text x="20" y="80" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#34D399">
+      ↑ 18.4% treaty volume
+    </text>
+
+    <!-- Card 2: Reinsurance Quota Share -->
+    <rect x="275" y="0" width="255" height="92" rx="14" fill="url(#card-grad)" stroke="#2563EB" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="295" y="28" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#94A3B8" letter-spacing="0.8">
+      REINSURER CEDED SHARE (40%)
+    </text>
+    <text x="295" y="62" font-family="'Outfit', 'DM Sans', sans-serif" font-size="28" font-weight="800" fill="#38BDF8">
+      $5,940,000
+    </text>
+    <text x="295" y="80" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#93C5FD">
+      Recoveries actively audited
+    </text>
+
+    <!-- Card 3: Insurer Retention -->
+    <rect x="550" y="0" width="255" height="92" rx="14" fill="url(#card-grad)" stroke="#818CF8" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="570" y="28" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#94A3B8" letter-spacing="0.8">
+      INSURER RETENTION (60%)
+    </text>
+    <text x="570" y="62" font-family="'Outfit', 'DM Sans', sans-serif" font-size="28" font-weight="800" fill="#E2E8F0">
+      $8,910,000
+    </text>
+    <text x="570" y="80" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#CBD5E1">
+      Net portfolio exposure
+    </text>
+
+    <!-- Card 4: AI Claims Triage Status -->
+    <rect x="825" y="0" width="255" height="92" rx="14" fill="url(#card-grad)" stroke="#06B6D4" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="845" y="28" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#94A3B8" letter-spacing="0.8">
+      AI TRIAGE ADVISORY
+    </text>
+    <text x="845" y="62" font-family="'Outfit', 'DM Sans', sans-serif" font-size="28" font-weight="800" fill="#06B6D4">
+      98.6%
+    </text>
+    <text x="845" y="80" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#67E8F9">
+      Deductible &amp; policy verified
+    </text>
+  </g>
+
+  <!-- Left Main Workspace: Claims Workbench & Reinsurance Ledger -->
+  <g transform="translate(60, 222)">
+    <rect width="650" height="395" rx="18" fill="url(#panel-grad)" stroke="#2563EB" stroke-width="1.2" stroke-opacity="0.35"/>
+
+    <!-- Workspace Header -->
+    <rect width="650" height="48" rx="18" fill="#132042" stroke="#334155" stroke-width="0.8"/>
+    <text x="24" y="30" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#F8FAFC" letter-spacing="0.8">
+      CLAIMS ADJUDICATION &amp; REINSURANCE LEDGER WORKBENCH
+    </text>
+    <rect x="520" y="12" width="108" height="24" rx="12" fill="#059669" fill-opacity="0.2" stroke="#10B981" stroke-width="0.8"/>
+    <text x="532" y="28" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#34D399">
+      ● ADJUSTER ACTIVE
+    </text>
+
+    <!-- Table Header -->
+    <rect x="20" y="66" width="610" height="32" rx="8" fill="#0B1329"/>
+    <text x="36" y="87" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#94A3B8">CLAIM ID</text>
+    <text x="130" y="87" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#94A3B8">POLICYHOLDER</text>
+    <text x="260" y="87" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#94A3B8">GROSS LOSS</text>
+    <text x="360" y="87" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#94A3B8">REINSURER (40%)</text>
+    <text x="490" y="87" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#94A3B8">STATUS</text>
+
+    <!-- Row 1 -->
+    <rect x="20" y="106" width="610" height="42" rx="8" fill="#111C3A" stroke="#1E293B" stroke-width="0.8"/>
+    <text x="36" y="132" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#38BDF8">CLM-2024-8901</text>
+    <text x="130" y="132" font-family="'DM Sans', sans-serif" font-size="12" font-weight="500" fill="#F1F5F9">Apex Logistics Inc.</text>
+    <text x="260" y="132" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#E2E8F0">$150,000</text>
+    <text x="360" y="132" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#34D399">$40,000</text>
+    <rect x="490" y="116" width="85" height="22" rx="11" fill="#10B981" fill-opacity="0.15" stroke="#10B981" stroke-width="0.8"/>
+    <text x="506" y="131" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#34D399">APPROVED</text>
+
+    <!-- Row 2 -->
+    <rect x="20" y="156" width="610" height="42" rx="8" fill="#0C152F" stroke="#1E293B" stroke-width="0.8"/>
+    <text x="36" y="182" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#38BDF8">CLM-2024-8902</text>
+    <text x="130" y="182" font-family="'DM Sans', sans-serif" font-size="12" font-weight="500" fill="#F1F5F9">Cascade Commercial</text>
+    <text x="260" y="182" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#E2E8F0">$320,000</text>
+    <text x="360" y="182" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#34D399">$108,000</text>
+    <rect x="490" y="166" width="85" height="22" rx="11" fill="#3B82F6" fill-opacity="0.15" stroke="#38BDF8" stroke-width="0.8"/>
+    <text x="504" y="181" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#38BDF8">REVIEWING</text>
+
+    <!-- Row 3 -->
+    <rect x="20" y="206" width="610" height="42" rx="8" fill="#111C3A" stroke="#1E293B" stroke-width="0.8"/>
+    <text x="36" y="232" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#38BDF8">CLM-2024-8903</text>
+    <text x="130" y="232" font-family="'DM Sans', sans-serif" font-size="12" font-weight="500" fill="#F1F5F9">Meridian Fleet Group</text>
+    <text x="260" y="232" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#E2E8F0">$75,000</text>
+    <text x="360" y="232" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#34D399">$20,000</text>
+    <rect x="490" y="216" width="85" height="22" rx="11" fill="#F59E0B" fill-opacity="0.15" stroke="#F59E0B" stroke-width="0.8"/>
+    <text x="506" y="231" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#FBBF24">HOLD (FNOL)</text>
+
+    <!-- Calculation Ledger Callout inside Workbench -->
+    <g transform="translate(20, 266)">
+      <rect width="610" height="108" rx="12" fill="#0A1228" stroke="#2563EB" stroke-width="1"/>
+      <text x="20" y="26" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#38BDF8" letter-spacing="1">
+        QUOTA-SHARE FORMULA VERIFICATION ENGINE
+      </text>
+      <text x="20" y="52" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500" fill="#E2E8F0">
+        Gross Loss ($150,000) - Deductible ($50,000) = Net Eligible Loss: $100,000
+      </text>
+      <text x="20" y="74" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#93C5FD">
+        ▶ Insurer Retains (60%): $60,000  |  ▶ Reinsurer Recovers (40%): $40,000
+      </text>
+      <text x="20" y="94" font-family="'JetBrains Mono', monospace" font-size="9.5" font-style="italic" fill="#64748B">
+        * Verified via Django model clean() methods and automated pytest test suites
+      </text>
+    </g>
+  </g>
+
+  <!-- Right Panel: End-to-End System Architecture Stack -->
+  <g transform="translate(730, 222)">
+    <rect width="410" height="395" rx="18" fill="url(#panel-grad)" stroke="#38BDF8" stroke-width="1.2" stroke-opacity="0.35"/>
+
+    <!-- Architecture Header -->
+    <rect width="410" height="48" rx="18" fill="#132042" stroke="#334155" stroke-width="0.8"/>
+    <text x="24" y="30" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#F8FAFC" letter-spacing="0.8">
+      ENTERPRISE ARCHITECTURE PIPELINE
+    </text>
+
+    <!-- Step 1: React Frontend -->
+    <g transform="translate(20, 64)">
+      <rect width="370" height="58" rx="10" fill="#0B1329" stroke="#38BDF8" stroke-width="1"/>
+      <circle cx="28" cy="29" r="14" fill="#1E293B"/>
+      <text x="24" y="33" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#38BDF8">01</text>
+      <text x="56" y="24" font-family="'Outfit', sans-serif" font-size="13" font-weight="700" fill="#F8FAFC">React 19 &amp; TypeScript Client</text>
+      <text x="56" y="44" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#94A3B8">Tailwind CSS · Reinsurance Quota-Share UI</text>
+    </g>
+
+    <!-- Arrow 1 -->
+    <line x1="205" y1="124" x2="205" y2="140" stroke="#38BDF8" stroke-width="2" stroke-dasharray="3 3"/>
+    <polygon points="205,143 201,137 209,137" fill="#38BDF8"/>
+
+    <!-- Step 2: Django REST Framework -->
+    <g transform="translate(20, 146)">
+      <rect width="370" height="58" rx="10" fill="#0B1329" stroke="#2563EB" stroke-width="1"/>
+      <circle cx="28" cy="29" r="14" fill="#1E293B"/>
+      <text x="24" y="33" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#2563EB">02</text>
+      <text x="56" y="24" font-family="'Outfit', sans-serif" font-size="13" font-weight="700" fill="#F8FAFC">Django REST Framework API</text>
+      <text x="56" y="44" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#94A3B8">JWT Auth · Role-Based Permissions · Business Logic</text>
+    </g>
+
+    <!-- Arrow 2 -->
+    <line x1="205" y1="206" x2="205" y2="222" stroke="#2563EB" stroke-width="2" stroke-dasharray="3 3"/>
+    <polygon points="205,225 201,219 209,219" fill="#2563EB"/>
+
+    <!-- Step 3: PostgreSQL Database -->
+    <g transform="translate(20, 228)">
+      <rect width="370" height="58" rx="10" fill="#0B1329" stroke="#818CF8" stroke-width="1"/>
+      <circle cx="28" cy="29" r="14" fill="#1E293B"/>
+      <text x="24" y="33" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#818CF8">03</text>
+      <text x="56" y="24" font-family="'Outfit', sans-serif" font-size="13" font-weight="700" fill="#F8FAFC">PostgreSQL Relational DB</text>
+      <text x="56" y="44" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#94A3B8">Normalized Treaties, Claims &amp; Audit Logs</text>
+    </g>
+
+    <!-- Branch: AI Claims Advisory Pipeline -->
+    <g transform="translate(20, 302)">
+      <rect width="370" height="74" rx="10" fill="#07132B" stroke="#06B6D4" stroke-width="1" stroke-dasharray="4 2"/>
+      <text x="18" y="24" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" fill="#06B6D4" letter-spacing="0.8">
+        AI CLAIMS ADVISORY &amp; RAG ENGINE
+      </text>
+      <text x="18" y="44" font-family="'DM Sans', sans-serif" font-size="11" font-weight="500" fill="#E2E8F0">
+        Extracts policy provisions &amp; deductible conditions
+      </text>
+      <text x="18" y="62" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="500" fill="#38BDF8">
+        Status: Claims Triage functional · Policy RAG ongoing
+      </text>
+    </g>
+  </g>
+
+  <!-- Bottom Visual Certification Footer -->
+  <g transform="translate(60, 630)">
+    <text x="0" y="16" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="600" fill="#64748B">
+      TARUN PEDIREDLA · FULL STACK PYTHON &amp; AI DEVELOPER · ENTERPRISE REINSURANCE SUITE
+    </text>
+    <text x="1080" y="16" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" fill="#38BDF8" text-anchor="end">
+      REPO: github.com/tarunpediredla-GenAi/insuresphere-ai
+    </text>
+  </g>
+</svg>

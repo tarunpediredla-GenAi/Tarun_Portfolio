@@ -16,6 +16,7 @@ import { portfolioContent, type ProjectCaseStudy } from '../data/content';
 export const ProjectsChapter: React.FC = () => {
   const { projects } = portfolioContent;
   const [activeTabByProject, setActiveTabByProject] = useState<Record<string, number>>({
+    'insuresphere-ai': 0,
     'satya-education': 0,
     'alex-interviewer': 0,
     'voice-task-planner': 0,

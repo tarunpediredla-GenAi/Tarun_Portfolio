@@ -20,10 +20,19 @@ export interface SkillItem {
   category: 'Frontend' | 'Backend' | 'Databases' | 'AI & Automation' | 'Dev & Deployment';
   scopeNote: string;
   description: string;
+  purpose?: string;
   projectsUsedIn: string[];
   orbitRadius: number;
   orbitAngle: number;
   accentColor: string;
+}
+
+export interface EnterpriseSkillPurpose {
+  technology: string;
+  purpose: string;
+  category: 'Frontend' | 'Backend' | 'Databases' | 'Security & Auth' | 'AI & Automation' | 'Dev & Deployment';
+  statusBadge: string;
+  primaryProject: string;
 }
 
 export interface ProjectScreenView {
@@ -38,6 +47,43 @@ export interface ProjectArchitectureStep {
   step: string;
   node: string;
   detail: string;
+}
+
+export interface ProjectModuleItem {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  highlights: string[];
+}
+
+export interface ProjectWorkflowStep {
+  step: string;
+  title: string;
+  role: string;
+  description: string;
+}
+
+export interface ProjectApiEndpoint {
+  method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+  path: string;
+  tag: string;
+  description: string;
+  detail: string;
+}
+
+export interface ProjectTestingHighlight {
+  area: string;
+  status: 'Automated' | 'Manual Verified' | 'Verification Pending';
+  badgeColor: string;
+  description: string;
+}
+
+export interface ReinsuranceCalculatorDefaults {
+  grossLoss: number;
+  deductible: number;
+  retentionPct: number;
+  reinsurerPct: number;
 }
 
 export interface ProjectCaseStudy {
@@ -58,6 +104,24 @@ export interface ProjectCaseStudy {
   implementedFeatures: string[];
   plannedOrPartialFeatures: string[];
   screens: ProjectScreenView[];
+  isFlagship?: boolean;
+  statusBadge?: string;
+  flagshipTechStack?: string[];
+  coreEngineeringStack?: string[];
+  aiVerificationFeatures?: {
+    name: string;
+    status: string;
+    description: string;
+  }[];
+  aiDevTools?: {
+    name: string;
+    role: string;
+  }[];
+  modules?: ProjectModuleItem[];
+  workflowSteps?: ProjectWorkflowStep[];
+  apiEndpoints?: ProjectApiEndpoint[];
+  testingHighlights?: ProjectTestingHighlight[];
+  reinsuranceCalculatorDefaults?: ReinsuranceCalculatorDefaults;
 }
 
 export interface EducationItem {
@@ -250,7 +314,7 @@ export const portfolioContent: PortfolioContent = {
   ],
 
   skills: {
-    note: 'Express, Google Maps Platform, Recharts, and Firebase Firestore are used across my portfolio projects (InsureSphere AI, SLT Culture, Satya’s Education, and Alex AI Interviewer) alongside my core Full Stack Python, Django, JavaScript, and React.js stack.',
+    note: 'Express and Firebase Firestore are used in my portfolio projects (Satya’s Education and Alex AI Mock Technical Interviewer) alongside my core Full Stack Python, Django, JavaScript, and React.js stack.',
     categories: ['All', 'Frontend', 'Backend', 'Databases', 'AI & Automation', 'Dev & Deployment'],
     items: [
       {
@@ -259,7 +323,8 @@ export const portfolioContent: PortfolioContent = {
         category: 'Frontend',
         scopeNote: 'Professional Role & Projects',
         description: 'Semantic document structure, accessible landmarks, forms, and SEO-ready markup.',
-        projectsUsedIn: ['Saras India Systems', 'Satya’s Education', 'Alex AI Interviewer', 'InsureSphere AI', 'SLT Culture'],
+        purpose: 'Defines structured semantic web content and accessibility landmarks',
+        projectsUsedIn: ['Saras India Systems', 'Satya’s Education', 'Alex AI Interviewer'],
         orbitRadius: 2.3,
         orbitAngle: 0.2,
         accentColor: '#38bdf8',
@@ -270,7 +335,8 @@ export const portfolioContent: PortfolioContent = {
         category: 'Frontend',
         scopeNote: 'Professional Role & Projects',
         description: 'Responsive grid/flex layouts, modular styling, custom animations, and mobile adaptation.',
-        projectsUsedIn: ['Saras India Systems', 'Satya’s Education', 'Alex AI Interviewer', 'InsureSphere AI', 'SLT Culture'],
+        purpose: 'Provides modular styling, grid/flex layouts, and responsive transitions',
+        projectsUsedIn: ['Saras India Systems', 'Satya’s Education', 'Alex AI Interviewer'],
         orbitRadius: 2.3,
         orbitAngle: 1.4,
         accentColor: '#38bdf8',
@@ -280,87 +346,107 @@ export const portfolioContent: PortfolioContent = {
         name: 'JavaScript',
         category: 'Frontend',
         scopeNote: 'Professional Role & Projects',
-        description: 'Asynchronous client logic, DOM events, Web Speech & Audio APIs, and REST consumption.',
-        projectsUsedIn: ['Saras India Systems', 'CP Academy', 'Finite HR & IT Solution', 'Satya’s Education', 'Alex AI Interviewer', 'InsureSphere AI'],
+        purpose: 'Handles user interactions and frontend logic',
+        description: 'Handles user interactions and frontend logic. Asynchronous client logic, DOM events, Web Speech & Audio APIs, and REST consumption.',
+        projectsUsedIn: ['InsureSphere AI', 'Saras India Systems', 'CP Academy', 'Finite HR & IT Solution', 'Satya’s Education', 'Alex AI Interviewer'],
         orbitRadius: 2.3,
         orbitAngle: 2.6,
-        accentColor: '#38bdf8',
-      },
-      {
-        id: 'typescript',
-        name: 'TypeScript',
-        category: 'Frontend',
-        scopeNote: 'Production Web Applications',
-        description: 'Strict type safety, generic interfaces, typed state stores, and scalable architectural boundaries.',
-        projectsUsedIn: ['SLT Culture', 'Tarun Portfolio', 'hiringmanager'],
-        orbitRadius: 2.3,
-        orbitAngle: 3.5,
         accentColor: '#38bdf8',
       },
       {
         id: 'react',
         name: 'React.js',
         category: 'Frontend',
-        scopeNote: 'Professional Role & Projects',
-        description: 'Component architecture, custom hooks, state management, and interactive client views (React 19).',
-        projectsUsedIn: ['Saras India Systems', 'Finite HR & IT Solution', 'Satya’s Education', 'Alex AI Interviewer', 'InsureSphere AI', 'SLT Culture'],
+        scopeNote: 'Core UI Architecture',
+        purpose: 'Builds the frontend website and dashboards',
+        description: 'Builds the frontend website and dashboards. Component architecture, custom hooks, state management, and high-performance interactive views.',
+        projectsUsedIn: ['InsureSphere AI', 'Saras India Systems', 'Finite HR & IT Solution', 'Satya’s Education', 'Alex AI Interviewer'],
         orbitRadius: 2.3,
-        orbitAngle: 4.4,
+        orbitAngle: 3.8,
         accentColor: '#06b6d4',
       },
       {
-        id: 'recharts',
-        name: 'Recharts & Data Viz',
+        id: 'tailwindcss',
+        name: 'Tailwind CSS',
         category: 'Frontend',
-        scopeNote: 'Analytics & Financial Visualizers',
-        description: 'Dynamic charts for treaty loss ratios, gross written premium distributions, and portfolio risk segments.',
-        projectsUsedIn: ['InsureSphere AI'],
+        scopeNote: 'Responsive Interface Styling',
+        purpose: 'Styles the responsive user interface',
+        description: 'Styles the responsive user interface. Utility-first styling, design system tokens, fluid typography, and editorial layouts.',
+        projectsUsedIn: ['InsureSphere AI', 'Portfolio Platform', 'Modern Web UIs'],
         orbitRadius: 2.3,
-        orbitAngle: 5.3,
-        accentColor: '#06b6d4',
+        orbitAngle: 5.0,
+        accentColor: '#38bdf8',
       },
       {
         id: 'python',
         name: 'Python',
         category: 'Backend',
         scopeNote: 'Core Professional Stack',
-        description: 'Primary backend language for full stack web applications, data processing, and AI integration.',
-        projectsUsedIn: ['Finite HR & IT Solution', 'CP Academy', 'InsureSphere AI', 'AI Workflows'],
+        purpose: 'Main backend programming language',
+        description: 'Main backend programming language. Primary backend language for full stack web applications, data processing, and AI integration.',
+        projectsUsedIn: ['InsureSphere AI', 'Finite HR & IT Solution', 'CP Academy', 'AI Workflows'],
         orbitRadius: 3.1,
-        orbitAngle: 0.7,
+        orbitAngle: 0.5,
         accentColor: '#22d3ee',
       },
       {
         id: 'django',
         name: 'Django',
         category: 'Backend',
-        scopeNote: 'Core Professional Stack',
-        description: 'Full-featured Python web framework for ORM modeling, authentication, REST APIs, and admin workflows.',
-        projectsUsedIn: ['Finite HR & IT Solution', 'CP Academy', 'InsureSphere AI', 'Satya’s Education Architecture'],
+        scopeNote: 'Enterprise Web Framework',
+        purpose: 'Backend application framework',
+        description: 'Backend application framework. Full-featured Python web framework for ORM modeling, authentication, REST APIs, and admin workflows.',
+        projectsUsedIn: ['InsureSphere AI', 'Finite HR & IT Solution', 'CP Academy', 'Satya’s Education Architecture'],
         orbitRadius: 3.1,
-        orbitAngle: 2.3,
+        orbitAngle: 1.8,
         accentColor: '#22d3ee',
       },
       {
         id: 'drf',
-        name: 'Django REST Framework',
+        name: 'Django REST Framework (DRF)',
         category: 'Backend',
-        scopeNote: 'Enterprise REST APIs',
-        description: 'Model serializers, viewsets, authentication tokens, and API endpoints for insurance & learning platforms.',
-        projectsUsedIn: ['InsureSphere AI', 'Finite HR & IT Solution'],
+        scopeNote: 'RESTful API Layer',
+        purpose: 'Creates APIs connecting React to Django',
+        description: 'Creates APIs connecting React to Django. Model serializers, validated endpoints, paginated querysets, and viewsets.',
+        projectsUsedIn: ['InsureSphere AI', 'Enterprise SaaS Backends'],
         orbitRadius: 3.1,
-        orbitAngle: 3.9,
-        accentColor: '#22d3ee',
+        orbitAngle: 3.0,
+        accentColor: '#0ea5e9',
+      },
+      {
+        id: 'jwt-auth',
+        name: 'JWT / SimpleJWT',
+        category: 'Backend',
+        scopeNote: 'Token Authentication',
+        purpose: 'User login and API authentication',
+        description: 'User login and API authentication. Secure stateless access and refresh tokens with Bearer Authorization headers.',
+        projectsUsedIn: ['InsureSphere AI', 'Authentication Systems'],
+        orbitRadius: 3.1,
+        orbitAngle: 4.2,
+        accentColor: '#38bdf8',
+      },
+      {
+        id: 'rbac',
+        name: 'RBAC',
+        category: 'Backend',
+        scopeNote: 'Access Control & Permissions',
+        purpose: 'Controls Admin, Agent, and Customer permissions',
+        description: 'Controls Admin, Agent, and Customer permissions. Role-Based Access Control enforcing granular permissions and domain safety.',
+        projectsUsedIn: ['InsureSphere AI', 'Multi-Tenant Platforms'],
+        orbitRadius: 3.1,
+        orbitAngle: 5.4,
+        accentColor: '#38bdf8',
       },
       {
         id: 'express',
         name: 'Express',
         category: 'Backend',
         scopeNote: 'Portfolio Project Technology',
+        purpose: 'Serves API proxy routes and serverless handlers',
         description: 'Used in portfolio projects to serve API proxy routes, Cashfree checkout endpoints, and Gemini SDK streams.',
-        projectsUsedIn: ['Satya’s Education', 'Alex AI Mock Technical Interviewer', 'SLT Culture'],
+        projectsUsedIn: ['Satya’s Education', 'Alex AI Mock Technical Interviewer'],
         orbitRadius: 3.1,
-        orbitAngle: 5.2,
+        orbitAngle: 6.0,
         accentColor: '#22d3ee',
       },
       {
@@ -368,6 +454,7 @@ export const portfolioContent: PortfolioContent = {
         name: 'MySQL',
         category: 'Databases',
         scopeNote: 'Relational Database',
+        purpose: 'Relational schema design and transactional query execution',
         description: 'Relational schema design, indexing, joins, and transactional query execution.',
         projectsUsedIn: ['Backend Application Data Modeling'],
         orbitRadius: 3.8,
@@ -379,8 +466,9 @@ export const portfolioContent: PortfolioContent = {
         name: 'PostgreSQL',
         category: 'Databases',
         scopeNote: 'Relational Database',
-        description: 'Relational persistence, structured queries, and vector/knowledge-base storage in AI workflows.',
-        projectsUsedIn: ['Backend Systems', 'n8n Knowledge-Base Chat Agent'],
+        purpose: 'Stores customers, policies, claims, and treaties',
+        description: 'Stores customers, policies, claims, and treaties. Relational persistence, transactional integrity, and structured SQL queries.',
+        projectsUsedIn: ['InsureSphere AI', 'Backend Systems', 'n8n Knowledge-Base Chat Agent'],
         orbitRadius: 3.8,
         orbitAngle: 3.2,
         accentColor: '#60a5fa',
@@ -390,21 +478,35 @@ export const portfolioContent: PortfolioContent = {
         name: 'Firebase Firestore',
         category: 'Databases',
         scopeNote: 'Portfolio Project Database',
-        description: 'Document collections, security rules (`firestore.rules`), user entitlements, orders, land inspections, and interview history.',
-        projectsUsedIn: ['Satya’s Education', 'Alex AI Mock Technical Interviewer', 'SLT Culture'],
+        purpose: 'Document collections, user entitlements, and interview history',
+        description: 'Document collections, security rules (`firestore.rules`), user entitlements, orders, and interview history.',
+        projectsUsedIn: ['Satya’s Education', 'Alex AI Mock Technical Interviewer'],
         orbitRadius: 3.8,
         orbitAngle: 5.3,
         accentColor: '#60a5fa',
       },
       {
         id: 'genai',
-        name: 'Generative AI',
+        name: 'Gemini / GenAI',
         category: 'AI & Automation',
         scopeNote: 'Professional Role & Projects',
-        description: 'Prompt engineering, structured JSON output generation, policy RAG, and conversational persona design.',
-        projectsUsedIn: ['Finite HR & IT Solution', 'Alex AI Interviewer', 'AI Voice Task Planner', 'InsureSphere AI'],
+        purpose: 'Intended for AI-assisted policy and claims analysis',
+        description: 'Intended for AI-assisted policy and claims analysis. Prompt engineering, structured JSON extraction, and conversational reasoning.',
+        projectsUsedIn: ['InsureSphere AI', 'Finite HR & IT Solution', 'Alex AI Interviewer', 'AI Voice Task Planner'],
         orbitRadius: 4.5,
-        orbitAngle: 0.4,
+        orbitAngle: 0.3,
+        accentColor: '#f59e0b',
+      },
+      {
+        id: 'rag',
+        name: 'RAG',
+        category: 'AI & Automation',
+        scopeNote: 'Document Knowledge Retrieval',
+        purpose: 'Intended for retrieving information from insurance documents',
+        description: 'Intended for retrieving information from insurance documents. Retrieval-Augmented Generation indexing policy schedules and clauses.',
+        projectsUsedIn: ['InsureSphere AI (Policy & RAG Studio)', 'n8n Knowledge-Base Chat Agent'],
+        orbitRadius: 4.5,
+        orbitAngle: 1.2,
         accentColor: '#f59e0b',
       },
       {
@@ -412,10 +514,11 @@ export const portfolioContent: PortfolioContent = {
         name: 'Agentic AI',
         category: 'AI & Automation',
         scopeNote: 'Professional Role & Projects',
-        description: 'Tool-calling agents, multi-step decision workflows, autonomous day planning, and claims triage.',
-        projectsUsedIn: ['Finite HR & IT Solution', 'Alex AI Interviewer', 'AI Voice Task Planner', 'InsureSphere AI'],
+        purpose: 'Tool-calling agents and autonomous execution workflows',
+        description: 'Tool-calling agents, multi-step decision workflows, autonomous day planning, and interview evaluation.',
+        projectsUsedIn: ['Finite HR & IT Solution', 'Alex AI Interviewer', 'AI Voice Task Planner'],
         orbitRadius: 4.5,
-        orbitAngle: 1.65,
+        orbitAngle: 2.1,
         accentColor: '#f59e0b',
       },
       {
@@ -423,10 +526,11 @@ export const portfolioContent: PortfolioContent = {
         name: 'Google Gemini',
         category: 'AI & Automation',
         scopeNote: 'AI Foundation Model SDK',
-        description: 'Server-side `@google/genai` integration for technical interview dialogues, TTS, claims severity triage, and task planning.',
-        projectsUsedIn: ['Alex AI Mock Technical Interviewer', 'AI Voice Task Planner', 'InsureSphere AI'],
+        purpose: 'Server-side multimodal dialogue, TTS, and transcription',
+        description: 'Server-side `@google/genai` integration for technical interview dialogues, TTS, transcription, and task planning.',
+        projectsUsedIn: ['Alex AI Mock Technical Interviewer', 'AI Voice Task Planner'],
         orbitRadius: 4.5,
-        orbitAngle: 2.9,
+        orbitAngle: 3.0,
         accentColor: '#f59e0b',
       },
       {
@@ -434,6 +538,7 @@ export const portfolioContent: PortfolioContent = {
         name: 'n8n',
         category: 'AI & Automation',
         scopeNote: 'Workflow Automation Engine',
+        purpose: 'Webhook-driven orchestration connecting voice and tools',
         description: 'Webhook-driven node workflows connecting voice assistants, Google Gemini, and Google Sheets.',
         projectsUsedIn: ['AI Voice Task Planner'],
         orbitRadius: 4.5,
@@ -445,21 +550,35 @@ export const portfolioContent: PortfolioContent = {
         name: 'Vapi',
         category: 'AI & Automation',
         scopeNote: 'Voice AI Infrastructure',
+        purpose: 'Real-time telephony and voice assistant orchestration',
         description: 'Real-time telephony and voice assistant orchestration triggering backend n8n tool webhooks.',
         projectsUsedIn: ['AI Voice Task Planner'],
         orbitRadius: 4.5,
-        orbitAngle: 5.4,
+        orbitAngle: 5.3,
         accentColor: '#f59e0b',
       },
       {
+        id: 'vitest',
+        name: 'Vitest',
+        category: 'Dev & Deployment',
+        scopeNote: 'Frontend Automated Testing',
+        purpose: 'Tests React application functionality',
+        description: 'Tests React application functionality. Unit and component testing verifying user flows, calculations, and UI states.',
+        projectsUsedIn: ['InsureSphere AI', 'Frontend Quality Assurance'],
+        orbitRadius: 5.2,
+        orbitAngle: 0.3,
+        accentColor: '#a855f7',
+      },
+      {
         id: 'github',
-        name: 'GitHub',
+        name: 'Git and GitHub',
         category: 'Dev & Deployment',
         scopeNote: 'Version Control & Collaboration',
-        description: 'Source control, repository workflows, branch management, and technical documentation.',
-        projectsUsedIn: ['All Repositories'],
+        purpose: 'Saves and manages project source code',
+        description: 'Saves and manages project source code. Git branching workflows, pull requests, automated GitHub Actions, and documentation.',
+        projectsUsedIn: ['All Repositories', 'InsureSphere AI'],
         orbitRadius: 5.2,
-        orbitAngle: 0.7,
+        orbitAngle: 1.5,
         accentColor: '#94a3b8',
       },
       {
@@ -467,10 +586,11 @@ export const portfolioContent: PortfolioContent = {
         name: 'Docker',
         category: 'Dev & Deployment',
         scopeNote: 'Professional Role Workflow',
+        purpose: 'Containerizing full stack applications for development & production',
         description: 'Containerizing full stack applications for consistent local development and production environments.',
         projectsUsedIn: ['Finite HR & IT Solution'],
         orbitRadius: 5.2,
-        orbitAngle: 1.9,
+        orbitAngle: 2.7,
         accentColor: '#94a3b8',
       },
       {
@@ -478,21 +598,11 @@ export const portfolioContent: PortfolioContent = {
         name: 'CI/CD',
         category: 'Dev & Deployment',
         scopeNote: 'Professional Role Workflow',
+        purpose: 'Automated test, lint, build, and deployment pipelines',
         description: 'Automated build, lint, test, and deployment pipelines for reliable software delivery.',
         projectsUsedIn: ['Finite HR & IT Solution', 'Alex AI Interviewer'],
         orbitRadius: 5.2,
-        orbitAngle: 3.1,
-        accentColor: '#94a3b8',
-      },
-      {
-        id: 'google-maps',
-        name: 'Google Maps Platform',
-        category: 'Dev & Deployment',
-        scopeNote: 'Geospatial & Location APIs',
-        description: 'Interactive map views, land parcel geocoding, boundary screening, and agent GPS field verification.',
-        projectsUsedIn: ['SLT Culture'],
-        orbitRadius: 5.2,
-        orbitAngle: 4.3,
+        orbitAngle: 3.9,
         accentColor: '#94a3b8',
       },
       {
@@ -500,10 +610,11 @@ export const portfolioContent: PortfolioContent = {
         name: 'Vercel',
         category: 'Dev & Deployment',
         scopeNote: 'Cloud Hosting & Serverless',
+        purpose: 'Production SPA and serverless API route deployment',
         description: 'Production SPA and serverless API route deployment with environment configuration.',
-        projectsUsedIn: ['Satya’s Education', 'Tarun Portfolio'],
+        projectsUsedIn: ['Satya’s Education'],
         orbitRadius: 5.2,
-        orbitAngle: 5.5,
+        orbitAngle: 5.1,
         accentColor: '#94a3b8',
       },
     ],
@@ -513,160 +624,491 @@ export const portfolioContent: PortfolioContent = {
     {
       id: 'insuresphere-ai',
       index: '01',
+      isFlagship: true,
       title: 'InsureSphere AI',
-      subtitle: 'Enterprise Insurance & Reinsurance Platform with AI-Assisted Claims & Risk-Sharing Analytics',
+      subtitle:
+        'Enterprise Insurance & Reinsurance Management Platform with AI-Assisted Claims Analysis',
+      statusBadge:
+        'Locally functional full-stack application; production-readiness verification ongoing.',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/insuresphere-ai',
-      heroImage: '/src/assets/images/insuresphere_platform_1794149818979.jpg',
-      technologies: ['Python', 'Django', 'React 19', 'Gemini', 'Recharts', 'Tailwind CSS'],
+      liveUrlNote:
+        'Local Full-Stack Application — Cloud Deployment & Production Readiness Verification Ongoing',
+      heroImage: '/assets/project_insuresphere_ai_banner.svg',
+      technologies: [
+        'Python',
+        'Django',
+        'DRF',
+        'React.js',
+        'JavaScript',
+        'Tailwind CSS',
+        'PostgreSQL',
+        'JWT',
+        'REST APIs',
+        'RBAC',
+        'Vitest',
+        'GitHub',
+      ],
+      flagshipTechStack: [
+        'Python',
+        'Django',
+        'DRF',
+        'React.js',
+        'JavaScript',
+        'Tailwind CSS',
+        'PostgreSQL',
+        'JWT',
+        'REST APIs',
+        'RBAC',
+        'Vitest',
+        'GitHub',
+      ],
+      coreEngineeringStack: [
+        'React',
+        'Python',
+        'Django REST Framework',
+        'PostgreSQL',
+        'JWT Authentication',
+      ],
+      aiVerificationFeatures: [
+        {
+          name: 'AI-Assisted Claims Analysis',
+          status: 'Under Integration Verification',
+          description:
+            'Advisory claims assessment, coverage & deductible verification, and human-in-the-loop audit logs.',
+        },
+        {
+          name: 'AI Policy & RAG Studio',
+          status: 'Under Integration Verification',
+          description:
+            'Document retrieval workflow for complex commercial policy schedules, reinsurance treaty clauses, and endorsements.',
+        },
+      ],
+      aiDevTools: [
+        {
+          name: 'Google Antigravity',
+          role: 'AI-assisted development & intelligent workflow orchestration tool (not a runtime application dependency).',
+        },
+        {
+          name: 'Google AI Studio',
+          role: 'Rapid prompt prototyping & schema structuring developer environment (not a runtime application dependency).',
+        },
+      ],
       description:
-        'An enterprise insurance and reinsurance management platform featuring Django REST Framework backend services, an interactive React 19 analytics dashboard, automated policy RAG retrieval, treaty risk-sharing analytics (Quota Share & Excess of Loss), and Gemini-assisted claims severity scoring.',
+        'InsureSphere AI is an enterprise-style insurance and reinsurance management application built with React.js, Python, Django REST Framework, and PostgreSQL. It provides a centralized workspace for managing insurance customers, underwriting policies, processing claims, reviewing audit histories, calculating reinsurance recoveries, and analyzing insurance portfolio performance. The platform also includes AI-assisted claims analysis features and a policy/RAG studio under ongoing integration verification.',
       problemStatement:
-        'Insurance carriers and reinsurance syndicates manage multi-million-dollar treaties and high-volume claims across disconnected legacy systems. Underwriters and claims adjusters lack unified tools to model multi-tier risk distributions, query dense policy wording through AI semantic retrieval, and visualize treaty loss ratios in real time.',
+        'Commercial insurers must coordinate customer onboarding, policy underwriting terms, claims adjudication, proportional risk-sharing treaties, and portfolio financial metrics across distinct teams. Fragmented legacy spreadsheets and disconnected operational silos lead to duplicated underwriting reviews, delayed claims settlement, inconsistent treaty audit trails, and limited visibility into ceded versus retained loss exposure.',
       architectureOverview:
-        'The architecture marries a Django backend with modular apps for policies, claims, and reinsurance treaties with a React 19 + Vite frontend. Underwriting risk metrics and treaty allocations are calculated deterministically on the server, while an embedded Gemini AI assistant retrieves policy clauses and drafts claims assessment recommendations through grounded prompt engineering.',
+        'InsureSphere AI centralizes mission-critical insurance operations via a component-driven React.js + TypeScript frontend communicating over authenticated REST API contracts with a Python Django REST Framework backend. Django enforces role-based access control (Admin, Adjuster, Agent, Policyholder), serializes underwriting and claim state machines, and commits transactional records into PostgreSQL. A dedicated AI-assisted triage module provides automated coverage checks and deductible validation while keeping final settlement decisions strictly in the hands of human adjusters.',
       architectureFlow: [
         {
           step: '01',
-          node: 'React 19 Executive Dashboard',
-          detail: 'Dashboard displaying Total GWP ($845M), Net Income ($128M), Loss Ratios, and segment breakdown with Recharts visualizers.',
+          node: 'React.js Client Workspace',
+          detail:
+            'Single-page responsive application with dedicated modules for executive analytics, customer onboarding, underwriting, claims workbench, and quota-share treaty management.',
         },
         {
           step: '02',
-          node: 'Django REST Treaty & Policy API',
-          detail: 'Calculates Quota Share and Excess of Loss treaty allocation matrices and manages multi-tier policy structures.',
+          node: 'JWT Auth & Role Guard',
+          detail:
+            'Token-based authentication enforcing organization-level tenancy and segregating Admin, Underwriter, Claims Adjuster, and Customer permissions.',
         },
         {
           step: '03',
-          node: 'Gemini AI Claims Triage Engine',
-          detail: 'Analyzes claimant loss narratives, photographic evidence, and coverage thresholds to assign automated risk scores.',
+          node: 'Django REST Framework Core',
+          detail:
+            'Business logic layer validating policy deductibles, claims state transitions (Draft → Submitted → Under Review → Approved/Rejected), and audit logging.',
         },
         {
           step: '04',
-          node: 'Policy RAG Assistant Workspace',
-          detail: 'Semantic retrieval interface (`AIAssistant.jsx`) providing instant clause lookups and underwriter debriefs.',
+          node: 'PostgreSQL Relational DB',
+          detail:
+            'Normalized schemas for Customers, Policies, Claims, Treaty Contracts, and Ceded/Retained Exposure ledgers with foreign key constraints.',
         },
         {
           step: '05',
-          node: 'Enterprise RBAC & Audit Trails',
-          detail: 'Role segregation separating Underwriters, Claims Adjusters, and System Administrators with compliance logging.',
+          node: 'AI Claims Advisory & Triage',
+          detail:
+            'Automated policy coverage verification, deductible matching, and investigation checklist generation for human adjuster sign-off.',
         },
       ],
       implementationExplanation:
-        'Engineered Django REST Framework backend apps for policies, claims, and reinsurance calculations alongside an interactive React 19 client. Integrated Recharts for dynamic loss ratio curves and GWP vs. NPW distributions, and designed grounded Gemini prompts to triage high-severity claims and answer complex policy terms.',
+        'Architected a multi-tenant enterprise portal where every insurance lifecycle phase is strictly validated. The backend leverages Django models with custom clean() methods to enforce financial invariants such as quota-share risk percentages (e.g., 60% retained / 40% ceded) and deductible boundaries. The React frontend features interactive treaty calculators, real-time claim status tracking, audit event timelines, and telemetry charts.',
       implementedFeatures: [
-        'Executive overview dashboard with real-time KPI metrics (GWP, Net Income, Claims Ratio, Renewal Rate) and interactive Recharts risk visualizers',
-        'Claims management studio with automated AI severity scoring, status tracking, and claimant detail records',
-        'Reinsurance treaty workspace with Quota Share and Excess of Loss risk-sharing calculation models',
-        'AI Policy Assistant (`AIAssistant.jsx`) powered by Google Gemini for natural-language policy queries and underwriter debriefs',
-        'Role-based user management and architectural blueprint viewer for enterprise compliance audit',
+        'Executive Dashboard with customer and policy metrics, claim status summaries, premium/claim analytics, and portfolio loss ratios',
+        'Customer Management directory with risk tier classification, organization accounts, and verified profile tracking',
+        'Policy Underwriting workbench with coverage limits, deductible settings, effective dates, and customer associations',
+        'Claims Management with First Notice of Loss (FNOL) registration, evidence uploads, adjuster review, and immutable audit logs',
+        'Proportional Reinsurance Treaty engine calculating ceded and retained exposures with downloadable ledger exports',
+        'AI-Assisted Claims Analysis generating coverage advisory reports, deductible validations, and recommended adjuster investigation steps',
+        'JWT-based role-based access control (RBAC) isolating Admin, Adjuster/Agent, and Policyholder views',
+        'Interactive quota-share reinsurance recovery modeling engine with real-time exposure simulation',
       ],
       plannedOrPartialFeatures: [
-        'Django backend (`django_backend/`) provides API routes for claims, policies, and reinsurance modeling with local SQLite/PostgreSQL support, paired with Vite-powered frontend mock fallback for seamless client testing.',
+        'Policy / RAG Studio document retrieval and generative policy-answering pipeline is under active integration verification',
+        'Locally functional full-stack application; production-readiness, Docker containerization, and public cloud deployment ongoing',
+        'Automated test coverage established for Django models and API serializers; end-to-end integration test expansion in progress',
       ],
-      screens: [
+      modules: [
         {
-          id: 'insuresphere-overview',
-          title: 'Executive Overview & Treaty Analytics',
-          caption: 'Real-time executive dashboard displaying Total GWP ($845M), Loss Ratio Trends (68.2%), and segment breakdowns with Recharts.',
-          type: 'showcase',
-          highlights: ['Real-Time KPI Metric Cards', 'Interactive Recharts Loss Ratio Curve', 'GWP & NPW Segment Distribution'],
+          id: 'mod-dashboard',
+          title: 'Executive Dashboard',
+          category: 'Telemetry & Analytics',
+          description:
+            'Aggregated telemetry on active customers, policy volumes, gross written premiums, open claims, loss ratios, and reinsurance recovery indicators.',
+          highlights: [
+            'Gross claims exposure tracking ($14.8M registered)',
+            'Real-time loss ratio & recovery gauge calculations',
+            'Treaty capacity utilization & ceded risk telemetry',
+          ],
         },
         {
-          id: 'insuresphere-claims',
-          title: 'Claims Intelligence & AI Severity Triage',
-          caption: 'AI-assisted claims table with automated risk predictions (High/Moderate/Low) and direct policyholder claim inspection.',
-          type: 'interface',
-          highlights: ['Automated Severity Prediction', 'Claims Lifecycle Management', 'Policyholder Detail Inspection'],
+          id: 'mod-customers',
+          title: 'Customer Management',
+          category: 'CRM & Risk Rating',
+          description:
+            'Centralized customer directory supporting individual policyholders and enterprise commercial entities with risk-tier classification (Low, Medium, High).',
+          highlights: [
+            'Organization-level account records & verified contacts',
+            'Risk-tier classification with underwriting flags',
+            'Direct linkage to active policies and claims history',
+          ],
         },
         {
-          id: 'insuresphere-treaty',
-          title: 'Reinsurance Treaty & Risk-Sharing Flow',
-          caption: 'End-to-end architecture connecting React analytics to Django REST service logic and Gemini policy reasoning.',
-          type: 'architecture',
-          highlights: ['Quota Share & Excess of Loss Engines', 'Gemini Underwriter Assistant', 'Django REST Service Blueprint'],
+          id: 'mod-underwriting',
+          title: 'Insurance Policy Underwriting',
+          category: 'Policy Issuance',
+          description:
+            'Structured policy drafting and issuance workbench configuring coverage limits, deductibles, effective/expiration dates, and customer-policy associations.',
+          highlights: [
+            'Coverage limit & deductible rule validation',
+            'Policy term date synchronization & renewal flags',
+            'Customer association with multi-policy portfolios',
+          ],
+        },
+        {
+          id: 'mod-claims',
+          title: 'Claims Management & Adjudication',
+          category: 'Claims Operations',
+          description:
+            'First Notice of Loss (FNOL) intake, document evidence upload, and human adjuster workbench supporting Approve, Hold, and Reject workflows with immutable audit logging.',
+          highlights: [
+            'FNOL intake & incident date verification',
+            'Adjuster review state machine with audit trails',
+            'Document upload tracking for incident evidence',
+          ],
+        },
+        {
+          id: 'mod-reinsurance',
+          title: 'Reinsurance Treaty Management',
+          category: 'Capital & Risk Sharing',
+          description:
+            'Proportional quota-share treaty management calculating insurer retained exposure (60%) versus reinsurer ceded share (40%) with transaction ledgers and CSV export.',
+          highlights: [
+            'Automated quota-share recovery mathematical engine',
+            'Claim-level ceded vs retained exposure ledger',
+            'Reinsurance settlement exports for treaty reporting',
+          ],
+        },
+        {
+          id: 'mod-ai-triage',
+          title: 'AI-Assisted Claims Analysis',
+          category: 'Decision Support',
+          description:
+            'Automated claims advisory report checking policy coverage bounds, verifying deductible thresholds, and proposing investigation checklists while keeping human adjusters in final control.',
+          highlights: [
+            'Coverage & deductible compliance validation',
+            'Suggested adjuster investigation checkpoints',
+            'Strict human-in-the-loop decision requirement',
+          ],
+        },
+        {
+          id: 'mod-rag-studio',
+          title: 'AI Policy & RAG Studio (Verification Ongoing)',
+          category: 'GenAI & Retrieval',
+          description:
+            'Document retrieval and policy clause question-answering studio designed to index insurance wordings and treaty clauses. Note: Under active development and verification.',
+          highlights: [
+            'Target semantic policy clause retrieval pipeline',
+            'Transparent status: under ongoing integration verification',
+            'Isolated from core transactional underwriting records',
+          ],
+        },
+        {
+          id: 'mod-auth-security',
+          title: 'Authentication & Access Control',
+          category: 'Security & Governance',
+          description:
+            'Secure JWT authentication with role-based authorization differentiating Administrator oversight, Claims Adjuster actions, and Customer portal views.',
+          highlights: [
+            'JWT access & refresh token lifecycle',
+            'Role-based view segregation (Admin, Adjuster, Customer)',
+            'Tenant isolation preventing cross-organization access',
+          ],
         },
       ],
-    },
-    {
-      id: 'slt-culture',
-      index: '02',
-      title: 'SLT Culture (LST)',
-      subtitle: 'Real-Time Land Screening, Testing, Verification & Multi-Role Real Estate Transaction Platform',
-      githubUrl: 'https://github.com/tarunpediredla-GenAi/SLT',
-      heroImage: '/src/assets/images/project_slt_culture.png',
-      technologies: ['React', 'TypeScript', 'Express', 'Firebase', 'Google Maps Platform', 'Tailwind CSS'],
-      description:
-        'A production-oriented land transformation platform designed to identify, evaluate, screen, and register land parcels through an automated 10-stage testing pipeline, Google Maps Platform geocoding, 12 Cloud Firestore collections, and 4 role-protected portals (Buyer, Seller, Agent, Admin).',
-      problemStatement:
-        'Agricultural, commercial, and residential land transactions are plagued by unclear boundary demarcations, fraudulent title claims, and manual on-site verification. Landowners and prospective buyers lack a verified, transparent platform to track soil testing, legal document audits, and registration progress.',
-      architectureOverview:
-        'Built with React, TypeScript, and Tailwind CSS on the client, backed by an Express server (`server.ts`), Firebase Authentication, and 12 Cloud Firestore collections with granular security rules. Google Maps Platform provides interactive parcel boundary mapping and GPS check-ins for field agents conducting on-site verifications.',
-      architectureFlow: [
+      workflowSteps: [
         {
           step: '01',
-          node: 'Multi-Role Onboarding',
-          detail: 'Firebase Auth with Google Sign-In and role assignment for Buyers, Sellers, Agents, and Administrators.',
+          title: 'Customer Registration',
+          role: 'Onboarding & Risk Tiering',
+          description:
+            'Customer account is created with commercial details, verified contact information, and initial risk-tier classification.',
         },
         {
           step: '02',
-          node: 'Seller Parcel Submission',
-          detail: 'Submission portal (`/seller`) capturing survey numbers, acreage, soil types, and deed uploads.',
+          title: 'Policy Underwriting',
+          role: 'Underwriter Review',
+          description:
+            'Underwriter configures coverage limits, policy clauses, deductible amounts, and premium terms.',
         },
         {
           step: '03',
-          node: 'Google Maps Geocoding & Boundary Inspection',
-          detail: 'Geospatial visualization of land parcels with boundary mapping and GPS coordinates.',
+          title: 'Policy Issued',
+          role: 'System Generation',
+          description:
+            'Django backend serializes policy record, commits to PostgreSQL, and binds to active reinsurance treaty contracts.',
         },
         {
           step: '04',
-          node: '10-Stage LST Pipeline & Agent Field Visits',
-          detail: 'Real-time progress tracker from Initial Review through Soil Testing to Verified Listing.',
+          title: 'Incident Reported',
+          role: 'Customer / Agent',
+          description:
+            'Policyholder or servicing agent reports a commercial loss incident with date, location, and loss description.',
         },
         {
           step: '05',
-          node: 'Firestore Rules & Admin Governance',
-          detail: '12 collections governed by strict security rules and administrative audit logs.',
+          title: 'Claim Submitted (FNOL)',
+          role: 'FNOL Intake',
+          description:
+            'First Notice of Loss is logged with claim ID, incident evidence documents, and gross estimated damage.',
+        },
+        {
+          step: '06',
+          title: 'Coverage & AI-Assisted Review',
+          role: 'AI Advisory Engine',
+          description:
+            'Automated advisory check verifies policy is active, checks deductible eligibility, and flags policy exclusions.',
+        },
+        {
+          step: '07',
+          title: 'Human Adjuster Decision',
+          role: 'Licensed Adjuster',
+          description:
+            'Human claims adjuster examines evidence, reviews AI advisory checklist, and executes Approve, Hold, or Reject decision.',
+        },
+        {
+          step: '08',
+          title: 'Reinsurance Recovery Calculation',
+          role: 'Treaty Engine',
+          description:
+            'Net eligible loss is calculated and partitioned into Insurer Retention (60%) and Reinsurer Recovery (40%) ledgers.',
+        },
+        {
+          step: '09',
+          title: 'Portfolio Analytics Dashboard',
+          role: 'Executive Telemetry',
+          description:
+            'Updated loss ratios, gross claims, and ceded recovery metrics are reflected across executive dashboard charts.',
         },
       ],
-      implementationExplanation:
-        'Implemented 4 dedicated role-protected dashboards (`/buyer`, `/seller`, `/agent`, `/admin`), an interactive 10-stage land screening stepper, and complete Firebase Firestore integration across 12 distinct collections. Integrated Google Maps Platform for parcel exploration and drafted comprehensive Firestore security rules for role-segregated read/write access.',
-      implementedFeatures: [
-        '10-Stage Land Screening & Testing (LST) lifecycle pipeline with real-time progress tracking',
-        '4 Dedicated role-protected dashboards: Buyer, Seller, Field Agent, and System Administrator',
-        'Google Maps Platform integration for interactive land parcel exploration, boundary mapping, and agent GPS check-in',
-        'Firebase Authentication (Google & Email/Password) with first-login role selection and persistent sessions',
-        '12 Cloud Firestore collections with production-grade security rules (`firestore.rules`) and audit logging',
+      reinsuranceCalculatorDefaults: {
+        grossLoss: 150000,
+        deductible: 50000,
+        retentionPct: 60,
+        reinsurerPct: 40,
+      },
+      apiEndpoints: [
+        {
+          method: 'POST',
+          path: '/api/auth/token/',
+          tag: 'Authentication',
+          description: 'Obtain JWT token pair',
+          detail:
+            'Validates user credentials and issues signed access & refresh JWT tokens with user role claims.',
+        },
+        {
+          method: 'GET',
+          path: '/api/customers/',
+          tag: 'Customers',
+          description: 'Customer directory & search',
+          detail:
+            'Returns paginated customer accounts with risk-tier filter, policy counts, and contact data.',
+        },
+        {
+          method: 'POST',
+          path: '/api/policies/',
+          tag: 'Underwriting',
+          description: 'Underwrite & issue policy',
+          detail:
+            'Validates coverage limits, deductibles, and dates before creating policy record linked to customer.',
+        },
+        {
+          method: 'POST',
+          path: '/api/claims/',
+          tag: 'Claims',
+          description: 'Register FNOL claim',
+          detail:
+            'Submits First Notice of Loss with gross estimated damage and initial evidence attachments.',
+        },
+        {
+          method: 'PATCH',
+          path: '/api/claims/{id}/adjudicate/',
+          tag: 'Claims',
+          description: 'Adjuster claim decision',
+          detail:
+            'Transitions claim state (Approve/Hold/Reject) and records adjuster ID, timestamp, and audit remarks.',
+        },
+        {
+          method: 'GET',
+          path: '/api/reinsurance/treaties/',
+          tag: 'Reinsurance',
+          description: 'Active quota-share treaties',
+          detail:
+            'Queries proportional treaty parameters, ceded/retained limits, and cumulative recovery ledger.',
+        },
+        {
+          method: 'GET',
+          path: '/api/dashboard/metrics/',
+          tag: 'Analytics',
+          description: 'Executive KPI telemetry',
+          detail:
+            'Aggregates gross written premium, claim frequency, net loss ratios, and treaty recoveries.',
+        },
       ],
-      plannedOrPartialFeatures: [
-        'Shipped with complete Express server (`server.ts`), Firebase configuration blueprints, and seed properties ready for local development or cloud deployment.',
+      testingHighlights: [
+        {
+          area: 'Django Backend Unit & Model Tests',
+          status: 'Automated',
+          badgeColor: '#10B981',
+          description:
+            'Automated tests for model clean() validation, financial invariant enforcement, and foreign key cascades.',
+        },
+        {
+          area: 'REST API Permissions & Serializers',
+          status: 'Automated',
+          badgeColor: '#10B981',
+          description:
+            'Automated status code, JWT authentication, and serializer payload validation across core endpoints.',
+        },
+        {
+          area: 'Reinsurance Quota-Share Math',
+          status: 'Automated',
+          badgeColor: '#10B981',
+          description:
+            'Formula test suites verifying max(0, gross - deductible) and 60/40 proportional risk allocations.',
+        },
+        {
+          area: 'Human Adjuster Workflow State Machine',
+          status: 'Manual Verified',
+          badgeColor: '#38BDF8',
+          description:
+            'End-to-end verified manual workflows for FNOL submission, adjuster hold/approval, and audit event logs.',
+        },
+        {
+          area: 'React Frontend UI & Form Validation',
+          status: 'Manual Verified',
+          badgeColor: '#38BDF8',
+          description:
+            'Verified responsive layout, input bounds checking, and telemetry chart interactions.',
+        },
+        {
+          area: 'AI Policy & RAG Studio Pipeline',
+          status: 'Verification Pending',
+          badgeColor: '#F59E0B',
+          description:
+            'Vector retrieval and generative clause question-answering workflow is currently under integration verification.',
+        },
       ],
       screens: [
         {
-          id: 'slt-pipeline',
-          title: '10-Stage Land Screening & Testing Pipeline',
-          caption: 'Visual step-by-step verification pipeline tracking land parcels from initial submission to soil testing and official listing.',
+          id: 'insure-dashboard',
+          title: 'Executive Dashboard & Telemetry',
+          caption:
+            'Real-time executive cockpit displaying customer growth, policy underwriting volume, open claims breakdown, and portfolio loss ratio metrics.',
           type: 'showcase',
-          highlights: ['10-Stage Verification Stepper', 'Real-Time Status Synchronization', 'Document Audit Indicators'],
+          highlights: [
+            'Portfolio Loss Ratio & Recovery Telemetry',
+            'Active Treaty Capacity & Utilization',
+            'Claims Volume by Adjudication State',
+          ],
         },
         {
-          id: 'slt-dashboards',
-          title: '4 Role-Segregated Portals (Buyer/Seller/Agent/Admin)',
-          caption: 'Tailored dashboards enabling buyers to schedule site visits, sellers to track listings, and agents to submit GPS field reports.',
+          id: 'insure-customers',
+          title: 'Customer Directory & Risk Classification',
+          caption:
+            'Commercial and individual policyholder directory with risk tier grading, active policy counts, and organization-level contact records.',
           type: 'interface',
-          highlights: ['Role-Based Route Guards', 'Agent Field Visit Checklist', 'Admin Approval Center'],
+          highlights: [
+            'Risk Tier Classification (Low / Med / High)',
+            'Organization Accounts & Multi-Contact Records',
+            'Integrated Policy & Claims History Linkage',
+          ],
         },
         {
-          id: 'slt-maps',
-          title: 'Google Maps Geospatial Boundary Inspection',
-          caption: 'Geocoding and interactive mapping architecture overlaying parcel coordinates with Firestore property records.',
+          id: 'insure-underwriting',
+          title: 'Policy Underwriting Workbench',
+          caption:
+            'Structured underwriting workbench for configuring coverage limits, deductible terms, effective dates, and policyholder covenants.',
+          type: 'interface',
+          highlights: [
+            'Coverage Limit & Deductible Rules Engine',
+            'Effective & Expiration Date Synchronization',
+            'Customer Portfolio Association & Renewal Tracking',
+          ],
+        },
+        {
+          id: 'insure-claims',
+          title: 'Claims Management & Human Adjuster Workbench',
+          caption:
+            'First Notice of Loss intake, evidence file review, and adjuster decision panel supporting Approve, Hold, and Reject workflows with audit logging.',
+          type: 'interface',
+          highlights: [
+            'FNOL Incident Intake & Damage Verification',
+            'Adjuster Decision Flow with Audit Timestamps',
+            'Document Evidence Attachment Explorer',
+          ],
+        },
+        {
+          id: 'insure-reinsurance',
+          title: 'Reinsurance Treaty & Quota-Share Ledger',
+          caption:
+            'Proportional risk-sharing ledger calculating ceded vs retained exposure per claim with downloadable CSV settlement reports.',
           type: 'architecture',
-          highlights: ['Google Maps Platform Coordinates', '12 Firestore Collections', 'Express + Firebase Backend'],
+          highlights: [
+            'Proportional Quota-Share Risk Partitioning',
+            'Insurer 60% Retained vs Reinsurer 40% Ceded',
+            'Audit-Ready Settlement Ledger & CSV Export',
+          ],
+        },
+        {
+          id: 'insure-ai-triage',
+          title: 'AI Claims Advisory & Triage Engine',
+          caption:
+            'AI-driven claims analysis providing coverage eligibility checks, deductible assessments, and adjuster investigation recommendations.',
+          type: 'architecture',
+          highlights: [
+            'Automated Policy Coverage & Deductible Audit',
+            'Actionable Adjuster Investigation Checklists',
+            'Human-in-the-Loop Adjudication Integrity',
+          ],
+        },
+        {
+          id: 'insure-architecture',
+          title: 'Full-Stack Django REST & PostgreSQL Architecture',
+          caption:
+            'End-to-end architecture pipeline showing React client requests, JWT token validation, Django business logic, and PostgreSQL persistence.',
+          type: 'architecture',
+          highlights: [
+            'Clean REST API Contracts & Serializers',
+            'Role-Based Authorization & Tenant Isolation',
+            'Transactional PostgreSQL Consistency',
+          ],
         },
       ],
     },
     {
       id: 'satya-education',
-      index: '03',
+      index: '02',
       title: "Satya's Education",
       subtitle: 'E-Commerce & Digital-Learning Platform for Books and Recorded Courses',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/SatyaEducationinstitute',
@@ -747,7 +1189,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'alex-interviewer',
-      index: '04',
+      index: '03',
       title: 'Alex AI Mock Technical Interviewer',
       subtitle: 'Conversational Voice & Text AI Technical Interview Practice Platform',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/hiringmanager',
@@ -825,7 +1267,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'voice-task-planner',
-      index: '05',
+      index: '04',
       title: 'AI Voice Task Planner',
       subtitle: 'Voice-Driven Task Management & AI Day-Planning Automation Pipeline',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/n8n-ai-automations',
@@ -974,27 +1416,58 @@ export const SKILL_CATEGORIES = [
     subtitle: 'Responsive component architectures & interactive web UIs',
     accent: '#6B1D2F',
     skills: [
-      { name: 'HTML' },
-      { name: 'CSS' },
-      { name: 'JavaScript' },
-      { name: 'TypeScript' },
-      { name: 'React.js' },
-      { name: 'Recharts & Data Viz' },
+      {
+        name: 'React.js',
+        purpose: 'Builds the frontend website and dashboards',
+      },
+      {
+        name: 'JavaScript',
+        purpose: 'Handles user interactions and frontend logic',
+      },
+      {
+        name: 'Tailwind CSS',
+        purpose: 'Styles the responsive user interface',
+      },
+      {
+        name: 'HTML',
+        purpose: 'Defines structured semantic web content',
+      },
+      {
+        name: 'CSS',
+        purpose: 'Modular styling, grid/flex layouts, and responsive transitions',
+      },
     ],
   },
   {
     id: 'backend',
-    title: 'Backend',
-    subtitle: 'Python service layers, REST APIs & full-stack servers',
+    title: 'Backend & APIs',
+    subtitle: 'Python service layers, REST APIs & access security',
     accent: '#4E5E56',
     skills: [
-      { name: 'Python' },
-      { name: 'Django' },
-      { name: 'Django REST Framework' },
+      {
+        name: 'Python',
+        purpose: 'Main backend programming language',
+      },
+      {
+        name: 'Django',
+        purpose: 'Backend application framework',
+      },
+      {
+        name: 'Django REST Framework (DRF)',
+        purpose: 'Creates APIs connecting React to Django',
+      },
+      {
+        name: 'JWT / SimpleJWT',
+        purpose: 'User login and API authentication',
+      },
+      {
+        name: 'RBAC',
+        purpose: 'Controls Admin, Agent, and Customer permissions',
+      },
       {
         name: 'Express',
-        contextNote:
-          'Used in portfolio project backend (Alex AI & SLT Culture)',
+        purpose: 'Used in portfolio project backend (Alex AI Mock Interviewer)',
+        contextNote: 'Used in portfolio project backend',
       },
     ],
   },
@@ -1004,36 +1477,244 @@ export const SKILL_CATEGORIES = [
     subtitle: 'Relational SQL engines & real-time cloud document stores',
     accent: '#85243A',
     skills: [
-      { name: 'MySQL' },
-      { name: 'PostgreSQL' },
-      { name: 'Firebase Firestore' },
+      {
+        name: 'PostgreSQL',
+        purpose: 'Stores customers, policies, claims, and treaties',
+      },
+      {
+        name: 'MySQL',
+        purpose: 'Relational schema design and transactional query execution',
+      },
+      {
+        name: 'Firebase Firestore',
+        purpose: 'Document collections, security rules & interview history',
+      },
     ],
   },
   {
     id: 'ai-automation',
     title: 'AI & Automation',
-    subtitle: 'Conversational voice agents, LLM reasoning & webhook pipelines',
+    subtitle: 'Conversational voice agents, LLM reasoning & document RAG',
     accent: '#6B1D2F',
     skills: [
-      { name: 'Generative AI' },
-      { name: 'Agentic AI' },
-      { name: 'Google Gemini' },
-      { name: 'n8n' },
-      { name: 'Vapi' },
+      {
+        name: 'Gemini / GenAI',
+        purpose: 'Intended for AI-assisted policy and claims analysis',
+      },
+      {
+        name: 'RAG',
+        purpose: 'Intended for retrieving information from insurance documents',
+      },
+      {
+        name: 'Agentic AI',
+        purpose: 'Tool-calling agents and autonomous execution workflows',
+      },
+      {
+        name: 'Google Gemini',
+        purpose: 'Server-side multimodal dialogue, TTS, and task planning',
+      },
+      {
+        name: 'n8n',
+        purpose: 'Webhook-driven orchestration connecting voice assistants & sheets',
+      },
+      {
+        name: 'Vapi',
+        purpose: 'Real-time telephony and voice assistant orchestration',
+      },
     ],
   },
   {
     id: 'dev-deployment',
-    title: 'Dev & Deployment',
-    subtitle: 'Containerized workflows, version control & cloud hosting',
+    title: 'Dev & Testing',
+    subtitle: 'Automated testing, containerization, version control & cloud hosting',
     accent: '#7A8B82',
     skills: [
-      { name: 'GitHub' },
-      { name: 'Docker' },
-      { name: 'CI/CD' },
-      { name: 'Google Maps Platform' },
-      { name: 'Vercel' },
+      {
+        name: 'Vitest',
+        purpose: 'Tests React application functionality',
+      },
+      {
+        name: 'Git and GitHub',
+        purpose: 'Saves and manages project source code',
+      },
+      {
+        name: 'Docker',
+        purpose: 'Containerizing full stack applications for development & production',
+      },
+      {
+        name: 'CI/CD',
+        purpose: 'Automated build, lint, test, and deployment pipelines',
+      },
+      {
+        name: 'Vercel',
+        purpose: 'Production SPA and serverless API route deployment',
+      },
     ],
+  },
+];
+
+/**
+ * Flagship Enterprise Technology & Purpose Matrix
+ * Direct 1:1 mapping of technologies to their specific role in Tarun's stack & InsureSphere AI.
+ */
+export const ENTERPRISE_SKILLS_TABLE: EnterpriseSkillPurpose[] = [
+  {
+    technology: 'React.js',
+    purpose: 'Builds the frontend website and dashboards',
+    category: 'Frontend',
+    statusBadge: 'Core UI Architecture',
+    primaryProject: 'InsureSphere AI & Portfolio',
+  },
+  {
+    technology: 'JavaScript',
+    purpose: 'Handles user interactions and frontend logic',
+    category: 'Frontend',
+    statusBadge: 'Interactive Client Logic',
+    primaryProject: 'InsureSphere AI & Web Apps',
+  },
+  {
+    technology: 'Tailwind CSS',
+    purpose: 'Styles the responsive user interface',
+    category: 'Frontend',
+    statusBadge: 'Design System & Styling',
+    primaryProject: 'InsureSphere AI & Modern UIs',
+  },
+  {
+    technology: 'Python',
+    purpose: 'Main backend programming language',
+    category: 'Backend',
+    statusBadge: 'Core Backend Language',
+    primaryProject: 'InsureSphere AI & Full Stack Backends',
+  },
+  {
+    technology: 'Django',
+    purpose: 'Backend application framework',
+    category: 'Backend',
+    statusBadge: 'Enterprise Web Framework',
+    primaryProject: 'InsureSphere AI & CP Academy',
+  },
+  {
+    technology: 'Django REST Framework (DRF)',
+    purpose: 'Creates APIs connecting React to Django',
+    category: 'Backend',
+    statusBadge: 'RESTful API Services',
+    primaryProject: 'InsureSphere AI (REST Layer)',
+  },
+  {
+    technology: 'PostgreSQL',
+    purpose: 'Stores customers, policies, claims, and treaties',
+    category: 'Databases',
+    statusBadge: 'Relational ACID Database',
+    primaryProject: 'InsureSphere AI',
+  },
+  {
+    technology: 'JWT / SimpleJWT',
+    purpose: 'User login and API authentication',
+    category: 'Security & Auth',
+    statusBadge: 'Token Authentication',
+    primaryProject: 'InsureSphere AI (Auth Subsystem)',
+  },
+  {
+    technology: 'RBAC',
+    purpose: 'Controls Admin, Agent, and Customer permissions',
+    category: 'Security & Auth',
+    statusBadge: 'Role-Based Access Control',
+    primaryProject: 'InsureSphere AI (Permission Guards)',
+  },
+  {
+    technology: 'Gemini / GenAI',
+    purpose: 'Intended for AI-assisted policy and claims analysis',
+    category: 'AI & Automation',
+    statusBadge: 'AI Claims Advisory',
+    primaryProject: 'InsureSphere AI & Alex AI',
+  },
+  {
+    technology: 'RAG',
+    purpose: 'Intended for retrieving information from insurance documents',
+    category: 'AI & Automation',
+    statusBadge: 'Document Retrieval Studio',
+    primaryProject: 'InsureSphere AI (Policy & RAG Studio)',
+  },
+  {
+    technology: 'Vitest',
+    purpose: 'Tests React application functionality',
+    category: 'Dev & Deployment',
+    statusBadge: 'Automated Test Suites',
+    primaryProject: 'InsureSphere AI & Frontend QA',
+  },
+  {
+    technology: 'Git and GitHub',
+    purpose: 'Saves and manages project source code',
+    category: 'Dev & Deployment',
+    statusBadge: 'Version Control & Repos',
+    primaryProject: 'All Repositories & CI/CD',
+  },
+];
+
+/**
+ * InsureSphere AI — Flagship Tech Stack
+ * Exact 12 core technologies powering the production codebase.
+ */
+export const INSURESPHERE_TECH_STACK = [
+  'Python',
+  'Django',
+  'DRF',
+  'React.js',
+  'JavaScript',
+  'Tailwind CSS',
+  'PostgreSQL',
+  'JWT',
+  'REST APIs',
+  'RBAC',
+  'Vitest',
+  'GitHub',
+];
+
+/**
+ * Tarun Pediredla — Core Engineering Stack
+ * Primary production engineering foundation.
+ */
+export const CORE_ENGINEERING_STACK = [
+  'React',
+  'Python',
+  'Django REST Framework',
+  'PostgreSQL',
+  'JWT Authentication',
+];
+
+/**
+ * AI-Assisted Analysis & RAG (Features Under Integration Verification)
+ */
+export const AI_VERIFICATION_FEATURES = [
+  {
+    name: 'AI-Assisted Claims Analysis',
+    status: 'Under Integration Verification',
+    badge: 'Integration Verification',
+    description:
+      'Advisory claims assessment, coverage checks, deductible validation, and human-in-the-loop review reports.',
+  },
+  {
+    name: 'AI Policy & RAG Studio',
+    status: 'Under Integration Verification',
+    badge: 'Integration Verification',
+    description:
+      'Document retrieval workflow for searching commercial insurance policy clauses, reinsurance treaty schedules, and endorsement terms.',
+  },
+];
+
+/**
+ * AI-Assisted Development Tools (Used during development, not runtime application dependencies)
+ */
+export const AI_ASSISTED_DEV_TOOLS = [
+  {
+    name: 'Google Antigravity',
+    category: 'AI-Assisted Development Tool',
+    role: 'AI-assisted development & intelligent workflow orchestration tool (not a runtime application dependency).',
+  },
+  {
+    name: 'Google AI Studio',
+    category: 'AI-Assisted Development Tool',
+    role: 'Rapid prompt prototyping & schema structuring developer environment (not a runtime application dependency).',
   },
 ];
 
@@ -1052,13 +1733,24 @@ export interface FeaturedProject {
   architectureFlow: string[];
   implementationNote: string;
   technologies: string[];
+  flagshipTechStack?: string[];
+  coreEngineeringStack?: string[];
+  aiVerificationFeatures?: {
+    name: string;
+    status: string;
+    description: string;
+  }[];
+  aiDevTools?: {
+    name: string;
+    role: string;
+  }[];
   caseStudy: ProjectCaseStudy;
+  isFlagship?: boolean;
 }
 
-const ACCENT_COLORS = ['#38bdf8', '#82B440', '#D8CBB8', '#9E334B', '#B6C2BB'];
+const ACCENT_COLORS = ['#38BDF8', '#D8CBB8', '#9E334B', '#B6C2BB'];
 const CATEGORIES = [
-  'Enterprise Insurance & Reinsurance AI',
-  'Multi-Role Real Estate & Land Transformation',
+  'Full-Stack Python & Enterprise SaaS',
   'Full Stack EdTech & E-Commerce',
   'Conversational Voice & Text AI',
   'Agentic Voice Automation',
@@ -1071,7 +1763,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] =
     title: p.title,
     subtitle: p.subtitle,
     category: CATEGORIES[idx] || 'Full Stack & AI',
-    accentColor: ACCENT_COLORS[idx] || '#D8CBB8',
+    accentColor: ACCENT_COLORS[idx] || '#38BDF8',
     image: p.heroImage,
     githubUrl: p.githubUrl,
     liveUrl: p.liveUrl,
@@ -1080,7 +1772,12 @@ export const FEATURED_PROJECTS: FeaturedProject[] =
     architectureFlow: p.architectureFlow.map((step) => step.node),
     implementationNote: p.plannedOrPartialFeatures[0] || p.implementationExplanation,
     technologies: p.technologies,
+    flagshipTechStack: p.flagshipTechStack,
+    coreEngineeringStack: p.coreEngineeringStack,
+    aiVerificationFeatures: p.aiVerificationFeatures,
+    aiDevTools: p.aiDevTools,
     caseStudy: p,
+    isFlagship: p.isFlagship || idx === 0,
   }));
 
 export const KINETIC_ROLES = [

@@ -9,6 +9,11 @@ import {
   CAREER_TIMELINE,
   EDUCATION_HISTORY,
   SKILL_CATEGORIES,
+  ENTERPRISE_SKILLS_TABLE,
+  INSURESPHERE_TECH_STACK,
+  CORE_ENGINEERING_STACK,
+  AI_VERIFICATION_FEATURES,
+  AI_ASSISTED_DEV_TOOLS,
   TARUN_PROFILE,
 } from '../data/content';
 
@@ -47,8 +52,8 @@ const ROBOT_HAND_SKILLS: RobotHandSkill[] = [
     title: 'Python & Django Backend',
     category: '01 · Core Backend Architecture',
     description:
-      'Production REST APIs, authentication, Cashfree payments & scalable server workflows.',
-    pills: ['Python', 'Django', 'REST APIs', 'Express'],
+      'Enterprise REST APIs, quota-share reinsurance logic, authentication & scalable Django server architectures.',
+    pills: ['Python', 'Django REST', 'PostgreSQL', 'Enterprise SaaS'],
     accentHex: '#5E1726',
   },
   {
@@ -1416,7 +1421,8 @@ export const BuiltDifferentAndFlowSection: React.FC<
                           <motion.div
                             whileHover={{ scale: 1.05, y: -2 }}
                             key={skill.name}
-                            className="group relative px-3 py-1.5 rounded-lg bg-[#EFE8DA] border border-[#687A70]/35 hover:border-[#5E1726] text-xs font-mono font-bold text-[#232B27] flex items-center gap-1.5 transition-colors"
+                            title={skill.purpose ? `${skill.name} — ${skill.purpose}` : skill.name}
+                            className="group relative px-3 py-1.5 rounded-lg bg-[#EFE8DA] border border-[#687A70]/35 hover:border-[#5E1726] text-xs font-mono font-bold text-[#232B27] flex items-center gap-1.5 transition-colors cursor-help"
                           >
                             <span>{skill.name}</span>
                             {skill.contextNote && (
@@ -1434,6 +1440,112 @@ export const BuiltDifferentAndFlowSection: React.FC<
                   ))}
                 </AnimatePresence>
               </motion.div>
+
+              {/* Flagship InsureSphere AI Tech Stack & Core Engineering Directory */}
+              <div className="mt-8 rounded-2xl border border-[#687A70]/40 bg-[#FAF7F2] p-5 sm:p-6 shadow-sm space-y-4">
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#687A70]/30 pb-3">
+                  <div>
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#5E1726]">
+                      Flagship Production Architecture
+                    </span>
+                    <h4 className="text-base sm:text-lg font-bold text-[#232B27]">
+                      InsureSphere AI — Tech Stack &amp; Engineering Foundation
+                    </h4>
+                  </div>
+                  <span className="text-[11px] font-mono font-semibold px-2.5 py-1 rounded-full bg-[#EFE8DA] border border-[#687A70]/40 text-[#232B27]">
+                    12 Production Technologies
+                  </span>
+                </div>
+
+                {/* Core Engineering Stack Callout */}
+                <div className="p-3.5 rounded-xl bg-[#EFE8DA] border border-[#5E1726]/30 space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#5E1726] font-bold text-xs font-mono uppercase tracking-wider">
+                      ✦ Core Engineering Stack:
+                    </span>
+                    <span className="text-xs font-mono font-bold text-[#232B27]">
+                      React + Python + Django REST Framework + PostgreSQL + JWT Authentication
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#35423C] font-medium leading-relaxed">
+                    Primary production stack powering authenticated role-based endpoints, policy underwriting state machines, and relational PostgreSQL persistence.
+                  </p>
+                </div>
+
+                {/* 12 Core Production Technologies Grid */}
+                <div className="space-y-2">
+                  <span className="text-[10.5px] font-mono font-bold uppercase tracking-wider text-[#5E1726]">
+                    Production Application Tech Stack:
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+                    {ENTERPRISE_SKILLS_TABLE.filter(
+                      (item) =>
+                        item.technology !== 'Gemini / GenAI' &&
+                        item.technology !== 'RAG'
+                    ).map((item) => (
+                      <div
+                        key={item.technology}
+                        className="p-3 rounded-xl bg-[#EFE8DA] border border-[#687A70]/35 hover:border-[#5E1726] transition-colors space-y-1"
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="font-mono text-xs font-bold text-[#232B27]">
+                            {item.technology}
+                          </span>
+                          <span className="text-[9.5px] font-mono font-semibold px-1.5 py-0.5 rounded bg-[#FAF7F2] text-[#5E1726] border border-[#687A70]/30">
+                            {item.category}
+                          </span>
+                        </div>
+                        <p className="text-xs text-[#35423C] font-medium leading-snug">
+                          {item.purpose}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Features Under Integration Verification */}
+                <div className="p-4 rounded-xl bg-[#EFE8DA]/80 border border-amber-600/40 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-900 flex items-center gap-1.5">
+                      <span>⚠️</span>
+                      <span>Features Under Integration Verification</span>
+                    </span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 font-semibold">
+                      Integration Verification Ongoing
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    {AI_VERIFICATION_FEATURES.map((item) => (
+                      <div
+                        key={item.name}
+                        className="p-2.5 rounded-lg bg-[#FAF7F2] border border-amber-400/40 space-y-1"
+                      >
+                        <div className="font-mono font-bold text-[#232B27]">
+                          {item.name}
+                        </div>
+                        <p className="text-[#35423C] text-[11.5px] leading-relaxed">
+                          {item.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* AI-Assisted Development Tools */}
+                <div className="p-3 rounded-xl bg-[#EFE8DA]/70 border border-[#687A70]/30 text-xs font-mono text-[#232B27] flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold uppercase tracking-wider text-[#5E1726]">
+                      🛠️ AI-Assisted Dev Tools:
+                    </span>
+                    <span className="font-semibold text-[#232B27]">
+                      Google Antigravity · Google AI Studio
+                    </span>
+                  </div>
+                  <span className="text-[11px] text-[#4E5E56] italic">
+                    (Used during development for architectural prototyping — not technologies that run the application)
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </section>

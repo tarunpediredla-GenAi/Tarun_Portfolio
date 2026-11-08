@@ -25,12 +25,16 @@ export function generateResumeMarkdown(): string {
       ...exp.responsibilities.map((r) => `- ${r}`),
       '',
     ]),
-    '## Technical Skills',
-    '- **Frontend**: HTML, CSS, JavaScript, TypeScript, React.js, Recharts, Responsive Design',
-    '- **Backend**: Python, Django, Django REST Framework, Express, REST APIs, Webhooks',
-    '- **Databases**: MySQL, PostgreSQL, Firebase Firestore',
-    '- **AI & Automation**: Generative AI, Agentic AI, Google Gemini, Policy RAG, n8n, Vapi',
-    '- **Development & Deployment**: GitHub, Docker, CI/CD, Google Maps Platform, Vercel',
+    '## Core Engineering Stack',
+    'React + Python + Django REST Framework + PostgreSQL + JWT Authentication',
+    '',
+    '## Technical Skills & Stack',
+    '- **Frontend**: React.js, JavaScript, Tailwind CSS, HTML, CSS',
+    '- **Backend & APIs**: Python, Django, Django REST Framework (DRF), JWT / SimpleJWT, RBAC, Express',
+    '- **Databases**: PostgreSQL, MySQL, Firebase Firestore',
+    '- **AI-Assisted Analysis & RAG (Verification Ongoing)**: Claims analysis triage, policy RAG retrieval',
+    '- **Testing & Dev**: Vitest, Git and GitHub, Docker, CI/CD, Vercel',
+    '- **AI-Assisted Dev Tools**: Google Antigravity, Google AI Studio (developer tooling, not runtime dependencies)',
     `> Note: ${skills.note}`,
     '',
     '## Featured Projects',
@@ -173,31 +177,44 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             ))}
           </div>
 
-          {/* Technical Skills */}
-          <div className="space-y-2 border-t border-[#7A8B82]/30 pt-5">
+          {/* Technical Skills & Core Stack */}
+          <div className="space-y-3 border-t border-[#7A8B82]/30 pt-5">
+            <div className="p-2.5 rounded-lg bg-[#EFE8DA] border border-[#5E1726]/30">
+              <span className="font-mono text-[10.5px] font-bold uppercase tracking-wider text-[#5E1726] block mb-0.5">
+                Core Engineering Stack:
+              </span>
+              <span className="font-mono text-xs font-bold text-[#1B231F]">
+                React + Python + Django REST Framework + PostgreSQL + JWT Authentication
+              </span>
+            </div>
+
             <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#6B1D2F]">
-              Technical Skills
+              Technical Skills &amp; Stack
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#232D28]">
               <div>
                 <span className="font-semibold text-[#1B231F]">Frontend: </span>
-                HTML, CSS, JavaScript, TypeScript, React.js, Recharts
+                React.js, JavaScript, Tailwind CSS, HTML, CSS
               </div>
               <div>
-                <span className="font-semibold text-[#1B231F]">Backend: </span>
-                Python, Django, Django REST Framework, Express
+                <span className="font-semibold text-[#1B231F]">Backend &amp; APIs: </span>
+                Python, Django, DRF, JWT / SimpleJWT, RBAC, Express
               </div>
               <div>
                 <span className="font-semibold text-[#1B231F]">Databases: </span>
-                MySQL, PostgreSQL, Firebase Firestore
+                PostgreSQL, MySQL, Firebase Firestore
               </div>
               <div>
-                <span className="font-semibold text-[#1B231F]">AI &amp; Automation: </span>
-                Generative AI, Agentic AI, Google Gemini, Policy RAG, n8n, Vapi
+                <span className="font-semibold text-[#1B231F]">AI-Assisted Features: </span>
+                Claims Analysis &amp; Policy RAG Studio (Verification Ongoing)
               </div>
-              <div className="sm:col-span-2">
-                <span className="font-semibold text-[#1B231F]">Development &amp; Deployment: </span>
-                GitHub, Docker, CI/CD, Google Maps Platform, Vercel
+              <div>
+                <span className="font-semibold text-[#1B231F]">Testing &amp; Deployment: </span>
+                Vitest, Git and GitHub, Docker, CI/CD, Vercel
+              </div>
+              <div>
+                <span className="font-semibold text-[#1B231F]">AI-Assisted Dev Tools: </span>
+                Google Antigravity, Google AI Studio (developer tooling)
               </div>
             </div>
           </div>

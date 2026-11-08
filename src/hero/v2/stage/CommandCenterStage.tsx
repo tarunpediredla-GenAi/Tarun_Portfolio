@@ -491,13 +491,13 @@ export const CommandCenterStage: React.FC = () => {
 
     const codeCardConfigs = [
       {
-        title: 'agent_workflow.py',
+        title: 'insuresphere_treaty.py',
         lines: [
-          'async def run_agent(task):',
-          '  plan = await gemini.plan(task)',
-          '  return await vapi.dispatch(plan)',
+          'class QuotaShareTreaty(models.Model):',
+          '  net_loss = max(0, gross - deductible)',
+          '  reinsurer_share = net_loss * 0.40',
         ],
-        accent: '#06b6d4',
+        accent: '#38bdf8',
         pos: [-2.15, 0.92, -0.6] as [number, number, number],
         rotY: 0.42,
       },
@@ -519,9 +519,20 @@ export const CommandCenterStage: React.FC = () => {
           '  .generateContent({ model,',
           '    contents: transcript });',
         ],
-        accent: '#38bdf8',
+        accent: '#06b6d4',
         pos: [-1.85, -0.68, 0.95] as [number, number, number],
         rotY: 0.35,
+      },
+      {
+        title: 'agent_workflow.py',
+        lines: [
+          'async def run_agent(task):',
+          '  plan = await gemini.plan(task)',
+          '  return await vapi.dispatch(plan)',
+        ],
+        accent: '#a855f7',
+        pos: [1.95, -0.72, 0.9] as [number, number, number],
+        rotY: -0.38,
       },
     ];
 

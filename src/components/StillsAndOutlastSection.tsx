@@ -52,68 +52,55 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
     {
       num: '01',
       title: 'InsureSphere AI Platform',
-      tag: 'Python · Django · React 19 · Gemini · Recharts',
+      tag: 'Python · Django REST · PostgreSQL · Reinsurance AI',
       image: FEATURED_PROJECTS[0].image,
       project: FEATURED_PROJECTS[0],
       side: 'left' as const,
     },
     {
       num: '02',
-      title: 'SLT Culture (LST) Platform',
-      tag: 'React · TypeScript · Express · Google Maps',
+      title: "Satya's Education Platform",
+      tag: 'React · JavaScript · Django · Cashfree',
       image: FEATURED_PROJECTS[1].image,
       project: FEATURED_PROJECTS[1],
       side: 'right' as const,
     },
     {
       num: '03',
-      title: "Satya's Education Platform",
-      tag: 'React · JavaScript · Django · Cashfree',
+      title: 'Alex AI Mock Interviewer',
+      tag: 'React · Express · Google Gemini · Voice AI',
       image: FEATURED_PROJECTS[2].image,
       project: FEATURED_PROJECTS[2],
       side: 'left' as const,
     },
     {
       num: '04',
-      title: 'Alex AI Mock Interviewer',
-      tag: 'React · Express · Google Gemini · Voice AI',
+      title: 'AI Voice Task Planner',
+      tag: 'n8n · Vapi · Gemini · Google Sheets',
       image: FEATURED_PROJECTS[3].image,
       project: FEATURED_PROJECTS[3],
       side: 'right' as const,
-    },
-    {
-      num: '05',
-      title: 'AI Command Architecture',
-      tag: 'Python · Agentic Workflows · Docker · CI/CD',
-      image: COMMAND_BACKDROP_IMAGE,
-      project: FEATURED_PROJECTS[4],
-      side: 'left' as const,
     },
   ];
 
   const carouselSlides = [
     {
       project: FEATURED_PROJECTS[0],
-      badge: 'Enterprise Reinsurance AI',
-      caption: 'Django REST Framework + Gemini Policy RAG & Treaty Risk Analytics',
+      badge: '★ Enterprise SaaS Flagship',
+      caption: 'Quota-share reinsurance treaties, underwriting workbench & claims AI',
     },
     {
       project: FEATURED_PROJECTS[1],
-      badge: 'Real Estate & Verification',
-      caption: '10-stage screening pipeline with Google Maps Platform & Firebase',
-    },
-    {
-      project: FEATURED_PROJECTS[2],
       badge: 'E-Commerce & EdTech',
       caption: 'Live production portal on Vercel with Cashfree checkout',
     },
     {
-      project: FEATURED_PROJECTS[3],
+      project: FEATURED_PROJECTS[2],
       badge: 'Conversational Voice AI',
       caption: '50-question bank, system design whiteboard & Hiring Committee',
     },
     {
-      project: FEATURED_PROJECTS[4],
+      project: FEATURED_PROJECTS[3],
       badge: 'Agentic Automation',
       caption: 'Voice request → Vapi → n8n → Gemini → Google Sheets',
     },
@@ -850,7 +837,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
           </div>
 
           {/* Surrounding Satellite Panels */}
-          {FEATURED_PROJECTS.slice(0, 4).map((proj, idx) => {
+          {FEATURED_PROJECTS.map((proj, idx) => {
             const positions = [
               '-top-[18vh] -left-[26vw]',
               '-top-[16vh] left-[26vw]',
@@ -895,39 +882,74 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
           </h2>
 
           <div className="divide-y divide-[#687A70]/35 border-y border-[#687A70]/35">
-            {FEATURED_PROJECTS.map((proj) => (
-              <div
-                key={proj.id}
-                onMouseEnter={() => setHoveredFlagship(proj)}
-                onMouseLeave={() => setHoveredFlagship(null)}
-                onClick={() => onSelectProject(proj)}
-                className="group relative block py-8 px-4 -mx-4 rounded-2xl hover:bg-[#EFE8DA] transition-colors duration-300 cursor-pointer"
-              >
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                  <div className="flex items-baseline gap-6">
-                    <span className="text-xs font-mono font-bold text-[#5E1726]">
-                      {proj.number}
-                    </span>
-                    <div>
-                      <h3 className="text-2xl md:text-4xl font-bold text-[#232B27] group-hover:text-[#5E1726] group-hover:translate-x-2 transition-all duration-300">
-                        {proj.title}
-                      </h3>
-                      <p className="text-xs md:text-sm text-[#35423C] font-medium mt-1">
-                        {proj.subtitle}
-                      </p>
+            {FEATURED_PROJECTS.map((proj) => {
+              const isFlagship = proj.isFlagship || proj.id === 'insuresphere-ai';
+
+              return (
+                <div
+                  key={proj.id}
+                  onMouseEnter={() => setHoveredFlagship(proj)}
+                  onMouseLeave={() => setHoveredFlagship(null)}
+                  onClick={() => onSelectProject(proj)}
+                  className={`group relative block py-8 px-4 -mx-4 rounded-2xl transition-all duration-300 cursor-pointer ${
+                    isFlagship
+                      ? 'bg-sky-50/50 hover:bg-sky-100/70 border-l-4 border-l-sky-500 shadow-xs'
+                      : 'hover:bg-[#EFE8DA]'
+                  }`}
+                >
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div className="flex items-baseline gap-6">
+                      <span
+                        className={`text-xs font-mono font-bold ${
+                          isFlagship ? 'text-sky-600' : 'text-[#5E1726]'
+                        }`}
+                      >
+                        {isFlagship ? '★ 01' : proj.number}
+                      </span>
+                      <div>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <h3
+                            className={`text-2xl md:text-4xl font-bold tracking-tight transition-all duration-300 ${
+                              isFlagship
+                                ? 'text-slate-900 group-hover:text-sky-700'
+                                : 'text-[#232B27] group-hover:text-[#5E1726]'
+                            } group-hover:translate-x-2`}
+                          >
+                            {proj.title}
+                          </h3>
+                          {isFlagship && (
+                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-sky-500/15 text-sky-700 border border-sky-400/30">
+                              Flagship Spotlight
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs md:text-sm text-[#35423C] font-medium mt-1">
+                          {proj.subtitle}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4 self-end md:self-center">
+                      <span
+                        className={`text-xs font-mono font-bold tracking-wider uppercase transition-colors duration-300 ${
+                          isFlagship
+                            ? 'text-sky-700 group-hover:text-sky-900'
+                            : 'text-[#35423C] group-hover:text-[#5E1726]'
+                        }`}
+                      >
+                        {proj.technologies.slice(0, 4).join(' · ')}
+                      </span>
+                      <span
+                        className={`group-hover:translate-x-1.5 transition-all duration-300 text-lg font-bold ${
+                          isFlagship ? 'text-sky-600' : 'text-[#5E1726]'
+                        }`}
+                      >
+                        →
+                      </span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4 self-end md:self-center">
-                    <span className="text-xs text-[#35423C] font-mono font-bold tracking-wider uppercase group-hover:text-[#5E1726] transition-colors duration-300">
-                      {proj.technologies.slice(0, 4).join(' · ')}
-                    </span>
-                    <span className="text-[#5E1726] group-hover:translate-x-1.5 transition-all duration-300 text-lg font-bold">
-                      →
-                    </span>
-                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Floating Cursor Preview Card */}
