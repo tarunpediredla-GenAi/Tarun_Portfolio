@@ -421,44 +421,6 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
                 experiences.&rdquo;
               </blockquote>
 
-              {/* Flagship Project Spotlight Card */}
-              <motion.div
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.99 }}
-                onClick={() => {
-                  const flagship =
-                    portfolioContent.projects.find(
-                      (p) => p.id === 'insuresphere-ai'
-                    ) || portfolioContent.projects[0];
-                  onSelectProject(flagship);
-                }}
-                className="hero-reveal-item cursor-pointer group mb-7 p-3 sm:p-3.5 pr-4 rounded-2xl border border-sky-400/45 bg-gradient-to-r from-[#071330]/95 via-[#0B1A42]/95 to-[#101436]/95 backdrop-blur-md shadow-[0_0_35px_rgba(56,189,248,0.24)] hover:border-sky-300 hover:shadow-[0_0_48px_rgba(56,189,248,0.4)] transition-all flex items-center justify-between gap-3 text-left w-full max-w-xl"
-              >
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="relative flex h-3 w-3 shrink-0 ml-1">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-400" />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-[10px] font-mono font-extrabold uppercase tracking-[0.2em] px-2 py-0.5 rounded-md bg-sky-400/20 text-sky-300 border border-sky-400/40">
-                        ★ FLAGSHIP SPOTLIGHT
-                      </span>
-                      <span className="text-[10.5px] font-mono text-slate-300 hidden sm:inline">
-                        React · Python · Django REST · PostgreSQL · JWT
-                      </span>
-                    </div>
-                    <div className="text-xs sm:text-sm font-bold text-white group-hover:text-sky-200 transition-colors mt-0.5 truncate">
-                      InsureSphere AI — Enterprise Insurance &amp; Reinsurance Platform
-                    </div>
-                  </div>
-                </div>
-                <span className="shrink-0 text-xs font-mono font-bold text-sky-300 group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                  <span className="hidden sm:inline">Explore Case Study</span>
-                  <span>→</span>
-                </span>
-              </motion.div>
-
               {/* Primary CTA Buttons: View My Projects & Download Resume */}
               <div className="hero-reveal-item flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-9 w-full sm:w-auto">
                 <motion.button

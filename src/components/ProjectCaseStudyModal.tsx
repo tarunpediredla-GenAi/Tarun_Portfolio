@@ -117,7 +117,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                       : 'bg-[#FAF7F2] text-[#5E1726]'
                   }`}
                 >
-                  {isFlagship ? '★ FLAGSHIP PROJECT 01' : `Project ${project.index}`}
+                  Project {project.index}
                 </span>
 
                 <span

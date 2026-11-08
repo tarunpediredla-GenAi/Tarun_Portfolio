@@ -266,82 +266,24 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                     delay: projIdx * 0.05,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className={`group relative rounded-3xl border overflow-hidden shadow-xl transition-all duration-500 ${
-                    isFlagship
-                      ? 'border-sky-500/50 bg-[#FAF7F2] shadow-[0_12px_45px_rgba(56,189,248,0.18)] hover:border-sky-400'
-                      : 'border-[#687A70]/45 bg-[#FAF7F2] hover:border-[#5E1726]'
-                  }`}
+                  className="group relative rounded-3xl border overflow-hidden shadow-xl transition-all duration-500 border-[#687A70]/45 bg-[#FAF7F2] hover:border-[#5E1726]"
                 >
                   {/* Top Window Chrome Bar */}
-                  <div
-                    className={`flex items-center justify-between px-6 py-3.5 ${
-                      isFlagship
-                        ? 'bg-[#060E26] text-white border-b border-sky-500/30'
-                        : 'bg-[#5E1726] text-[#F6F1E7]'
-                    }`}
-                  >
+                  <div className="flex items-center justify-between px-6 py-3.5 bg-[#5E1726] text-[#F6F1E7]">
                     <div className="flex items-center gap-2">
-                      <span
-                        className={`w-3 h-3 rounded-full ${
-                          isFlagship ? 'bg-rose-500' : 'bg-[#F6F1E7]'
-                        }`}
-                      />
-                      <span
-                        className={`w-3 h-3 rounded-full ${
-                          isFlagship ? 'bg-amber-400' : 'bg-[#DCE3DF]'
-                        }`}
-                      />
-                      <span
-                        className={`w-3 h-3 rounded-full ${
-                          isFlagship ? 'bg-emerald-400' : 'bg-[#84968B]'
-                        }`}
-                      />
+                      <span className="w-3 h-3 rounded-full bg-[#F6F1E7]" />
+                      <span className="w-3 h-3 rounded-full bg-[#DCE3DF]" />
+                      <span className="w-3 h-3 rounded-full bg-[#84968B]" />
                       <span className="ml-3 text-xs font-mono font-bold">
-                        {isFlagship ? '★ FLAGSHIP 01' : project.number} —{' '}
-                        {project.title}
+                        {project.number} — {project.title}
                       </span>
                     </div>
                     <div className="flex items-center gap-2.5">
-                      {isFlagship && (
-                        <span className="hidden sm:inline-flex items-center gap-1.5 text-[10.5px] font-mono font-bold uppercase tracking-[0.2em] px-3 py-0.5 rounded-full bg-sky-400/20 text-sky-300 border border-sky-400/40 shadow-[0_0_12px_rgba(56,189,248,0.35)]">
-                          <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-ping" />
-                          <span>Flagship Spotlight</span>
-                        </span>
-                      )}
-                      <span
-                        className={`text-[11px] font-mono font-bold uppercase tracking-[0.18em] px-3 py-0.5 rounded-full ${
-                          isFlagship
-                            ? 'bg-slate-900 text-sky-300 border border-slate-700'
-                            : 'bg-[#F6F1E7] text-[#5E1726]'
-                        }`}
-                      >
+                      <span className="text-[11px] font-mono font-bold uppercase tracking-[0.18em] px-3 py-0.5 rounded-full bg-[#F6F1E7] text-[#5E1726]">
                         {project.category}
                       </span>
                     </div>
                   </div>
-
-                  {/* Flagship Enterprise Telemetry Ribbon */}
-                  {isFlagship && (
-                    <div className="bg-[#0B1536] border-b border-sky-500/25 px-6 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
-                      <div className="flex flex-wrap items-center gap-3 sm:gap-6">
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-sky-400 font-bold">● Telemetry:</span>
-                          <span className="text-white font-semibold">$14.8M Claims Registered</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-sky-400 font-bold">● Treaty Structure:</span>
-                          <span className="text-white font-semibold">60% Retained / 40% Ceded</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-emerald-400 font-bold">● AI Adjudication:</span>
-                          <span className="text-emerald-300 font-semibold">Automated Coverage &amp; Deductible Triage</span>
-                        </div>
-                      </div>
-                      <div className="text-[11px] text-sky-300 font-bold tracking-wider hidden md:block">
-                        POSTGRESQL 16 · DJANGO REST · REACT 19
-                      </div>
-                    </div>
-                  )}
 
                   {/* Main Split Showcase Body */}
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 md:p-10 items-center">
@@ -351,11 +293,7 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                         whileHover={{ scale: 1.015 }}
                         transition={{ duration: 0.35 }}
                         onClick={() => onSelectProject(project)}
-                        className={`relative rounded-2xl overflow-hidden border cursor-pointer group/img aspect-video shadow-md ${
-                          isFlagship
-                            ? 'border-sky-500/40 bg-[#070E24]'
-                            : 'border-[#687A70]/45 bg-[#232B27]'
-                        }`}
+                        className="relative rounded-2xl overflow-hidden border cursor-pointer group/img aspect-video shadow-md border-[#687A70]/45 bg-[#232B27]"
                       >
                         <img
                           src={project.image}
@@ -364,13 +302,7 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#020512]/80 via-transparent to-transparent" />
                         <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                          <span
-                            className={`px-3.5 py-1.5 rounded-full text-[11px] font-mono font-bold shadow-sm transition-colors ${
-                              isFlagship
-                                ? 'bg-[#0A122C]/90 text-sky-300 border border-sky-400/50 group-hover/img:bg-sky-400 group-hover/img:text-slate-950'
-                                : 'bg-[#FAF7F2]/95 text-[#232B27] group-hover/img:bg-[#5E1726] group-hover/img:text-[#F6F1E7]'
-                            }`}
-                          >
+                          <span className="px-3.5 py-1.5 rounded-full text-[11px] font-mono font-bold shadow-sm transition-colors bg-[#FAF7F2]/95 text-[#232B27] group-hover/img:bg-[#5E1726] group-hover/img:text-[#F6F1E7]">
                             Click to inspect full architecture →
                           </span>
                           {project.liveUrl ? (
@@ -379,7 +311,7 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                               <span>Live Verified</span>
                             </span>
                           ) : isFlagship ? (
-                            <span className="px-3 py-1 rounded-full bg-slate-900/90 text-[10.5px] font-mono font-bold text-slate-300 border border-slate-700 shadow-sm">
+                            <span className="px-3 py-1 rounded-full bg-[#232B27]/90 text-[10.5px] font-mono font-bold text-[#F6F1E7] border border-[#687A70]/50 shadow-sm">
                               Local Full-Stack App
                             </span>
                           ) : null}
@@ -387,28 +319,14 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                       </motion.div>
 
                       {/* Visual Architecture Pipeline with Animated Signal Pulse */}
-                      <div
-                        className={`relative rounded-xl border p-4 overflow-hidden ${
-                          isFlagship
-                            ? 'border-sky-500/30 bg-[#0D1838]/20'
-                            : 'border-[#687A70]/40 bg-[#E6ECE8]'
-                        }`}
-                      >
+                      <div className="relative rounded-xl border p-4 overflow-hidden border-[#687A70]/40 bg-[#E6ECE8]">
                         {/* Animated signal bar along top edge */}
                         <div className="absolute top-0 left-0 right-0 h-0.5 bg-[#687A70]/25 overflow-hidden">
-                          <div
-                            className={`w-1/3 h-full animate-signal-flow ${
-                              isFlagship ? 'bg-sky-400' : 'bg-[#5E1726]'
-                            }`}
-                          />
+                          <div className="w-1/3 h-full animate-signal-flow bg-[#5E1726]" />
                         </div>
 
                         <div className="flex items-center justify-between mb-3">
-                          <span
-                            className={`text-[10.5px] font-mono font-bold uppercase tracking-[0.25em] ${
-                              isFlagship ? 'text-sky-600' : 'text-[#5E1726]'
-                            }`}
-                          >
+                          <span className="text-[10.5px] font-mono font-bold uppercase tracking-[0.25em] text-[#5E1726]">
                             System Architecture Flow
                           </span>
                           <span className="text-[10px] font-mono font-semibold text-[#35423C]">
@@ -423,20 +341,14 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                                 className={`px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold border transition-colors ${
                                   idx === 0 ||
                                   idx === project.architectureFlow.length - 1
-                                    ? isFlagship
-                                      ? 'bg-[#08112D] border-sky-400 text-sky-300'
-                                      : 'bg-[#5E1726] border-[#5E1726] text-[#F6F1E7]'
-                                    : 'bg-[#FAF7F2] border-[#687A70]/40 text-[#232B27] hover:border-sky-500'
+                                    ? 'bg-[#5E1726] border-[#5E1726] text-[#F6F1E7]'
+                                    : 'bg-[#FAF7F2] border-[#687A70]/40 text-[#232B27] hover:border-[#5E1726]'
                                 }`}
                               >
                                 {step}
                               </motion.span>
                               {idx < project.architectureFlow.length - 1 && (
-                                <span
-                                  className={`text-xs font-mono font-bold px-0.5 ${
-                                    isFlagship ? 'text-sky-500' : 'text-[#5E1726]'
-                                  }`}
-                                >
+                                <span className="text-xs font-mono font-bold px-0.5 text-[#5E1726]">
                                   →
                                 </span>
                               )}
@@ -450,14 +362,8 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                     <div className="lg:col-span-6 space-y-5">
                       <div>
                         <div className="flex flex-wrap items-center gap-2.5 mb-2">
-                          <span
-                            className={`text-xs font-mono font-bold uppercase tracking-[0.25em] ${
-                              isFlagship ? 'text-sky-600' : 'text-[#5E1726]'
-                            }`}
-                          >
-                            {isFlagship
-                              ? '★ Flagship Project 01'
-                              : `Project ${project.number}`}
+                          <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-[#5E1726]">
+                            Project {project.number}
                           </span>
                           <span className="text-[#687A70]">•</span>
                           <span className="text-xs font-mono font-semibold text-[#35423C]">
@@ -479,17 +385,9 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                           <motion.div
                             whileHover={{ x: 3 }}
                             key={feat}
-                            className={`rounded-lg border px-3.5 py-2.5 text-xs font-medium flex items-start gap-2 ${
-                              isFlagship
-                                ? 'border-sky-400/30 bg-[#E6ECE8] text-[#1E293B]'
-                                : 'border-[#687A70]/35 bg-[#EFE8DA] text-[#232B27]'
-                            }`}
+                            className="rounded-lg border px-3.5 py-2.5 text-xs font-medium flex items-start gap-2 border-[#687A70]/35 bg-[#EFE8DA] text-[#232B27]"
                           >
-                            <span
-                              className={`mt-0.5 font-bold ${
-                                isFlagship ? 'text-sky-600' : 'text-[#5E1726]'
-                              }`}
-                            >
+                            <span className="mt-0.5 font-bold text-[#5E1726]">
                               ✓
                             </span>
                             <span>{feat}</span>
@@ -498,18 +396,8 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                       </div>
 
                       {/* Implementation & Runtime Scope Note */}
-                      <div
-                        className={`rounded-xl border px-4 py-3 text-xs leading-relaxed ${
-                          isFlagship
-                            ? 'border-sky-500/35 bg-[#E0F2FE]/50 text-slate-800'
-                            : 'border-[#5E1726]/30 bg-[#E6ECE8] text-[#232B27]'
-                        }`}
-                      >
-                        <span
-                          className={`font-mono uppercase tracking-wider text-[10.5px] font-bold block mb-0.5 ${
-                            isFlagship ? 'text-sky-700' : 'text-[#5E1726]'
-                          }`}
-                        >
+                      <div className="rounded-xl border px-4 py-3 text-xs leading-relaxed border-[#5E1726]/30 bg-[#E6ECE8] text-[#232B27]">
+                        <span className="font-mono uppercase tracking-wider text-[10.5px] font-bold block mb-0.5 text-[#5E1726]">
                           Engineering &amp; Runtime Scope
                         </span>
                         {project.implementationNote}
@@ -517,102 +405,18 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
 
                       {/* Tech Stack Heading & Badges */}
                       <div className="space-y-3 pt-1">
-                        {isFlagship ? (
-                          <>
-                            {/* InsureSphere AI — Tech Stack Heading */}
-                            <div>
-                              <div className="flex items-center justify-between mb-1.5">
-                                <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-sky-400">
-                                  InsureSphere AI — Tech Stack
-                                </span>
-                                <span className="text-[10px] font-mono text-slate-400">
-                                  12 Production Technologies
-                                </span>
-                              </div>
-                              <div className="flex flex-wrap gap-1.5">
-                                {project.technologies.map((tech) => {
-                                  const isCorePillar = [
-                                    'React.js',
-                                    'Python',
-                                    'DRF',
-                                    'Django',
-                                    'PostgreSQL',
-                                    'JWT',
-                                  ].includes(tech);
-                                  return (
-                                    <span
-                                      key={tech}
-                                      className={`px-3 py-1 rounded-full text-xs font-mono font-bold transition-transform hover:scale-105 ${
-                                        isCorePillar
-                                          ? 'bg-sky-500/20 text-sky-200 border border-sky-400/50 shadow-sm'
-                                          : 'bg-[#0E1A3C] text-slate-300 border border-slate-700/60'
-                                      }`}
-                                    >
-                                      {tech}
-                                    </span>
-                                  );
-                                })}
-                              </div>
-                            </div>
-
-                            {/* Core Engineering Stack Callout Banner */}
-                            <div className="p-3 rounded-xl bg-sky-950/40 border border-sky-500/30 text-xs font-mono text-sky-200 flex flex-wrap items-center gap-2">
-                              <span className="font-bold uppercase tracking-wider text-sky-300 shrink-0">
-                                ✦ Core Engineering Stack:
+                        <div>
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#5E1726]">
+                              {isFlagship ? 'InsureSphere AI — Tech Stack' : 'Technologies & Tools'}
+                            </span>
+                            {isFlagship && (
+                              <span className="text-[10.5px] font-mono text-[#35423C]">
+                                12 Technologies
                               </span>
-                              <span className="text-white font-semibold">
-                                React + Python + Django REST Framework + PostgreSQL + JWT Authentication
-                              </span>
-                            </div>
-
-                            {/* AI-assisted analysis and RAG shown separately as features under integration verification */}
-                            <div className="p-3.5 rounded-xl bg-amber-950/25 border border-amber-500/35 space-y-2">
-                              <div className="flex items-center justify-between">
-                                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-amber-300 flex items-center gap-1.5">
-                                  <span>⚠️</span>
-                                  <span>Features Under Integration Verification</span>
-                                </span>
-                                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-200 border border-amber-400/30">
-                                  Verification Ongoing
-                                </span>
-                              </div>
-                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-amber-100/90 font-sans">
-                                <div className="p-2 rounded-lg bg-amber-900/20 border border-amber-500/20">
-                                  <div className="font-mono font-bold text-amber-200 text-xs">
-                                    • AI-Assisted Claims Analysis
-                                  </div>
-                                  <div className="text-[11px] text-amber-200/80 mt-0.5">
-                                    Advisory coverage checks, deductible validation, and human-in-the-loop review reports.
-                                  </div>
-                                </div>
-                                <div className="p-2 rounded-lg bg-amber-900/20 border border-amber-500/20">
-                                  <div className="font-mono font-bold text-amber-200 text-xs">
-                                    • AI Policy &amp; RAG Studio
-                                  </div>
-                                  <div className="text-[11px] text-amber-200/80 mt-0.5">
-                                    Document retrieval workflow for complex commercial policy terms and reinsurance treaties.
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* AI-Assisted Development Tools (Google Antigravity & Google AI Studio) */}
-                            <div className="p-3 rounded-xl bg-violet-950/20 border border-violet-500/30 text-xs font-mono text-violet-200 flex flex-wrap items-center justify-between gap-2">
-                              <div className="flex items-center gap-2">
-                                <span className="text-violet-400 font-bold uppercase tracking-wider">
-                                  🛠️ AI-Assisted Dev Tools:
-                                </span>
-                                <span className="text-white font-medium">
-                                  Google Antigravity · Google AI Studio
-                                </span>
-                              </div>
-                              <span className="text-[10.5px] text-violet-300/80 italic">
-                                (Developer tooling — not runtime application dependencies)
-                              </span>
-                            </div>
-                          </>
-                        ) : (
-                          <div className="flex flex-wrap gap-2">
+                            )}
+                          </div>
+                          <div className="flex flex-wrap gap-1.5">
                             {project.technologies.map((tech) => (
                               <span
                                 key={tech}
@@ -622,6 +426,33 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                               </span>
                             ))}
                           </div>
+                        </div>
+
+                        {isFlagship && (
+                          <>
+                            {/* Core Engineering Stack Callout Banner */}
+                            <div className="p-3 rounded-xl bg-[#EFE8DA] border border-[#687A70]/30 text-xs font-mono text-[#232B27] flex flex-wrap items-center gap-2">
+                              <span className="font-bold uppercase tracking-wider text-[#5E1726] shrink-0">
+                                Core Engineering Stack:
+                              </span>
+                              <span className="text-[#35423C] font-semibold">
+                                React + Python + Django REST Framework + PostgreSQL + JWT Authentication
+                              </span>
+                            </div>
+
+                            {/* Features under integration verification */}
+                            <div className="p-3 rounded-xl bg-[#FAF7F2] border border-[#687A70]/30 text-xs font-sans text-[#35423C] space-y-1">
+                              <div className="flex items-center justify-between font-mono font-bold text-xs text-[#5E1726]">
+                                <span>Features Under Integration Verification</span>
+                                <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#DCE3DF] text-[#232B27] border border-[#687A70]/30">
+                                  Verification Ongoing
+                                </span>
+                              </div>
+                              <div className="text-[11.5px] text-[#35423C] leading-relaxed">
+                                AI-assisted claims analysis and AI policy/RAG studio are structured for advisory coverage verification and document retrieval.
+                              </div>
+                            </div>
+                          </>
                         )}
                       </div>
 
@@ -632,11 +463,7 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                           whileTap={{ scale: 0.97 }}
                           type="button"
                           onClick={() => onSelectProject(project)}
-                          className={`px-4 sm:px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-[0.16em] font-bold transition-all cursor-pointer shadow-md ${
-                            isFlagship
-                              ? 'bg-gradient-to-r from-sky-500 via-sky-400 to-indigo-500 text-slate-950 hover:shadow-[0_0_24px_rgba(56,189,248,0.45)]'
-                              : 'bg-[#5E1726] text-[#F6F1E7] hover:bg-[#751E31]'
-                          }`}
+                          className="px-4 sm:px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-[0.16em] font-bold transition-all cursor-pointer shadow-md bg-[#5E1726] text-[#F6F1E7] hover:bg-[#751E31]"
                         >
                           Explore Case Study
                         </motion.button>
@@ -647,7 +474,7 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-4 sm:px-5 py-2.5 rounded-full bg-[#DCE3DF] border border-[#687A70]/50 text-[#232B27] text-xs font-mono font-bold uppercase tracking-[0.16em] hover:border-sky-500 transition-colors"
+                          className="px-4 sm:px-5 py-2.5 rounded-full bg-[#DCE3DF] border border-[#687A70]/50 text-[#232B27] text-xs font-mono font-bold uppercase tracking-[0.16em] hover:border-[#5E1726] transition-colors"
                         >
                           View Source Code ↗
                         </motion.a>
@@ -657,7 +484,7 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                           whileTap={{ scale: 0.97 }}
                           type="button"
                           onClick={() => onSelectProject(project)}
-                          className="px-3.5 py-2.5 rounded-full bg-[#FAF7F2] border border-[#687A70]/40 text-[#35423C] text-xs font-mono font-semibold uppercase tracking-wider hover:border-sky-500 transition-colors cursor-pointer"
+                          className="px-3.5 py-2.5 rounded-full bg-[#FAF7F2] border border-[#687A70]/40 text-[#35423C] text-xs font-mono font-semibold uppercase tracking-wider hover:border-[#5E1726] transition-colors cursor-pointer"
                         >
                           System Architecture
                         </motion.button>
@@ -671,22 +498,10 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                               .getElementById('skills')
                               ?.scrollIntoView({ behavior: 'smooth' });
                           }}
-                          className="px-3.5 py-2.5 rounded-full bg-[#FAF7F2] border border-[#687A70]/40 text-[#35423C] text-xs font-mono font-semibold uppercase tracking-wider hover:border-sky-500 transition-colors cursor-pointer"
+                          className="px-3.5 py-2.5 rounded-full bg-[#FAF7F2] border border-[#687A70]/40 text-[#35423C] text-xs font-mono font-semibold uppercase tracking-wider hover:border-[#5E1726] transition-colors cursor-pointer"
                         >
                           Technology Stack
                         </motion.button>
-
-                        {isFlagship && (
-                          <motion.button
-                            whileHover={{ scale: 1.04, y: -2 }}
-                            whileTap={{ scale: 0.97 }}
-                            type="button"
-                            onClick={() => onSelectProject(project)}
-                            className="px-4 py-2.5 rounded-full bg-sky-500/15 border border-sky-400/50 text-sky-900 text-xs font-mono font-bold uppercase tracking-wider hover:bg-sky-400/25 transition-colors cursor-pointer flex items-center gap-1.5 shadow-sm"
-                          >
-                            <span>📊 60/40 Calculator</span>
-                          </motion.button>
-                        )}
 
                         {project.liveUrl && (
                           <motion.a

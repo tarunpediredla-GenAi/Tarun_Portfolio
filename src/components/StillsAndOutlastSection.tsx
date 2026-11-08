@@ -86,7 +86,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
   const carouselSlides = [
     {
       project: FEATURED_PROJECTS[0],
-      badge: '★ Enterprise SaaS Flagship',
+      badge: 'Enterprise SaaS & InsurTech',
       caption: 'Quota-share reinsurance treaties, underwriting workbench & claims AI',
     },
     {
@@ -883,45 +883,24 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
 
           <div className="divide-y divide-[#687A70]/35 border-y border-[#687A70]/35">
             {FEATURED_PROJECTS.map((proj) => {
-              const isFlagship = proj.isFlagship || proj.id === 'insuresphere-ai';
-
               return (
                 <div
                   key={proj.id}
                   onMouseEnter={() => setHoveredFlagship(proj)}
                   onMouseLeave={() => setHoveredFlagship(null)}
                   onClick={() => onSelectProject(proj)}
-                  className={`group relative block py-8 px-4 -mx-4 rounded-2xl transition-all duration-300 cursor-pointer ${
-                    isFlagship
-                      ? 'bg-sky-50/50 hover:bg-sky-100/70 border-l-4 border-l-sky-500 shadow-xs'
-                      : 'hover:bg-[#EFE8DA]'
-                  }`}
+                  className="group relative block py-8 px-4 -mx-4 rounded-2xl transition-all duration-300 cursor-pointer hover:bg-[#EFE8DA]"
                 >
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="flex items-baseline gap-6">
-                      <span
-                        className={`text-xs font-mono font-bold ${
-                          isFlagship ? 'text-sky-600' : 'text-[#5E1726]'
-                        }`}
-                      >
-                        {isFlagship ? '★ 01' : proj.number}
+                      <span className="text-xs font-mono font-bold text-[#5E1726]">
+                        {proj.number}
                       </span>
                       <div>
                         <div className="flex items-center gap-2 flex-wrap">
-                          <h3
-                            className={`text-2xl md:text-4xl font-bold tracking-tight transition-all duration-300 ${
-                              isFlagship
-                                ? 'text-slate-900 group-hover:text-sky-700'
-                                : 'text-[#232B27] group-hover:text-[#5E1726]'
-                            } group-hover:translate-x-2`}
-                          >
+                          <h3 className="text-2xl md:text-4xl font-bold tracking-tight transition-all duration-300 text-[#232B27] group-hover:text-[#5E1726] group-hover:translate-x-2">
                             {proj.title}
                           </h3>
-                          {isFlagship && (
-                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-sky-500/15 text-sky-700 border border-sky-400/30">
-                              Flagship Spotlight
-                            </span>
-                          )}
                         </div>
                         <p className="text-xs md:text-sm text-[#35423C] font-medium mt-1">
                           {proj.subtitle}
@@ -929,20 +908,10 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
                       </div>
                     </div>
                     <div className="flex items-center gap-4 self-end md:self-center">
-                      <span
-                        className={`text-xs font-mono font-bold tracking-wider uppercase transition-colors duration-300 ${
-                          isFlagship
-                            ? 'text-sky-700 group-hover:text-sky-900'
-                            : 'text-[#35423C] group-hover:text-[#5E1726]'
-                        }`}
-                      >
+                      <span className="text-xs font-mono font-bold tracking-wider uppercase transition-colors duration-300 text-[#35423C] group-hover:text-[#5E1726]">
                         {proj.technologies.slice(0, 4).join(' · ')}
                       </span>
-                      <span
-                        className={`group-hover:translate-x-1.5 transition-all duration-300 text-lg font-bold ${
-                          isFlagship ? 'text-sky-600' : 'text-[#5E1726]'
-                        }`}
-                      >
+                      <span className="group-hover:translate-x-1.5 transition-all duration-300 text-lg font-bold text-[#5E1726]">
                         →
                       </span>
                     </div>

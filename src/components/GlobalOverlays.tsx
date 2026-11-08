@@ -81,10 +81,10 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
 
   const searchItems = [
     {
-      label: 'InsureSphere AI (Flagship · Enterprise SaaS & Reinsurance Platform)',
+      label: 'InsureSphere AI (Enterprise SaaS & Reinsurance Platform)',
       description:
         'React.js · Python · Django REST Framework · PostgreSQL · Quota-Share Treaties · Claims AI',
-      category: '★ Flagship Project',
+      category: 'Featured Project',
       action: () => {
         setSearchOpen(false);
         setActiveProjectModal(projects[0]);
