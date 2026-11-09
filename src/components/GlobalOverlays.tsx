@@ -83,7 +83,7 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
     {
       label: 'InsureSphere AI (Enterprise SaaS & Reinsurance Platform)',
       description:
-        'React.js · Python · Django REST Framework · PostgreSQL · Quota-Share Treaties · Claims AI',
+        'React.js · Python · Django REST Framework · PostgreSQL · AWS Cloud · Quota-Share Treaties · Claims AI',
       category: 'Featured Project',
       action: () => {
         setSearchOpen(false);
@@ -115,6 +115,15 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
       action: () => {
         setSearchOpen(false);
         setActiveProjectModal(projects[3]);
+      },
+    },
+    {
+      label: 'AWS Cloud, Python & GenAI Technology Universe',
+      description: 'AWS Cloud (EC2, S3, RDS) · Python · Django · React · Docker · CI/CD',
+      category: 'Skills & Cloud',
+      action: () => {
+        setSearchOpen(false);
+        document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
       },
     },
     {

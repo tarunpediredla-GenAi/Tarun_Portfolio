@@ -26,14 +26,14 @@ export function generateResumeMarkdown(): string {
       '',
     ]),
     '## Core Engineering Stack',
-    'React + Python + Django REST Framework + PostgreSQL + JWT Authentication',
+    'React + Python + Django REST Framework + PostgreSQL + AWS Cloud + JWT Authentication',
     '',
     '## Technical Skills & Stack',
     '- **Frontend**: React.js, JavaScript, Tailwind CSS, HTML, CSS',
     '- **Backend & APIs**: Python, Django, Django REST Framework (DRF), JWT / SimpleJWT, RBAC, Express',
     '- **Databases**: PostgreSQL, MySQL, Firebase Firestore',
     '- **AI-Assisted Analysis & RAG (Verification Ongoing)**: Claims analysis triage, policy RAG retrieval',
-    '- **Testing & Dev**: Vitest, Git and GitHub, Docker, CI/CD, Vercel',
+    '- **Cloud, Dev & Testing**: AWS Cloud (EC2, S3, RDS, IAM), Docker, CI/CD, Git and GitHub, Vitest, Vercel',
     `> Note: ${skills.note}`,
     '',
     '## Featured Projects',
@@ -183,7 +183,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                 Core Engineering Stack:
               </span>
               <span className="font-mono text-xs font-bold text-[#1B231F]">
-                React + Python + Django REST Framework + PostgreSQL + JWT Authentication
+                React + Python + Django REST Framework + PostgreSQL + AWS Cloud + JWT Authentication
               </span>
             </div>
 
@@ -207,9 +207,9 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                 <span className="font-semibold text-[#1B231F]">AI-Assisted Features: </span>
                 Claims Analysis &amp; Policy RAG Studio (Verification Ongoing)
               </div>
-              <div>
-                <span className="font-semibold text-[#1B231F]">Testing &amp; Deployment: </span>
-                Vitest, Git and GitHub, Docker, CI/CD, Vercel
+              <div className="sm:col-span-2">
+                <span className="font-semibold text-[#1B231F]">Cloud, Testing &amp; Deployment: </span>
+                AWS Cloud (EC2, S3, RDS, IAM), Docker, CI/CD, Git and GitHub, Vitest, Vercel
               </div>
             </div>
           </div>

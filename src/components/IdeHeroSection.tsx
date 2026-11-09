@@ -29,6 +29,7 @@ const HERO_STACK_PILLS = [
   'Django',
   'React.js',
   'JavaScript',
+  'AWS Cloud',
   'GenAI · Gemini',
   'Agentic AI · n8n & Vapi',
 ];

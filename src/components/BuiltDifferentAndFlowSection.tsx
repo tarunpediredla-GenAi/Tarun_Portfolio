@@ -28,6 +28,7 @@ const EDITORIAL_TICKER_ITEMS = [
   'HYDERABAD, TELANGANA',
   'DJANGO & REST APIS',
   'REACT & JAVASCRIPT',
+  'AWS CLOUD INFRASTRUCTURE',
   'GOOGLE GEMINI · N8N · VAPI',
   'DOCKER & CI/CD PIPELINES',
 ];
@@ -101,13 +102,13 @@ const ROBOT_HAND_SKILLS: RobotHandSkill[] = [
   },
   {
     id: 'devops-cloud',
-    shortLabel: 'DOCKER · CI/CD',
-    badgeSub: 'CLOUD & DEVOPS',
-    title: 'Docker, CI/CD & Cloud',
-    category: '06 · Deployment & Delivery',
+    shortLabel: 'AWS · DOCKER · CI/CD',
+    badgeSub: 'AWS CLOUD & DEVOPS',
+    title: 'AWS Cloud, Docker & CI/CD',
+    category: '06 · Cloud & Deployment',
     description:
-      'Containerized services, automated Git & GitHub CI/CD pipelines, and zero-downtime Vercel hosting.',
-    pills: ['Docker', 'CI/CD', 'Git & GitHub', 'Vercel'],
+      'Scalable AWS Cloud infrastructure (EC2, S3, RDS), containerized services, automated GitHub CI/CD pipelines, and Vercel hosting.',
+    pills: ['AWS Cloud', 'Docker', 'CI/CD', 'Git & GitHub', 'Vercel'],
     accentHex: '#35423C',
   },
 ];
@@ -1073,7 +1074,7 @@ export const BuiltDifferentAndFlowSection: React.FC<
                   {
                     label: 'Core Stack',
                     title: 'Python · Django · React',
-                    sub: 'PostgreSQL · MySQL · Docker',
+                    sub: 'AWS Cloud · PostgreSQL · Docker',
                   },
                 ].map((card, i) => (
                   <motion.div
@@ -1252,7 +1253,7 @@ export const BuiltDifferentAndFlowSection: React.FC<
                 engineering skills right in its hands — or click its palms
                 to cycle through{' '}
                 <span className="text-[#5E1726] font-bold underline decoration-[#5E1726] underline-offset-4">
-                  Python, Django, React, Generative AI, and Agentic AI
+                  Python, Django, React, AWS Cloud, Generative AI, and Agentic AI
                   workflows
                 </span>
                 .
@@ -1452,7 +1453,7 @@ export const BuiltDifferentAndFlowSection: React.FC<
                     </h4>
                   </div>
                   <span className="text-[11px] font-mono font-semibold px-2.5 py-1 rounded-full bg-[#EFE8DA] border border-[#687A70]/40 text-[#232B27]">
-                    12 Production Technologies
+                    {INSURESPHERE_TECH_STACK.length} Production Technologies
                   </span>
                 </div>
 
@@ -1463,11 +1464,11 @@ export const BuiltDifferentAndFlowSection: React.FC<
                       ✦ Core Engineering Stack:
                     </span>
                     <span className="text-xs font-mono font-bold text-[#232B27]">
-                      React + Python + Django REST Framework + PostgreSQL + JWT Authentication
+                      React + Python + Django REST Framework + PostgreSQL + AWS Cloud + JWT Authentication
                     </span>
                   </div>
                   <p className="text-xs text-[#35423C] font-medium leading-relaxed">
-                    Primary production stack powering authenticated role-based endpoints, policy underwriting state machines, and relational PostgreSQL persistence.
+                    Primary production stack powering authenticated role-based endpoints, policy underwriting state machines, AWS Cloud infrastructure, and relational PostgreSQL persistence.
                   </p>
                 </div>
 

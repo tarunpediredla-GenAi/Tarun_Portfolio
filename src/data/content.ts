@@ -235,8 +235,8 @@ export const portfolioContent: PortfolioContent = {
     heading: 'Full Stack Python & AI Systems Engineering',
     summaryParagraphs: [
       'I am a Full Stack Python Developer based in Hyderabad, Telangana, building web applications that connect responsive React interfaces with structured Python and Django backends, relational and document databases, and practical Generative AI workflows.',
-      'My career began with solid frontend foundations in HTML, CSS, JavaScript, and React.js at Saras India Systems Private Limited, progressed into end-to-end Python full stack engineering at CP Academy, and now encompasses Full Stack Python, Generative AI, Agentic AI, Docker workflows, and CI/CD pipelines at Finite HR & IT Solution.',
-      'Across my engineering work and portfolio systems, I focus on reliable state management, clean API contracts, voice-first and conversational AI interfaces powered by Google Gemini and Vapi, and automated n8n orchestration pipelines.',
+      'My career began with solid frontend foundations in HTML, CSS, JavaScript, and React.js at Saras India Systems Private Limited, progressed into end-to-end Python full stack engineering at CP Academy, and now encompasses Full Stack Python, Generative AI, Agentic AI, AWS Cloud, Docker workflows, and CI/CD pipelines at Finite HR & IT Solution.',
+      'Across my engineering work and portfolio systems, I focus on reliable state management, clean API contracts, scalable AWS Cloud deployments, voice-first and conversational AI interfaces powered by Google Gemini and Vapi, and automated n8n orchestration pipelines.',
     ],
     philosophyTitle: 'Development Philosophy',
     philosophyPillars: [
@@ -256,7 +256,7 @@ export const portfolioContent: PortfolioContent = {
         index: '03',
         title: 'Production Discipline',
         description:
-          'Prioritizing role-based access rules, server-side verification, Docker containerization, and reproducible CI/CD deployment workflows.',
+          'Prioritizing role-based access rules, server-side verification, AWS Cloud infrastructure, Docker containerization, and reproducible CI/CD deployment workflows.',
       },
     ],
   },
@@ -269,14 +269,14 @@ export const portfolioContent: PortfolioContent = {
       period: '1 April 2025 – Present',
       location: 'Hyderabad, Telangana',
       summary:
-        'Developing full stack Python web applications and integrating Generative AI and Agentic AI workflows with containerized deployment pipelines.',
+        'Developing full stack Python web applications and integrating Generative AI and Agentic AI workflows with AWS Cloud and containerized deployment pipelines.',
       responsibilities: [
         'Full stack Python application development across modern web architectures',
         'Building and maintaining cohesive frontend and backend functionality',
         'Generative AI and agentic AI application development and workflow orchestration',
-        'Managing Docker workflows and automated CI/CD pipelines',
+        'Deploying and managing cloud services on AWS alongside Docker workflows and automated CI/CD pipelines',
       ],
-      technologies: ['Python', 'Django', 'React.js', 'Generative AI', 'Agentic AI', 'Docker', 'CI/CD'],
+      technologies: ['Python', 'Django', 'React.js', 'Generative AI', 'Agentic AI', 'AWS Cloud', 'Docker', 'CI/CD'],
     },
     {
       id: 'cp-academy',
@@ -602,6 +602,18 @@ export const portfolioContent: PortfolioContent = {
         accentColor: '#94a3b8',
       },
       {
+        id: 'aws',
+        name: 'AWS Cloud',
+        category: 'Dev & Deployment',
+        scopeNote: 'Cloud Infrastructure & Services',
+        purpose: 'Cloud compute (EC2), S3 storage, RDS databases & IAM security',
+        description: 'Cloud infrastructure deployment and management using AWS EC2, S3 object storage, RDS PostgreSQL, IAM access control, and scalable cloud architecture.',
+        projectsUsedIn: ['Finite HR & IT Solution', 'InsureSphere AI', 'Cloud Deployments'],
+        orbitRadius: 5.2,
+        orbitAngle: 4.5,
+        accentColor: '#f59e0b',
+      },
+      {
         id: 'vercel',
         name: 'Vercel',
         category: 'Dev & Deployment',
@@ -610,7 +622,7 @@ export const portfolioContent: PortfolioContent = {
         description: 'Production SPA and serverless API route deployment with environment configuration.',
         projectsUsedIn: ['Satya’s Education'],
         orbitRadius: 5.2,
-        orbitAngle: 5.1,
+        orbitAngle: 5.5,
         accentColor: '#94a3b8',
       },
     ],
@@ -638,6 +650,7 @@ export const portfolioContent: PortfolioContent = {
         'JavaScript',
         'Tailwind CSS',
         'PostgreSQL',
+        'AWS Cloud',
         'JWT',
         'REST APIs',
         'RBAC',
@@ -652,6 +665,7 @@ export const portfolioContent: PortfolioContent = {
         'JavaScript',
         'Tailwind CSS',
         'PostgreSQL',
+        'AWS Cloud',
         'JWT',
         'REST APIs',
         'RBAC',
@@ -663,6 +677,7 @@ export const portfolioContent: PortfolioContent = {
         'Python',
         'Django REST Framework',
         'PostgreSQL',
+        'AWS Cloud',
         'JWT Authentication',
       ],
       aiVerificationFeatures: [
@@ -1511,17 +1526,13 @@ export const SKILL_CATEGORIES = [
   },
   {
     id: 'dev-deployment',
-    title: 'Dev & Testing',
-    subtitle: 'Automated testing, containerization, version control & cloud hosting',
+    title: 'Cloud, Dev & Testing',
+    subtitle: 'AWS Cloud infrastructure, Docker containerization, CI/CD & automated testing',
     accent: '#7A8B82',
     skills: [
       {
-        name: 'Vitest',
-        purpose: 'Tests React application functionality',
-      },
-      {
-        name: 'Git and GitHub',
-        purpose: 'Saves and manages project source code',
+        name: 'AWS Cloud (EC2, S3, RDS)',
+        purpose: 'Cloud compute, S3 document storage, RDS PostgreSQL & IAM security',
       },
       {
         name: 'Docker',
@@ -1530,6 +1541,14 @@ export const SKILL_CATEGORIES = [
       {
         name: 'CI/CD',
         purpose: 'Automated build, lint, test, and deployment pipelines',
+      },
+      {
+        name: 'Git and GitHub',
+        purpose: 'Saves and manages project source code',
+      },
+      {
+        name: 'Vitest',
+        purpose: 'Tests React application functionality',
       },
       {
         name: 'Vercel',
@@ -1622,6 +1641,13 @@ export const ENTERPRISE_SKILLS_TABLE: EnterpriseSkillPurpose[] = [
     primaryProject: 'InsureSphere AI (Policy & RAG Studio)',
   },
   {
+    technology: 'AWS Cloud',
+    purpose: 'Cloud compute (EC2), S3 storage, RDS PostgreSQL & IAM security',
+    category: 'Dev & Deployment',
+    statusBadge: 'Cloud Infrastructure',
+    primaryProject: 'Finite HR & InsureSphere AI',
+  },
+  {
     technology: 'Vitest',
     purpose: 'Tests React application functionality',
     category: 'Dev & Deployment',
@@ -1639,7 +1665,7 @@ export const ENTERPRISE_SKILLS_TABLE: EnterpriseSkillPurpose[] = [
 
 /**
  * InsureSphere AI — Flagship Tech Stack
- * Exact 12 core technologies powering the production codebase.
+ * Core technologies powering the production codebase.
  */
 export const INSURESPHERE_TECH_STACK = [
   'Python',
@@ -1649,6 +1675,7 @@ export const INSURESPHERE_TECH_STACK = [
   'JavaScript',
   'Tailwind CSS',
   'PostgreSQL',
+  'AWS Cloud',
   'JWT',
   'REST APIs',
   'RBAC',
@@ -1665,6 +1692,7 @@ export const CORE_ENGINEERING_STACK = [
   'Python',
   'Django REST Framework',
   'PostgreSQL',
+  'AWS Cloud',
   'JWT Authentication',
 ];
 
@@ -1752,7 +1780,7 @@ export const KINETIC_ROLES = [
   { role: 'DEVELOPER', caption: 'Clean Code & API Architecture' },
   { role: 'CREATOR', caption: 'Voice AI · Gemini · Vapi · n8n' },
   { role: 'THINKER', caption: 'System Design & Data Modeling' },
-  { role: 'SHIPPER', caption: 'Docker · CI/CD · Vercel Production' },
+  { role: 'SHIPPER', caption: 'AWS Cloud · Docker · CI/CD · Vercel' },
   { role: 'PROBLEM-SOLVER', caption: 'Deterministic AI & Business Logic' },
 ];
 
