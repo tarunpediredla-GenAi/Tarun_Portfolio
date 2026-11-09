@@ -3,6 +3,12 @@
  * Source of truth: Tarun Pediredla's resume and verified public GitHub repositories.
  */
 
+import satyaEducationImg from '../assets/images/project_satya_education_1793895968852.jpg';
+import alexInterviewerImg from '../assets/images/project_alex_interviewer_1793895970870.jpg';
+import voiceTaskPlannerImg from '../assets/images/project_voice_task_planner_1793895973106.jpg';
+import commandBackdropImg from '../assets/images/tarun_command_backdrop_1793895972254.jpg';
+
+
 export interface ExperienceItem {
   id: string;
   company: string;
@@ -1115,7 +1121,7 @@ export const portfolioContent: PortfolioContent = {
       githubUrl: 'https://github.com/tarunpediredla-GenAi/SatyaEducationinstitute',
       liveUrl: 'https://satyaeducationinstitute.vercel.app',
       liveUrlNote: 'Verified live deployment on Vercel (HTTP 200)',
-      heroImage: '/src/assets/images/project_satya_education_1793895968852.jpg',
+      heroImage: satyaEducationImg,
       technologies: ['React', 'JavaScript', 'Django', 'Firebase', 'Firestore', 'Cashfree', 'Vercel'],
       description:
         'An e-commerce and digital-learning platform supporting physical/digital books, recorded video courses, and separate student and administrator experiences.',
@@ -1194,7 +1200,7 @@ export const portfolioContent: PortfolioContent = {
       title: 'Alex AI Mock Technical Interviewer',
       subtitle: 'Conversational Voice & Text AI Technical Interview Practice Platform',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/hiringmanager',
-      heroImage: '/src/assets/images/project_alex_interviewer_1793895970870.jpg',
+      heroImage: alexInterviewerImg,
       technologies: ['React', 'JavaScript', 'Express', 'Gemini', 'Firebase'],
       description:
         'A conversational AI technical interview practice application featuring spoken and typed interaction, a 50-question Full Stack Python & GenAI curriculum, an interactive system-design whiteboard, and structured hiring-rubric evaluations.',
@@ -1272,7 +1278,7 @@ export const portfolioContent: PortfolioContent = {
       title: 'AI Voice Task Planner',
       subtitle: 'Voice-Driven Task Management & AI Day-Planning Automation Pipeline',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/n8n-ai-automations',
-      heroImage: '/src/assets/images/project_voice_task_planner_1793895973106.jpg',
+      heroImage: voiceTaskPlannerImg,
       technologies: ['n8n', 'Vapi', 'Google Gemini', 'Google Sheets', 'Webhooks'],
       description:
         'A voice-driven automation workflow connecting spoken phone instructions to structured Google Sheets task storage and Google Gemini-generated time-blocked daily schedules.',
@@ -1375,8 +1381,7 @@ export const portfolioContent: PortfolioContent = {
   ],
 };
 
-export const COMMAND_BACKDROP_IMAGE =
-  '/src/assets/images/tarun_command_backdrop_1793895972254.jpg';
+export const COMMAND_BACKDROP_IMAGE = commandBackdropImg;
 
 export const TARUN_PORTRAIT_IMAGE =
   '/assets/aistudio/Warm_Rim-Lit_Developer_Portrait_3ff9f2c3.png';

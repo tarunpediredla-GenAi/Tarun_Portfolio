@@ -56,6 +56,7 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
   const [pointerNormalized, setPointerNormalized] = useState({ x: 0, y: 0 });
   const [scrolledDown, setScrolledDown] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Detect reduced-motion preference for accessibility
   useEffect(() => {
@@ -266,7 +267,7 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
       {/* =====================================================================
           TOP FLOATING NAVIGATION BAR (Adaptive Glassmorphism)
          ===================================================================== */}
-      <header className="fixed top-3.5 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-4 pointer-events-none flex justify-center">
+      <header className="fixed top-3.5 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-4 pointer-events-none flex flex-col items-center">
         <nav
           aria-label="Primary portfolio navigation"
           className={`pointer-events-auto flex items-center gap-1 sm:gap-1.5 px-3 py-1.5 rounded-full border backdrop-blur-xl transition-all duration-300 shadow-2xl ${
@@ -277,6 +278,7 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
         >
           <a
             href="#"
+            onClick={() => setMobileMenuOpen(false)}
             className={`px-3 py-1 rounded-full text-[11px] font-mono font-bold tracking-wider transition-colors ${
               scrolledDown
                 ? 'bg-[#5E1726] text-[#F6F1E7]'
@@ -302,7 +304,10 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
           </div>
           <button
             type="button"
-            onClick={onOpenResume}
+            onClick={() => {
+              setMobileMenuOpen(false);
+              onOpenResume();
+            }}
             className={`px-3 py-1 rounded-full text-xs font-mono font-bold transition-colors cursor-pointer ${
               scrolledDown
                 ? 'bg-[#EFE8DA] border border-[#687A70]/40 text-[#5E1726] hover:bg-[#5E1726] hover:text-[#F6F1E7]'
@@ -313,7 +318,10 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
           </button>
           <button
             type="button"
-            onClick={onOpenSearch}
+            onClick={() => {
+              setMobileMenuOpen(false);
+              onOpenSearch();
+            }}
             className={`px-2.5 py-1 rounded-full text-[11px] font-mono font-bold transition-colors cursor-pointer ${
               scrolledDown
                 ? 'bg-[#DCE3DF] text-[#232B27] hover:bg-[#5E1726] hover:text-[#F6F1E7]'
@@ -322,7 +330,46 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
           >
             ⌘K
           </button>
+          <button
+            type="button"
+            aria-label="Toggle mobile navigation menu"
+            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            className={`md:hidden px-2.5 py-1 rounded-full text-[11px] font-mono font-bold transition-colors cursor-pointer ${
+              scrolledDown
+                ? 'bg-[#DCE3DF] text-[#232B27] hover:bg-[#5E1726] hover:text-[#F6F1E7]'
+                : 'bg-white/10 text-slate-200 hover:bg-white/20'
+            }`}
+          >
+            {mobileMenuOpen ? '✕' : 'Menu'}
+          </button>
         </nav>
+
+        {/* Mobile Navigation Dropdown */}
+        {mobileMenuOpen && (
+          <div
+            className={`pointer-events-auto md:hidden mt-2 flex flex-wrap items-center justify-center gap-1.5 px-4 py-2.5 rounded-2xl border backdrop-blur-xl shadow-2xl ${
+              scrolledDown
+                ? 'border-[#687A70]/45 bg-[#FAF7F2]/95 text-[#232B27]'
+                : 'border-sky-400/25 bg-[#050A1F]/92 text-slate-100'
+            }`}
+          >
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                  scrolledDown
+                    ? 'text-[#232B27] hover:bg-[#DCE3DF] hover:text-[#5E1726]'
+                    : 'text-slate-200 hover:bg-white/10 hover:text-sky-300'
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        )}
       </header>
 
       {/* =====================================================================

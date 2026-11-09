@@ -179,15 +179,23 @@ function createSkillPlateTexture(
   return texture;
 }
 
+interface CyberneticBotCanvasProps {
+  activeSkillIdx: number;
+  onSelectSkill: (idxOrUpdater: number | ((prev: number) => number)) => void;
+  conjureTriggerRef: React.MutableRefObject<number>;
+}
+
 /**
  * Interactive 3D WebGL Cybernetic AI Bot & Cinematic Hand-Held Skill Projector
  * Sculpted in Warm Cream Beige ceramic armor, Muted Sage Grey chassis joints, and Deep Burgundy core/visor accents.
  * The robot holds both articulated hands forward, projecting an orbiting 3D hologram of Tarun's skills right in its hands!
  */
-function CyberneticBotCanvas() {
+function CyberneticBotCanvas({
+  activeSkillIdx,
+  onSelectSkill,
+  conjureTriggerRef,
+}: CyberneticBotCanvasProps) {
   const mountRef = useRef<HTMLDivElement>(null);
-  const conjureTriggerRef = useRef<number>(0);
-  const [activeSkillIdx, setActiveSkillIdx] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
   const activeSkill = ROBOT_HAND_SKILLS[activeSkillIdx];
@@ -197,14 +205,14 @@ function CyberneticBotCanvas() {
     if (isPaused) return;
     const id = window.setInterval(() => {
       conjureTriggerRef.current = 1.35;
-      setActiveSkillIdx((prev) => (prev + 1) % ROBOT_HAND_SKILLS.length);
+      onSelectSkill((prev) => (prev + 1) % ROBOT_HAND_SKILLS.length);
     }, 3000);
     return () => window.clearInterval(id);
-  }, [isPaused]);
+  }, [isPaused, onSelectSkill, conjureTriggerRef]);
 
   const handleSelectSkill = (idx: number) => {
     conjureTriggerRef.current = 1.5;
-    setActiveSkillIdx(idx);
+    onSelectSkill(idx);
   };
 
   useEffect(() => {
@@ -652,6 +660,7 @@ function CyberneticBotCanvas() {
     let isDragging = false;
     let dragOffsetX = 0;
     let prevPointerX = 0;
+    let downPointerX = 0;
 
     const onPointerMove = (e: PointerEvent) => {
       const rect = container.getBoundingClientRect();
@@ -669,11 +678,14 @@ function CyberneticBotCanvas() {
     const onPointerDown = (e: PointerEvent) => {
       isDragging = true;
       prevPointerX = e.clientX;
+      downPointerX = e.clientX;
       conjureTriggerRef.current = 1.5;
-      setActiveSkillIdx((prev) => (prev + 1) % ROBOT_HAND_SKILLS.length);
     };
 
-    const onPointerUp = () => {
+    const onPointerUp = (e: PointerEvent) => {
+      if (isDragging && Math.abs(e.clientX - downPointerX) < 8) {
+        onSelectSkill((prev) => (prev + 1) % ROBOT_HAND_SKILLS.length);
+      }
       isDragging = false;
     };
 
@@ -811,7 +823,7 @@ function CyberneticBotCanvas() {
         container.removeChild(renderer.domElement);
       }
     };
-  }, []);
+  }, [conjureTriggerRef, onSelectSkill]);
 
   return (
     <div
@@ -917,7 +929,17 @@ export const BuiltDifferentAndFlowSection: React.FC<
   BuiltDifferentAndFlowSectionProps
 > = ({ onOpenResume }) => {
   const flowTriggerRef = useRef<HTMLDivElement>(null);
+  const conjureTriggerRef = useRef<number>(0);
+  const [activeRobotSkillIdx, setActiveRobotSkillIdx] = useState<number>(0);
   const [activeSkillCategory, setActiveSkillCategory] = useState<string>('all');
+
+  const handleSelectRobotSkill = React.useCallback(
+    (idxOrUpdater: number | ((prev: number) => number)) => {
+      conjureTriggerRef.current = 1.5;
+      setActiveRobotSkillIdx(idxOrUpdater);
+    },
+    []
+  );
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -1250,8 +1272,8 @@ export const BuiltDifferentAndFlowSection: React.FC<
               </h2>
               <p className="mt-3.5 text-[#35423C] max-w-lg text-sm sm:text-base md:text-lg leading-relaxed font-medium">
                 Watch the cybernetic AI core conjure and orbit my core
-                engineering skills right in its hands — or click its palms
-                to cycle through{' '}
+                engineering skills right in its hands — or click any skill badge
+                or its palms to cycle through{' '}
                 <span className="text-[#5E1726] font-bold underline decoration-[#5E1726] underline-offset-4">
                   Python, Django, React, AWS Cloud, Generative AI, and Agentic AI
                   workflows
@@ -1265,23 +1287,44 @@ export const BuiltDifferentAndFlowSection: React.FC<
                   const IconComp =
                     skillDomainIcons[idx % skillDomainIcons.length] ||
                     Layers;
+                  const isActive = idx === activeRobotSkillIdx;
                   return (
-                    <div
+                    <button
+                      type="button"
                       key={sk.id}
-                      className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#FAF7F2]/90 border border-[#687A70]/45 shadow-2xs"
+                      onClick={() => handleSelectRobotSkill(idx)}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-xl border text-left transition-all cursor-pointer shadow-2xs ${
+                        isActive
+                          ? 'bg-[#5E1726] border-[#5E1726] text-[#F6F1E7] scale-[1.02] shadow-md'
+                          : 'bg-[#FAF7F2]/90 border-[#687A70]/45 hover:border-[#5E1726]'
+                      }`}
                     >
-                      <span className="w-6 h-6 rounded-lg bg-[#5E1726] text-[#F6F1E7] flex items-center justify-center shrink-0">
+                      <span
+                        className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 ${
+                          isActive
+                            ? 'bg-[#F6F1E7] text-[#5E1726]'
+                            : 'bg-[#5E1726] text-[#F6F1E7]'
+                        }`}
+                      >
                         <IconComp className="w-3.5 h-3.5" />
                       </span>
                       <div className="min-w-0">
-                        <span className="block text-[10px] font-mono font-extrabold text-[#232B27] truncate">
+                        <span
+                          className={`block text-[10px] font-mono font-extrabold truncate ${
+                            isActive ? 'text-[#F6F1E7]' : 'text-[#232B27]'
+                          }`}
+                        >
                           {sk.shortLabel}
                         </span>
-                        <span className="block text-[9px] font-mono text-[#5E1726] font-semibold truncate">
+                        <span
+                          className={`block text-[9px] font-mono font-semibold truncate ${
+                            isActive ? 'text-[#EFE8DA]' : 'text-[#5E1726]'
+                          }`}
+                        >
                           {sk.badgeSub}
                         </span>
                       </div>
-                    </div>
+                    </button>
                   );
                 })}
               </div>
@@ -1319,7 +1362,11 @@ export const BuiltDifferentAndFlowSection: React.FC<
 
             {/* Right Column: Interactive 3D WebGL Stage with Hand-Held Skill Hologram */}
             <div className="flex-1 relative min-h-[460px] md:min-h-screen">
-              <CyberneticBotCanvas />
+              <CyberneticBotCanvas
+                activeSkillIdx={activeRobotSkillIdx}
+                onSelectSkill={handleSelectRobotSkill}
+                conjureTriggerRef={conjureTriggerRef}
+              />
             </div>
           </div>
         </section>

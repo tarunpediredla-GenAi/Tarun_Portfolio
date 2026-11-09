@@ -62,7 +62,7 @@ export const ProfileCardAndFooter: React.FC<ProfileCardAndFooterProps> = ({
     wrapper.style.setProperty('--pointer-from-center', '0');
     wrapper.style.setProperty('--rotate-x', '0deg');
     wrapper.style.setProperty('--rotate-y', '0deg');
-    wrapper.style.setProperty('--card-opacity', '0');
+    wrapper.style.setProperty('--card-opacity', '0.35');
   };
 
   const copyToClipboard = (value: string, field: 'email' | 'phone') => {
@@ -353,147 +353,151 @@ export const ProfileCardAndFooter: React.FC<ProfileCardAndFooterProps> = ({
          ===================================================================== */}
       <section className="relative w-full mt-0 overflow-hidden">
         <footer className="border-t border-[#F6F1E7]/20 bg-[#4A111D] text-[#EFE8DA] relative">
-          <div className="max-w-7xl mx-auto flex flex-col justify-between min-h-[34rem] sm:min-h-[36rem] md:min-h-[40rem] relative p-6 py-12">
+          <div className="max-w-7xl mx-auto flex flex-col justify-between relative px-6 py-14 space-y-12">
             {/* Top Footer Content */}
-            <div className="flex flex-col mb-12 sm:mb-20 md:mb-0 w-full z-10">
-              <div className="w-full flex flex-col items-center">
-                <div className="space-y-2 flex flex-col items-center text-center">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[#F6F1E7] text-3xl font-bold tracking-tight">
-                      {TARUN_PROFILE.name}
-                    </span>
-                  </div>
-                  <p className="text-sm font-mono text-[#DCE3DF] font-bold">
-                    Full Stack Python Developer with Gen AI &amp; Agentic AI ·{' '}
-                    {TARUN_PROFILE.location}
-                  </p>
-                  <p className="text-[#EFE8DA] font-medium text-center w-full max-w-md sm:w-96 px-4 sm:px-0">
-                    {TARUN_PROFILE.tagline}
-                  </p>
-                </div>
+            <div className="w-full flex flex-col items-center z-10">
+              <div className="space-y-2 flex flex-col items-center text-center">
+                <span className="text-[#F6F1E7] text-3xl font-bold tracking-tight">
+                  {TARUN_PROFILE.name}
+                </span>
+                <p className="text-sm font-mono text-[#DCE3DF] font-bold">
+                  Full Stack Python Developer with Gen AI &amp; Agentic AI ·{' '}
+                  {TARUN_PROFILE.location}
+                </p>
+                <p className="text-[#EFE8DA] font-medium text-center w-full max-w-md sm:w-96 px-4 sm:px-0">
+                  {TARUN_PROFILE.tagline}
+                </p>
+              </div>
 
-                {/* Social & Contact Icons */}
-                <div className="flex mb-8 mt-5 gap-5">
-                  <a
-                    href={TARUN_PROFILE.github}
+              {/* Social & Contact Icons */}
+              <div className="flex mb-6 mt-5 gap-5">
+                <a
+                  href={TARUN_PROFILE.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#EFE8DA] hover:text-white transition-colors"
+                  aria-label="GitHub"
+                >
+                  <svg
+                    className="w-6 h-6 hover:scale-110 duration-300"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-1.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                    <path d="M9 18c-4.51 2-5-2-7-2" />
+                  </svg>
+                </a>
+
+                <a
+                  href={`mailto:${TARUN_PROFILE.email}`}
+                  className="text-[#EFE8DA] hover:text-white transition-colors"
+                  aria-label="Email"
+                >
+                  <svg
+                    className="w-6 h-6 hover:scale-110 duration-300"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                </a>
+
+                <a
+                  href={`tel:${TARUN_PROFILE.phoneClean}`}
+                  className="text-[#EFE8DA] hover:text-white transition-colors"
+                  aria-label="Phone"
+                >
+                  <svg
+                    className="w-6 h-6 hover:scale-110 duration-300"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Section Navigation Links */}
+              <div className="flex flex-wrap gap-5 text-sm font-semibold text-[#F6F1E7] justify-center mt-2">
+                <a className="hover:text-[#DCE3DF] duration-300" href="#about">
+                  About
+                </a>
+                <a className="hover:text-[#DCE3DF] duration-300" href="#journey">
+                  Experience
+                </a>
+                <a className="hover:text-[#DCE3DF] duration-300" href="#skills">
+                  Skills
+                </a>
+                <a className="hover:text-[#DCE3DF] duration-300" href="#showcase">
+                  Projects
+                </a>
+                <a className="hover:text-[#DCE3DF] duration-300" href="#gallery">
+                  Gallery
+                </a>
+                <a className="hover:text-[#DCE3DF] duration-300" href="#flagship">
+                  Flagship
+                </a>
+                <a className="hover:text-[#DCE3DF] duration-300" href="#contact">
+                  Contact
+                </a>
+              </div>
+
+              {/* Verified Project Repository Direct Links */}
+              <div className="flex flex-wrap gap-3 justify-center mt-5">
+                {FEATURED_PROJECTS.map((proj) => (
+                  <motion.a
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.97 }}
+                    key={proj.id}
+                    href={proj.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#EFE8DA] hover:text-white transition-colors"
-                    aria-label="GitHub"
+                    className="text-xs font-mono font-bold text-[#5E1726] bg-[#F6F1E7] hover:bg-[#EFE8DA] px-3.5 py-1.5 rounded-full transition-colors"
                   >
-                    <svg
-                      className="w-6 h-6 hover:scale-110 duration-300"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-1.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-                      <path d="M9 18c-4.51 2-5-2-7-2" />
-                    </svg>
-                  </a>
+                    {proj.title} ↗
+                  </motion.a>
+                ))}
+              </div>
+            </div>
 
-                  <a
-                    href={`mailto:${TARUN_PROFILE.email}`}
-                    className="text-[#EFE8DA] hover:text-white transition-colors"
-                    aria-label="Email"
-                  >
-                    <svg
-                      className="w-6 h-6 hover:scale-110 duration-300"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <rect width="20" height="16" x="2" y="4" rx="2" />
-                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                    </svg>
-                  </a>
+            {/* Monumental Background Name + Centered Emblem Badge (Zero Overlap Flow) */}
+            <div className="relative flex flex-col items-center justify-center py-4">
+              <div
+                aria-hidden="true"
+                className="text-[#F6F1E7]/20 leading-none font-extrabold tracking-tighter pointer-events-none select-none text-center px-4"
+                style={{
+                  fontSize: 'clamp(2.2rem, 10vw, 8.5rem)',
+                  maxWidth: '96vw',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                TARUN PEDIREDLA
+              </div>
 
-                  <a
-                    href={`tel:${TARUN_PROFILE.phoneClean}`}
-                    className="text-[#EFE8DA] hover:text-white transition-colors"
-                    aria-label="Phone"
-                  >
-                    <svg
-                      className="w-6 h-6 hover:scale-110 duration-300"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                    </svg>
-                  </a>
-                </div>
-
-                {/* Section Navigation Links */}
-                <div className="flex flex-wrap gap-5 text-sm font-semibold text-[#F6F1E7] justify-center mt-2">
-                  <a
-                    className="hover:text-[#DCE3DF] duration-300"
-                    href="#about"
-                  >
-                    About
-                  </a>
-                  <a
-                    className="hover:text-[#DCE3DF] duration-300"
-                    href="#journey"
-                  >
-                    Experience
-                  </a>
-                  <a
-                    className="hover:text-[#DCE3DF] duration-300"
-                    href="#skills"
-                  >
-                    Skills
-                  </a>
-                  <a
-                    className="hover:text-[#DCE3DF] duration-300"
-                    href="#showcase"
-                  >
-                    Projects
-                  </a>
-                  <a
-                    className="hover:text-[#DCE3DF] duration-300"
-                    href="#gallery"
-                  >
-                    Gallery
-                  </a>
-                  <a
-                    className="hover:text-[#DCE3DF] duration-300"
-                    href="#flagship"
-                  >
-                    Flagship
-                  </a>
-                  <a
-                    className="hover:text-[#DCE3DF] duration-300"
-                    href="#contact"
-                  >
-                    Contact
-                  </a>
-                </div>
-
-                {/* Verified Project Repository Direct Links */}
-                <div className="flex flex-wrap gap-3 justify-center mt-5">
-                  {FEATURED_PROJECTS.map((proj) => (
-                    <motion.a
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.97 }}
-                      key={proj.id}
-                      href={proj.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-mono font-bold text-[#5E1726] bg-[#F6F1E7] hover:bg-[#EFE8DA] px-3.5 py-1.5 rounded-full transition-colors"
-                    >
-                      {proj.title} ↗
-                    </motion.a>
-                  ))}
-                </div>
+              <div className="relative w-full flex items-center justify-center mt-4">
+                <div className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-[#F6F1E7]/30 to-transparent" />
+                <motion.div
+                  whileHover={{ scale: 1.08, rotate: 4 }}
+                  className="relative rounded-3xl bg-[#F6F1E7] border-2 border-[#DCE3DF] flex items-center justify-center p-2.5 z-10 shadow-xl"
+                >
+                  <div className="w-12 sm:w-14 md:w-16 h-12 sm:h-14 md:h-16 bg-[#5E1726] rounded-2xl flex items-center justify-center shadow-inner">
+                    <span className="font-mono font-black text-lg sm:text-xl tracking-tighter text-[#F6F1E7]">
+                      TP
+                    </span>
+                  </div>
+                </motion.div>
               </div>
             </div>
 
             {/* Copyright Row */}
-            <div className="mt-20 md:mt-24 flex flex-col gap-2 md:flex-row items-center justify-between px-4 md:px-0 z-10">
+            <div className="flex flex-col gap-2 md:flex-row items-center justify-between px-4 md:px-0 z-10">
               <p className="text-sm text-[#EFE8DA] text-center md:text-left">
                 ©2026 {TARUN_PROFILE.name}. All rights reserved.
               </p>
@@ -502,7 +506,7 @@ export const ProfileCardAndFooter: React.FC<ProfileCardAndFooterProps> = ({
                   href={TARUN_PROFILE.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-[#EFE8DA] hover:text-white transition-colors duration-300"
+                  className="text-sm text-[#EFE8DA] hover:text-white transition-colors duration-300 text-center"
                 >
                   Crafted with precision by {TARUN_PROFILE.name} ·{' '}
                   {TARUN_PROFILE.location}
@@ -510,32 +514,6 @@ export const ProfileCardAndFooter: React.FC<ProfileCardAndFooterProps> = ({
               </nav>
             </div>
           </div>
-
-          {/* Monumental Background Name Display (Warm Cream Beige) */}
-          <div
-            className="text-[#F6F1E7]/25 leading-none absolute left-1/2 -translate-x-1/2 bottom-32 md:bottom-28 font-extrabold tracking-tighter pointer-events-none select-none text-center px-4"
-            style={{
-              fontSize: 'clamp(2.5rem, 10.5vw, 9rem)',
-              maxWidth: '96vw',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            TARUN PEDIREDLA
-          </div>
-
-          {/* Centered Emblem Badge */}
-          <motion.div
-            whileHover={{ scale: 1.08, rotate: 4 }}
-            className="absolute bottom-16 md:bottom-14 rounded-3xl bg-[#F6F1E7] left-1/2 border-2 border-[#DCE3DF] flex items-center justify-center p-3 -translate-x-1/2 z-10 shadow-xl"
-          >
-            <div className="w-12 sm:w-16 md:w-20 h-12 sm:h-16 md:h-20 bg-[#5E1726] rounded-2xl flex items-center justify-center shadow-inner">
-              <span className="font-mono font-black text-lg sm:text-xl md:text-2xl tracking-tighter text-[#F6F1E7]">
-                TP
-              </span>
-            </div>
-          </motion.div>
-
-          <div className="absolute bottom-28 sm:bottom-26 h-px bg-gradient-to-r from-transparent via-[#F6F1E7]/30 to-transparent w-full left-1/2 -translate-x-1/2" />
         </footer>
       </section>
     </>

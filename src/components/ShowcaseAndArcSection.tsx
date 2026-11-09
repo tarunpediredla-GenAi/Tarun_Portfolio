@@ -410,11 +410,9 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                             <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#5E1726]">
                               {isFlagship ? 'InsureSphere AI — Tech Stack' : 'Technologies & Tools'}
                             </span>
-                            {isFlagship && (
-                              <span className="text-[10.5px] font-mono text-[#35423C]">
-                                12 Technologies
-                              </span>
-                            )}
+                            <span className="text-[10.5px] font-mono text-[#35423C]">
+                              {project.technologies.length} Technologies
+                            </span>
                           </div>
                           <div className="flex flex-wrap gap-1.5">
                             {project.technologies.map((tech) => (
@@ -436,7 +434,7 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                                 Core Engineering Stack:
                               </span>
                               <span className="text-[#35423C] font-semibold">
-                                React + Python + Django REST Framework + PostgreSQL + JWT Authentication
+                                React + Python + Django REST Framework + PostgreSQL + AWS Cloud + JWT Authentication
                               </span>
                             </div>
 

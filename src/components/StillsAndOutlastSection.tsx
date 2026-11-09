@@ -700,7 +700,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
                       height: '300px',
                       transform: `translate3d(${translateX}px, 0, ${translateZ}px) rotateY(${rotateY}deg)`,
                       zIndex: isCenter ? 20 : 10 - Math.abs(offset),
-                      opacity: isCenter ? 1 : 0.45,
+                      opacity: isCenter ? 1 : Math.abs(offset) === 1 ? 0.48 : 0.14,
                       transition:
                         'transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease',
                     }}

@@ -58,6 +58,19 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
   const [deductible, setDeductible] = useState<number>(50000);
   const [retentionPct, setRetentionPct] = useState<number>(60);
 
+  // Reset tab and sub-selections whenever a different project is opened
+  React.useEffect(() => {
+    setActiveTab('overview');
+    setSelectedModuleIdx(0);
+    setSelectedArchitectureNode(0);
+    setActiveScreenIdx(0);
+    if (project?.reinsuranceCalculatorDefaults) {
+      setGrossLoss(project.reinsuranceCalculatorDefaults.grossLoss);
+      setDeductible(project.reinsuranceCalculatorDefaults.deductible);
+      setRetentionPct(project.reinsuranceCalculatorDefaults.retentionPct);
+    }
+  }, [project?.id]);
+
   if (!project) return null;
 
   const isFlagship = project.id === 'insuresphere-ai' || project.isFlagship;
@@ -77,6 +90,18 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
       currency: 'USD',
       maximumFractionDigits: 0,
     }).format(val);
+
+  const tabBtnClass = (tab: TabType) => {
+    const isActive = activeTab === tab;
+    if (isFlagship) {
+      return isActive
+        ? 'bg-sky-400 text-slate-950 font-bold shadow-[0_0_16px_rgba(56,189,248,0.45)]'
+        : 'bg-slate-800/60 text-slate-300 hover:bg-slate-700/60';
+    }
+    return isActive
+      ? 'bg-[#FAF7F2] text-[#5E1726] font-bold shadow-sm'
+      : 'bg-black/20 text-[#F6F1E7]/90 hover:bg-black/35';
+  };
 
   return (
     <div
@@ -126,7 +151,9 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                       : 'bg-black/20 text-white/90'
                   }`}
                 >
-                  Full-Stack Python · Enterprise SaaS
+                  {isFlagship
+                    ? 'Full-Stack Python · Enterprise SaaS'
+                    : project.technologies.slice(0, 3).join(' · ')}
                 </span>
 
                 {project.statusBadge && (
@@ -174,70 +201,60 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
             </button>
           </div>
 
-          {/* Interactive Navigation Tabs for Flagship Project */}
-          {isFlagship && (
-            <div className="flex items-center gap-1.5 sm:gap-2 mt-4 pt-3 border-t border-slate-800/80 overflow-x-auto scrollbar-none">
-              <button
-                type="button"
-                onClick={() => setActiveTab('overview')}
-                className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer ${
-                  activeTab === 'overview'
-                    ? 'bg-sky-400 text-slate-950 font-bold shadow-[0_0_16px_rgba(56,189,248,0.45)]'
-                    : 'bg-slate-800/60 text-slate-300 hover:bg-slate-700/60'
-                }`}
-              >
-                Overview &amp; Problem
-              </button>
+          {/* Interactive Navigation Tabs for All Projects */}
+          <div
+            className={`flex items-center gap-1.5 sm:gap-2 mt-4 pt-3 border-t overflow-x-auto scrollbar-none ${
+              isFlagship ? 'border-slate-800/80' : 'border-[#F6F1E7]/20'
+            }`}
+          >
+            <button
+              type="button"
+              onClick={() => setActiveTab('overview')}
+              className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer ${tabBtnClass('overview')}`}
+            >
+              Overview &amp; Problem
+            </button>
 
+            {isFlagship && project.modules && (
               <button
                 type="button"
                 onClick={() => setActiveTab('modules')}
-                className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer ${
-                  activeTab === 'modules'
-                    ? 'bg-sky-400 text-slate-950 font-bold shadow-[0_0_16px_rgba(56,189,248,0.45)]'
-                    : 'bg-slate-800/60 text-slate-300 hover:bg-slate-700/60'
-                }`}
+                className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer ${tabBtnClass('modules')}`}
               >
                 8 Core Modules
               </button>
+            )}
 
+            {isFlagship && (
               <button
                 type="button"
                 onClick={() => setActiveTab('techstack')}
-                className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
-                  activeTab === 'techstack'
-                    ? 'bg-sky-400 text-slate-950 font-bold shadow-[0_0_16px_rgba(56,189,248,0.45)]'
-                    : 'bg-slate-800/60 text-slate-300 hover:bg-slate-700/60'
-                }`}
+                className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${tabBtnClass('techstack')}`}
               >
                 <Cpu className="w-3.5 h-3.5" />
                 <span>InsureSphere AI — Tech Stack</span>
               </button>
+            )}
 
-              <button
-                type="button"
-                onClick={() => setActiveTab('architecture')}
-                className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer ${
-                  activeTab === 'architecture'
-                    ? 'bg-sky-400 text-slate-950 font-bold shadow-[0_0_16px_rgba(56,189,248,0.45)]'
-                    : 'bg-slate-800/60 text-slate-300 hover:bg-slate-700/60'
-                }`}
-              >
-                System Architecture
-              </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('architecture')}
+              className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer ${tabBtnClass('architecture')}`}
+            >
+              System Architecture
+            </button>
 
+            {isFlagship && project.workflowSteps && (
               <button
                 type="button"
                 onClick={() => setActiveTab('workflow')}
-                className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer ${
-                  activeTab === 'workflow'
-                    ? 'bg-sky-400 text-slate-950 font-bold shadow-[0_0_16px_rgba(56,189,248,0.45)]'
-                    : 'bg-slate-800/60 text-slate-300 hover:bg-slate-700/60'
-                }`}
+                className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer ${tabBtnClass('workflow')}`}
               >
                 9-Step Workflow
               </button>
+            )}
 
+            {isFlagship && (
               <button
                 type="button"
                 onClick={() => setActiveTab('calculator')}
@@ -250,50 +267,42 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                 <Calculator className="w-3.5 h-3.5" />
                 <span>Reinsurance Calculator</span>
               </button>
+            )}
 
+            {isFlagship && project.apiEndpoints && (
               <button
                 type="button"
                 onClick={() => setActiveTab('api')}
-                className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer ${
-                  activeTab === 'api'
-                    ? 'bg-sky-400 text-slate-950 font-bold shadow-[0_0_16px_rgba(56,189,248,0.45)]'
-                    : 'bg-slate-800/60 text-slate-300 hover:bg-slate-700/60'
-                }`}
+                className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer ${tabBtnClass('api')}`}
               >
                 REST API Specs
               </button>
+            )}
 
+            {isFlagship && project.testingHighlights && (
               <button
                 type="button"
                 onClick={() => setActiveTab('testing')}
-                className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer ${
-                  activeTab === 'testing'
-                    ? 'bg-sky-400 text-slate-950 font-bold shadow-[0_0_16px_rgba(56,189,248,0.45)]'
-                    : 'bg-slate-800/60 text-slate-300 hover:bg-slate-700/60'
-                }`}
+                className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer ${tabBtnClass('testing')}`}
               >
                 QA &amp; Verification
               </button>
+            )}
 
-              <button
-                type="button"
-                onClick={() => setActiveTab('gallery')}
-                className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer ${
-                  activeTab === 'gallery'
-                    ? 'bg-sky-400 text-slate-950 font-bold shadow-[0_0_16px_rgba(56,189,248,0.45)]'
-                    : 'bg-slate-800/60 text-slate-300 hover:bg-slate-700/60'
-                }`}
-              >
-                Blueprint &amp; Gallery
-              </button>
-            </div>
-          )}
+            <button
+              type="button"
+              onClick={() => setActiveTab('gallery')}
+              className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer ${tabBtnClass('gallery')}`}
+            >
+              Blueprint &amp; Gallery
+            </button>
+          </div>
         </div>
 
         {/* Scrollable Modal Body */}
         <div className="flex-1 overflow-y-auto p-5 sm:p-8 space-y-8">
           {/* TAB 1: EXECUTIVE OVERVIEW & PROBLEM STATEMENT */}
-          {(!isFlagship || activeTab === 'overview') && (
+          {activeTab === 'overview' && (
             <div className="space-y-6">
               {/* Hero Banner Graphic */}
               <div
@@ -340,7 +349,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                       className={`px-3 py-1 rounded-full text-[11px] font-mono font-medium ${
                         isFlagship
                           ? 'bg-slate-900/90 text-slate-300 border border-slate-700'
-                          : 'bg-[#FAF7F2] text-[#232B27]'
+                          : 'bg-[#FAF7F2] text-[#232B27] border border-[#687A70]/40'
                       }`}
                     >
                       {project.liveUrlNote || 'Repository Case Study'}
@@ -389,10 +398,16 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                         isFlagship ? 'text-rose-300' : 'text-[#5E1726]'
                       }`}
                     >
-                      The Commercial Insurance Problem
+                      {isFlagship
+                        ? 'The Commercial Insurance Problem'
+                        : 'The Engineering Problem'}
                     </h4>
                   </div>
-                  <p className="text-xs sm:text-sm leading-relaxed text-slate-300/90">
+                  <p
+                    className={`text-xs sm:text-sm leading-relaxed ${
+                      isFlagship ? 'text-slate-300/90' : 'text-[#35423C]'
+                    }`}
+                  >
                     {project.problemStatement}
                   </p>
                 </div>
@@ -415,10 +430,16 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                         isFlagship ? 'text-sky-300' : 'text-[#5E1726]'
                       }`}
                     >
-                      The InsureSphere Architectural Solution
+                      {isFlagship
+                        ? 'The InsureSphere Architectural Solution'
+                        : 'The Architectural Solution'}
                     </h4>
                   </div>
-                  <p className="text-xs sm:text-sm leading-relaxed text-slate-300/90">
+                  <p
+                    className={`text-xs sm:text-sm leading-relaxed ${
+                      isFlagship ? 'text-slate-300/90' : 'text-[#35423C]'
+                    }`}
+                  >
                     {project.architectureOverview}
                   </p>
                 </div>
@@ -447,7 +468,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                       className={`p-3.5 rounded-xl border flex items-start gap-2.5 text-xs sm:text-sm leading-snug ${
                         isFlagship
                           ? 'bg-[#0B1536] border-slate-800 text-slate-200'
-                          : 'bg-[#FAF7F2] border-[#687A70]/30 text-[#232B27]'
+                          : 'bg-[#FAF7F2] border-[#687A70]/35 text-[#232B27]'
                       }`}
                     >
                       <CheckCircle2
@@ -461,24 +482,16 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                 </div>
               </div>
 
-              {/* InsureSphere AI — Tech Stack & Architecture Foundation */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <span
-                      className={`w-6 h-px ${
-                        isFlagship ? 'bg-sky-400' : 'bg-[#5E1726]'
-                      }`}
-                    />
-                    <h4
-                      className={`text-xs font-mono font-bold uppercase tracking-[0.25em] ${
-                        isFlagship ? 'text-sky-300' : 'text-[#5E1726]'
-                      }`}
-                    >
-                      InsureSphere AI — Tech Stack
-                    </h4>
-                  </div>
-                  {isFlagship && (
+              {/* Tech Stack & Implementation Architecture (Flagship vs Non-Flagship) */}
+              {isFlagship ? (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <span className="w-6 h-px bg-sky-400" />
+                      <h4 className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-sky-300">
+                        InsureSphere AI — Tech Stack
+                      </h4>
+                    </div>
                     <button
                       type="button"
                       onClick={() => setActiveTab('techstack')}
@@ -486,73 +499,99 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                     >
                       Inspect Detailed Roles &amp; Matrix →
                     </button>
-                  )}
-                </div>
-
-                {/* Core Engineering Stack Highlight Callout */}
-                <div className="p-4 rounded-xl bg-sky-950/40 border border-sky-400/40 space-y-1.5 shadow-sm">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-sky-400 shrink-0" />
-                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-sky-300">
-                      Core Engineering Foundation
-                    </span>
                   </div>
-                  <p className="text-sm font-bold text-white font-mono">
-                    React + Python + Django REST Framework + PostgreSQL + JWT Authentication
-                  </p>
-                  <p className="text-xs text-slate-300 leading-relaxed font-sans">
-                    The deterministic full-stack backbone: customer onboarding, policy underwriting, claims lifecycle states, quota-share reinsurance treaties, and ACID ledger guarantees.
-                  </p>
-                </div>
 
-                {/* 12 Core Production Technologies Chips */}
-                <div className="space-y-2">
-                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400">
-                    Production Application Tech Stack (12 Technologies):
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {INSURESPHERE_TECH_STACK.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1.5 rounded-xl bg-[#0B1536] border border-sky-500/30 text-sky-200 text-xs font-mono font-bold shadow-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Features Under Integration Verification */}
-                <div className="p-4 rounded-xl bg-amber-950/25 border border-amber-500/35 space-y-2.5">
-                  <div className="flex items-center justify-between">
+                  {/* Core Engineering Stack Highlight Callout */}
+                  <div className="p-4 rounded-xl bg-sky-950/40 border border-sky-400/40 space-y-1.5 shadow-sm">
                     <div className="flex items-center gap-2">
-                      <span className="text-amber-400 font-bold">⚠️</span>
-                      <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-300">
-                        Features Under Integration Verification
+                      <CheckCircle2 className="w-4 h-4 text-sky-400 shrink-0" />
+                      <span className="text-xs font-mono font-bold uppercase tracking-wider text-sky-300">
+                        Core Engineering Foundation
                       </span>
                     </div>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-200 border border-amber-400/30 font-semibold">
-                      Verification Ongoing
-                    </span>
+                    <p className="text-sm font-bold text-white font-mono">
+                      React + Python + Django REST Framework + PostgreSQL + AWS Cloud + JWT Authentication
+                    </p>
+                    <p className="text-xs text-slate-300 leading-relaxed font-sans">
+                      The deterministic full-stack backbone: customer onboarding, policy underwriting, claims lifecycle states, quota-share reinsurance treaties, and ACID ledger guarantees.
+                    </p>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
-                    {AI_VERIFICATION_FEATURES.map((item) => (
-                      <div
-                        key={item.name}
-                        className="p-3 rounded-lg bg-amber-900/20 border border-amber-500/25 space-y-1"
-                      >
-                        <div className="font-mono font-bold text-amber-200">
-                          {item.name}
-                        </div>
-                        <p className="text-amber-100/80 leading-relaxed font-sans">
-                          {item.description}
-                        </p>
+
+                  {/* Core Production Technologies Chips */}
+                  <div className="space-y-2">
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400">
+                      Production Application Tech Stack ({INSURESPHERE_TECH_STACK.length} Technologies):
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {INSURESPHERE_TECH_STACK.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-3 py-1.5 rounded-xl bg-[#0B1536] border border-sky-500/30 text-sky-200 text-xs font-mono font-bold shadow-sm"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Features Under Integration Verification */}
+                  <div className="p-4 rounded-xl bg-amber-950/25 border border-amber-500/35 space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="text-amber-400 font-bold">⚠️</span>
+                        <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-300">
+                          Features Under Integration Verification
+                        </span>
                       </div>
-                    ))}
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-200 border border-amber-400/30 font-semibold">
+                        Verification Ongoing
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                      {AI_VERIFICATION_FEATURES.map((item) => (
+                        <div
+                          key={item.name}
+                          className="p-3 rounded-lg bg-amber-900/20 border border-amber-500/25 space-y-1"
+                        >
+                          <div className="font-mono font-bold text-amber-200">
+                            {item.name}
+                          </div>
+                          <p className="text-amber-100/80 leading-relaxed font-sans">
+                            {item.description}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
+              ) : (
+                <div className="space-y-4">
+                  <div className="p-5 rounded-2xl bg-[#EFE8DA] border border-[#687A70]/40 space-y-2">
+                    <h4 className="text-xs font-mono font-bold uppercase tracking-[0.22em] text-[#5E1726]">
+                      Implementation Breakdown
+                    </h4>
+                    <p className="text-xs sm:text-sm text-[#232B27] leading-relaxed">
+                      {project.implementationExplanation}
+                    </p>
+                  </div>
 
-              </div>
+                  <div className="space-y-2">
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#5E1726]">
+                      Technologies &amp; Stack ({project.technologies.length}):
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-3 py-1.5 rounded-xl bg-[#DCE3DF] border border-[#687A70]/45 text-[#232B27] text-xs font-mono font-bold"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Transparent Scope Notes */}
               <div
@@ -563,15 +602,33 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                 }`}
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <AlertCircle className="w-4 h-4 text-amber-400" />
-                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-300">
+                  <AlertCircle
+                    className={`w-4 h-4 ${
+                      isFlagship ? 'text-amber-400' : 'text-[#5E1726]'
+                    }`}
+                  />
+                  <span
+                    className={`text-xs font-mono font-bold uppercase tracking-wider ${
+                      isFlagship ? 'text-amber-300' : 'text-[#5E1726]'
+                    }`}
+                  >
                     Production-Readiness &amp; Verification Scope
                   </span>
                 </div>
-                <ul className="space-y-1.5 text-xs text-slate-300">
+                <ul
+                  className={`space-y-1.5 text-xs ${
+                    isFlagship ? 'text-slate-300' : 'text-[#232B27]'
+                  }`}
+                >
                   {project.plannedOrPartialFeatures.map((note) => (
                     <li key={note} className="flex items-start gap-2">
-                      <span className="text-amber-400 font-bold mt-0.5">•</span>
+                      <span
+                        className={`font-bold mt-0.5 ${
+                          isFlagship ? 'text-amber-400' : 'text-[#5E1726]'
+                        }`}
+                      >
+                        •
+                      </span>
                       <span>{note}</span>
                     </li>
                   ))}
@@ -695,11 +752,25 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                     <span>InsureSphere AI — Tech Stack</span>
                   </h3>
                   <p className="text-xs font-mono text-slate-400 mt-0.5">
-                    12 production technologies powering the core insurance &amp; reinsurance management platform
+                    {
+                      ENTERPRISE_SKILLS_TABLE.filter(
+                        (item) =>
+                          item.technology !== 'Gemini / GenAI' &&
+                          item.technology !== 'RAG'
+                      ).length
+                    }{' '}
+                    production technologies powering the core insurance &amp; reinsurance management platform
                   </p>
                 </div>
                 <span className="text-xs font-mono font-semibold text-sky-400 bg-sky-400/10 px-3 py-1 rounded-full border border-sky-400/30">
-                  12 Production Technologies
+                  {
+                    ENTERPRISE_SKILLS_TABLE.filter(
+                      (item) =>
+                        item.technology !== 'Gemini / GenAI' &&
+                        item.technology !== 'RAG'
+                    ).length
+                  }{' '}
+                  Production Technologies
                 </span>
               </div>
 
@@ -712,10 +783,10 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                   </span>
                 </div>
                 <p className="text-base sm:text-lg font-bold text-white font-mono">
-                  React + Python + Django REST Framework + PostgreSQL + JWT Authentication
+                  React + Python + Django REST Framework + PostgreSQL + AWS Cloud + JWT Authentication
                 </p>
                 <p className="text-xs text-slate-300 leading-relaxed font-sans">
-                  The primary architectural foundation delivering stateless JWT authentication, model-level role enforcement, transactional quota-share reinsurance mathematics, and an interactive SPA client interface.
+                  The primary architectural foundation delivering stateless JWT authentication, model-level role enforcement, AWS Cloud infrastructure, transactional quota-share reinsurance mathematics, and an interactive SPA client interface.
                 </p>
               </div>
 
@@ -801,20 +872,33 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
           )}
 
           {/* TAB 3: SYSTEM ARCHITECTURE DIAGRAM */}
-          {isFlagship && activeTab === 'architecture' && (
+          {activeTab === 'architecture' && (
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-display font-bold text-white">
-                    End-to-End Enterprise Architecture
+                  <h3
+                    className={`text-lg font-display font-bold ${
+                      isFlagship ? 'text-white' : 'text-[#232B27]'
+                    }`}
+                  >
+                    End-to-End System Architecture
                   </h3>
-                  <p className="text-xs font-mono text-slate-400 mt-0.5">
-                    Interactive signal flow from React client through Django REST
-                    Framework to PostgreSQL &amp; AI Triage
+                  <p
+                    className={`text-xs font-mono mt-0.5 ${
+                      isFlagship ? 'text-slate-400' : 'text-[#35423C]'
+                    }`}
+                  >
+                    Interactive signal flow across all {project.architectureFlow.length} architectural stages of {project.title}
                   </p>
                 </div>
-                <span className="text-xs font-mono font-semibold text-sky-400 bg-sky-400/10 px-3 py-1 rounded-full border border-sky-400/30">
-                  5 Architecture Stages
+                <span
+                  className={`text-xs font-mono font-semibold px-3 py-1 rounded-full border ${
+                    isFlagship
+                      ? 'text-sky-400 bg-sky-400/10 border-sky-400/30'
+                      : 'text-[#5E1726] bg-[#EFE8DA] border-[#5E1726]/30'
+                  }`}
+                >
+                  {project.architectureFlow.length} Architecture Stages
                 </span>
               </div>
 
@@ -827,22 +911,42 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                     onClick={() => setSelectedArchitectureNode(idx)}
                     className={`p-4 rounded-2xl border text-left transition-all cursor-pointer relative ${
                       selectedArchitectureNode === idx
-                        ? 'bg-sky-500/20 border-sky-400 shadow-[0_0_24px_rgba(56,189,248,0.3)]'
-                        : 'bg-[#0B1536] border-slate-800 hover:border-slate-700'
+                        ? isFlagship
+                          ? 'bg-sky-500/20 border-sky-400 shadow-[0_0_24px_rgba(56,189,248,0.3)]'
+                          : 'bg-[#EFE8DA] border-[#5E1726] shadow-md'
+                        : isFlagship
+                        ? 'bg-[#0B1536] border-slate-800 hover:border-slate-700'
+                        : 'bg-[#FAF7F2] border-[#687A70]/40 hover:border-[#5E1726]'
                     }`}
                   >
-                    <div className="text-[10px] font-mono font-bold text-sky-400 mb-1">
+                    <div
+                      className={`text-[10px] font-mono font-bold mb-1 ${
+                        isFlagship ? 'text-sky-400' : 'text-[#5E1726]'
+                      }`}
+                    >
                       STAGE {node.step}
                     </div>
-                    <div className="text-sm font-bold text-white leading-tight mb-2">
+                    <div
+                      className={`text-sm font-bold leading-tight mb-2 ${
+                        isFlagship ? 'text-white' : 'text-[#232B27]'
+                      }`}
+                    >
                       {node.node}
                     </div>
-                    <div className="text-[11px] text-slate-400 line-clamp-3">
+                    <div
+                      className={`text-[11px] line-clamp-3 ${
+                        isFlagship ? 'text-slate-400' : 'text-[#35423C]'
+                      }`}
+                    >
                       {node.detail}
                     </div>
 
                     {idx < project.architectureFlow.length - 1 && (
-                      <span className="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 text-sky-400 text-sm font-bold">
+                      <span
+                        className={`hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 text-sm font-bold ${
+                          isFlagship ? 'text-sky-400' : 'text-[#5E1726]'
+                        }`}
+                      >
                         →
                       </span>
                     )}
@@ -851,52 +955,65 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
               </div>
 
               {/* Deep Architecture Layer Breakdown */}
-              <div className="p-6 rounded-2xl bg-[#0B1536] border border-sky-500/30 shadow-xl space-y-4">
+              <div
+                className={`p-6 rounded-2xl border shadow-xl space-y-4 ${
+                  isFlagship
+                    ? 'bg-[#0B1536] border-sky-500/30'
+                    : 'bg-[#EFE8DA] border-[#687A70]/45'
+                }`}
+              >
                 <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-xl bg-sky-400/20 text-sky-300 border border-sky-400/30">
+                  <div
+                    className={`p-2.5 rounded-xl border ${
+                      isFlagship
+                        ? 'bg-sky-400/20 text-sky-300 border-sky-400/30'
+                        : 'bg-[#5E1726] text-[#F6F1E7] border-[#5E1726]'
+                    }`}
+                  >
                     <Layers className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-sky-400">
+                    <span
+                      className={`text-[10px] font-mono font-bold uppercase tracking-wider ${
+                        isFlagship ? 'text-sky-400' : 'text-[#5E1726]'
+                      }`}
+                    >
                       Layer Inspection · Stage{' '}
                       {project.architectureFlow[selectedArchitectureNode]?.step}
                     </span>
-                    <h4 className="text-lg font-bold text-white">
+                    <h4
+                      className={`text-lg font-bold ${
+                        isFlagship ? 'text-white' : 'text-[#232B27]'
+                      }`}
+                    >
                       {project.architectureFlow[selectedArchitectureNode]?.node}
                     </h4>
                   </div>
                 </div>
 
-                <p className="text-sm text-slate-200 leading-relaxed">
+                <p
+                  className={`text-sm leading-relaxed ${
+                    isFlagship ? 'text-slate-200' : 'text-[#232B27]'
+                  }`}
+                >
                   {project.architectureFlow[selectedArchitectureNode]?.detail}
                 </p>
 
-                {/* Layer Details Matrix */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                  <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-                    <span className="text-[10px] font-mono text-slate-400 uppercase">
-                      Protocol &amp; Security
-                    </span>
-                    <p className="text-xs font-semibold text-slate-200">
-                      REST JSON · JWT Bearer Headers
-                    </p>
-                  </div>
-                  <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-                    <span className="text-[10px] font-mono text-slate-400 uppercase">
-                      Validation Enforcement
-                    </span>
-                    <p className="text-xs font-semibold text-slate-200">
-                      Django Serializers &amp; model clean()
-                    </p>
-                  </div>
-                  <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-                    <span className="text-[10px] font-mono text-slate-400 uppercase">
-                      Persistence Guarantee
-                    </span>
-                    <p className="text-xs font-semibold text-slate-200">
-                      ACID PostgreSQL Transactions
-                    </p>
-                  </div>
+                <div
+                  className={`p-4 rounded-xl border text-xs leading-relaxed ${
+                    isFlagship
+                      ? 'bg-slate-900 border-slate-800 text-slate-300'
+                      : 'bg-[#FAF7F2] border-[#687A70]/35 text-[#35423C]'
+                  }`}
+                >
+                  <span
+                    className={`font-mono font-bold uppercase tracking-wider block mb-1 ${
+                      isFlagship ? 'text-sky-400' : 'text-[#5E1726]'
+                    }`}
+                  >
+                    Architectural Overview:
+                  </span>
+                  {project.architectureOverview}
                 </div>
               </div>
             </div>
@@ -1270,20 +1387,33 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
           )}
 
           {/* TAB 8: SCREENSHOT BLUEPRINT & GALLERY */}
-          {isFlagship && activeTab === 'gallery' && (
+          {activeTab === 'gallery' && (
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-display font-bold text-white">
+                  <h3
+                    className={`text-lg font-display font-bold ${
+                      isFlagship ? 'text-white' : 'text-[#232B27]'
+                    }`}
+                  >
                     Interface Blueprint &amp; Feature Gallery
                   </h3>
-                  <p className="text-xs font-mono text-slate-400 mt-0.5">
-                    Explore high-fidelity blueprints for all 7 major enterprise
-                    subsystems
+                  <p
+                    className={`text-xs font-mono mt-0.5 ${
+                      isFlagship ? 'text-slate-400' : 'text-[#35423C]'
+                    }`}
+                  >
+                    Explore high-fidelity blueprints across all {project.screens.length} core subsystems
                   </p>
                 </div>
-                <span className="text-xs font-mono font-semibold text-sky-400 bg-sky-400/10 px-3 py-1 rounded-full border border-sky-400/30">
-                  7 Blueprint Views
+                <span
+                  className={`text-xs font-mono font-semibold px-3 py-1 rounded-full border ${
+                    isFlagship
+                      ? 'text-sky-400 bg-sky-400/10 border-sky-400/30'
+                      : 'text-[#5E1726] bg-[#EFE8DA] border-[#5E1726]/30'
+                  }`}
+                >
+                  {project.screens.length} Blueprint Views
                 </span>
               </div>
 
@@ -1296,8 +1426,12 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                     onClick={() => setActiveScreenIdx(sIdx)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all cursor-pointer ${
                       activeScreenIdx === sIdx
-                        ? 'bg-sky-400 text-slate-950 font-bold shadow-[0_0_16px_rgba(56,189,248,0.35)]'
-                        : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700/80'
+                        ? isFlagship
+                          ? 'bg-sky-400 text-slate-950 font-bold shadow-[0_0_16px_rgba(56,189,248,0.35)]'
+                          : 'bg-[#5E1726] text-[#F6F1E7] font-bold shadow-sm'
+                        : isFlagship
+                        ? 'bg-slate-800/80 text-slate-300 hover:bg-slate-700/80'
+                        : 'bg-[#EFE8DA] text-[#232B27] hover:bg-[#DCE3DF]'
                     }`}
                   >
                     {screen.title}
@@ -1307,34 +1441,68 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
 
               {/* Active Screen Inspection Box */}
               {project.screens[activeScreenIdx] && (
-                <div className="p-6 rounded-2xl bg-[#0B1536] border border-sky-500/30 shadow-xl space-y-4">
-                  <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div
+                  className={`p-6 rounded-2xl border shadow-xl space-y-4 ${
+                    isFlagship
+                      ? 'bg-[#0B1536] border-sky-500/30'
+                      : 'bg-[#EFE8DA] border-[#687A70]/45'
+                  }`}
+                >
+                  <div
+                    className={`flex items-center justify-between border-b pb-3 ${
+                      isFlagship ? 'border-slate-800' : 'border-[#687A70]/35'
+                    }`}
+                  >
                     <div>
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-sky-400">
+                      <span
+                        className={`text-[10px] font-mono font-bold uppercase tracking-wider ${
+                          isFlagship ? 'text-sky-400' : 'text-[#5E1726]'
+                        }`}
+                      >
                         Category: {project.screens[activeScreenIdx].type}
                       </span>
-                      <h4 className="text-xl font-bold text-white mt-0.5">
+                      <h4
+                        className={`text-xl font-bold mt-0.5 ${
+                          isFlagship ? 'text-white' : 'text-[#232B27]'
+                        }`}
+                      >
                         {project.screens[activeScreenIdx].title}
                       </h4>
                     </div>
-                    <span className="text-xs font-mono text-slate-400">
+                    <span
+                      className={`text-xs font-mono ${
+                        isFlagship ? 'text-slate-400' : 'text-[#35423C]'
+                      }`}
+                    >
                       View {activeScreenIdx + 1} of {project.screens.length}
                     </span>
                   </div>
 
-                  <p className="text-sm text-slate-200 leading-relaxed">
+                  <p
+                    className={`text-sm leading-relaxed ${
+                      isFlagship ? 'text-slate-200' : 'text-[#232B27]'
+                    }`}
+                  >
                     {project.screens[activeScreenIdx].caption}
                   </p>
 
                   <div className="space-y-2 pt-2">
-                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 block">
+                    <span
+                      className={`text-xs font-mono font-bold uppercase tracking-wider block ${
+                        isFlagship ? 'text-slate-400' : 'text-[#5E1726]'
+                      }`}
+                    >
                       Feature Highlights in this View:
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                       {project.screens[activeScreenIdx].highlights.map((hl) => (
                         <div
                           key={hl}
-                          className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-200 font-medium"
+                          className={`p-3 rounded-xl border text-xs font-medium ${
+                            isFlagship
+                              ? 'bg-slate-900 border-slate-800 text-slate-200'
+                              : 'bg-[#FAF7F2] border-[#687A70]/35 text-[#232B27]'
+                          }`}
                         >
                           ✦ {hl}
                         </div>

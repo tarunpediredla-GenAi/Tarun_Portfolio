@@ -186,7 +186,13 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
       category: 'External',
       action: () => {
         setSearchOpen(false);
-        window.open(profile.github, '_blank', 'noopener,noreferrer');
+        const link = document.createElement('a');
+        link.href = profile.github;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       },
     },
     {
@@ -215,6 +221,13 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
       item.description.toLowerCase().includes(query.toLowerCase()) ||
       item.category.toLowerCase().includes(query.toLowerCase())
   );
+
+  // Reset search query when modal closes
+  useEffect(() => {
+    if (!searchOpen) {
+      setQuery('');
+    }
+  }, [searchOpen]);
 
   return (
     <>
@@ -265,33 +278,39 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
               <button
                 type="button"
                 onClick={() => setSearchOpen(false)}
-                className="px-2 py-0.5 text-[10px] font-mono font-bold rounded bg-[#DCE3DF] text-[#232B27] hover:bg-[#5E1726] hover:text-[#F6F1E7]"
+                className="px-2 py-0.5 text-[10px] font-mono font-bold rounded bg-[#DCE3DF] text-[#232B27] hover:bg-[#5E1726] hover:text-[#F6F1E7] cursor-pointer"
               >
                 ESC
               </button>
             </div>
 
             <div className="max-h-[60vh] overflow-y-auto p-2 divide-y divide-[#687A70]/20">
-              {filteredItems.map((item) => (
-                <button
-                  key={item.label}
-                  type="button"
-                  onClick={item.action}
-                  className="w-full flex items-center justify-between gap-4 px-3.5 py-3 text-left rounded-xl hover:bg-[#E6ECE8] transition-colors group"
-                >
-                  <div className="min-w-0">
-                    <div className="text-xs font-bold text-[#232B27] group-hover:text-[#5E1726] truncate">
-                      {item.label}
+              {filteredItems.length > 0 ? (
+                filteredItems.map((item) => (
+                  <button
+                    key={item.label}
+                    type="button"
+                    onClick={item.action}
+                    className="w-full flex items-center justify-between gap-4 px-3.5 py-3 text-left rounded-xl hover:bg-[#E6ECE8] transition-colors group cursor-pointer"
+                  >
+                    <div className="min-w-0">
+                      <div className="text-xs font-bold text-[#232B27] group-hover:text-[#5E1726] truncate">
+                        {item.label}
+                      </div>
+                      <div className="text-[11px] text-[#35423C] truncate mt-0.5">
+                        {item.description}
+                      </div>
                     </div>
-                    <div className="text-[11px] text-[#35423C] truncate mt-0.5">
-                      {item.description}
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#5E1726] shrink-0">
-                    {item.category} →
-                  </span>
-                </button>
-              ))}
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#5E1726] shrink-0">
+                      {item.category} →
+                    </span>
+                  </button>
+                ))
+              ) : (
+                <div className="py-8 text-center text-xs font-mono text-[#35423C]">
+                  No matching projects, skills, or actions found for &ldquo;{query}&rdquo;.
+                </div>
+              )}
             </div>
 
             <div className="px-4 py-2.5 bg-[#EFE8DA] border-t border-[#687A70]/35 flex items-center justify-between text-[11px] text-[#35423C] font-mono">
