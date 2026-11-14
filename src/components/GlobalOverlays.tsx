@@ -118,8 +118,8 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
       },
     },
     {
-      label: 'AWS Cloud, Python & GenAI Technology Universe',
-      description: 'AWS Cloud (EC2, S3, RDS) · Python · Django · React · Docker · CI/CD',
+      label: 'Technical Skills · GenAI, AI Agents, Python & Cloud',
+      description: 'LangChain · LangGraph · CrewAI · Google ADK · Agentic RAG · n8n · AWS EC2 · FastAPI · React · TypeScript',
       category: 'Skills & Cloud',
       action: () => {
         setSearchOpen(false);
