@@ -14,10 +14,21 @@ Production-ready interactive 3D developer portfolio for **Tarun Pediredla** (Ful
   - **Chapter 02 — About Me**: Lateral camera sweep revealing engineering summary and development philosophy pillars.
   - **Chapter 03 — Professional Journey**: Illuminated 3D timeline corridor featuring verified experience at **Finite HR & IT Solution**, **CP Academy**, and **Saras India Systems Private Limited**, alongside academic credentials.
   - **Chapter 04 — Technology Universe**: Synchronized 2D/3D orbital technology constellation with category filtering (`Frontend`, `Backend`, `Databases`, `AI & Automation`, `Dev & Deployment`).
-  - **Chapter 05 — Featured Projects**: Deep-dive case studies for **Satya's Education**, **Alex AI Mock Technical Interviewer**, and **AI Voice Task Planner**, distinguishing verified repository functionality from runtime/deployment scope notes.
+  - **Chapter 05 — Featured Projects**: Five in-portfolio case studies including **Currency Exchange Rate Tracker**, **InsureSphere AI**, **Satya's Education**, **Alex AI Mock Technical Interviewer**, and **AI Voice Task Planner**, with demo links and transparent implementation notes.
   - **Chapter 06 — Contact**: Direct communication channels (`tarunpediredla9966@gmail.com`, `+91 8074080773`, GitHub) and printable/downloadable Resume viewer.
 - **Central Typed Data File (`src/data/content.ts`)**:
   - All biography, career timeline, skills, projects, and education content lives in a single typed file for easy maintenance in VS Code.
+
+---
+
+## Newly Featured — Currency Exchange Rate Tracker
+
+**[Open Live Currency Dashboard](https://d2ywbdz39a2o4v.cloudfront.net/dashboard)**
+
+- Portfolio description: currency conversion, live fiat/crypto quote comparisons, 24-hour change indicators, historical rate trends, volatility indicators, and conditional alerts.
+- Specified providers: ExchangeRate-API (live forex), Frankfurter (historical data), and CoinGecko (cryptocurrency values).
+- The dashboard is highlighted first in the main project showcase and included in the case-study explorer and interactive project reel.
+- **Source integrity:** The dashboard URL and requirements were supplied by the portfolio owner. The tracker implementation repository was not provided, so this repository contains the *portfolio presentation*, not the tracker microservice's backend or CI/CD code. The cover illustration is not a screenshot of live rates.
 
 ---
 
