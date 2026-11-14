@@ -13,7 +13,7 @@ Production-ready interactive 3D developer portfolio for **Tarun Pediredla** (Ful
   - **Chapter 01 — Introduction**: Wide atmospheric command center approach, interactive 3D motif switcher (`Cyber Cheetah` / `AI Core`), and drag-to-rotate turntable.
   - **Chapter 02 — About Me**: Lateral camera sweep revealing engineering summary and development philosophy pillars.
   - **Chapter 03 — Professional Journey**: Illuminated 3D timeline corridor featuring verified experience at **Finite HR & IT Solution**, **CP Academy**, and **Saras India Systems Private Limited**, alongside academic credentials.
-  - **Chapter 04 — Technology Universe**: Synchronized 2D/3D orbital technology constellation with category filtering (`Frontend`, `Backend`, `Databases`, `AI & Automation`, `Dev & Deployment`).
+  - **Chapter 04 — Technology Universe**: Resume-aligned interactive skills grid with eight filterable domains and 59 entries: Languages, Backend & APIs, Frontend, GenAI & RAG, AI Agents, Cloud & Automation, Databases & Testing, and AI Development. Includes framework-specific AI agent capabilities (LangChain, LangGraph, CrewAI, Google ADK), detailed prompting methods, and accurate AWS experience labels (EC2 hands-on; S3/RDS/IAM working knowledge).
   - **Chapter 05 — Featured Projects**: Five in-portfolio case studies including **Currency Exchange Rate Tracker**, **InsureSphere AI**, **Satya's Education**, **Alex AI Mock Technical Interviewer**, and **AI Voice Task Planner**, with demo links and transparent implementation notes.
   - **Chapter 06 — Contact**: Direct communication channels (`tarunpediredla9966@gmail.com`, `+91 8074080773`, GitHub) and printable/downloadable Resume viewer.
 - **Central Typed Data File (`src/data/content.ts`)**:

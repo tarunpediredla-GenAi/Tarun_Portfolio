@@ -1477,150 +1477,132 @@ export const CAREER_TIMELINE = portfolioContent.experience.map((exp, idx) => ({
 
 export const EDUCATION_HISTORY = portfolioContent.education;
 
+/**
+ * Resume-aligned technical skill matrix, updated from the November 2026 one-page resume.
+ * Capability labels reflect the user's resume; project-specific badges are explicitly identified.
+ */
 export const SKILL_CATEGORIES = [
   {
-    id: 'frontend',
-    title: 'Frontend',
-    subtitle: 'Responsive component architectures & interactive web UIs',
-    accent: '#6B1D2F',
+    id: "languages",
+    title: "Languages",
+    subtitle: "Core programming, typed web development & SQL",
+    accent: "#6B1D2F",
     skills: [
-      {
-        name: 'React.js',
-        purpose: 'Builds the frontend website and dashboards',
-      },
-      {
-        name: 'JavaScript',
-        purpose: 'Handles user interactions and frontend logic',
-      },
-      {
-        name: 'Tailwind CSS',
-        purpose: 'Styles the responsive user interface',
-      },
-      {
-        name: 'HTML',
-        purpose: 'Defines structured semantic web content',
-      },
-      {
-        name: 'CSS',
-        purpose: 'Modular styling, grid/flex layouts, and responsive transitions',
-      },
+      { name: "Python", purpose: "Primary programming language for backend services, automation and AI development" },
+      { name: "JavaScript", purpose: "Browser behavior, asynchronous programming and API integrations" },
+      { name: "TypeScript", purpose: "Type-safe React interfaces and application development" },
+      { name: "SQL", purpose: "Relational querying, joins and data manipulation" },
+      { name: "HTML5", purpose: "Semantic structure for accessible websites" },
+      { name: "CSS3", purpose: "Responsive layouts and modern styling" },
     ],
   },
   {
-    id: 'backend',
-    title: 'Backend & APIs',
-    subtitle: 'Python service layers, REST APIs & access security',
-    accent: '#4E5E56',
+    id: "backend",
+    title: "Backend & APIs",
+    subtitle: "Python frameworks, REST services & application security",
+    accent: "#4E5E56",
     skills: [
-      {
-        name: 'Python',
-        purpose: 'Main backend programming language',
-      },
-      {
-        name: 'Django',
-        purpose: 'Backend application framework',
-      },
-      {
-        name: 'Django REST Framework (DRF)',
-        purpose: 'Creates APIs connecting React to Django',
-      },
-      {
-        name: 'JWT / SimpleJWT',
-        purpose: 'User login and API authentication',
-      },
-      {
-        name: 'RBAC',
-        purpose: 'Controls Admin, Agent, and Customer permissions',
-      },
-      {
-        name: 'Express',
-        purpose: 'Used in portfolio project backend (Alex AI Mock Interviewer)',
-        contextNote: 'Used in portfolio project backend',
-      },
+      { name: "Django", purpose: "Python web framework for models, views, authentication and application logic" },
+      { name: "Django REST Framework", purpose: "Builds serialized, authenticated REST APIs for React clients" },
+      { name: "FastAPI", purpose: "Python API development with typed request and response models" },
+      { name: "Flask", purpose: "Lightweight framework for Python web services" },
+      { name: "REST APIs", purpose: "Design and integration of HTTP-based application services" },
+      { name: "JWT", purpose: "Token-based authentication for API clients" },
+      { name: "RBAC", purpose: "Role-based access control and permission management" },
+      { name: "Express.js", purpose: "Additional portfolio project backend technology", contextNote: "Project Tech" },
     ],
   },
   {
-    id: 'databases',
-    title: 'Databases',
-    subtitle: 'Relational SQL engines & real-time cloud document stores',
-    accent: '#85243A',
+    id: "frontend",
+    title: "Frontend",
+    subtitle: "React component architecture & responsive UI engineering",
+    accent: "#85243A",
     skills: [
-      {
-        name: 'PostgreSQL',
-        purpose: 'Stores customers, policies, claims, and treaties',
-      },
-      {
-        name: 'MySQL',
-        purpose: 'Relational schema design and transactional query execution',
-      },
-      {
-        name: 'Firebase Firestore',
-        purpose: 'Document collections, security rules & interview history',
-      },
+      { name: "React.js", purpose: "Component-based frontend application development" },
+      { name: "React Hooks", purpose: "Functional component state, effects and reusable behavior" },
+      { name: "Tailwind CSS", purpose: "Utility-first styling and consistent responsive design" },
+      { name: "Responsive UI", purpose: "Layouts that adapt to mobile, tablet and desktop" },
     ],
   },
   {
-    id: 'ai-automation',
-    title: 'AI & Automation',
-    subtitle: 'Conversational voice agents, LLM reasoning & document RAG',
-    accent: '#6B1D2F',
+    id: "genai",
+    title: "GenAI & RAG",
+    subtitle: "Prompt engineering, retrieval, grounding & LLM integrations",
+    accent: "#8C3449",
     skills: [
-      {
-        name: 'Gemini / GenAI',
-        purpose: 'Intended for AI-assisted policy and claims analysis',
-      },
-      {
-        name: 'RAG',
-        purpose: 'Intended for retrieving information from insurance documents',
-      },
-      {
-        name: 'Agentic AI',
-        purpose: 'Tool-calling agents and autonomous execution workflows',
-      },
-      {
-        name: 'Google Gemini',
-        purpose: 'Server-side multimodal dialogue, TTS, and task planning',
-      },
-      {
-        name: 'n8n',
-        purpose: 'Webhook-driven orchestration connecting voice assistants & sheets',
-      },
-      {
-        name: 'Vapi',
-        purpose: 'Real-time telephony and voice assistant orchestration',
-      },
+      { name: "LLM APIs", purpose: "Connect language models to web applications and automation workflows" },
+      { name: "Prompt Engineering", purpose: "Instruction design and prompt refinement for reliable model outputs" },
+      { name: "RCTC · CO-STAR · RTF", purpose: "Prompt frameworks named in the resume" },
+      { name: "Zero-Shot & Few-Shot", purpose: "Prompting techniques using no examples or a small number of examples" },
+      { name: "Chain-of-Thought (CoT)", purpose: "Reasoning-oriented prompt technique listed in the resume" },
+      { name: "RAG", purpose: "Retrieval-Augmented Generation for knowledge-grounded answers" },
+      { name: "Agentic RAG", purpose: "Agent-directed retrieval and question answering workflows" },
+      { name: "Tool / Function Calling", purpose: "Connect model outputs to structured tool operations" },
+      { name: "Grounding", purpose: "Anchor generated responses to reliable source information" },
+      { name: "Fact-Checking & Citations", purpose: "Evaluate supporting evidence and cite retrieved sources" },
     ],
   },
   {
-    id: 'dev-deployment',
-    title: 'Cloud, Dev & Testing',
-    subtitle: 'AWS Cloud infrastructure, Docker containerization, CI/CD & automated testing',
-    accent: '#7A8B82',
+    id: "ai-agents",
+    title: "AI Agents",
+    subtitle: "Agent orchestration, safety, evaluation & local AI tooling",
+    accent: "#6B1D2F",
     skills: [
-      {
-        name: 'AWS Cloud (EC2, S3, RDS)',
-        purpose: 'Cloud compute, S3 document storage, RDS PostgreSQL & IAM security',
-      },
-      {
-        name: 'Docker',
-        purpose: 'Containerizing full stack applications for development & production',
-      },
-      {
-        name: 'CI/CD',
-        purpose: 'Automated build, lint, test, and deployment pipelines',
-      },
-      {
-        name: 'Git and GitHub',
-        purpose: 'Saves and manages project source code',
-      },
-      {
-        name: 'Vitest',
-        purpose: 'Tests React application functionality',
-      },
-      {
-        name: 'Vercel',
-        purpose: 'Production SPA and serverless API route deployment',
-      },
+      { name: "LangChain", purpose: "Framework for building LLM applications and tool integrations" },
+      { name: "LangGraph", purpose: "Graph-based orchestration for stateful agent workflows" },
+      { name: "CrewAI", purpose: "Framework for coordinating role-based AI agents" },
+      { name: "Google ADK", purpose: "Agent Development Kit for AI assistant workflows" },
+      { name: "Multi-Agent Systems", purpose: "Design patterns for agents cooperating on a task" },
+      { name: "Chatbots", purpose: "Conversational assistant interfaces and flows" },
+      { name: "Agentic Workflow Debugging", purpose: "Inspect and troubleshoot orchestration steps and tool calls" },
+      { name: "Guardrails", purpose: "Rules and checks to constrain AI outputs and behavior" },
+      { name: "Human-in-the-Loop", purpose: "Human approval and review for AI-assisted decisions" },
+      { name: "LLM Evaluation", purpose: "Assess language-model outputs and response quality" },
+      { name: "Hugging Face", purpose: "Model discovery and AI ecosystem tooling" },
+      { name: "Ollama", purpose: "Local language-model development and experimentation" },
+    ],
+  },
+  {
+    id: "cloud-automation",
+    title: "Cloud & Automation",
+    subtitle: "n8n workflows, AWS deployment & delivery tooling",
+    accent: "#7A8B82",
+    skills: [
+      { name: "n8n Architecture & Automation", purpose: "Triggers, nodes, webhooks, data mapping and execution flow" },
+      { name: "AWS EC2", purpose: "Hands-on AWS compute and application / n8n hosting", contextNote: "Hands-on" },
+      { name: "AWS S3 / RDS / IAM", purpose: "Cloud storage, managed databases and permissions", contextNote: "Working Knowledge" },
+      { name: "AWS CLI", purpose: "Command-line administration and workflows for AWS" },
+      { name: "Google Cloud Console", purpose: "Cloud project and service configuration" },
+      { name: "Docker", purpose: "Containerized development and application delivery" },
+      { name: "CI/CD", purpose: "Automated testing, building and deployment workflows" },
+      { name: "Git & GitHub", purpose: "Version control and collaboration" },
+      { name: "Vercel", purpose: "Hosting and deployment of React web applications" },
+      { name: "Vapi", purpose: "Voice assistant integration in AI Voice Task Planner", contextNote: "Project Tech" },
+    ],
+  },
+  {
+    id: "databases-testing",
+    title: "Databases & Testing",
+    subtitle: "SQL, Firebase, authentication & automated quality checks",
+    accent: "#356C70",
+    skills: [
+      { name: "PostgreSQL", purpose: "Relational persistence and transactional queries" },
+      { name: "MySQL", purpose: "Relational storage, data modeling and SQL queries" },
+      { name: "Firebase Firestore", purpose: "Cloud document storage and data access rules" },
+      { name: "Firebase Authentication", purpose: "Authentication services and user sign-in" },
+      { name: "Pytest", purpose: "Automated test cases for Python application behavior" },
+      { name: "Vitest", purpose: "Frontend testing for React and TypeScript applications" },
+    ],
+  },
+  {
+    id: "ai-development",
+    title: "AI Development",
+    subtitle: "AI-assisted design, implementation, debugging & deployment",
+    accent: "#80634B",
+    skills: [
+      { name: "AI-Powered IDEs", purpose: "AI-assisted software design and development" },
+      { name: "CLI Tools", purpose: "Developer command-line tools and AI coding workflows" },
+      { name: "Coding Agents", purpose: "Agent-assisted implementation, debugging and deployment" },
     ],
   },
 ];

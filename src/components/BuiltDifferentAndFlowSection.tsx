@@ -29,8 +29,8 @@ const EDITORIAL_TICKER_ITEMS = [
   'DJANGO & REST APIS',
   'REACT & JAVASCRIPT',
   'AWS CLOUD INFRASTRUCTURE',
-  'GOOGLE GEMINI · N8N · VAPI',
-  'DOCKER & CI/CD PIPELINES',
+  'LANGGRAPH · LANGCHAIN · CREWAI',
+  'N8N · AWS EC2 · DOCKER · CI/CD',
 ];
 
 interface RobotHandSkill {
@@ -53,29 +53,29 @@ const ROBOT_HAND_SKILLS: RobotHandSkill[] = [
     category: '01 · Core Backend Architecture',
     description:
       'Enterprise REST APIs, quota-share reinsurance logic, authentication & scalable Django server architectures.',
-    pills: ['Python', 'Django REST', 'PostgreSQL', 'Enterprise SaaS'],
+    pills: ['Python', 'Django REST', 'FastAPI', 'PostgreSQL'],
     accentHex: '#5E1726',
   },
   {
     id: 'genai-gemini',
     shortLabel: 'GEN AI · GEMINI',
     badgeSub: 'LLM REASONING',
-    title: 'Generative AI & Gemini',
+    title: 'Generative AI, Prompting & RAG',
     category: '02 · AI Intelligence Layer',
     description:
-      'Multi-persona AI interview evaluation, structured JSON extraction & contextual reasoning.',
-    pills: ['Google Gemini', 'Prompt Eng', 'Multi-Agent', 'RAG'],
+      'LLM APIs, prompt engineering, RAG and Agentic RAG, structured tool calling, grounded answers and citation-focused output review.',
+    pills: ['Prompt Engineering', 'RAG', 'Agentic RAG', 'LLM APIs'],
     accentHex: '#751E31',
   },
   {
     id: 'agentic-vapi-n8n',
     shortLabel: 'N8N · VAPI VOICE',
     badgeSub: 'AGENTIC AI',
-    title: 'Agentic AI & Voice Workflows',
+    title: 'AI Agents & n8n Orchestration',
     category: '03 · Autonomous Orchestration',
     description:
-      'Spoken voice agents via Vapi + n8n webhook pipelines syncing directly with Google Sheets.',
-    pills: ['n8n', 'Vapi Voice AI', 'Webhooks', 'Automation'],
+      'AI-agent frameworks (LangChain, LangGraph, CrewAI, Google ADK), multi-agent workflows and n8n voice automation with Vapi.',
+    pills: ['LangGraph', 'CrewAI', 'n8n', 'Human-in-the-Loop'],
     accentHex: '#5E1726',
   },
   {
@@ -86,7 +86,7 @@ const ROBOT_HAND_SKILLS: RobotHandSkill[] = [
     category: '04 · Interactive Frontend',
     description:
       'High-contrast editorial interfaces, 3D WebGL stages, and responsive full-stack web apps.',
-    pills: ['React.js', 'JavaScript', 'HTML5 & CSS3', 'Tailwind CSS'],
+    pills: ['React.js', 'TypeScript', 'React Hooks', 'Tailwind CSS'],
     accentHex: '#35423C',
   },
   {
@@ -107,8 +107,8 @@ const ROBOT_HAND_SKILLS: RobotHandSkill[] = [
     title: 'AWS Cloud, Docker & CI/CD',
     category: '06 · Cloud & Deployment',
     description:
-      'Scalable AWS Cloud infrastructure (EC2, S3, RDS), containerized services, automated GitHub CI/CD pipelines, and Vercel hosting.',
-    pills: ['AWS Cloud', 'Docker', 'CI/CD', 'Git & GitHub', 'Vercel'],
+      'AWS EC2 hands-on deployment experience; working knowledge of S3, RDS and IAM, alongside Docker, GitHub, CI/CD and Vercel.',
+    pills: ['AWS EC2 (Hands-on)', 'S3/RDS/IAM (Working Knowledge)', 'Docker', 'CI/CD'],
     accentHex: '#35423C',
   },
 ];
@@ -1398,8 +1398,11 @@ export const BuiltDifferentAndFlowSection: React.FC<
                     Chapter 04 · Technology Universe
                   </span>
                   <h3 className="text-2xl md:text-4xl font-bold tracking-tight text-[#232B27]">
-                    Full Stack Python, Gen AI &amp; Cloud Ecosystem
+                    Resume-Aligned Engineering Skills
                   </h3>
+                  <p className="mt-2 text-sm text-[#35423C] max-w-xl leading-relaxed">
+                    Explore {SKILL_CATEGORIES.length} areas and {SKILL_CATEGORIES.reduce((total, category) => total + category.skills.length, 0)} skills from my current resume, including GenAI, multi-agent frameworks, AWS, and full-stack engineering.
+                  </p>
                 </div>
 
                 {/* Category Filter Tabs */}
@@ -1477,7 +1480,7 @@ export const BuiltDifferentAndFlowSection: React.FC<
                                 title={skill.contextNote}
                                 className="text-[9.5px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-[#5E1726] text-[#F6F1E7] font-bold"
                               >
-                                Project Tech
+                                {skill.contextNote}
                               </span>
                             )}
                           </motion.div>
