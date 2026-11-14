@@ -1542,7 +1542,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
           {/* Action CTAs */}
           <div className="flex items-center gap-3">
             <a
-              href={project.githubUrl}
+              href={project.githubUrl || project.liveUrl || '#'}
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-mono text-xs font-bold transition-all cursor-pointer shadow-md ${
@@ -1551,8 +1551,8 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                   : 'bg-[#5E1726] text-[#F6F1E7] hover:bg-[#751E31]'
               }`}
             >
-              <GitBranch className="w-4 h-4" />
-              <span>View Source Code</span>
+              {project.githubUrl ? <GitBranch className="w-4 h-4" /> : <ExternalLink className="w-4 h-4" />}
+              <span>{project.githubUrl ? 'View Source Code' : 'Open Live Demo'}</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
 

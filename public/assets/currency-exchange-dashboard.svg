@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Illustrative currency exchange rate tracker dashboard">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#12222B"/><stop offset="0.56" stop-color="#21393D"/><stop offset="1" stop-color="#461D31"/></linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4BDFC0"/><stop offset="1" stop-color="#83B5FF"/></linearGradient>
+    <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4BDFC0" stop-opacity=".33"/><stop offset="1" stop-color="#4BDFC0" stop-opacity="0"/></linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="54"/></filter>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="1030" cy="40" r="245" fill="#169985" opacity=".15" filter="url(#blur)"/>
+  <circle cx="75" cy="645" r="220" fill="#A02453" opacity=".22" filter="url(#blur)"/>
+  <g fill="none" stroke="#D5FFF4" stroke-opacity=".07"><path d="M0 160H1200M0 290H1200M0 420H1200M0 550H1200"/><path d="M170 0V675M340 0V675M510 0V675M680 0V675M850 0V675M1020 0V675"/></g>
+  <rect x="40" y="32" width="1120" height="610" rx="28" fill="#0A151D" fill-opacity=".6" stroke="#7CDDD1" stroke-opacity=".3" stroke-width="2"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="73" y="66" width="42" height="42" rx="12" fill="#48CEB4"/>
+    <path d="M84 91h20m-14-7l-7 7 7 7m8-14 7 7-7 7" stroke="#10242C" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="131" y="94" font-size="23" font-weight="700" fill="#F6FFFE">EXCHANGE<tspan fill="#4BDFC0">.TRACK</tspan></text>
+    <text x="1059" y="94" font-size="12" letter-spacing="2" fill="#A4CAC8">PORTFOLIO</text>
+    <line x1="70" y1="127" x2="1130" y2="127" stroke="#9EDFD7" stroke-opacity=".2"/>
+    <text x="77" y="178" font-size="13" letter-spacing="4" font-weight="bold" fill="#58D9C0">FOREX / CRYPTO ANALYTICS</text>
+    <text x="74" y="234" font-size="49" font-weight="800" fill="#F7FAF7">Currency Exchange</text>
+    <text x="74" y="294" font-size="49" font-weight="800" fill="#F7FAF7">Rate Tracker<tspan fill="#57DCC3">.</tspan></text>
+    <text x="77" y="340" font-size="18" fill="#B8D3D4">Live rates  ·  30-day trends  ·  Smart alerts</text>
+    <rect x="76" y="388" width="417" height="96" rx="16" fill="#FFFFFF" fill-opacity=".075" stroke="#A5E0D6" stroke-opacity=".28"/>
+    <text x="100" y="420" font-size="12" letter-spacing="2" fill="#AAC9CA">CONVERT &amp; COMPARE</text>
+    <text x="101" y="457" font-size="25" font-weight="700" fill="#F7FFFC">BASE</text>
+    <rect x="191" y="433" width="81" height="36" rx="9" fill="#4CE0BE" fill-opacity=".15"/>
+    <text x="207" y="458" font-size="22" font-weight="700" fill="#5FEAC8">USD</text>
+    <text x="295" y="457" font-size="22" fill="#B6E1DA">→</text>
+    <text x="340" y="457" font-size="23" font-weight="700" fill="#F7FFFC">INR</text>
+    <rect x="76" y="512" width="184" height="62" rx="13" fill="#45D2B2" fill-opacity=".14" stroke="#45D2B2" stroke-opacity=".35"/>
+    <text x="94" y="538" font-size="12" fill="#A1CBC7">RATE MOVEMENT</text>
+    <text x="94" y="558" font-size="17" font-weight="700" fill="#66E4C6">24H INSIGHTS</text>
+    <rect x="273" y="512" width="220" height="62" rx="13" fill="#FFFFFF" fill-opacity=".08" stroke="#D5EEF4" stroke-opacity=".22"/>
+    <text x="290" y="538" font-size="12" fill="#A1CBC7">HISTORICAL VIEW</text>
+    <text x="290" y="558" font-size="17" font-weight="700" fill="#F2FBFA">30-DAY TRENDS</text>
+    <rect x="560" y="175" width="554" height="377" rx="23" fill="#092329" fill-opacity=".74" stroke="#B0FFF0" stroke-opacity=".23" stroke-width="2"/>
+    <text x="594" y="222" font-size="14" letter-spacing="2" font-weight="700" fill="#D3F9F1">HISTORICAL PERFORMANCE</text>
+    <text x="594" y="246" font-size="12" fill="#8AAEA9">Illustrative 30-day trend display</text>
+    <g stroke="#9DCCC3" stroke-opacity=".16" fill="none">
+      <path d="M593 306H1082M593 358H1082M593 410H1082M593 462H1082"/>
+      <path d="M650 285V485M740 285V485M830 285V485M920 285V485M1010 285V485"/>
+    </g>
+    <path d="M596 438C641 431 660 396 704 411S770 354 820 377 876 300 926 325 1014 283 1080 290L1080 480H596Z" fill="url(#fill)"/>
+    <path d="M596 438C641 431 660 396 704 411S770 354 820 377 876 300 926 325 1014 283 1080 290" fill="none" stroke="url(#glow)" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="1080" cy="290" r="9" fill="#64E6C9" stroke="#0B3138" stroke-width="5"/>
+    <rect x="898" y="304" width="166" height="51" rx="12" fill="#D4F7F0" fill-opacity=".96"/>
+    <text x="915" y="326" font-size="12" fill="#1A5F57">VOLATILITY</text>
+    <text x="915" y="342" font-size="15" font-weight="700" fill="#133E40">RATE ANALYSIS</text>
+    <text x="596" y="511" font-size="12" fill="#8DBCB5">30 DAYS AGO</text>
+    <text x="1018" y="511" font-size="12" fill="#8DBCB5">TODAY</text>
+    <rect x="77" y="604" width="352" height="20" rx="10" fill="#6AC9B8" fill-opacity=".13"/>
+    <text x="90" y="618" font-size="11" letter-spacing="1" fill="#A2D3CC">ILLUSTRATIVE PORTFOLIO VISUAL · NOT LIVE RATE DATA</text>
+  </g>
+</svg>

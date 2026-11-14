@@ -1354,6 +1354,68 @@ export const portfolioContent: PortfolioContent = {
         },
       ],
     },
+    {
+      id: 'currency-exchange-tracker',
+      index: '05',
+      title: 'Currency Exchange Rate Tracker',
+      subtitle: 'Live Forex & Crypto Dashboard · Currency Conversion · 30-Day Trends',
+      statusBadge: 'Live demo supplied · Implementation details based on project brief',
+      // Tracker source repository has not been supplied. Do not mislabel portfolio source as tracker source.
+      githubUrl: '',
+      liveUrl: 'https://d2ywbdz39a2o4v.cloudfront.net/dashboard',
+      liveUrlNote: 'Externally hosted interactive dashboard (user-provided demo URL)',
+      heroImage: '/assets/currency-exchange-dashboard.svg',
+      technologies: ['React.js', 'JavaScript', 'REST APIs', 'ExchangeRate-API', 'Frankfurter', 'CoinGecko'],
+      description:
+        'A browser-based currency exchange tracking dashboard combining forex and cryptocurrency rate comparisons, amount conversion, 24-hour change indicators, and a 30-day history and volatility view. The product brief also describes configurable exchange alerts and offline/fallback behavior.',
+      problemStatement:
+        'Currency exchange decisions require current conversion rates, historical context, and a clear indication of large price movements. Separate live forex, historical, and cryptocurrency data sources make meaningful comparisons difficult, particularly when an upstream service is unavailable.',
+      architectureOverview:
+        'The project specification describes a hybrid REST API architecture: ExchangeRate-API supplies live fiat exchange rates, Frankfurter supplies date-ranged historical series, and CoinGecko supplies Bitcoin and Ethereum quotes. A React dashboard presents conversions, comparisons, trends, and conditional rate messages. API keys should remain on a server-side service and never be embedded in the browser bundle.',
+      architectureFlow: [
+        { step: '01', node: 'React Currency Dashboard', detail: 'Select a base/target currency, enter an amount, and inspect rate comparisons, historical charts, and alert messages.' },
+        { step: '02', node: 'Currency Rate Service', detail: 'A service layer is specified for coordinating upstream APIs, normalization, rate conversions, and fallback decisions.' },
+        { step: '03', node: 'ExchangeRate-API & CoinGecko', detail: 'Fetch recent fiat quotes and current BTC/ETH values from separate upstream providers.' },
+        { step: '04', node: 'Frankfurter Historical Trends', detail: 'Query a 30-day date range to compare exchange-rate movements and derive volatility indicators.' },
+        { step: '05', node: 'Alerts & Resilience', detail: 'Display threshold-based warnings and, where implemented, use cached or mock data when a provider fails.' },
+      ],
+      implementationExplanation:
+        'The specified dashboard accepts a base currency and multiple targets, calculates conversion amounts and rate movements, and evaluates historical volatility using the coefficient of variation (standard deviation divided by mean, expressed as a percentage). Its conditional messages include significant movement above 5% in 24 hours, user-defined favorable thresholds, and volatility above 2%; crypto conversions include a cautionary notice. The original service source and CI/CD configuration were not supplied for independent verification.',
+      implementedFeatures: [
+        'Live fiat exchange-rate comparisons across multiple target currencies',
+        'Amount-based conversion calculator and 24-hour rate-change indicators',
+        '30-day historical exchange trends and volatility visualization',
+        'CoinGecko-based Bitcoin and Ethereum rate context',
+        'User-defined threshold alerts and favorable exchange indicators',
+        'Offline-mode and stale/mock fallback behavior described in the project requirements',
+      ],
+      plannedOrPartialFeatures: [
+        'Verification note: the live URL and functional specification were provided, but the underlying tracker source has not been reviewed. Docker, Jenkins, test coverage, cache TTL, and the assignment option (A/B/C) should not be presented as verified until source is available.',
+      ],
+      screens: [
+        {
+          id: 'currency-dashboard-overview',
+          title: 'Multi-Currency Exchange Dashboard',
+          caption: 'Illustrative portfolio visual showing the dashboard concept; open Live Demo for the actual application.',
+          type: 'showcase',
+          highlights: ['Multi-Currency Quotes', '24-Hour Movement', 'Currency Converter'],
+        },
+        {
+          id: 'currency-history',
+          title: 'Historical Trends & Volatility',
+          caption: 'Thirty-day rate comparisons and coefficient-of-variation indicator described in the project brief.',
+          type: 'interface',
+          highlights: ['Frankfurter Historical Data', '30-Day Trends', 'Volatility Index'],
+        },
+        {
+          id: 'currency-alerts',
+          title: 'Rate Alerts & Fallback Strategy',
+          caption: 'Conditional volatility/favorable-rate messages and API resilience behavior from the supplied specification.',
+          type: 'architecture',
+          highlights: ['5% Daily Change Alert', '2% Volatility Threshold', 'Offline Fallback'],
+        },
+      ],
+    },
   ],
 
   education: [
@@ -1746,12 +1808,13 @@ export interface FeaturedProject {
   isFlagship?: boolean;
 }
 
-const ACCENT_COLORS = ['#38BDF8', '#D8CBB8', '#9E334B', '#B6C2BB'];
+const ACCENT_COLORS = ['#38BDF8', '#D8CBB8', '#9E334B', '#B6C2BB', '#0F766E'];
 const CATEGORIES = [
   'Full-Stack Python & Enterprise SaaS',
   'Full Stack EdTech & E-Commerce',
   'Conversational Voice & Text AI',
   'Agentic Voice Automation',
+  'Live Forex & Crypto Analytics',
 ];
 
 export const FEATURED_PROJECTS: FeaturedProject[] =

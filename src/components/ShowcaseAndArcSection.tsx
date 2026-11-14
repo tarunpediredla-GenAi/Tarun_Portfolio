@@ -12,6 +12,13 @@ interface ShowcaseAndArcSectionProps {
 
 const WARP_FRAMES = [0, 1, 2, 3, 4, 5, 6];
 
+// Lead with the newest live dashboard while retaining stable source-data indices
+// used by the cinematic gallery, carousel, and satellite visuals.
+const SHOWCASE_PROJECTS = [
+  ...FEATURED_PROJECTS.filter((project) => project.id === 'currency-exchange-tracker'),
+  ...FEATURED_PROJECTS.filter((project) => project.id !== 'currency-exchange-tracker'),
+];
+
 export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
   onSelectProject,
 }) => {
@@ -243,16 +250,16 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
               </span>
             </h2>
             <p className="mt-6 text-[#35423C] font-medium text-base md:text-lg max-w-2xl mx-auto">
-              Four verified full-stack and AI systems engineered by Tarun
-              Pediredla — led by the InsureSphere AI enterprise flagship,
-              complete with real repository links, architecture flows, and
-              transparent engineering scope.
+              Five full-stack and AI project case studies engineered by Tarun
+              Pediredla — now featuring the live Currency Exchange Rate Tracker,
+              alongside InsureSphere AI and other portfolio systems.
+              Explore their architecture, technology choices, and demo links.
             </p>
           </motion.div>
 
-          {/* 4 Cinematic Project Showcases */}
+          {/* Five cinematic project showcases — live currency dashboard first */}
           <div className="space-y-16">
-            {FEATURED_PROJECTS.map((project, projIdx) => {
+            {SHOWCASE_PROJECTS.map((project, projIdx) => {
               const isFlagship = project.isFlagship || project.id === 'insuresphere-ai';
 
               return (
@@ -266,7 +273,7 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                     delay: projIdx * 0.05,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="group relative rounded-3xl border overflow-hidden shadow-xl transition-all duration-500 border-[#687A70]/45 bg-[#FAF7F2] hover:border-[#5E1726]"
+                  className={`group relative rounded-3xl border overflow-hidden shadow-xl transition-all duration-500 border-[#687A70]/45 bg-[#FAF7F2] hover:border-[#5E1726] ${project.id === 'currency-exchange-tracker' ? 'ring-2 ring-emerald-500/60 shadow-emerald-950/20' : ''}`}
                 >
                   {/* Top Window Chrome Bar */}
                   <div className="flex items-center justify-between px-6 py-3.5 bg-[#5E1726] text-[#F6F1E7]">
@@ -282,6 +289,11 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                       <span className="text-[11px] font-mono font-bold uppercase tracking-[0.18em] px-3 py-0.5 rounded-full bg-[#F6F1E7] text-[#5E1726]">
                         {project.category}
                       </span>
+                      {project.id === 'currency-exchange-tracker' && (
+                        <span className="hidden sm:inline-flex items-center rounded-full border border-emerald-200/60 bg-emerald-400/20 px-3 py-0.5 text-[11px] font-bold uppercase tracking-widest text-emerald-100">
+                          NEW · FEATURED LIVE DEMO
+                        </span>
+                      )}
                     </div>
                   </div>
 
@@ -308,7 +320,7 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                           {project.liveUrl ? (
                             <span className="px-3.5 py-1.5 rounded-full bg-emerald-600 text-[11px] font-mono font-bold text-white shadow-sm flex items-center gap-1.5">
                               <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
-                              <span>Live Verified</span>
+                              <span>{project.id === 'currency-exchange-tracker' ? 'Live Demo' : 'Live Verified'}</span>
                             </span>
                           ) : isFlagship ? (
                             <span className="px-3 py-1 rounded-full bg-[#232B27]/90 text-[10.5px] font-mono font-bold text-[#F6F1E7] border border-[#687A70]/50 shadow-sm">
@@ -469,12 +481,12 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                         <motion.a
                           whileHover={{ scale: 1.04, y: -2 }}
                           whileTap={{ scale: 0.97 }}
-                          href={project.githubUrl}
+                          href={project.githubUrl || project.liveUrl || '#'}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="px-4 sm:px-5 py-2.5 rounded-full bg-[#DCE3DF] border border-[#687A70]/50 text-[#232B27] text-xs font-mono font-bold uppercase tracking-[0.16em] hover:border-[#5E1726] transition-colors"
                         >
-                          View Source Code ↗
+                          {project.githubUrl ? 'View Source Code ↗' : 'Visit Live Demo ↗'}
                         </motion.a>
 
                         <motion.button
