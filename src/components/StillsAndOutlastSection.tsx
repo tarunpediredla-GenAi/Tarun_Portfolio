@@ -16,6 +16,11 @@ interface StillsAndOutlastSectionProps {
   onSelectProject: (project: FeaturedProject) => void;
 }
 
+const INDEX_PROJECTS = [
+  ...FEATURED_PROJECTS.filter((project) => project.id === 'currency-exchange-tracker'),
+  ...FEATURED_PROJECTS.filter((project) => project.id !== 'currency-exchange-tracker'),
+];
+
 const TWINKLE_STARS = Array.from({ length: 28 }, (_, i) => ({
   id: i,
   top: `${(i * 37) % 94}%`,
@@ -103,6 +108,11 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
       project: FEATURED_PROJECTS[3],
       badge: 'Agentic Automation',
       caption: 'Voice request → Vapi → n8n → Gemini → Google Sheets',
+    },
+    {
+      project: FEATURED_PROJECTS[4],
+      badge: 'NEW · Live Forex & Crypto',
+      caption: 'Live conversion dashboard, 30-day trends, volatility and rate alerts',
     },
   ];
 
@@ -837,7 +847,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
           </div>
 
           {/* Surrounding Satellite Panels */}
-          {FEATURED_PROJECTS.map((proj, idx) => {
+          {FEATURED_PROJECTS.slice(0, 4).map((proj, idx) => {
             const positions = [
               '-top-[18vh] -left-[26vw]',
               '-top-[16vh] left-[26vw]',
@@ -875,14 +885,14 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
           className="relative w-full mx-auto max-w-5xl px-6 py-12"
         >
           <p className="text-xs uppercase tracking-[0.35em] text-[#5E1726] font-bold mb-3 font-mono">
-            Quick Index · Verified Repositories
+            Quick Index · Featured Project Case Studies
           </p>
           <h2 className="text-3xl md:text-5xl font-bold text-[#232B27] mb-12 tracking-tight">
             Flagship Projects
           </h2>
 
           <div className="divide-y divide-[#687A70]/35 border-y border-[#687A70]/35">
-            {FEATURED_PROJECTS.map((proj) => {
+            {INDEX_PROJECTS.map((proj) => {
               return (
                 <div
                   key={proj.id}
@@ -901,6 +911,11 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
                           <h3 className="text-2xl md:text-4xl font-bold tracking-tight transition-all duration-300 text-[#232B27] group-hover:text-[#5E1726] group-hover:translate-x-2">
                             {proj.title}
                           </h3>
+                          {proj.id === 'currency-exchange-tracker' && (
+                            <span className="rounded-full bg-emerald-100 text-emerald-800 border border-emerald-400/40 px-2.5 py-1 text-[10px] font-mono font-bold tracking-wider uppercase">
+                              New · Live Demo
+                            </span>
+                          )}
                         </div>
                         <p className="text-xs md:text-sm text-[#35423C] font-medium mt-1">
                           {proj.subtitle}
