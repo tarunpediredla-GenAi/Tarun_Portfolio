@@ -134,7 +134,7 @@ export const ProfileCardAndFooter: React.FC<ProfileCardAndFooterProps> = ({
                   <div className="pc-content">
                     <div className="pc-details">
                       <h3>{TARUN_PROFILE.name}</h3>
-                      <p>Python Full Stack Developer | GenAI &amp; Agentic AI</p>
+                      <p>{TARUN_PROFILE.role}</p>
                     </div>
                   </div>
                   <div className="pc-content pc-avatar-content">
@@ -159,7 +159,7 @@ export const ProfileCardAndFooter: React.FC<ProfileCardAndFooterProps> = ({
                             {TARUN_PROFILE.handle}
                           </div>
                           <div className="pc-status">
-                            {TARUN_PROFILE.status} · Hyderabad, Telangana
+                            {TARUN_PROFILE.status} · {TARUN_PROFILE.location}
                           </div>
                         </div>
                       </div>
@@ -275,10 +275,14 @@ export const ProfileCardAndFooter: React.FC<ProfileCardAndFooterProps> = ({
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[11px] font-mono font-bold uppercase tracking-wider text-[#35423C] mb-1.5">
+                  <label
+                    htmlFor="contact-sender-name"
+                    className="block text-[11px] font-mono font-bold uppercase tracking-wider text-[#35423C] mb-1.5"
+                  >
                     Your Name
                   </label>
                   <input
+                    id="contact-sender-name"
                     type="text"
                     required
                     value={senderName}
@@ -288,10 +292,14 @@ export const ProfileCardAndFooter: React.FC<ProfileCardAndFooterProps> = ({
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-mono font-bold uppercase tracking-wider text-[#35423C] mb-1.5">
+                  <label
+                    htmlFor="contact-sender-email"
+                    className="block text-[11px] font-mono font-bold uppercase tracking-wider text-[#35423C] mb-1.5"
+                  >
                     Your Email
                   </label>
                   <input
+                    id="contact-sender-email"
                     type="email"
                     required
                     value={senderEmail}
@@ -303,15 +311,19 @@ export const ProfileCardAndFooter: React.FC<ProfileCardAndFooterProps> = ({
               </div>
 
               <div>
-                <label className="block text-[11px] font-mono font-bold uppercase tracking-wider text-[#35423C] mb-1.5">
+                <label
+                  htmlFor="contact-sender-message"
+                  className="block text-[11px] font-mono font-bold uppercase tracking-wider text-[#35423C] mb-1.5"
+                >
                   Project or Opportunity Details
                 </label>
                 <textarea
+                  id="contact-sender-message"
                   rows={3}
                   required
                   value={senderMessage}
                   onChange={(e) => setSenderMessage(e.target.value)}
-                  placeholder="Tell Tarun about your Full Stack Python, Django, React, Gen AI, or Agentic AI role or project..."
+                  placeholder="Tell Tarun about your Full Stack Python, Django, FastAPI, React, AWS, GenAI, or Agentic AI role or project..."
                   className="w-full rounded-xl border border-[#687A70]/50 bg-[#F6F1E7] px-3.5 py-2.5 text-sm text-[#232B27] placeholder:text-[#687A70] focus:border-[#5E1726] focus:outline-none resize-none"
                 />
               </div>
@@ -361,8 +373,7 @@ export const ProfileCardAndFooter: React.FC<ProfileCardAndFooterProps> = ({
                   {TARUN_PROFILE.name}
                 </span>
                 <p className="text-sm font-mono text-[#DCE3DF] font-bold">
-                  Full Stack Python Developer with Gen AI &amp; Agentic AI ·{' '}
-                  {TARUN_PROFILE.location}
+                  {TARUN_PROFILE.role} · {TARUN_PROFILE.location}
                 </p>
                 <p className="text-[#EFE8DA] font-medium text-center w-full max-w-md sm:w-96 px-4 sm:px-0">
                   {TARUN_PROFILE.tagline}
@@ -371,6 +382,26 @@ export const ProfileCardAndFooter: React.FC<ProfileCardAndFooterProps> = ({
 
               {/* Social & Contact Icons */}
               <div className="flex mb-6 mt-5 gap-5">
+                <a
+                  href={TARUN_PROFILE.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#EFE8DA] hover:text-white transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <svg
+                    className="w-6 h-6 hover:scale-110 duration-300"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                    <rect width="4" height="12" x="2" y="9" />
+                    <circle cx="4" cy="4" r="2" />
+                  </svg>
+                </a>
+
                 <a
                   href={TARUN_PROFILE.github}
                   target="_blank"
@@ -449,14 +480,16 @@ export const ProfileCardAndFooter: React.FC<ProfileCardAndFooterProps> = ({
                 </a>
               </div>
 
-              {/* Verified Project Repository Direct Links */}
+              {/* Verified Project Direct Links (only render valid external links) */}
               <div className="flex flex-wrap gap-3 justify-center mt-5">
-                {FEATURED_PROJECTS.map((proj) => (
+                {FEATURED_PROJECTS.filter(
+                  (proj) => Boolean(proj.githubUrl || proj.liveUrl)
+                ).map((proj) => (
                   <motion.a
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.97 }}
                     key={proj.id}
-                    href={proj.githubUrl}
+                    href={proj.liveUrl || proj.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs font-mono font-bold text-[#5E1726] bg-[#F6F1E7] hover:bg-[#EFE8DA] px-3.5 py-1.5 rounded-full transition-colors"

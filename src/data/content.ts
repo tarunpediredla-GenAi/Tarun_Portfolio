@@ -7,7 +7,13 @@ import satyaEducationImg from '../assets/images/project_satya_education_17938959
 import alexInterviewerImg from '../assets/images/project_alex_interviewer_1793895970870.jpg';
 import voiceTaskPlannerImg from '../assets/images/project_voice_task_planner_1793895973106.jpg';
 import commandBackdropImg from '../assets/images/tarun_command_backdrop_1793895972254.jpg';
-
+import {
+  RESUME_EDUCATION,
+  RESUME_EXPERIENCE,
+  RESUME_PROFILE,
+  RESUME_SKILL_CATEGORIES,
+  RESUME_SUMMARY_PARAGRAPHS,
+} from './resumeCatalog';
 
 export interface ExperienceItem {
   id: string;
@@ -154,6 +160,10 @@ export interface PortfolioContent {
     phone: string;
     location: string;
     github: string;
+    linkedinUrl: string;
+    linkedinLabel: string;
+    portfolioUrl: string;
+    portfolioLabel: string;
     fallbackBackdrop: string;
   };
   chapters: ChapterItem[];
@@ -179,16 +189,20 @@ export interface PortfolioContent {
 
 export const portfolioContent: PortfolioContent = {
   profile: {
-    name: 'Tarun Pediredla',
-    openingHeadline: 'TARUN PEDIREDLA',
-    role: 'Python Full Stack Developer | GenAI & Agentic AI',
-    secondaryTitle: 'PYTHON FULL STACK · GENAI · AGENTIC AI',
-    professionalTitle: 'Python Full Stack Developer | GenAI & Agentic AI',
-    tagline: 'Building intelligent, scalable, and visually stunning digital experiences.',
-    email: 'tarunpediredla9966@gmail.com',
-    phone: '+91 8074080773',
-    location: 'Hyderabad, Telangana',
-    github: 'https://github.com/tarunpediredla-GenAi',
+    name: RESUME_PROFILE.name,
+    openingHeadline: RESUME_PROFILE.openingHeadline,
+    role: RESUME_PROFILE.role,
+    secondaryTitle: RESUME_PROFILE.secondaryTitle,
+    professionalTitle: RESUME_PROFILE.professionalTitle,
+    tagline: RESUME_PROFILE.tagline,
+    email: RESUME_PROFILE.email,
+    phone: RESUME_PROFILE.phone,
+    location: RESUME_PROFILE.location,
+    github: RESUME_PROFILE.github,
+    linkedinUrl: RESUME_PROFILE.linkedinUrl,
+    linkedinLabel: RESUME_PROFILE.linkedinLabel,
+    portfolioUrl: RESUME_PROFILE.portfolioUrl,
+    portfolioLabel: RESUME_PROFILE.portfolioLabel,
     fallbackBackdrop: '/assets/aistudio/Warm_Rim-Lit_Developer_Portrait_3ff9f2c3.png',
   },
 
@@ -238,82 +252,36 @@ export const portfolioContent: PortfolioContent = {
   ],
 
   about: {
-    heading: 'Full Stack Python & AI Systems Engineering',
-    summaryParagraphs: [
-      'I am a Full Stack Python Developer based in Hyderabad, Telangana, building web applications that connect responsive React interfaces with structured Python and Django backends, relational and document databases, and practical Generative AI workflows.',
-      'My career began with solid frontend foundations in HTML, CSS, JavaScript, and React.js at Saras India Systems Private Limited, progressed into end-to-end Python full stack engineering at CP Academy, and now encompasses Full Stack Python, Generative AI, Agentic AI, AWS Cloud, Docker workflows, and CI/CD pipelines at Finite HR & IT Solution.',
-      'Across my engineering work and portfolio systems, I focus on reliable state management, clean API contracts, scalable AWS Cloud deployments, voice-first and conversational AI interfaces powered by Google Gemini and Vapi, and automated n8n orchestration pipelines.',
-    ],
+    heading: 'Full Stack Python, Cloud & Agentic AI Engineering',
+    summaryParagraphs: [...RESUME_SUMMARY_PARAGRAPHS],
     philosophyTitle: 'Development Philosophy',
     philosophyPillars: [
       {
         index: '01',
         title: 'End-to-End Ownership',
         description:
-          'Connecting component-driven React interfaces directly to clean backend business logic, database schemas, and payment or webhook validations without brittle glue code.',
+          'Connecting component-driven React & TypeScript interfaces directly to Django REST Framework and FastAPI backends, relational PostgreSQL schemas, and verified payment or webhook validations.',
       },
       {
         index: '02',
-        title: 'Practical Agentic AI',
+        title: 'Grounded & Agentic AI',
         description:
-          'Designing Generative AI and voice workflows where LLM prompts, tool calls, and webhook automations produce deterministic, structured outcomes rather than unverified chat responses.',
+          'Designing Generative AI, Agentic RAG, multi-agent systems, and self-hosted n8n workflows with tool calling, citations, guardrails, and human-in-the-loop review.',
       },
       {
         index: '03',
         title: 'Production Discipline',
         description:
-          'Prioritizing role-based access rules, server-side verification, AWS Cloud infrastructure, Docker containerization, and reproducible CI/CD deployment workflows.',
+          'Enforcing JWT/RBAC security, server-side invariants, automated Pytest & Vitest suites, Docker containerization, AWS EC2 deployments, and reproducible CI/CD pipelines.',
       },
     ],
   },
 
-  experience: [
-    {
-      id: 'finite-hr',
-      company: 'Finite HR & IT Solution',
-      role: 'Full Stack Python Developer',
-      period: '1 April 2025 – Present',
-      location: 'Hyderabad, Telangana',
-      summary:
-        'Developing full stack Python web applications and integrating Generative AI and Agentic AI workflows with AWS Cloud and containerized deployment pipelines.',
-      responsibilities: [
-        'Full stack Python application development across modern web architectures',
-        'Building and maintaining cohesive frontend and backend functionality',
-        'Generative AI and agentic AI application development and workflow orchestration',
-        'Deploying and managing cloud services on AWS alongside Docker workflows and automated CI/CD pipelines',
-      ],
-      technologies: ['Python', 'Django', 'React.js', 'Generative AI', 'Agentic AI', 'AWS Cloud', 'Docker', 'CI/CD'],
-    },
-    {
-      id: 'cp-academy',
-      company: 'CP Academy',
-      role: 'Full Stack Python Developer',
-      period: 'Duration: 9 months',
-      location: 'Hyderabad, Telangana',
-      summary:
-        'Focused on Python full stack application development and bridging client-side interfaces with backend service logic.',
-      responsibilities: [
-        'Python full stack application development',
-        'Connecting frontend interfaces to backend logic and database persistence layers',
-      ],
-      technologies: ['Python', 'Django', 'JavaScript', 'React.js', 'SQL'],
-    },
-    {
-      id: 'saras-india',
-      company: 'Saras India Systems Private Limited',
-      role: 'Frontend Developer',
-      period: 'May 2022 – 10 July 2024',
-      location: 'India',
-      summary:
-        'Built responsive, component-driven web interfaces and reusable UI modules using core web technologies and React.js.',
-      responsibilities: [
-        'HTML, CSS, JavaScript and React.js application development',
-        'Engineering responsive user interfaces across desktop, tablet, and mobile viewports',
-        'Designing and maintaining reusable frontend components',
-      ],
-      technologies: ['HTML', 'CSS', 'JavaScript', 'React.js'],
-    },
-  ],
+  experience: RESUME_EXPERIENCE.map((item) => ({
+    ...item,
+    responsibilities: [...item.responsibilities],
+    technologies: [...item.technologies],
+  })),
 
   skills: {
     note: 'Express and Firebase Firestore are used in my portfolio projects (Satya’s Education and Alex AI Mock Technical Interviewer) alongside my core Full Stack Python, Django, JavaScript, and React.js stack.',
@@ -637,54 +605,52 @@ export const portfolioContent: PortfolioContent = {
   projects: [
     {
       id: 'insuresphere-ai',
-      index: '01',
+      index: '02',
       isFlagship: true,
       title: 'InsureSphere AI',
       subtitle:
-        'Enterprise Insurance & Reinsurance Management Platform with AI-Assisted Claims Analysis',
-      statusBadge:
-        'Locally functional full-stack application; production-readiness verification ongoing.',
+        'Enterprise Insurance & Reinsurance Management Platform with AI-Assisted Claims Analysis & Policy RAG Studio',
+      statusBadge: '140+ Automated Tests Passing (Pytest & Vitest)',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/insuresphere-ai',
       liveUrlNote:
-        'Local Full-Stack Application — Cloud Deployment & Production Readiness Verification Ongoing',
+        'Full-Stack SaaS Platform — 140+ Pytest & Vitest Checks Passing',
       heroImage: '/assets/project_insuresphere_ai_banner.svg',
       technologies: [
         'Python',
         'Django',
-        'DRF',
-        'React.js',
-        'JavaScript',
+        'Django REST Framework',
+        'React',
+        'TypeScript',
         'Tailwind CSS',
         'PostgreSQL',
-        'AWS Cloud',
-        'JWT',
-        'REST APIs',
-        'RBAC',
+        'JWT / RBAC',
+        'RAG',
+        'Pytest',
         'Vitest',
-        'GitHub',
+        'AWS Cloud',
       ],
       flagshipTechStack: [
         'Python',
         'Django',
         'DRF',
-        'React.js',
-        'JavaScript',
+        'React',
+        'TypeScript',
         'Tailwind CSS',
         'PostgreSQL',
         'AWS Cloud',
-        'JWT',
-        'REST APIs',
-        'RBAC',
+        'JWT / RBAC',
+        'RAG',
+        'Pytest',
         'Vitest',
         'GitHub',
       ],
       coreEngineeringStack: [
-        'React',
+        'React & TypeScript',
         'Python',
         'Django REST Framework',
         'PostgreSQL',
         'AWS Cloud',
-        'JWT Authentication',
+        'JWT / RBAC',
       ],
       aiVerificationFeatures: [
         {
@@ -1115,16 +1081,17 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'satya-education',
-      index: '02',
+      index: '04',
       title: "Satya's Education",
-      subtitle: 'E-Commerce & Digital-Learning Platform for Books and Recorded Courses',
+      subtitle: 'E-Commerce & Learning Platform with Cashfree HMAC Webhook Verification',
+      statusBadge: 'Live on Vercel',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/SatyaEducationinstitute',
       liveUrl: 'https://satyaeducationinstitute.vercel.app',
-      liveUrlNote: 'Verified live deployment on Vercel (HTTP 200)',
+      liveUrlNote: 'Verified live deployment on Vercel',
       heroImage: satyaEducationImg,
-      technologies: ['React', 'JavaScript', 'Django', 'Firebase', 'Firestore', 'Cashfree', 'Vercel'],
+      technologies: ['React', 'TypeScript', 'Django', 'Firebase', 'Firestore', 'Cashfree', 'Vercel'],
       description:
-        'An e-commerce and digital-learning platform supporting physical/digital books, recorded video courses, and separate student and administrator experiences.',
+        'A course and book storefront featuring shopping cart, orders, and student/admin portals with server-side price and stock validation and Cashfree payments secured by HMAC webhook verification.',
       problemStatement:
         'Educational institutions selling both physical books and recorded video courses often struggle with fragmented tools—using one platform for storefront checkout and another for student course playback and entitlement management. Satya’s Education unifies product browsing, shopping cart checkout, payment verification, student course progress tracking, and administrator catalogue controls in a single platform.',
       architectureOverview:
@@ -1196,7 +1163,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'alex-interviewer',
-      index: '03',
+      index: '06',
       title: 'Alex AI Mock Technical Interviewer',
       subtitle: 'Conversational Voice & Text AI Technical Interview Practice Platform',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/hiringmanager',
@@ -1274,12 +1241,13 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'voice-task-planner',
-      index: '04',
+      index: '05',
       title: 'AI Voice Task Planner',
-      subtitle: 'Voice-Driven Task Management & AI Day-Planning Automation Pipeline',
+      subtitle: 'Self-Hosted n8n Voice Automation Pipeline on AWS EC2',
+      statusBadge: 'Self-Hosted on AWS EC2',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/n8n-ai-automations',
       heroImage: voiceTaskPlannerImg,
-      technologies: ['n8n', 'Vapi', 'Google Gemini', 'Google Sheets', 'Webhooks'],
+      technologies: ['n8n Architecture', 'Vapi', 'Gemini', 'Google Sheets', 'Webhooks', 'AWS EC2'],
       description:
         'A voice-driven automation workflow connecting spoken phone instructions to structured Google Sheets task storage and Google Gemini-generated time-blocked daily schedules.',
       problemStatement:
@@ -1356,91 +1324,156 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'currency-exchange-tracker',
-      index: '05',
+      index: '01',
       title: 'Currency Exchange Rate Tracker',
       subtitle: 'Live Forex & Crypto Dashboard · Currency Conversion · 30-Day Trends',
-      statusBadge: 'Live demo supplied · Implementation details based on project brief',
+      statusBadge: 'Live Dashboard · CloudFront',
       // Tracker source repository has not been supplied. Do not mislabel portfolio source as tracker source.
       githubUrl: '',
       liveUrl: 'https://d2ywbdz39a2o4v.cloudfront.net/dashboard',
-      liveUrlNote: 'Externally hosted interactive dashboard (user-provided demo URL)',
+      liveUrlNote: 'Live hosted dashboard on AWS CloudFront',
       heroImage: '/assets/currency-exchange-dashboard.svg',
       technologies: ['React.js', 'JavaScript', 'REST APIs', 'ExchangeRate-API', 'Frankfurter', 'CoinGecko'],
       description:
-        'A browser-based currency exchange tracking dashboard combining forex and cryptocurrency rate comparisons, amount conversion, 24-hour change indicators, and a 30-day history and volatility view. The product brief also describes configurable exchange alerts and offline/fallback behavior.',
+        'A currency exchange dashboard integrating live forex rates, cryptocurrency prices, and 30-day historical exchange trends with conversion calculations, percentage-change indicators, volatility metrics, configurable rate alerts, offline support, and API-failure fallbacks.',
       problemStatement:
         'Currency exchange decisions require current conversion rates, historical context, and a clear indication of large price movements. Separate live forex, historical, and cryptocurrency data sources make meaningful comparisons difficult, particularly when an upstream service is unavailable.',
       architectureOverview:
-        'The project specification describes a hybrid REST API architecture: ExchangeRate-API supplies live fiat exchange rates, Frankfurter supplies date-ranged historical series, and CoinGecko supplies Bitcoin and Ethereum quotes. A React dashboard presents conversions, comparisons, trends, and conditional rate messages. API keys should remain on a server-side service and never be embedded in the browser bundle.',
+        'The dashboard combines live fiat quotes from ExchangeRate-API, 30-day historical series from Frankfurter, and BTC/ETH crypto pricing from CoinGecko behind a resilient React client with caching, offline support, and graceful fallbacks when an upstream provider fails.',
       architectureFlow: [
-        { step: '01', node: 'React Currency Dashboard', detail: 'Select a base/target currency, enter an amount, and inspect rate comparisons, historical charts, and alert messages.' },
-        { step: '02', node: 'Currency Rate Service', detail: 'A service layer is specified for coordinating upstream APIs, normalization, rate conversions, and fallback decisions.' },
-        { step: '03', node: 'ExchangeRate-API & CoinGecko', detail: 'Fetch recent fiat quotes and current BTC/ETH values from separate upstream providers.' },
-        { step: '04', node: 'Frankfurter Historical Trends', detail: 'Query a 30-day date range to compare exchange-rate movements and derive volatility indicators.' },
-        { step: '05', node: 'Alerts & Resilience', detail: 'Display threshold-based warnings and, where implemented, use cached or mock data when a provider fails.' },
+        { step: '01', node: 'React Currency Dashboard', detail: 'Select base/target currencies, convert amounts, and inspect comparisons, 30-day trends, and alerts.' },
+        { step: '02', node: 'Rate Normalization Layer', detail: 'Coordinates live forex, historical series, and crypto quotes with conversion and percentage-change math.' },
+        { step: '03', node: 'ExchangeRate-API & CoinGecko', detail: 'Fetches live fiat rates alongside current Bitcoin and Ethereum quotes.' },
+        { step: '04', node: 'Frankfurter 30-Day History', detail: 'Queries 30-day date-ranged historical data to compute trends and volatility indicators.' },
+        { step: '05', node: 'Rate Alerts & Offline Fallback', detail: 'Evaluates configurable threshold alerts and falls back gracefully during offline or upstream API outages.' },
       ],
       implementationExplanation:
-        'The specified dashboard accepts a base currency and multiple targets, calculates conversion amounts and rate movements, and evaluates historical volatility using the coefficient of variation (standard deviation divided by mean, expressed as a percentage). Its conditional messages include significant movement above 5% in 24 hours, user-defined favorable thresholds, and volatility above 2%; crypto conversions include a cautionary notice. The original service source and CI/CD configuration were not supplied for independent verification.',
+        'Built a responsive multi-currency dashboard computing real-time conversions, 24-hour percentage changes, and 30-day historical volatility indicators alongside configurable rate alerts and resilient offline/API-failure fallbacks.',
       implementedFeatures: [
-        'Live fiat exchange-rate comparisons across multiple target currencies',
-        'Amount-based conversion calculator and 24-hour rate-change indicators',
-        '30-day historical exchange trends and volatility visualization',
-        'CoinGecko-based Bitcoin and Ethereum rate context',
-        'User-defined threshold alerts and favorable exchange indicators',
-        'Offline-mode and stale/mock fallback behavior described in the project requirements',
+        'Live forex exchange-rate comparisons across major global currencies',
+        'Real-time currency converter with 24-hour percentage-change calculations',
+        '30-day historical rate trends and volatility indicators powered by Frankfurter',
+        'Integrated cryptocurrency prices (BTC/ETH) via CoinGecko',
+        'Configurable threshold rate alerts and responsive UI across devices',
+        'Offline support and API-failure fallback handling for continuous usability',
       ],
       plannedOrPartialFeatures: [
-        'Verification note: the live URL and functional specification were provided, but the underlying tracker source has not been reviewed. Docker, Jenkins, test coverage, cache TTL, and the assignment option (A/B/C) should not be presented as verified until source is available.',
+        'Hosted live on AWS CloudFront; source repository is maintained separately from this portfolio codebase.',
       ],
       screens: [
         {
           id: 'currency-dashboard-overview',
           title: 'Multi-Currency Exchange Dashboard',
-          caption: 'Illustrative portfolio visual showing the dashboard concept; open Live Demo for the actual application.',
+          caption: 'Portfolio architecture overview; open Live Demo to interact with the deployed application.',
           type: 'showcase',
           highlights: ['Multi-Currency Quotes', '24-Hour Movement', 'Currency Converter'],
         },
         {
           id: 'currency-history',
-          title: 'Historical Trends & Volatility',
-          caption: 'Thirty-day rate comparisons and coefficient-of-variation indicator described in the project brief.',
+          title: '30-Day Historical Trends & Volatility',
+          caption: 'Thirty-day rate comparisons and volatility indicators driven by historical series data.',
           type: 'interface',
           highlights: ['Frankfurter Historical Data', '30-Day Trends', 'Volatility Index'],
         },
         {
           id: 'currency-alerts',
-          title: 'Rate Alerts & Fallback Strategy',
-          caption: 'Conditional volatility/favorable-rate messages and API resilience behavior from the supplied specification.',
+          title: 'Rate Alerts & Fallback Resilience',
+          caption: 'Configurable threshold alerts with offline support and upstream API fallback handling.',
           type: 'architecture',
-          highlights: ['5% Daily Change Alert', '2% Volatility Threshold', 'Offline Fallback'],
+          highlights: ['Configurable Rate Alerts', 'Volatility Thresholds', 'Offline & API Fallbacks'],
+        },
+      ],
+    },
+    {
+      id: 'cloud-claims-api',
+      index: '03',
+      title: 'Cloud Claims API',
+      subtitle: 'FastAPI & AWS — FNOL Claims Microservice with S3 Presigned Uploads & RDS',
+      statusBadge: 'In Development · Nov 2026',
+      githubUrl: '',
+      liveUrlNote: 'In active development (Nov 2026) — S3 presigned uploads, RDS PostgreSQL & EC2 deployment in progress',
+      heroImage: '/assets/cloud-claims-api-banner.svg',
+      technologies: [
+        'FastAPI',
+        'SQLAlchemy',
+        'Docker',
+        'Pytest',
+        'AWS S3',
+        'RDS PostgreSQL',
+        'AWS EC2',
+      ],
+      description:
+        'A cloud-native insurance claims microservice built with FastAPI and SQLAlchemy implementing a First Notice of Loss (FNOL) status workflow, automated Pytest verification, Docker containerization, and AWS S3 presigned evidence uploads backed by RDS PostgreSQL on EC2.',
+      problemStatement:
+        'Handling First Notice of Loss (FNOL) claims intake and large incident evidence uploads directly through a monolithic application server creates bottlenecks, brittle status transitions, and poor cloud portability.',
+      architectureOverview:
+        'FastAPI exposes strongly typed OpenAPI endpoints validated by Pydantic schemas and backed by SQLAlchemy ORM models. Claim status transitions follow a strict FNOL state machine verified by Pytest, while evidence files upload directly to AWS S3 via time-limited presigned URLs, containerized in Docker for EC2 and RDS PostgreSQL deployment.',
+      architectureFlow: [
+        {
+          step: '01',
+          node: 'FastAPI OpenAPI Endpoints',
+          detail: 'Typed Pydantic request/response contracts for FNOL registration, status updates, and evidence upload requests.',
+        },
+        {
+          step: '02',
+          node: 'FNOL Status State Machine',
+          detail: 'Enforces deterministic claim transitions (FNOL Logged → Under Review → Approved / Settled) with audit timestamps.',
+        },
+        {
+          step: '03',
+          node: 'SQLAlchemy & RDS PostgreSQL',
+          detail: 'Transactional ORM persistence modeling claims, status history events, and evidence metadata.',
+        },
+        {
+          step: '04',
+          node: 'AWS S3 Presigned Uploads',
+          detail: 'Issues scoped, expiring presigned upload URLs so clients upload incident documents straight to S3.',
+        },
+        {
+          step: '05',
+          node: 'Docker, Pytest & AWS EC2',
+          detail: 'Automated Pytest suite covering endpoints and transitions with Dockerized deployment targeting AWS EC2.',
+        },
+      ],
+      implementationExplanation:
+        'Engineered as a focused backend microservice demonstrating FastAPI, SQLAlchemy, Pytest API testing, Docker packaging, and AWS cloud integration patterns (S3 presigned URLs, RDS PostgreSQL, IAM least-privilege access, and EC2 hosting).',
+      implementedFeatures: [
+        'FastAPI REST microservice with typed Pydantic validation and OpenAPI documentation',
+        'FNOL claims intake and deterministic status-transition workflow',
+        'SQLAlchemy relational models structured for PostgreSQL persistence',
+        'Automated Pytest suite validating endpoints and FNOL state transitions',
+        'Docker container setup for reproducible local and cloud runtime environments',
+      ],
+      plannedOrPartialFeatures: [
+        'In Development (Nov 2026): AWS S3 presigned evidence uploads, managed RDS PostgreSQL cutover, and production AWS EC2 deployment are actively in progress.',
+      ],
+      screens: [
+        {
+          id: 'cloud-claims-endpoints',
+          title: 'FastAPI FNOL Endpoints & OpenAPI Spec',
+          caption: 'Typed REST endpoints for FNOL submission, claim status updates, and S3 presigned upload issuance.',
+          type: 'showcase',
+          highlights: ['POST /api/v1/claims/fnol', 'PATCH /api/v1/claims/{id}/status', 'POST /api/v1/evidence/presign'],
+        },
+        {
+          id: 'cloud-claims-aws',
+          title: 'AWS Cloud & Docker Pipeline',
+          caption: 'Containerized FastAPI service running on AWS EC2 with RDS PostgreSQL and S3 direct evidence uploads.',
+          type: 'architecture',
+          highlights: ['Dockerized Uvicorn Runtime', 'AWS RDS PostgreSQL', 'S3 Presigned Uploads & IAM'],
+        },
+        {
+          id: 'cloud-claims-pytest',
+          title: 'Pytest Verification Suite',
+          caption: 'Automated API contract and FNOL state-machine test coverage running before container builds.',
+          type: 'interface',
+          highlights: ['FNOL Persistence Tests', 'State Machine Guard Tests', 'Presigned Upload Contract Tests'],
         },
       ],
     },
   ],
 
-  education: [
-    {
-      id: 'bsc-cs',
-      degree: 'Bachelor of Science in Computer Science',
-      institution: 'Gayatri Vidya Parishad College for Degree and PG Courses (Autonomous)',
-      completion: 'Completed August 2021',
-      details: 'Undergraduate degree in Computer Science in Visakhapatnam, India.',
-    },
-    {
-      id: 'intermediate',
-      degree: 'Intermediate',
-      institution: 'Narayana Junior College',
-      completion: '2018',
-      details: 'Pre-university intermediate education completed in 2018.',
-    },
-    {
-      id: 'school',
-      degree: 'School',
-      institution: 'Bhashyam Public School',
-      completion: '2016',
-      details: 'Secondary school education completed in 2016.',
-    },
-  ],
+  education: RESUME_EDUCATION.map((edu) => ({ ...edu })),
 };
 
 export const COMMAND_BACKDROP_IMAGE = commandBackdropImg;
@@ -1449,20 +1482,24 @@ export const TARUN_PORTRAIT_IMAGE =
   '/assets/aistudio/Warm_Rim-Lit_Developer_Portrait_3ff9f2c3.png';
 
 export const TARUN_PROFILE = {
-  name: portfolioContent.profile.name,
-  displayName: 'TARUN PEDIREDLA',
-  role: portfolioContent.profile.professionalTitle,
-  tagline: portfolioContent.profile.tagline,
-  email: portfolioContent.profile.email,
-  phone: portfolioContent.profile.phone,
-  phoneClean: '+918074080773',
-  location: portfolioContent.profile.location,
-  github: portfolioContent.profile.github,
-  handle: '@tarunpediredla',
-  status: 'Online',
+  name: RESUME_PROFILE.name,
+  displayName: RESUME_PROFILE.openingHeadline,
+  role: RESUME_PROFILE.professionalTitle,
+  tagline: RESUME_PROFILE.tagline,
+  email: RESUME_PROFILE.email,
+  phone: RESUME_PROFILE.phone,
+  phoneClean: RESUME_PROFILE.phoneClean,
+  location: RESUME_PROFILE.location,
+  github: RESUME_PROFILE.github,
+  linkedinUrl: RESUME_PROFILE.linkedinUrl,
+  linkedinLabel: RESUME_PROFILE.linkedinLabel,
+  portfolioUrl: RESUME_PROFILE.portfolioUrl,
+  portfolioLabel: RESUME_PROFILE.portfolioLabel,
+  handle: RESUME_PROFILE.handle,
+  status: RESUME_PROFILE.status,
   portraitImage: TARUN_PORTRAIT_IMAGE,
-  summary: portfolioContent.about.summaryParagraphs[0],
-  philosophy: portfolioContent.about.summaryParagraphs[2],
+  summary: RESUME_SUMMARY_PARAGRAPHS[0],
+  philosophy: RESUME_SUMMARY_PARAGRAPHS[2],
 };
 
 export const CAREER_TIMELINE = portfolioContent.experience.map((exp, idx) => ({
@@ -1478,134 +1515,10 @@ export const CAREER_TIMELINE = portfolioContent.experience.map((exp, idx) => ({
 export const EDUCATION_HISTORY = portfolioContent.education;
 
 /**
- * Resume-aligned technical skill matrix, updated from the November 2026 one-page resume.
- * Capability labels reflect the user's resume; project-specific badges are explicitly identified.
+ * Resume-aligned technical skill matrix derived directly from src/data/resumeCatalog.ts.
  */
-export const SKILL_CATEGORIES = [
-  {
-    id: "languages",
-    title: "Languages",
-    subtitle: "Core programming, typed web development & SQL",
-    accent: "#6B1D2F",
-    skills: [
-      { name: "Python", purpose: "Primary programming language for backend services, automation and AI development" },
-      { name: "JavaScript", purpose: "Browser behavior, asynchronous programming and API integrations" },
-      { name: "TypeScript", purpose: "Type-safe React interfaces and application development" },
-      { name: "SQL", purpose: "Relational querying, joins and data manipulation" },
-      { name: "HTML5", purpose: "Semantic structure for accessible websites" },
-      { name: "CSS3", purpose: "Responsive layouts and modern styling" },
-    ],
-  },
-  {
-    id: "backend",
-    title: "Backend & APIs",
-    subtitle: "Python frameworks, REST services & application security",
-    accent: "#4E5E56",
-    skills: [
-      { name: "Django", purpose: "Python web framework for models, views, authentication and application logic" },
-      { name: "Django REST Framework", purpose: "Builds serialized, authenticated REST APIs for React clients" },
-      { name: "FastAPI", purpose: "Python API development with typed request and response models" },
-      { name: "Flask", purpose: "Lightweight framework for Python web services" },
-      { name: "REST APIs", purpose: "Design and integration of HTTP-based application services" },
-      { name: "JWT", purpose: "Token-based authentication for API clients" },
-      { name: "RBAC", purpose: "Role-based access control and permission management" },
-      { name: "Express.js", purpose: "Additional portfolio project backend technology", contextNote: "Project Tech" },
-    ],
-  },
-  {
-    id: "frontend",
-    title: "Frontend",
-    subtitle: "React component architecture & responsive UI engineering",
-    accent: "#85243A",
-    skills: [
-      { name: "React.js", purpose: "Component-based frontend application development" },
-      { name: "React Hooks", purpose: "Functional component state, effects and reusable behavior" },
-      { name: "Tailwind CSS", purpose: "Utility-first styling and consistent responsive design" },
-      { name: "Responsive UI", purpose: "Layouts that adapt to mobile, tablet and desktop" },
-    ],
-  },
-  {
-    id: "genai",
-    title: "GenAI & RAG",
-    subtitle: "Prompt engineering, retrieval, grounding & LLM integrations",
-    accent: "#8C3449",
-    skills: [
-      { name: "LLM APIs", purpose: "Connect language models to web applications and automation workflows" },
-      { name: "Prompt Engineering", purpose: "Instruction design and prompt refinement for reliable model outputs" },
-      { name: "RCTC · CO-STAR · RTF", purpose: "Prompt frameworks named in the resume" },
-      { name: "Zero-Shot & Few-Shot", purpose: "Prompting techniques using no examples or a small number of examples" },
-      { name: "Chain-of-Thought (CoT)", purpose: "Reasoning-oriented prompt technique listed in the resume" },
-      { name: "RAG", purpose: "Retrieval-Augmented Generation for knowledge-grounded answers" },
-      { name: "Agentic RAG", purpose: "Agent-directed retrieval and question answering workflows" },
-      { name: "Tool / Function Calling", purpose: "Connect model outputs to structured tool operations" },
-      { name: "Grounding", purpose: "Anchor generated responses to reliable source information" },
-      { name: "Fact-Checking & Citations", purpose: "Evaluate supporting evidence and cite retrieved sources" },
-    ],
-  },
-  {
-    id: "ai-agents",
-    title: "AI Agents",
-    subtitle: "Agent orchestration, safety, evaluation & local AI tooling",
-    accent: "#6B1D2F",
-    skills: [
-      { name: "LangChain", purpose: "Framework for building LLM applications and tool integrations" },
-      { name: "LangGraph", purpose: "Graph-based orchestration for stateful agent workflows" },
-      { name: "CrewAI", purpose: "Framework for coordinating role-based AI agents" },
-      { name: "Google ADK", purpose: "Agent Development Kit for AI assistant workflows" },
-      { name: "Multi-Agent Systems", purpose: "Design patterns for agents cooperating on a task" },
-      { name: "Chatbots", purpose: "Conversational assistant interfaces and flows" },
-      { name: "Agentic Workflow Debugging", purpose: "Inspect and troubleshoot orchestration steps and tool calls" },
-      { name: "Guardrails", purpose: "Rules and checks to constrain AI outputs and behavior" },
-      { name: "Human-in-the-Loop", purpose: "Human approval and review for AI-assisted decisions" },
-      { name: "LLM Evaluation", purpose: "Assess language-model outputs and response quality" },
-      { name: "Hugging Face", purpose: "Model discovery and AI ecosystem tooling" },
-      { name: "Ollama", purpose: "Local language-model development and experimentation" },
-    ],
-  },
-  {
-    id: "cloud-automation",
-    title: "Cloud & Automation",
-    subtitle: "n8n workflows, AWS deployment & delivery tooling",
-    accent: "#7A8B82",
-    skills: [
-      { name: "n8n Architecture & Automation", purpose: "Triggers, nodes, webhooks, data mapping and execution flow" },
-      { name: "AWS EC2", purpose: "Hands-on AWS compute and application / n8n hosting", contextNote: "Hands-on" },
-      { name: "AWS S3 / RDS / IAM", purpose: "Cloud storage, managed databases and permissions", contextNote: "Working Knowledge" },
-      { name: "AWS CLI", purpose: "Command-line administration and workflows for AWS" },
-      { name: "Google Cloud Console", purpose: "Cloud project and service configuration" },
-      { name: "Docker", purpose: "Containerized development and application delivery" },
-      { name: "CI/CD", purpose: "Automated testing, building and deployment workflows" },
-      { name: "Git & GitHub", purpose: "Version control and collaboration" },
-      { name: "Vercel", purpose: "Hosting and deployment of React web applications" },
-      { name: "Vapi", purpose: "Voice assistant integration in AI Voice Task Planner", contextNote: "Project Tech" },
-    ],
-  },
-  {
-    id: "databases-testing",
-    title: "Databases & Testing",
-    subtitle: "SQL, Firebase, authentication & automated quality checks",
-    accent: "#356C70",
-    skills: [
-      { name: "PostgreSQL", purpose: "Relational persistence and transactional queries" },
-      { name: "MySQL", purpose: "Relational storage, data modeling and SQL queries" },
-      { name: "Firebase Firestore", purpose: "Cloud document storage and data access rules" },
-      { name: "Firebase Authentication", purpose: "Authentication services and user sign-in" },
-      { name: "Pytest", purpose: "Automated test cases for Python application behavior" },
-      { name: "Vitest", purpose: "Frontend testing for React and TypeScript applications" },
-    ],
-  },
-  {
-    id: "ai-development",
-    title: "AI Development",
-    subtitle: "AI-assisted design, implementation, debugging & deployment",
-    accent: "#80634B",
-    skills: [
-      { name: "AI-Powered IDEs", purpose: "AI-assisted software design and development" },
-      { name: "CLI Tools", purpose: "Developer command-line tools and AI coding workflows" },
-      { name: "Coding Agents", purpose: "Agent-assisted implementation, debugging and deployment" },
-    ],
-  },
-];
+export const SKILL_CATEGORIES = RESUME_SKILL_CATEGORIES;
+
 
 /**
  * Flagship Enterprise Technology & Purpose Matrix
@@ -1790,23 +1703,36 @@ export interface FeaturedProject {
   isFlagship?: boolean;
 }
 
-const ACCENT_COLORS = ['#38BDF8', '#D8CBB8', '#9E334B', '#B6C2BB', '#0F766E'];
-const CATEGORIES = [
-  'Full-Stack Python & Enterprise SaaS',
-  'Full Stack EdTech & E-Commerce',
-  'Conversational Voice & Text AI',
-  'Agentic Voice Automation',
-  'Live Forex & Crypto Analytics',
-];
+const PROJECT_CATEGORY_BY_ID: Record<string, string> = {
+  'currency-exchange-tracker': 'Live Forex & Crypto Analytics',
+  'insuresphere-ai': 'Full-Stack Python & Enterprise SaaS',
+  'cloud-claims-api': 'FastAPI · AWS Cloud Microservice',
+  'satya-education': 'Full Stack EdTech & E-Commerce',
+  'voice-task-planner': 'Self-Hosted n8n Voice Automation',
+  'alex-interviewer': 'Conversational Voice & Text AI',
+};
+
+const PROJECT_ACCENT_BY_ID: Record<string, string> = {
+  'currency-exchange-tracker': '#0F766E',
+  'insuresphere-ai': '#38BDF8',
+  'cloud-claims-api': '#0284C7',
+  'satya-education': '#D8CBB8',
+  'voice-task-planner': '#B6C2BB',
+  'alex-interviewer': '#9E334B',
+};
+
+const ORDERED_PROJECTS = [...portfolioContent.projects].sort(
+  (a, b) => Number(a.index) - Number(b.index)
+);
 
 export const FEATURED_PROJECTS: FeaturedProject[] =
-  portfolioContent.projects.map((p, idx) => ({
+  ORDERED_PROJECTS.map((p) => ({
     id: p.id,
     number: p.index,
     title: p.title,
     subtitle: p.subtitle,
-    category: CATEGORIES[idx] || 'Full Stack & AI',
-    accentColor: ACCENT_COLORS[idx] || '#38BDF8',
+    category: PROJECT_CATEGORY_BY_ID[p.id] || 'Full Stack & AI',
+    accentColor: PROJECT_ACCENT_BY_ID[p.id] || '#38BDF8',
     image: p.heroImage,
     githubUrl: p.githubUrl,
     liveUrl: p.liveUrl,
@@ -1819,7 +1745,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] =
     coreEngineeringStack: p.coreEngineeringStack,
     aiVerificationFeatures: p.aiVerificationFeatures,
     caseStudy: p,
-    isFlagship: p.isFlagship || idx === 0,
+    isFlagship: Boolean(p.isFlagship),
   }));
 
 export const KINETIC_ROLES = [

@@ -6,7 +6,12 @@ import {
   Check,
   ArrowUpRight,
 } from 'lucide-react';
-import { portfolioContent, type ProjectCaseStudy } from '../data/content';
+import {
+  FEATURED_PROJECTS,
+  portfolioContent,
+  type ProjectCaseStudy,
+} from '../data/content';
+import { filterCommandItems } from '../utils/resumeData';
 import { ProjectCaseStudyModal } from './ProjectCaseStudyModal';
 
 interface GlobalOverlaysProps {
@@ -40,25 +45,31 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
     let outerY = -100;
     let rafId = 0;
 
-    const onMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      inner.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
-    };
-
     const tick = () => {
       outerX += (mouseX - outerX) * 0.18;
       outerY += (mouseY - outerY) * 0.18;
       outer.style.transform = `translate3d(${outerX}px, ${outerY}px, 0) translate(-50%, -50%)`;
-      rafId = requestAnimationFrame(tick);
+      if (Math.abs(mouseX - outerX) > 0.25 || Math.abs(mouseY - outerY) > 0.25) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        rafId = 0;
+      }
+    };
+
+    const onMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      inner.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+      if (!rafId) {
+        rafId = requestAnimationFrame(tick);
+      }
     };
 
     window.addEventListener('mousemove', onMove, { passive: true });
-    rafId = requestAnimationFrame(tick);
 
     return () => {
       window.removeEventListener('mousemove', onMove);
-      cancelAnimationFrame(rafId);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 
@@ -77,49 +88,32 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [searchOpen, activeProjectModal, setSearchOpen, setActiveProjectModal]);
 
-  const { profile, projects } = portfolioContent;
+  const { profile } = portfolioContent;
+
+  const openExternal = (url: string) => {
+    const link = document.createElement('a');
+    link.href = url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const searchItems = [
-    {
-      label: 'InsureSphere AI (Enterprise SaaS & Reinsurance Platform)',
-      description:
-        'React.js · Python · Django REST Framework · PostgreSQL · AWS Cloud · Quota-Share Treaties · Claims AI',
+    ...FEATURED_PROJECTS.map((proj) => ({
+      label: `${proj.title} — ${proj.subtitle}`,
+      description: proj.technologies.join(' · '),
       category: 'Featured Project',
       action: () => {
         setSearchOpen(false);
-        setActiveProjectModal(projects[0]);
+        setActiveProjectModal(proj.caseStudy);
       },
-    },
-    {
-      label: "Satya's Education (Case Study & Live Demo)",
-      description: 'React · JavaScript · Django · Firebase · Cashfree · Vercel',
-      category: 'Featured Project',
-      action: () => {
-        setSearchOpen(false);
-        setActiveProjectModal(projects[1]);
-      },
-    },
-    {
-      label: 'Alex AI Mock Technical Interviewer',
-      description: 'React · JavaScript · Express · Google Gemini · Firebase',
-      category: 'Featured Project',
-      action: () => {
-        setSearchOpen(false);
-        setActiveProjectModal(projects[2]);
-      },
-    },
-    {
-      label: 'AI Voice Task Planner (n8n + Vapi + Gemini)',
-      description: 'Voice request → Vapi → n8n automation → Gemini → Google Sheets',
-      category: 'Featured Project',
-      action: () => {
-        setSearchOpen(false);
-        setActiveProjectModal(projects[3]);
-      },
-    },
+    })),
     {
       label: 'Technical Skills · GenAI, AI Agents, Python & Cloud',
-      description: 'LangChain · LangGraph · CrewAI · Google ADK · Agentic RAG · n8n · AWS EC2 · FastAPI · React · TypeScript',
+      description:
+        'LangChain · LangGraph · CrewAI · Google ADK · Agentic RAG · n8n · AWS EC2 · FastAPI · React · TypeScript',
       category: 'Skills & Cloud',
       action: () => {
         setSearchOpen(false);
@@ -128,7 +122,7 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
     },
     {
       label: 'Who I Am & Engineering Mission',
-      description: 'Jump to Chapter 01 Flow Sections',
+      description: '4+ years Full Stack Python, AWS Cloud, Generative AI & Agentic AI',
       category: 'Navigation',
       action: () => {
         setSearchOpen(false);
@@ -137,7 +131,8 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
     },
     {
       label: 'Professional Journey & Education',
-      description: 'Finite HR & IT Solution · CP Academy · Saras India Systems · GVP College',
+      description:
+        'Finite HR & IT Solution · CP Academy · Saras India Systems · GVP College (B.Sc. CS)',
       category: 'Navigation',
       action: () => {
         setSearchOpen(false);
@@ -173,11 +168,20 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
     },
     {
       label: 'View & Download Resume (CV)',
-      description: 'Tarun Pediredla — Full Stack Python & AI Developer',
+      description: `${profile.name} — ${profile.professionalTitle}`,
       category: 'Action',
       action: () => {
         setSearchOpen(false);
         onOpenResume();
+      },
+    },
+    {
+      label: 'LinkedIn (Tarun Pediredla)',
+      description: profile.linkedinLabel,
+      category: 'External',
+      action: () => {
+        setSearchOpen(false);
+        openExternal(profile.linkedinUrl);
       },
     },
     {
@@ -186,13 +190,7 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
       category: 'External',
       action: () => {
         setSearchOpen(false);
-        const link = document.createElement('a');
-        link.href = profile.github;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        openExternal(profile.github);
       },
     },
     {
@@ -215,12 +213,7 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
     },
   ];
 
-  const filteredItems = searchItems.filter(
-    (item) =>
-      item.label.toLowerCase().includes(query.toLowerCase()) ||
-      item.description.toLowerCase().includes(query.toLowerCase()) ||
-      item.category.toLowerCase().includes(query.toLowerCase())
-  );
+  const filteredItems = filterCommandItems(searchItems, query);
 
   // Reset search query when modal closes
   useEffect(() => {

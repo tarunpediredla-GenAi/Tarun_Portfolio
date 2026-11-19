@@ -12,12 +12,9 @@ interface ShowcaseAndArcSectionProps {
 
 const WARP_FRAMES = [0, 1, 2, 3, 4, 5, 6];
 
-// Lead with the newest live dashboard while retaining stable source-data indices
-// used by the cinematic gallery, carousel, and satellite visuals.
-const SHOWCASE_PROJECTS = [
-  ...FEATURED_PROJECTS.filter((project) => project.id === 'currency-exchange-tracker'),
-  ...FEATURED_PROJECTS.filter((project) => project.id !== 'currency-exchange-tracker'),
-];
+// FEATURED_PROJECTS is pre-sorted by resume index (01 Currency Exchange, 02 InsureSphere AI,
+// 03 Cloud Claims API, 04 Satya's Education, 05 AI Voice Task Planner, 06 Alex AI).
+const SHOWCASE_PROJECTS = FEATURED_PROJECTS;
 
 export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
   onSelectProject,
@@ -250,14 +247,14 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
               </span>
             </h2>
             <p className="mt-6 text-[#35423C] font-medium text-base md:text-lg max-w-2xl mx-auto">
-              Five full-stack and AI project case studies engineered by Tarun
-              Pediredla — now featuring the live Currency Exchange Rate Tracker,
-              alongside InsureSphere AI and other portfolio systems.
-              Explore their architecture, technology choices, and demo links.
+              Six full-stack, cloud, and AI engineering case studies by Tarun
+              Pediredla — featuring the live Currency Exchange Rate Tracker,
+              InsureSphere AI (140+ tests passing), Cloud Claims API (FastAPI + AWS),
+              Satya&apos;s Education, AI Voice Task Planner, and Alex AI.
             </p>
           </motion.div>
 
-          {/* Five cinematic project showcases — live currency dashboard first */}
+          {/* Six cinematic project showcases */}
           <div className="space-y-16">
             {SHOWCASE_PROJECTS.map((project, projIdx) => {
               const isFlagship = project.isFlagship || project.id === 'insuresphere-ai';
@@ -291,7 +288,12 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                       </span>
                       {project.id === 'currency-exchange-tracker' && (
                         <span className="hidden sm:inline-flex items-center rounded-full border border-emerald-200/60 bg-emerald-400/20 px-3 py-0.5 text-[11px] font-bold uppercase tracking-widest text-emerald-100">
-                          NEW · FEATURED LIVE DEMO
+                          LIVE DASHBOARD
+                        </span>
+                      )}
+                      {project.id === 'cloud-claims-api' && (
+                        <span className="hidden sm:inline-flex items-center rounded-full border border-sky-200/60 bg-sky-400/20 px-3 py-0.5 text-[11px] font-bold uppercase tracking-widest text-sky-100">
+                          IN DEVELOPMENT · NOV 2026
                         </span>
                       )}
                     </div>
@@ -324,7 +326,11 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                             </span>
                           ) : isFlagship ? (
                             <span className="px-3 py-1 rounded-full bg-[#232B27]/90 text-[10.5px] font-mono font-bold text-[#F6F1E7] border border-[#687A70]/50 shadow-sm">
-                              Local Full-Stack App
+                              140+ Tests Passing
+                            </span>
+                          ) : project.caseStudy.statusBadge ? (
+                            <span className="px-3 py-1 rounded-full bg-[#232B27]/90 text-[10.5px] font-mono font-bold text-[#F6F1E7] border border-[#687A70]/50 shadow-sm">
+                              {project.caseStudy.statusBadge}
                             </span>
                           ) : null}
                         </div>
@@ -475,19 +481,21 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                           onClick={() => onSelectProject(project)}
                           className="px-4 sm:px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-[0.16em] font-bold transition-all cursor-pointer shadow-md bg-[#5E1726] text-[#F6F1E7] hover:bg-[#751E31]"
                         >
-                          Explore Case Study
+                          Explore {project.title}
                         </motion.button>
 
-                        <motion.a
-                          whileHover={{ scale: 1.04, y: -2 }}
-                          whileTap={{ scale: 0.97 }}
-                          href={project.githubUrl || project.liveUrl || '#'}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-4 sm:px-5 py-2.5 rounded-full bg-[#DCE3DF] border border-[#687A70]/50 text-[#232B27] text-xs font-mono font-bold uppercase tracking-[0.16em] hover:border-[#5E1726] transition-colors"
-                        >
-                          {project.githubUrl ? 'View Source Code ↗' : 'Visit Live Demo ↗'}
-                        </motion.a>
+                        {project.githubUrl && (
+                          <motion.a
+                            whileHover={{ scale: 1.04, y: -2 }}
+                            whileTap={{ scale: 0.97 }}
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-4 sm:px-5 py-2.5 rounded-full bg-[#DCE3DF] border border-[#687A70]/50 text-[#232B27] text-xs font-mono font-bold uppercase tracking-[0.16em] hover:border-[#5E1726] transition-colors"
+                          >
+                            View Source Code ↗
+                          </motion.a>
+                        )}
 
                         <motion.button
                           whileHover={{ scale: 1.04, y: -2 }}
@@ -522,7 +530,7 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                             rel="noopener noreferrer"
                             className="px-4 py-2.5 rounded-full border border-emerald-600 bg-emerald-600 text-white text-xs font-mono font-bold uppercase tracking-[0.16em] hover:bg-emerald-500 transition-colors"
                           >
-                            View Demo ↗
+                            Open Live Demo ↗
                           </motion.a>
                         )}
                       </div>

@@ -16,10 +16,11 @@ interface StillsAndOutlastSectionProps {
   onSelectProject: (project: FeaturedProject) => void;
 }
 
-const INDEX_PROJECTS = [
-  ...FEATURED_PROJECTS.filter((project) => project.id === 'currency-exchange-tracker'),
-  ...FEATURED_PROJECTS.filter((project) => project.id !== 'currency-exchange-tracker'),
-];
+const INDEX_PROJECTS = FEATURED_PROJECTS;
+
+function getProjectById(id: string): FeaturedProject {
+  return FEATURED_PROJECTS.find((p) => p.id === id) || FEATURED_PROJECTS[0];
+}
 
 const TWINKLE_STARS = Array.from({ length: 28 }, (_, i) => ({
   id: i,
@@ -53,66 +54,78 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const flagshipListRef = useRef<HTMLDivElement>(null);
 
+  const currencyProj = getProjectById('currency-exchange-tracker');
+  const insureProj = getProjectById('insuresphere-ai');
+  const cloudClaimsProj = getProjectById('cloud-claims-api');
+  const satyaProj = getProjectById('satya-education');
+  const voiceProj = getProjectById('voice-task-planner');
+  const alexProj = getProjectById('alex-interviewer');
+
   const galleryStills = [
     {
       num: '01',
-      title: 'InsureSphere AI Platform',
-      tag: 'Python · Django REST · PostgreSQL · Reinsurance AI',
-      image: FEATURED_PROJECTS[0].image,
-      project: FEATURED_PROJECTS[0],
+      title: currencyProj.title,
+      tag: 'React · ExchangeRate-API · Frankfurter · CoinGecko',
+      image: currencyProj.image,
+      project: currencyProj,
       side: 'left' as const,
     },
     {
       num: '02',
-      title: "Satya's Education Platform",
-      tag: 'React · JavaScript · Django · Cashfree',
-      image: FEATURED_PROJECTS[1].image,
-      project: FEATURED_PROJECTS[1],
+      title: insureProj.title,
+      tag: 'Python · Django REST · PostgreSQL · 140+ Tests',
+      image: insureProj.image,
+      project: insureProj,
       side: 'right' as const,
     },
     {
       num: '03',
-      title: 'Alex AI Mock Interviewer',
-      tag: 'React · Express · Google Gemini · Voice AI',
-      image: FEATURED_PROJECTS[2].image,
-      project: FEATURED_PROJECTS[2],
+      title: cloudClaimsProj.title,
+      tag: 'FastAPI · SQLAlchemy · Docker · AWS S3 & RDS',
+      image: cloudClaimsProj.image,
+      project: cloudClaimsProj,
       side: 'left' as const,
     },
     {
       num: '04',
-      title: 'AI Voice Task Planner',
-      tag: 'n8n · Vapi · Gemini · Google Sheets',
-      image: FEATURED_PROJECTS[3].image,
-      project: FEATURED_PROJECTS[3],
+      title: satyaProj.title,
+      tag: 'React · TypeScript · Django · Cashfree HMAC',
+      image: satyaProj.image,
+      project: satyaProj,
       side: 'right' as const,
     },
   ];
 
   const carouselSlides = [
     {
-      project: FEATURED_PROJECTS[0],
-      badge: 'Enterprise SaaS & InsurTech',
-      caption: 'Quota-share reinsurance treaties, underwriting workbench & claims AI',
-    },
-    {
-      project: FEATURED_PROJECTS[1],
-      badge: 'E-Commerce & EdTech',
-      caption: 'Live production portal on Vercel with Cashfree checkout',
-    },
-    {
-      project: FEATURED_PROJECTS[2],
-      badge: 'Conversational Voice AI',
-      caption: '50-question bank, system design whiteboard & Hiring Committee',
-    },
-    {
-      project: FEATURED_PROJECTS[3],
-      badge: 'Agentic Automation',
-      caption: 'Voice request → Vapi → n8n → Gemini → Google Sheets',
-    },
-    {
-      project: FEATURED_PROJECTS[4],
-      badge: 'NEW · Live Forex & Crypto',
+      project: currencyProj,
+      badge: 'Live · Forex & Crypto',
       caption: 'Live conversion dashboard, 30-day trends, volatility and rate alerts',
+    },
+    {
+      project: insureProj,
+      badge: 'Enterprise SaaS · 140+ Tests',
+      caption: 'Underwriting, claims FNOL, reinsurance treaties & Policy RAG Studio',
+    },
+    {
+      project: cloudClaimsProj,
+      badge: 'In Development · Nov 2026',
+      caption: 'FastAPI FNOL claims API with Pytest, Docker, S3 presigned uploads & RDS',
+    },
+    {
+      project: satyaProj,
+      badge: 'Live · E-Commerce & EdTech',
+      caption: 'Course & book storefront with server-side validation & Cashfree HMAC',
+    },
+    {
+      project: voiceProj,
+      badge: 'Self-Hosted AWS EC2',
+      caption: 'Node-based n8n voice flows connecting Vapi, Gemini & Google Sheets',
+    },
+    {
+      project: alexProj,
+      badge: 'Conversational Voice AI',
+      caption: '50-question bank, system design whiteboard & Hiring Committee debrief',
     },
   ];
 
@@ -894,12 +907,13 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
           <div className="divide-y divide-[#687A70]/35 border-y border-[#687A70]/35">
             {INDEX_PROJECTS.map((proj) => {
               return (
-                <div
+                <button
+                  type="button"
                   key={proj.id}
                   onMouseEnter={() => setHoveredFlagship(proj)}
                   onMouseLeave={() => setHoveredFlagship(null)}
                   onClick={() => onSelectProject(proj)}
-                  className="group relative block py-8 px-4 -mx-4 rounded-2xl transition-all duration-300 cursor-pointer hover:bg-[#EFE8DA]"
+                  className="group relative block w-full text-left py-8 px-4 -mx-4 rounded-2xl transition-all duration-300 cursor-pointer hover:bg-[#EFE8DA]"
                 >
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="flex items-baseline gap-6">
@@ -913,7 +927,17 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
                           </h3>
                           {proj.id === 'currency-exchange-tracker' && (
                             <span className="rounded-full bg-emerald-100 text-emerald-800 border border-emerald-400/40 px-2.5 py-1 text-[10px] font-mono font-bold tracking-wider uppercase">
-                              New · Live Demo
+                              Live Demo
+                            </span>
+                          )}
+                          {proj.id === 'cloud-claims-api' && (
+                            <span className="rounded-full bg-sky-100 text-sky-900 border border-sky-400/40 px-2.5 py-1 text-[10px] font-mono font-bold tracking-wider uppercase">
+                              In Development · Nov 2026
+                            </span>
+                          )}
+                          {proj.id === 'insuresphere-ai' && (
+                            <span className="rounded-full bg-[#EFE8DA] text-[#5E1726] border border-[#5E1726]/35 px-2.5 py-1 text-[10px] font-mono font-bold tracking-wider uppercase">
+                              140+ Tests Passing
                             </span>
                           )}
                         </div>
@@ -931,7 +955,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
                       </span>
                     </div>
                   </div>
-                </div>
+                </button>
               );
             })}
           </div>

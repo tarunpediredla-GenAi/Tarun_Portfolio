@@ -15,6 +15,10 @@ import {
   AI_VERIFICATION_FEATURES,
   TARUN_PROFILE,
 } from '../data/content';
+import {
+  countTotalSkills,
+  filterSkillCategories,
+} from '../utils/resumeData';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -80,9 +84,9 @@ const ROBOT_HAND_SKILLS: RobotHandSkill[] = [
   },
   {
     id: 'react-javascript',
-    shortLabel: 'REACT · JAVASCRIPT',
+    shortLabel: 'REACT · TS',
     badgeSub: 'FRONTEND ENGINE',
-    title: 'React.js & JavaScript UI',
+    title: 'React.js & TypeScript UI',
     category: '04 · Interactive Frontend',
     description:
       'High-contrast editorial interfaces, 3D WebGL stages, and responsive full-stack web apps.',
@@ -102,8 +106,8 @@ const ROBOT_HAND_SKILLS: RobotHandSkill[] = [
   },
   {
     id: 'devops-cloud',
-    shortLabel: 'AWS · DOCKER · CI/CD',
-    badgeSub: 'AWS CLOUD & DEVOPS',
+    shortLabel: 'AWS · DOCKER',
+    badgeSub: 'CLOUD & DEVOPS',
     title: 'AWS Cloud, Docker & CI/CD',
     category: '06 · Cloud & Deployment',
     description:
@@ -702,14 +706,18 @@ function CyberneticBotCanvas({
     window.addEventListener('resize', onResize);
 
     let rafId = 0;
+    let isVisible = false;
     const clock = new THREE.Clock();
     const worldSpritePos = new THREE.Vector3();
 
-    const animate = () => {
-      rafId = requestAnimationFrame(animate);
-      const dt = Math.min(clock.getDelta(), 0.1);
-      const t = clock.elapsedTime;
+    const gl = renderer.getContext();
+    const dbg = gl.getExtension('WEBGL_debug_renderer_info');
+    const rendererStr = dbg
+      ? String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL))
+      : '';
+    const isSoftwareGl = /swiftshader|llvmpipe|software/i.test(rendererStr);
 
+    const renderFrame = (dt: number, t: number) => {
       conjureTriggerRef.current = THREE.MathUtils.damp(
         conjureTriggerRef.current,
         0,
@@ -778,7 +786,6 @@ function CyberneticBotCanvas({
 
       skillSprites.forEach((sprite) => {
         sprite.getWorldPosition(worldSpritePos);
-        // Scale up and brighten skill plates as they pass in front of the robot's hands toward the viewer
         const depthFactor = THREE.MathUtils.clamp(
           (worldSpritePos.z - 0.5) / 2.2,
           0,
@@ -789,13 +796,11 @@ function CyberneticBotCanvas({
         sprite.material.opacity = 0.45 + depthFactor * 0.55;
       });
 
-      // Natural eye blink + conjure excitement
       const blinkWave = Math.sin(t * 0.85);
       const eyeScaleY = blinkWave > 0.985 ? 0.1 : 1 + conjureEnergy * 0.3;
       leftEye.scale.y = eyeScaleY;
       rightEye.scale.y = eyeScaleY;
 
-      // Gyroscope & Core rotations
       const speedBoost = 1 + conjureEnergy * 3.0;
       coreRing.rotation.z += dt * 1.4 * speedBoost;
       outerRing.rotation.z -= dt * 0.38 * speedBoost;
@@ -807,10 +812,43 @@ function CyberneticBotCanvas({
       renderer.render(scene, camera);
     };
 
-    animate();
+    const animate = () => {
+      if (!isVisible) {
+        rafId = 0;
+        return;
+      }
+      const dt = Math.min(clock.getDelta(), 0.1);
+      const t = clock.elapsedTime;
+      renderFrame(dt, t);
+      if (!isSoftwareGl) {
+        rafId = requestAnimationFrame(animate);
+      } else {
+        rafId = 0;
+      }
+    };
+
+    // Initial crisp frame
+    renderFrame(0.016, 0.4);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries[0]?.isIntersecting ?? false;
+        if (isVisible) {
+          clock.getDelta();
+          if (isSoftwareGl) {
+            renderFrame(0.016, clock.elapsedTime);
+          } else if (!rafId) {
+            rafId = requestAnimationFrame(animate);
+          }
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      observer.disconnect();
+      if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener('pointermove', onPointerMove);
       container.removeEventListener('pointerdown', onPointerDown);
       window.removeEventListener('pointerup', onPointerUp);
@@ -979,10 +1017,11 @@ export const BuiltDifferentAndFlowSection: React.FC<
     return () => ctx.revert();
   }, []);
 
-  const filteredCategories =
-    activeSkillCategory === 'all'
-      ? SKILL_CATEGORIES
-      : SKILL_CATEGORIES.filter((c) => c.id === activeSkillCategory);
+  const filteredCategories = filterSkillCategories(
+    SKILL_CATEGORIES,
+    activeSkillCategory
+  );
+  const totalSkillCount = countTotalSkills(SKILL_CATEGORIES);
 
   const skillDomainIcons = [Cpu, Bot, Sparkles, Code2, Database, Cloud];
 
@@ -1079,9 +1118,9 @@ export const BuiltDifferentAndFlowSection: React.FC<
               <div className="lg:col-span-5 grid grid-cols-2 gap-4">
                 {[
                   {
-                    label: 'Current Role',
-                    title: 'Full Stack Python Developer',
-                    sub: 'Finite HR & IT Solution',
+                    label: 'Experience',
+                    title: '4+ Years Full Stack',
+                    sub: 'Finite HR · CP Academy · Saras India',
                   },
                   {
                     label: 'Location',
@@ -1090,13 +1129,13 @@ export const BuiltDifferentAndFlowSection: React.FC<
                   },
                   {
                     label: 'AI Focus',
-                    title: 'Gen AI & Agentic AI',
-                    sub: 'Gemini · n8n · Vapi',
+                    title: 'GenAI, RAG & Agents',
+                    sub: 'LangGraph · CrewAI · ADK · n8n',
                   },
                   {
                     label: 'Core Stack',
-                    title: 'Python · Django · React',
-                    sub: 'AWS Cloud · PostgreSQL · Docker',
+                    title: 'Python · Django · FastAPI',
+                    sub: 'React · TypeScript · AWS EC2 · Docker',
                   },
                 ].map((card, i) => (
                   <motion.div
@@ -1131,13 +1170,13 @@ export const BuiltDifferentAndFlowSection: React.FC<
         {/* PAGE 3: VERIFIED CAREER TIMELINE & EDUCATION (Warm Cream Beige #F6F1E7) */}
         <section
           id="journey"
-          className="flow-art-section relative overflow-hidden"
+          className="flow-art-section relative overflow-hidden scroll-mt-10"
           style={{
             backgroundColor: '#F6F1E7',
             color: '#232B27',
             minHeight: '100vh',
             height: 'auto',
-            paddingTop: '6rem',
+            paddingTop: '7.5rem',
             paddingBottom: '6rem',
           }}
         >
@@ -1221,7 +1260,11 @@ export const BuiltDifferentAndFlowSection: React.FC<
               </div>
 
               {/* Verified Education Strip */}
-              <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div
+                className={`mt-8 grid grid-cols-1 gap-4 ${
+                  EDUCATION_HISTORY.length > 1 ? 'md:grid-cols-3' : ''
+                }`}
+              >
                 {EDUCATION_HISTORY.map((edu, idx) => (
                   <motion.div
                     key={edu.id}
@@ -1230,19 +1273,22 @@ export const BuiltDifferentAndFlowSection: React.FC<
                     whileHover={{ y: -4 }}
                     viewport={{ once: false, amount: 0.2 }}
                     transition={{ duration: 0.4, delay: idx * 0.06 }}
-                    className="rounded-xl border border-[#687A70]/40 hover:border-[#5E1726] bg-[#EFE8DA] px-5 py-4 flex flex-col justify-between transition-colors"
+                    className="rounded-xl border border-[#687A70]/40 hover:border-[#5E1726] bg-[#EFE8DA] px-6 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors"
                   >
                     <div>
                       <span className="text-[10.5px] font-mono font-bold uppercase tracking-[0.22em] text-[#5E1726] block mb-1">
-                        Education · {edu.completion}
+                        Academic Credential · Class of {edu.completion}
                       </span>
-                      <h5 className="text-sm font-bold text-[#232B27]">
+                      <h5 className="text-base font-bold text-[#232B27]">
                         {edu.degree}
                       </h5>
+                      <p className="text-xs sm:text-sm text-[#35423C] font-medium mt-0.5">
+                        {edu.institution}
+                      </p>
                     </div>
-                    <p className="text-xs text-[#35423C] font-medium mt-1.5">
-                      {edu.institution}
-                    </p>
+                    <span className="self-start sm:self-center shrink-0 px-3.5 py-1.5 rounded-full bg-[#FAF7F2] border border-[#687A70]/40 text-xs font-mono font-bold text-[#5E1726]">
+                      Graduated {edu.completion}
+                    </span>
                   </motion.div>
                 ))}
               </div>
@@ -1391,7 +1437,7 @@ export const BuiltDifferentAndFlowSection: React.FC<
             <h2 className="flow-art-heading text-[#232B27]">THINK. BUILD. SHIP.</h2>
 
             {/* Interactive Technology Universe Matrix */}
-            <div className="mt-12 pt-10 border-t border-[#687A70]/40">
+            <div id="skills-matrix" className="mt-12 pt-10 border-t border-[#687A70]/40 scroll-mt-24">
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
                 <div>
                   <span className="text-xs font-mono font-bold uppercase tracking-[0.3em] text-[#5E1726] block mb-2">
@@ -1401,7 +1447,7 @@ export const BuiltDifferentAndFlowSection: React.FC<
                     Resume-Aligned Engineering Skills
                   </h3>
                   <p className="mt-2 text-sm text-[#35423C] max-w-xl leading-relaxed">
-                    Explore {SKILL_CATEGORIES.length} areas and {SKILL_CATEGORIES.reduce((total, category) => total + category.skills.length, 0)} skills from my current resume, including GenAI, multi-agent frameworks, AWS, and full-stack engineering.
+                    Explore {SKILL_CATEGORIES.length} areas and {totalSkillCount} verified skills from my current resume, including GenAI, multi-agent frameworks, AWS, FastAPI, Django, and React/TypeScript.
                   </p>
                 </div>
 

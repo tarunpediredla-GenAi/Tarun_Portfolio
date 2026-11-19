@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#071126"/>
+      <stop offset="55%" stop-color="#0C1B38"/>
+      <stop offset="100%" stop-color="#132645"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#112242" stop-opacity="0.96"/>
+      <stop offset="100%" stop-color="#0A162E" stop-opacity="0.98"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="1200" height="675" fill="url(#bg)"/>
+
+  <!-- Subtle architectural grid -->
+  <g stroke="#38BDF8" stroke-opacity="0.06" stroke-width="1">
+    <path d="M0 90 H1200 M0 180 H1200 M0 270 H1200 M0 360 H1200 M0 450 H1200 M0 540 H1200 M0 630 H1200"/>
+    <path d="M120 0 V675 M240 0 V675 M360 0 V675 M480 0 V675 M600 0 V675 M720 0 V675 M840 0 V675 M960 0 V675 M1080 0 V675"/>
+  </g>
+
+  <!-- Soft ambient radial highlights -->
+  <circle cx="960" cy="140" r="240" fill="#38BDF8" fill-opacity="0.09"/>
+  <circle cx="240" cy="540" r="220" fill="#34D399" fill-opacity="0.07"/>
+
+  <!-- Top Header Strip -->
+  <rect x="56" y="42" width="1088" height="62" rx="14" fill="#0B1832" stroke="#38BDF8" stroke-opacity="0.28"/>
+  <circle cx="88" cy="73" r="6" fill="#F87171"/>
+  <circle cx="110" cy="73" r="6" fill="#FBBF24"/>
+  <circle cx="132" cy="73" r="6" fill="#34D399"/>
+  <text x="164" y="79" fill="#E2E8F0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700">
+    CLOUD CLAIMS API · FASTAPI + SQLALCHEMY + AWS
+  </text>
+  <rect x="874" y="57" width="246" height="32" rx="16" fill="#0F2942" stroke="#38BDF8" stroke-opacity="0.5"/>
+  <text x="997" y="78" text-anchor="middle" fill="#7DD3FC" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" font-weight="700">
+    IN DEVELOPMENT · NOV 2026
+  </text>
+
+  <!-- Left Panel: FastAPI FNOL Endpoints -->
+  <rect x="56" y="132" width="560" height="486" rx="18" fill="url(#cardBg)" stroke="#38BDF8" stroke-opacity="0.26"/>
+  <text x="86" y="172" fill="#7DD3FC" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="700" letter-spacing="2">
+    FNOL CLAIMS SERVICE · OPENAPI 3.1
+  </text>
+  <text x="86" y="206" fill="#F8FAFC" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="800">
+    FastAPI Claims Workflow
+  </text>
+
+  <!-- Endpoint Row 1 -->
+  <rect x="86" y="232" width="500" height="62" rx="12" fill="#0B1A34" stroke="#34D399" stroke-opacity="0.35"/>
+  <rect x="102" y="249" width="66" height="28" rx="7" fill="#065F46"/>
+  <text x="135" y="268" text-anchor="middle" fill="#A7F3D0" font-family="ui-monospace, monospace" font-size="12.5" font-weight="700">POST</text>
+  <text x="184" y="260" fill="#F1F5F9" font-family="ui-monospace, monospace" font-size="15" font-weight="700">/api/v1/claims/fnol</text>
+  <text x="184" y="281" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="12.5">Register First Notice of Loss with typed Pydantic validation</text>
+
+  <!-- Endpoint Row 2 -->
+  <rect x="86" y="308" width="500" height="62" rx="12" fill="#0B1A34" stroke="#38BDF8" stroke-opacity="0.35"/>
+  <rect x="102" y="325" width="66" height="28" rx="7" fill="#0C4A6E"/>
+  <text x="135" y="344" text-anchor="middle" fill="#BAE6FD" font-family="ui-monospace, monospace" font-size="12.5" font-weight="700">PATCH</text>
+  <text x="184" y="336" fill="#F1F5F9" font-family="ui-monospace, monospace" font-size="15" font-weight="700">/api/v1/claims/{id}/status</text>
+  <text x="184" y="357" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="12.5">Transition FNOL → In Review → Approved / Settled</text>
+
+  <!-- Endpoint Row 3 -->
+  <rect x="86" y="384" width="500" height="62" rx="12" fill="#0B1A34" stroke="#F59E0B" stroke-opacity="0.35"/>
+  <rect x="102" y="401" width="66" height="28" rx="7" fill="#78350F"/>
+  <text x="135" y="420" text-anchor="middle" fill="#FDE68A" font-family="ui-monospace, monospace" font-size="12.5" font-weight="700">POST</text>
+  <text x="184" y="412" fill="#F1F5F9" font-family="ui-monospace, monospace" font-size="15" font-weight="700">/api/v1/evidence/presign</text>
+  <text x="184" y="433" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="12.5">Generate AWS S3 presigned URL for direct evidence uploads</text>
+
+  <!-- Endpoint Row 4: Pytest Box -->
+  <rect x="86" y="468" width="500" height="120" rx="12" fill="#071226" stroke="#34D399" stroke-opacity="0.4"/>
+  <text x="106" y="497" fill="#34D399" font-family="ui-monospace, monospace" font-size="13" font-weight="700">
+    $ pytest -v tests/test_fnol_flow.py
+  </text>
+  <text x="106" y="523" fill="#CBD5E1" font-family="ui-monospace, monospace" font-size="12.5">
+    PASSED  test_create_fnol_claim_persists_record
+  </text>
+  <text x="106" y="545" fill="#CBD5E1" font-family="ui-monospace, monospace" font-size="12.5">
+    PASSED  test_status_transition_state_machine
+  </text>
+  <text x="106" y="567" fill="#7DD3FC" font-family="ui-monospace, monospace" font-size="12.5">
+    PASSED  test_s3_presigned_upload_contract
+  </text>
+
+  <!-- Right Panel: AWS & Docker Architecture -->
+  <rect x="644" y="132" width="500" height="486" rx="18" fill="url(#cardBg)" stroke="#38BDF8" stroke-opacity="0.26"/>
+  <text x="674" y="172" fill="#34D399" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="700" letter-spacing="2">
+    CLOUD INFRASTRUCTURE &amp; PERSISTENCE
+  </text>
+  <text x="674" y="206" fill="#F8FAFC" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="800">
+    AWS Deployment Pipeline
+  </text>
+
+  <!-- Node 1: Docker + FastAPI -->
+  <rect x="674" y="232" width="440" height="82" rx="14" fill="#0E2140" stroke="#38BDF8" stroke-opacity="0.5"/>
+  <text x="698" y="264" fill="#7DD3FC" font-family="ui-monospace, monospace" font-size="13" font-weight="700">01 · DOCKER CONTAINER ON AWS EC2</text>
+  <text x="698" y="290" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="15" font-weight="600">FastAPI + Uvicorn + SQLAlchemy ORM</text>
+
+  <!-- Connector arrow -->
+  <path d="M894 314 V344" stroke="url(#accent)" stroke-width="2.5"/>
+  <polygon points="887,340 901,340 894,351" fill="#34D399"/>
+
+  <!-- Node 2: RDS PostgreSQL -->
+  <rect x="674" y="352" width="440" height="82" rx="14" fill="#0E2140" stroke="#34D399" stroke-opacity="0.5"/>
+  <text x="698" y="384" fill="#34D399" font-family="ui-monospace, monospace" font-size="13" font-weight="700">02 · MANAGED RELATIONAL STORAGE</text>
+  <text x="698" y="410" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="15" font-weight="600">AWS RDS PostgreSQL · Claims &amp; Status Ledger</text>
+
+  <!-- Connector arrow -->
+  <path d="M894 434 V464" stroke="url(#accent)" stroke-width="2.5"/>
+  <polygon points="887,460 901,460 894,471" fill="#38BDF8"/>
+
+  <!-- Node 3: S3 Presigned Uploads -->
+  <rect x="674" y="472" width="440" height="82" rx="14" fill="#0E2140" stroke="#F59E0B" stroke-opacity="0.5"/>
+  <text x="698" y="504" fill="#FCD34D" font-family="ui-monospace, monospace" font-size="13" font-weight="700">03 · OBJECT EVIDENCE STORAGE</text>
+  <text x="698" y="530" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="15" font-weight="600">AWS S3 Presigned Uploads &amp; IAM Scoped Access</text>
+
+  <!-- Footer Tech Strip -->
+  <text x="674" y="592" fill="#94A3B8" font-family="ui-monospace, monospace" font-size="12.5" font-weight="600">
+    FastAPI · SQLAlchemy · Docker · Pytest · AWS S3 · RDS · EC2
+  </text>
+</svg>

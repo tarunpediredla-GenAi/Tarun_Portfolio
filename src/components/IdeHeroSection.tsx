@@ -25,13 +25,12 @@ interface IdeHeroSectionProps {
 }
 
 const HERO_STACK_PILLS = [
-  'Python',
-  'Django',
-  'React.js',
-  'JavaScript',
-  'AWS Cloud',
-  'GenAI · Gemini',
-  'Agentic AI · n8n & Vapi',
+  'Python · Django · FastAPI',
+  'React · TypeScript',
+  'AWS EC2 · S3 · RDS',
+  'GenAI · RAG · Agentic RAG',
+  'LangGraph · CrewAI · ADK',
+  'n8n · Docker · CI/CD',
 ];
 
 const NAV_LINKS = [
@@ -149,10 +148,33 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
     window.addEventListener('mousemove', onPointerMove, { passive: true });
 
     let rafId = 0;
+    let isVisible = true;
     const clock = new THREE.Clock();
 
+    // Detect software WebGL (SwiftShader) so we render gently instead of saturating CPU
+    const gl = renderer.getContext();
+    const dbg = gl.getExtension('WEBGL_debug_renderer_info');
+    const rendererStr = dbg ? String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL)) : '';
+    const isSoftwareGl = /swiftshader|llvmpipe|software/i.test(rendererStr);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries[0]?.isIntersecting ?? true;
+        if (isVisible && !rafId && !isSoftwareGl) {
+          rafId = window.requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.05 }
+    );
+    if (canvas.parentElement) {
+      observer.observe(canvas.parentElement);
+    }
+
     const animate = () => {
-      rafId = window.requestAnimationFrame(animate);
+      if (!isVisible) {
+        rafId = 0;
+        return;
+      }
       const elapsed = clock.getElapsedTime();
 
       if (!prefersReducedMotion) {
@@ -160,12 +182,19 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
         points.rotation.x = Math.sin(elapsed * 0.2) * 0.05 + pointerTargetY * 0.12;
       }
       renderer.render(scene, camera);
+
+      if (!isSoftwareGl && !prefersReducedMotion) {
+        rafId = window.requestAnimationFrame(animate);
+      } else {
+        rafId = 0;
+      }
     };
 
     animate();
 
     return () => {
-      window.cancelAnimationFrame(rafId);
+      observer.disconnect();
+      if (rafId) window.cancelAnimationFrame(rafId);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onPointerMove);
       geometry.dispose();
@@ -277,7 +306,7 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
           }`}
         >
           <a
-            href="#"
+            href="#top"
             onClick={() => setMobileMenuOpen(false)}
             className={`px-3 py-1 rounded-full text-[11px] font-mono font-bold tracking-wider transition-colors ${
               scrolledDown
@@ -376,11 +405,12 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
           CINEMATIC DARK NAVY & ELECTRIC-BLUE/VIOLET 3D PORTRAIT HERO
          ===================================================================== */}
       <section
+        id="top"
         ref={heroSectionRef}
         onMouseMove={handleHeroMouseMove}
         onMouseLeave={handleHeroMouseLeave}
         aria-label="Tarun Pediredla Developer Hero"
-        className="relative w-full min-h-screen overflow-hidden flex items-center pt-24 pb-16 lg:py-24"
+        className="relative w-full min-h-screen overflow-hidden flex items-center pt-22 pb-16 lg:py-16"
         style={{
           background:
             'radial-gradient(ellipse 90% 70% at 72% 38%, rgba(56, 189, 248, 0.16) 0%, rgba(139, 92, 246, 0.14) 36%, rgba(5, 9, 26, 0.98) 72%, #02040A 100%)',
@@ -438,11 +468,11 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-400" />
                 </span>
                 <MapPin className="w-3.5 h-3.5 text-sky-400" />
-                <span>Hyderabad, Telangana</span>
+                <span>{profile.location}</span>
                 <span aria-hidden="true" className="text-slate-500">
                   ·
                 </span>
-                <span className="text-sky-300">Available for Full-Time Roles</span>
+                <span className="text-sky-300">4+ Years Exp · Full-Time Roles</span>
               </div>
 
               {/* Primary Display Name: HI, I'M TARUN PEDIREDLA */}
@@ -458,19 +488,18 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
                 </span>
               </h1>
 
-              {/* Subtitle: Python Full Stack Developer | GenAI & Agentic AI */}
+              {/* Subtitle */}
               <h2 className="hero-reveal-item text-base sm:text-xl md:text-2xl font-display font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-indigo-200 to-violet-300 mb-5">
-                Python Full Stack Developer | GenAI &amp; Agentic AI
+                {profile.professionalTitle}
               </h2>
 
               {/* Quote / Tagline */}
               <blockquote className="hero-reveal-item relative max-w-2xl text-sm sm:text-lg md:text-xl text-slate-300/95 font-normal italic leading-relaxed mb-6 px-4 lg:px-0 lg:pl-5 lg:border-l-2 lg:border-sky-400/60">
-                &ldquo;Building intelligent, scalable, and visually stunning digital
-                experiences.&rdquo;
+                &ldquo;{profile.tagline}&rdquo;
               </blockquote>
 
-              {/* Primary CTA Buttons: View My Projects & Download Resume */}
-              <div className="hero-reveal-item flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-9 w-full sm:w-auto">
+              {/* Primary CTA Buttons: View My Projects, Download Resume, LinkedIn & GitHub */}
+              <div className="hero-reveal-item flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 mb-7 w-full sm:w-auto">
                 <motion.button
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.98 }}
@@ -480,7 +509,7 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
                       .getElementById('showcase')
                       ?.scrollIntoView({ behavior: 'smooth' })
                   }
-                  className="group relative inline-flex items-center justify-center gap-2.5 h-12 sm:h-13 px-7 rounded-full font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-slate-950 bg-gradient-to-r from-sky-400 via-sky-300 to-violet-300 hover:from-sky-300 hover:to-violet-200 shadow-[0_0_32px_rgba(56,189,248,0.45)] transition-all cursor-pointer"
+                  className="group relative inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-5 rounded-full font-mono text-xs font-bold uppercase tracking-[0.12em] text-slate-950 bg-gradient-to-r from-sky-400 via-sky-300 to-violet-300 hover:from-sky-300 hover:to-violet-200 shadow-[0_0_32px_rgba(56,189,248,0.45)] transition-all whitespace-nowrap cursor-pointer"
                 >
                   <span>View My Projects</span>
                   <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -491,7 +520,7 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
                   whileTap={{ scale: 0.98 }}
                   type="button"
                   onClick={onOpenResume}
-                  className="inline-flex items-center justify-center gap-2.5 h-12 sm:h-13 px-7 rounded-full font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-white bg-white/[0.06] hover:bg-white/[0.12] border border-sky-400/40 hover:border-sky-300 backdrop-blur-md shadow-[0_0_24px_rgba(139,92,246,0.2)] transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-5 rounded-full font-mono text-xs font-bold uppercase tracking-[0.12em] text-white bg-white/[0.06] hover:bg-white/[0.12] border border-sky-400/40 hover:border-sky-300 backdrop-blur-md shadow-[0_0_24px_rgba(139,92,246,0.2)] transition-all whitespace-nowrap cursor-pointer"
                 >
                   <Download className="w-4 h-4 text-sky-300" />
                   <span>Download Resume</span>
@@ -500,10 +529,22 @@ export const IdeHeroSection: React.FC<IdeHeroSectionProps> = ({
                 <motion.a
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.98 }}
+                  href={profile.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-1.5 h-11 sm:h-12 px-4 rounded-full font-mono text-xs font-bold uppercase tracking-wider text-slate-200 hover:text-white bg-[#091026]/80 border border-slate-700/80 hover:border-sky-400/60 transition-all whitespace-nowrap"
+                >
+                  <span>LinkedIn</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-sky-300" />
+                </motion.a>
+
+                <motion.a
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
                   href={profile.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 h-12 sm:h-13 px-5 rounded-full font-mono text-xs font-bold uppercase tracking-wider text-slate-200 hover:text-white bg-[#091026]/80 border border-slate-700/80 hover:border-violet-400/60 transition-all"
+                  className="inline-flex items-center justify-center gap-1.5 h-11 sm:h-12 px-4 rounded-full font-mono text-xs font-bold uppercase tracking-wider text-slate-200 hover:text-white bg-[#091026]/80 border border-slate-700/80 hover:border-violet-400/60 transition-all whitespace-nowrap"
                 >
                   <span>GitHub</span>
                   <ExternalLink className="w-3.5 h-3.5 text-violet-300" />

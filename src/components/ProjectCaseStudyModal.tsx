@@ -27,6 +27,7 @@ import {
   CORE_ENGINEERING_STACK,
   AI_VERIFICATION_FEATURES,
 } from '../data/content';
+import { calculateReinsuranceSplit } from '../utils/resumeData';
 
 interface ProjectCaseStudyModalProps {
   project: ProjectCaseStudy | null;
@@ -75,14 +76,12 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
 
   const isFlagship = project.id === 'insuresphere-ai' || project.isFlagship;
 
-  // Reinsurance Calculations based on required formula:
-  // Net eligible loss = max(0, Gross loss - Deductible)
-  // Insurer retained = Net eligible loss * (retentionPct / 100)
-  // Reinsurer share = Net eligible loss * ((100 - retentionPct) / 100)
-  const netEligibleLoss = Math.max(0, grossLoss - deductible);
-  const reinsurerPct = Math.max(0, 100 - retentionPct);
-  const insurerRetained = netEligibleLoss * (retentionPct / 100);
-  const reinsurerShare = netEligibleLoss * (reinsurerPct / 100);
+  const {
+    netEligibleLoss,
+    reinsurerPct,
+    insurerRetained,
+    reinsurerShare,
+  } = calculateReinsuranceSplit(grossLoss, deductible, retentionPct);
 
   const formatCurrency = (val: number) =>
     new Intl.NumberFormat('en-US', {
@@ -324,15 +323,15 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                       : 'bg-gradient-to-t from-[#FAF7F2] via-transparent to-transparent'
                   }`}
                 />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-2.5">
                   <span
-                    className={`px-3 py-1 rounded-full text-xs font-mono font-bold ${
+                    className={`px-3 py-1 rounded-full text-xs font-mono font-bold whitespace-nowrap shrink-0 ${
                       isFlagship
                         ? 'bg-slate-950/90 text-sky-300 border border-sky-400/40'
                         : 'bg-[#5E1726] text-[#F6F1E7]'
                     }`}
                   >
-                    Interactive Case Study Analysis
+                    Case Study Analysis
                   </span>
                   {project.liveUrl ? (
                     <a
@@ -1540,32 +1539,40 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
           </div>
 
           {/* Action CTAs */}
-          <div className="flex items-center gap-3">
-            <a
-              href={project.githubUrl || project.liveUrl || '#'}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-mono text-xs font-bold transition-all cursor-pointer shadow-md ${
-                isFlagship
-                  ? 'bg-gradient-to-r from-sky-400 via-sky-300 to-indigo-300 text-slate-950 hover:shadow-[0_0_24px_rgba(56,189,248,0.5)]'
-                  : 'bg-[#5E1726] text-[#F6F1E7] hover:bg-[#751E31]'
-              }`}
-            >
-              {project.githubUrl ? <GitBranch className="w-4 h-4" /> : <ExternalLink className="w-4 h-4" />}
-              <span>{project.githubUrl ? 'View Source Code' : 'Open Live Demo'}</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+          <div className="flex flex-wrap items-center gap-3">
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-mono text-xs font-bold transition-all cursor-pointer shadow-md ${
+                  isFlagship
+                    ? 'bg-gradient-to-r from-sky-400 via-sky-300 to-indigo-300 text-slate-950 hover:shadow-[0_0_24px_rgba(56,189,248,0.5)]'
+                    : 'bg-[#5E1726] text-[#F6F1E7] hover:bg-[#751E31]'
+                }`}
+              >
+                <GitBranch className="w-4 h-4" />
+                <span>View Source Code</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            )}
 
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full font-mono text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 transition-colors"
+                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full font-mono text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 transition-colors shadow-md"
               >
-                <span>Live Demo</span>
+                <span>Open Live Demo</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
+            )}
+
+            {!project.githubUrl && !project.liveUrl && (
+              <span className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full font-mono text-xs font-bold bg-[#DCE3DF] text-[#232B27] border border-[#687A70]/45">
+                {project.statusBadge || 'In Active Development'}
+              </span>
             )}
 
             <button

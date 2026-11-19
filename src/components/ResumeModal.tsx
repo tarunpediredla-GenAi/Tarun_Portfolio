@@ -1,6 +1,14 @@
 import React from 'react';
 import { X, Printer, Download, ExternalLink } from 'lucide-react';
-import { portfolioContent } from '../data/content';
+import {
+  RESUME_EDUCATION,
+  RESUME_EXPERIENCE,
+  RESUME_PROFILE,
+  RESUME_PROJECTS_META,
+  RESUME_SKILL_CATEGORIES,
+  RESUME_SUMMARY_PARAGRAPHS,
+} from '../data/resumeCatalog';
+import { buildResumeMarkdown } from '../utils/resumeData';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -8,52 +16,35 @@ interface ResumeModalProps {
 }
 
 export function generateResumeMarkdown(): string {
-  const { profile, experience, skills, projects, education } = portfolioContent;
-  const lines: string[] = [
-    `# ${profile.name}`,
-    `**${profile.professionalTitle}**`,
-    `${profile.location} | ${profile.phone} | ${profile.email}`,
-    `GitHub: ${profile.github}`,
-    '',
-    '## Professional Summary',
-    ...portfolioContent.about.summaryParagraphs,
-    '',
-    '## Professional Experience',
-    ...experience.flatMap((exp) => [
-      `### ${exp.role} — ${exp.company}`,
-      `${exp.period}`,
-      ...exp.responsibilities.map((r) => `- ${r}`),
-      '',
-    ]),
-    '## Core Engineering Stack',
-    'React + Python + Django REST Framework + PostgreSQL + AWS Cloud + JWT Authentication',
-    '',
-    '## Technical Skills & Stack',
-    '- **Frontend**: React.js, JavaScript, Tailwind CSS, HTML, CSS',
-    '- **Backend & APIs**: Python, Django, Django REST Framework (DRF), JWT / SimpleJWT, RBAC, Express',
-    '- **Databases**: PostgreSQL, MySQL, Firebase Firestore',
-    '- **AI-Assisted Analysis & RAG (Verification Ongoing)**: Claims analysis triage, policy RAG retrieval',
-    '- **Cloud, Dev & Testing**: AWS Cloud (EC2, S3, RDS, IAM), Docker, CI/CD, Git and GitHub, Vitest, Vercel',
-    `> Note: ${skills.note}`,
-    '',
-    '## Featured Projects',
-    ...projects.flatMap((p) => [
-      `### ${p.title} (${p.technologies.join(', ')})`,
-      `GitHub: ${p.githubUrl}${p.liveUrl ? ` | Live: ${p.liveUrl}` : ''}`,
-      p.description,
-      ...p.implementedFeatures.map((f) => `- ${f}`),
-      '',
-    ]),
-    '## Education',
-    ...education.map((e) => `- **${e.degree}** — ${e.institution} (${e.completion})`),
-  ];
-  return lines.join('\n');
+  return buildResumeMarkdown({
+    profile: RESUME_PROFILE,
+    summaryParagraphs: RESUME_SUMMARY_PARAGRAPHS,
+    skillCategories: RESUME_SKILL_CATEGORIES,
+    experience: RESUME_EXPERIENCE.map((exp) => ({
+      company: exp.company,
+      role: exp.role,
+      period: exp.period,
+      responsibilities: [...exp.responsibilities],
+    })),
+    projects: RESUME_PROJECTS_META.map((proj) => ({
+      title: proj.title,
+      subtitle: proj.subtitle,
+      statusLabel: proj.statusLabel,
+      technologies: [...proj.technologies],
+      githubUrl: proj.githubUrl || undefined,
+      liveUrl: proj.liveUrl,
+      resumeBullets: [...proj.resumeBullets],
+    })),
+    education: RESUME_EDUCATION.map((edu) => ({
+      degree: edu.degree,
+      institution: edu.institution,
+      completion: edu.completion,
+    })),
+  });
 }
 
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
-
-  const { profile, experience, projects, education } = portfolioContent;
 
   const handleDownloadResumeFile = () => {
     const mdContent = generateResumeMarkdown();
@@ -78,7 +69,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
       aria-modal="true"
       aria-label="Tarun Pediredla Resume"
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#141A17]/85 backdrop-blur-md p-4 sm:p-8 overflow-y-auto"
+      className="fixed inset-0 z-[9995] flex items-center justify-center bg-[#141A17]/85 backdrop-blur-md p-4 sm:p-8 overflow-y-auto"
     >
       <div
         onClick={(e) => e.stopPropagation()}
@@ -88,10 +79,10 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#7A8B82]/30 pb-5 mb-6 print:hidden">
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-[#6B1D2F] font-semibold">
-              Verified Curriculum Vitae
+              Verified Curriculum Vitae · 4+ Years Exp
             </p>
             <h2 className="font-display text-xl font-bold text-[#1B231F]">
-              {profile.name} — Resume
+              {RESUME_PROFILE.name} — Resume
             </h2>
           </div>
 
@@ -129,19 +120,50 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
         <div className="space-y-6 text-sm">
           {/* Header */}
           <div className="border-b border-[#7A8B82]/30 pb-5">
-            <h1 className="font-display text-3xl font-bold text-[#1B231F]">{profile.name}</h1>
+            <h1 className="font-display text-3xl font-bold text-[#1B231F]">
+              {RESUME_PROFILE.name}
+            </h1>
             <p className="text-base font-semibold text-[#6B1D2F] mt-1">
-              {profile.professionalTitle}
+              {RESUME_PROFILE.professionalTitle}
             </p>
-            <div className="mt-2 flex flex-wrap items-center gap-2 text-xs font-mono text-[#2D3933]">
-              <span>{profile.location}</span>
-              <span aria-hidden="true">·</span>
-              <span>{profile.phone}</span>
-              <span aria-hidden="true">·</span>
-              <span>{profile.email}</span>
+            <div className="mt-2.5 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs font-mono text-[#2D3933]">
+              <span>{RESUME_PROFILE.location}</span>
               <span aria-hidden="true">·</span>
               <a
-                href={profile.github}
+                href={`tel:${RESUME_PROFILE.phoneClean}`}
+                className="hover:text-[#6B1D2F] hover:underline"
+              >
+                {RESUME_PROFILE.phone}
+              </a>
+              <span aria-hidden="true">·</span>
+              <a
+                href={`mailto:${RESUME_PROFILE.email}`}
+                className="hover:text-[#6B1D2F] hover:underline"
+              >
+                {RESUME_PROFILE.email}
+              </a>
+            </div>
+            <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-mono">
+              <a
+                href={RESUME_PROFILE.portfolioUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#6B1D2F] font-semibold hover:underline inline-flex items-center gap-1"
+              >
+                <span>{RESUME_PROFILE.portfolioLabel}</span>
+                <ExternalLink className="h-3 w-3" />
+              </a>
+              <a
+                href={RESUME_PROFILE.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#6B1D2F] font-semibold hover:underline inline-flex items-center gap-1"
+              >
+                <span>{RESUME_PROFILE.linkedinLabel}</span>
+                <ExternalLink className="h-3 w-3" />
+              </a>
+              <a
+                href={RESUME_PROFILE.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#6B1D2F] font-semibold hover:underline inline-flex items-center gap-1"
@@ -152,16 +174,55 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             </div>
           </div>
 
+          {/* Summary */}
+          <div className="space-y-2">
+            <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#6B1D2F]">
+              Professional Summary
+            </h3>
+            <p className="text-xs sm:text-sm leading-relaxed text-[#232D28]">
+              {RESUME_SUMMARY_PARAGRAPHS[0]}
+            </p>
+          </div>
+
+          {/* Technical Skills (All 8 Resume Categories) */}
+          <div className="space-y-3 border-t border-[#7A8B82]/30 pt-5">
+            <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#6B1D2F]">
+              Technical Skills ({RESUME_SKILL_CATEGORIES.length} Domains)
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-[#232D28]">
+              {RESUME_SKILL_CATEGORIES.map((category) => (
+                <div
+                  key={category.id}
+                  className="rounded-lg bg-[#EFE8DA]/75 border border-[#7A8B82]/25 px-3 py-2"
+                >
+                  <span className="font-semibold text-[#1B231F]">
+                    {category.title}:{' '}
+                  </span>
+                  <span>
+                    {category.skills
+                      .map((s) =>
+                        s.contextNote ? `${s.name} (${s.contextNote})` : s.name
+                      )
+                      .join(', ')}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Experience */}
-          <div className="space-y-4">
+          <div className="space-y-4 border-t border-[#7A8B82]/30 pt-5">
             <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#6B1D2F]">
               Professional Experience
             </h3>
-            {experience.map((job) => (
+            {RESUME_EXPERIENCE.map((job) => (
               <div key={job.id} className="space-y-1.5">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <h4 className="font-display text-base font-bold text-[#1B231F]">
-                    {job.role} · <span className="text-[#4E5E56]">{job.company}</span>
+                    {job.company} ·{' '}
+                    <span className="text-[#4E5E56] font-semibold">
+                      {job.role}
+                    </span>
                   </h4>
                   <span className="font-mono text-xs font-semibold text-[#6B1D2F] tabular-nums">
                     {job.period}
@@ -176,60 +237,55 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             ))}
           </div>
 
-          {/* Technical Skills & Core Stack */}
-          <div className="space-y-3 border-t border-[#7A8B82]/30 pt-5">
-            <div className="p-2.5 rounded-lg bg-[#EFE8DA] border border-[#5E1726]/30">
-              <span className="font-mono text-[10.5px] font-bold uppercase tracking-wider text-[#5E1726] block mb-0.5">
-                Core Engineering Stack:
-              </span>
-              <span className="font-mono text-xs font-bold text-[#1B231F]">
-                React + Python + Django REST Framework + PostgreSQL + AWS Cloud + JWT Authentication
-              </span>
-            </div>
-
-            <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#6B1D2F]">
-              Technical Skills &amp; Stack
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#232D28]">
-              <div>
-                <span className="font-semibold text-[#1B231F]">Frontend: </span>
-                React.js, JavaScript, Tailwind CSS, HTML, CSS
-              </div>
-              <div>
-                <span className="font-semibold text-[#1B231F]">Backend &amp; APIs: </span>
-                Python, Django, DRF, JWT / SimpleJWT, RBAC, Express
-              </div>
-              <div>
-                <span className="font-semibold text-[#1B231F]">Databases: </span>
-                PostgreSQL, MySQL, Firebase Firestore
-              </div>
-              <div>
-                <span className="font-semibold text-[#1B231F]">AI-Assisted Features: </span>
-                Claims Analysis &amp; Policy RAG Studio (Verification Ongoing)
-              </div>
-              <div className="sm:col-span-2">
-                <span className="font-semibold text-[#1B231F]">Cloud, Testing &amp; Deployment: </span>
-                AWS Cloud (EC2, S3, RDS, IAM), Docker, CI/CD, Git and GitHub, Vitest, Vercel
-              </div>
-            </div>
-          </div>
-
-          {/* Featured Projects */}
+          {/* Selected Projects (All 5 Resume Projects) */}
           <div className="space-y-4 border-t border-[#7A8B82]/30 pt-5">
             <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#6B1D2F]">
-              Featured Projects
+              Selected Projects
             </h3>
-            {projects.map((proj) => (
+            {RESUME_PROJECTS_META.map((proj) => (
               <div key={proj.id} className="space-y-1">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h4 className="font-display text-base font-bold text-[#1B231F]">
-                    {proj.title}
-                  </h4>
-                  <span className="font-mono text-xs text-[#4E5E56] font-semibold">
-                    {proj.technologies.join(' · ')}
-                  </span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h4 className="font-display text-base font-bold text-[#1B231F]">
+                      {proj.title}
+                    </h4>
+                    <span className="font-mono text-[10.5px] font-bold px-2 py-0.5 rounded-full bg-[#EFE8DA] border border-[#6B1D2F]/25 text-[#6B1D2F]">
+                      {proj.statusLabel}
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-3 text-[11px] font-mono">
+                    {proj.liveUrl && (
+                      <a
+                        href={proj.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#6B1D2F] font-semibold hover:underline inline-flex items-center gap-1"
+                      >
+                        <span>Live Demo</span>
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
+                    )}
+                    {proj.githubUrl && (
+                      <a
+                        href={proj.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#4E5E56] font-semibold hover:text-[#6B1D2F] hover:underline inline-flex items-center gap-1"
+                      >
+                        <span>GitHub</span>
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
+                    )}
+                  </div>
                 </div>
-                <p className="text-xs text-[#232D28]">{proj.description}</p>
+                <p className="font-mono text-[11px] text-[#4E5E56] font-semibold">
+                  {proj.technologies.join(' · ')}
+                </p>
+                <ul className="space-y-1 pl-4 list-disc text-xs text-[#232D28]">
+                  {proj.resumeBullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
@@ -240,13 +296,15 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               Education
             </h3>
             <div className="space-y-2 text-xs">
-              {education.map((edu) => (
+              {RESUME_EDUCATION.map((edu) => (
                 <div
                   key={edu.id}
                   className="flex flex-wrap items-baseline justify-between gap-2"
                 >
                   <div>
-                    <span className="font-semibold text-[#1B231F]">{edu.degree}</span>
+                    <span className="font-semibold text-[#1B231F]">
+                      {edu.degree}
+                    </span>
                     <span className="text-[#4E5E56]"> — {edu.institution}</span>
                   </div>
                   <span className="font-mono font-semibold text-[#6B1D2F] tabular-nums">
