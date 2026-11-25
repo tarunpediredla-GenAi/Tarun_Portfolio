@@ -318,7 +318,7 @@ export const portfolioContent: PortfolioContent = {
         scopeNote: 'Professional Role & Projects',
         purpose: 'Handles user interactions and frontend logic',
         description: 'Handles user interactions and frontend logic. Asynchronous client logic, DOM events, Web Speech & Audio APIs, and REST consumption.',
-        projectsUsedIn: ['InsureSphere AI', 'Saras India Systems', 'CP Academy', 'Finite HR & IT Solution', 'Satya’s Education', 'Alex AI Interviewer'],
+        projectsUsedIn: ['insure-bazarpolicies', 'Saras India Systems', 'CP Academy', 'Finite HR & IT Solution', 'Satya’s Education', 'Alex AI Interviewer'],
         orbitRadius: 2.3,
         orbitAngle: 2.6,
         accentColor: '#38bdf8',
@@ -330,7 +330,7 @@ export const portfolioContent: PortfolioContent = {
         scopeNote: 'Core UI Architecture',
         purpose: 'Builds the frontend website and dashboards',
         description: 'Builds the frontend website and dashboards. Component architecture, custom hooks, state management, and high-performance interactive views.',
-        projectsUsedIn: ['InsureSphere AI', 'Saras India Systems', 'Finite HR & IT Solution', 'Satya’s Education', 'Alex AI Interviewer'],
+        projectsUsedIn: ['insure-bazarpolicies', 'Saras India Systems', 'Finite HR & IT Solution', 'Satya’s Education', 'Alex AI Interviewer'],
         orbitRadius: 2.3,
         orbitAngle: 3.8,
         accentColor: '#06b6d4',
@@ -342,7 +342,7 @@ export const portfolioContent: PortfolioContent = {
         scopeNote: 'Responsive Interface Styling',
         purpose: 'Styles the responsive user interface',
         description: 'Styles the responsive user interface. Utility-first styling, design system tokens, fluid typography, and editorial layouts.',
-        projectsUsedIn: ['InsureSphere AI', 'Portfolio Platform', 'Modern Web UIs'],
+        projectsUsedIn: ['insure-bazarpolicies', 'Portfolio Platform', 'Modern Web UIs'],
         orbitRadius: 2.3,
         orbitAngle: 5.0,
         accentColor: '#38bdf8',
@@ -354,7 +354,7 @@ export const portfolioContent: PortfolioContent = {
         scopeNote: 'Core Professional Stack',
         purpose: 'Main backend programming language',
         description: 'Main backend programming language. Primary backend language for full stack web applications, data processing, and AI integration.',
-        projectsUsedIn: ['InsureSphere AI', 'Finite HR & IT Solution', 'CP Academy', 'AI Workflows'],
+        projectsUsedIn: ['insure-bazarpolicies', 'Finite HR & IT Solution', 'CP Academy', 'AI Workflows'],
         orbitRadius: 3.1,
         orbitAngle: 0.5,
         accentColor: '#22d3ee',
@@ -366,7 +366,7 @@ export const portfolioContent: PortfolioContent = {
         scopeNote: 'Enterprise Web Framework',
         purpose: 'Backend application framework',
         description: 'Backend application framework. Full-featured Python web framework for ORM modeling, authentication, REST APIs, and admin workflows.',
-        projectsUsedIn: ['InsureSphere AI', 'Finite HR & IT Solution', 'CP Academy', 'Satya’s Education Architecture'],
+        projectsUsedIn: ['insure-bazarpolicies', 'Finite HR & IT Solution', 'CP Academy', 'Satya’s Education Architecture'],
         orbitRadius: 3.1,
         orbitAngle: 1.8,
         accentColor: '#22d3ee',
@@ -378,7 +378,7 @@ export const portfolioContent: PortfolioContent = {
         scopeNote: 'RESTful API Layer',
         purpose: 'Creates APIs connecting React to Django',
         description: 'Creates APIs connecting React to Django. Model serializers, validated endpoints, paginated querysets, and viewsets.',
-        projectsUsedIn: ['InsureSphere AI', 'Enterprise SaaS Backends'],
+        projectsUsedIn: ['insure-bazarpolicies', 'Enterprise SaaS Backends'],
         orbitRadius: 3.1,
         orbitAngle: 3.0,
         accentColor: '#0ea5e9',
@@ -390,7 +390,7 @@ export const portfolioContent: PortfolioContent = {
         scopeNote: 'Token Authentication',
         purpose: 'User login and API authentication',
         description: 'User login and API authentication. Secure stateless access and refresh tokens with Bearer Authorization headers.',
-        projectsUsedIn: ['InsureSphere AI', 'Authentication Systems'],
+        projectsUsedIn: ['insure-bazarpolicies', 'Authentication Systems'],
         orbitRadius: 3.1,
         orbitAngle: 4.2,
         accentColor: '#38bdf8',
@@ -402,7 +402,7 @@ export const portfolioContent: PortfolioContent = {
         scopeNote: 'Access Control & Permissions',
         purpose: 'Controls Admin, Agent, and Customer permissions',
         description: 'Controls Admin, Agent, and Customer permissions. Role-Based Access Control enforcing granular permissions and domain safety.',
-        projectsUsedIn: ['InsureSphere AI', 'Multi-Tenant Platforms'],
+        projectsUsedIn: ['insure-bazarpolicies', 'Multi-Tenant Platforms'],
         orbitRadius: 3.1,
         orbitAngle: 5.4,
         accentColor: '#38bdf8',
@@ -438,7 +438,7 @@ export const portfolioContent: PortfolioContent = {
         scopeNote: 'Relational Database',
         purpose: 'Stores customers, policies, claims, and treaties',
         description: 'Stores customers, policies, claims, and treaties. Relational persistence, transactional integrity, and structured SQL queries.',
-        projectsUsedIn: ['InsureSphere AI', 'Backend Systems', 'n8n Knowledge-Base Chat Agent'],
+        projectsUsedIn: ['insure-bazarpolicies', 'Backend Systems', 'n8n Knowledge-Base Chat Agent'],
         orbitRadius: 3.8,
         orbitAngle: 3.2,
         accentColor: '#60a5fa',
@@ -462,7 +462,7 @@ export const portfolioContent: PortfolioContent = {
         scopeNote: 'Professional Role & Projects',
         purpose: 'Intended for AI-assisted policy and claims analysis',
         description: 'Intended for AI-assisted policy and claims analysis. Prompt engineering, structured JSON extraction, and conversational reasoning.',
-        projectsUsedIn: ['InsureSphere AI', 'Finite HR & IT Solution', 'Alex AI Interviewer', 'AI Voice Task Planner'],
+        projectsUsedIn: ['insure-bazarpolicies', 'Finite HR & IT Solution', 'Alex AI Interviewer', 'AI Voice Task Planner'],
         orbitRadius: 4.5,
         orbitAngle: 0.3,
         accentColor: '#f59e0b',
@@ -474,7 +474,7 @@ export const portfolioContent: PortfolioContent = {
         scopeNote: 'Document Knowledge Retrieval',
         purpose: 'Intended for retrieving information from insurance documents',
         description: 'Intended for retrieving information from insurance documents. Retrieval-Augmented Generation indexing policy schedules and clauses.',
-        projectsUsedIn: ['InsureSphere AI (Policy & RAG Studio)', 'n8n Knowledge-Base Chat Agent'],
+        projectsUsedIn: ['insure-bazarpolicies (Policy & RAG Studio)', 'n8n Knowledge-Base Chat Agent'],
         orbitRadius: 4.5,
         orbitAngle: 1.2,
         accentColor: '#f59e0b',
@@ -534,7 +534,7 @@ export const portfolioContent: PortfolioContent = {
         scopeNote: 'Frontend Automated Testing',
         purpose: 'Tests React application functionality',
         description: 'Tests React application functionality. Unit and component testing verifying user flows, calculations, and UI states.',
-        projectsUsedIn: ['InsureSphere AI', 'Frontend Quality Assurance'],
+        projectsUsedIn: ['insure-bazarpolicies', 'Frontend Quality Assurance'],
         orbitRadius: 5.2,
         orbitAngle: 0.3,
         accentColor: '#a855f7',
@@ -546,7 +546,7 @@ export const portfolioContent: PortfolioContent = {
         scopeNote: 'Version Control & Collaboration',
         purpose: 'Saves and manages project source code',
         description: 'Saves and manages project source code. Git branching workflows, pull requests, automated GitHub Actions, and documentation.',
-        projectsUsedIn: ['All Repositories', 'InsureSphere AI'],
+        projectsUsedIn: ['All Repositories', 'insure-bazarpolicies'],
         orbitRadius: 5.2,
         orbitAngle: 1.5,
         accentColor: '#94a3b8',
@@ -582,7 +582,7 @@ export const portfolioContent: PortfolioContent = {
         scopeNote: 'Cloud Infrastructure & Services',
         purpose: 'Cloud compute (EC2), S3 storage, RDS databases & IAM security',
         description: 'Cloud infrastructure deployment and management using AWS EC2, S3 object storage, RDS PostgreSQL, IAM access control, and scalable cloud architecture.',
-        projectsUsedIn: ['Finite HR & IT Solution', 'InsureSphere AI', 'Cloud Deployments'],
+        projectsUsedIn: ['Finite HR & IT Solution', 'insure-bazarpolicies', 'Cloud Deployments'],
         orbitRadius: 5.2,
         orbitAngle: 4.5,
         accentColor: '#f59e0b',
@@ -607,7 +607,7 @@ export const portfolioContent: PortfolioContent = {
       id: 'insuresphere-ai',
       index: '02',
       isFlagship: true,
-      title: 'InsureSphere AI',
+      title: 'insure-bazarpolicies',
       subtitle:
         'Enterprise Insurance & Reinsurance Management Platform with AI-Assisted Claims Analysis & Policy RAG Studio',
       statusBadge: '140+ Automated Tests Passing (Pytest & Vitest)',
@@ -667,11 +667,11 @@ export const portfolioContent: PortfolioContent = {
         },
       ],
       description:
-        'InsureSphere AI is an enterprise-style insurance and reinsurance management application built with React.js, Python, Django REST Framework, and PostgreSQL. It provides a centralized workspace for managing insurance customers, underwriting policies, processing claims, reviewing audit histories, calculating reinsurance recoveries, and analyzing insurance portfolio performance. The platform also includes AI-assisted claims analysis features and a policy/RAG studio under ongoing integration verification.',
+        'insure-bazarpolicies is an enterprise-style insurance and reinsurance management application built with React.js, Python, Django REST Framework, and PostgreSQL. It provides a centralized workspace for managing insurance customers, underwriting policies, processing claims, reviewing audit histories, calculating reinsurance recoveries, and analyzing insurance portfolio performance. The platform also includes AI-assisted claims analysis features and a policy/RAG studio under ongoing integration verification.',
       problemStatement:
         'Commercial insurers must coordinate customer onboarding, policy underwriting terms, claims adjudication, proportional risk-sharing treaties, and portfolio financial metrics across distinct teams. Fragmented legacy spreadsheets and disconnected operational silos lead to duplicated underwriting reviews, delayed claims settlement, inconsistent treaty audit trails, and limited visibility into ceded versus retained loss exposure.',
       architectureOverview:
-        'InsureSphere AI centralizes mission-critical insurance operations via a component-driven React.js + TypeScript frontend communicating over authenticated REST API contracts with a Python Django REST Framework backend. Django enforces role-based access control (Admin, Adjuster, Agent, Policyholder), serializes underwriting and claim state machines, and commits transactional records into PostgreSQL. A dedicated AI-assisted triage module provides automated coverage checks and deductible validation while keeping final settlement decisions strictly in the hands of human adjusters.',
+        'insure-bazarpolicies centralizes mission-critical insurance operations via a component-driven React.js + TypeScript frontend communicating over authenticated REST API contracts with a Python Django REST Framework backend. Django enforces role-based access control (Admin, Adjuster, Agent, Policyholder), serializes underwriting and claim state machines, and commits transactional records into PostgreSQL. A dedicated AI-assisted triage module provides automated coverage checks and deductible validation while keeping final settlement decisions strictly in the hands of human adjusters.',
       architectureFlow: [
         {
           step: '01',
@@ -1522,7 +1522,7 @@ export const SKILL_CATEGORIES = RESUME_SKILL_CATEGORIES;
 
 /**
  * Flagship Enterprise Technology & Purpose Matrix
- * Direct 1:1 mapping of technologies to their specific role in Tarun's stack & InsureSphere AI.
+ * Direct 1:1 mapping of technologies to their specific role in Tarun's stack & insure-bazarpolicies.
  */
 export const ENTERPRISE_SKILLS_TABLE: EnterpriseSkillPurpose[] = [
   {
@@ -1530,91 +1530,91 @@ export const ENTERPRISE_SKILLS_TABLE: EnterpriseSkillPurpose[] = [
     purpose: 'Builds the frontend website and dashboards',
     category: 'Frontend',
     statusBadge: 'Core UI Architecture',
-    primaryProject: 'InsureSphere AI & Portfolio',
+    primaryProject: 'insure-bazarpolicies & Portfolio',
   },
   {
     technology: 'JavaScript',
     purpose: 'Handles user interactions and frontend logic',
     category: 'Frontend',
     statusBadge: 'Interactive Client Logic',
-    primaryProject: 'InsureSphere AI & Web Apps',
+    primaryProject: 'insure-bazarpolicies & Web Apps',
   },
   {
     technology: 'Tailwind CSS',
     purpose: 'Styles the responsive user interface',
     category: 'Frontend',
     statusBadge: 'Design System & Styling',
-    primaryProject: 'InsureSphere AI & Modern UIs',
+    primaryProject: 'insure-bazarpolicies & Modern UIs',
   },
   {
     technology: 'Python',
     purpose: 'Main backend programming language',
     category: 'Backend',
     statusBadge: 'Core Backend Language',
-    primaryProject: 'InsureSphere AI & Full Stack Backends',
+    primaryProject: 'insure-bazarpolicies & Full Stack Backends',
   },
   {
     technology: 'Django',
     purpose: 'Backend application framework',
     category: 'Backend',
     statusBadge: 'Enterprise Web Framework',
-    primaryProject: 'InsureSphere AI & CP Academy',
+    primaryProject: 'insure-bazarpolicies & CP Academy',
   },
   {
     technology: 'Django REST Framework (DRF)',
     purpose: 'Creates APIs connecting React to Django',
     category: 'Backend',
     statusBadge: 'RESTful API Services',
-    primaryProject: 'InsureSphere AI (REST Layer)',
+    primaryProject: 'insure-bazarpolicies (REST Layer)',
   },
   {
     technology: 'PostgreSQL',
     purpose: 'Stores customers, policies, claims, and treaties',
     category: 'Databases',
     statusBadge: 'Relational ACID Database',
-    primaryProject: 'InsureSphere AI',
+    primaryProject: 'insure-bazarpolicies',
   },
   {
     technology: 'JWT / SimpleJWT',
     purpose: 'User login and API authentication',
     category: 'Security & Auth',
     statusBadge: 'Token Authentication',
-    primaryProject: 'InsureSphere AI (Auth Subsystem)',
+    primaryProject: 'insure-bazarpolicies (Auth Subsystem)',
   },
   {
     technology: 'RBAC',
     purpose: 'Controls Admin, Agent, and Customer permissions',
     category: 'Security & Auth',
     statusBadge: 'Role-Based Access Control',
-    primaryProject: 'InsureSphere AI (Permission Guards)',
+    primaryProject: 'insure-bazarpolicies (Permission Guards)',
   },
   {
     technology: 'Gemini / GenAI',
     purpose: 'Intended for AI-assisted policy and claims analysis',
     category: 'AI & Automation',
     statusBadge: 'AI Claims Advisory',
-    primaryProject: 'InsureSphere AI & Alex AI',
+    primaryProject: 'insure-bazarpolicies & Alex AI',
   },
   {
     technology: 'RAG',
     purpose: 'Intended for retrieving information from insurance documents',
     category: 'AI & Automation',
     statusBadge: 'Document Retrieval Studio',
-    primaryProject: 'InsureSphere AI (Policy & RAG Studio)',
+    primaryProject: 'insure-bazarpolicies (Policy & RAG Studio)',
   },
   {
     technology: 'AWS Cloud',
     purpose: 'Cloud compute (EC2), S3 storage, RDS PostgreSQL & IAM security',
     category: 'Dev & Deployment',
     statusBadge: 'Cloud Infrastructure',
-    primaryProject: 'Finite HR & InsureSphere AI',
+    primaryProject: 'Finite HR & insure-bazarpolicies',
   },
   {
     technology: 'Vitest',
     purpose: 'Tests React application functionality',
     category: 'Dev & Deployment',
     statusBadge: 'Automated Test Suites',
-    primaryProject: 'InsureSphere AI & Frontend QA',
+    primaryProject: 'insure-bazarpolicies & Frontend QA',
   },
   {
     technology: 'Git and GitHub',
@@ -1626,7 +1626,7 @@ export const ENTERPRISE_SKILLS_TABLE: EnterpriseSkillPurpose[] = [
 ];
 
 /**
- * InsureSphere AI — Flagship Tech Stack
+ * insure-bazarpolicies — Flagship Tech Stack
  * Core technologies powering the production codebase.
  */
 export const INSURESPHERE_TECH_STACK = [

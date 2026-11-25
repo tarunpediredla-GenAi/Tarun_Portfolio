@@ -231,7 +231,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                 className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${tabBtnClass('techstack')}`}
               >
                 <Cpu className="w-3.5 h-3.5" />
-                <span>InsureSphere AI — Tech Stack</span>
+                <span>insure-bazarpolicies — Tech Stack</span>
               </button>
             )}
 
@@ -430,7 +430,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                       }`}
                     >
                       {isFlagship
-                        ? 'The InsureSphere Architectural Solution'
+                        ? 'The insure-bazarpolicies Architectural Solution'
                         : 'The Architectural Solution'}
                     </h4>
                   </div>
@@ -488,7 +488,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
                     <div className="flex items-center gap-3">
                       <span className="w-6 h-px bg-sky-400" />
                       <h4 className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-sky-300">
-                        InsureSphere AI — Tech Stack
+                        insure-bazarpolicies — Tech Stack
                       </h4>
                     </div>
                     <button
@@ -741,14 +741,14 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
             </div>
           )}
 
-          {/* TAB: INSURESPHERE AI — TECH STACK & ARCHITECTURE SCOPE */}
+          {/* TAB: INSURE-BAZARPOLICIES — TECH STACK & ARCHITECTURE SCOPE */}
           {isFlagship && activeTab === 'techstack' && (
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-lg font-display font-bold text-white flex items-center gap-2">
                     <Cpu className="w-5 h-5 text-sky-400" />
-                    <span>InsureSphere AI — Tech Stack</span>
+                    <span>insure-bazarpolicies — Tech Stack</span>
                   </h3>
                   <p className="text-xs font-mono text-slate-400 mt-0.5">
                     {

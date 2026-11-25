@@ -88,10 +88,10 @@
     <circle cx="68" cy="26" r="6" fill="#10B981"/>
 
     <!-- Project Identifier -->
-    <text x="96" y="32" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700" fill="#F8FAFC" letter-spacing="1">
-      INSURESPHERE AI
+    <text x="96" y="32" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700" fill="#F8FAFC" letter-spacing="0.6">
+      insure-bazarpolicies
     </text>
-    <text x="245" y="32" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500" fill="#94A3B8" letter-spacing="0.5">
+    <text x="305" y="32" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500" fill="#94A3B8" letter-spacing="0.5">
       / Enterprise Insurance &amp; Reinsurance Platform
     </text>
 
@@ -293,7 +293,7 @@
       TARUN PEDIREDLA · FULL STACK PYTHON &amp; AI DEVELOPER · ENTERPRISE REINSURANCE SUITE
     </text>
     <text x="1080" y="16" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" fill="#38BDF8" text-anchor="end">
-      REPO: github.com/tarunpediredla-GenAi/insuresphere-ai
+      PROJECT: insure-bazarpolicies · DJANGO REST · REACT
     </text>
   </g>
 </svg>

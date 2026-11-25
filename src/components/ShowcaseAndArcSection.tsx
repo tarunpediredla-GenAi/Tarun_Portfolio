@@ -12,7 +12,7 @@ interface ShowcaseAndArcSectionProps {
 
 const WARP_FRAMES = [0, 1, 2, 3, 4, 5, 6];
 
-// FEATURED_PROJECTS is pre-sorted by resume index (01 Currency Exchange, 02 InsureSphere AI,
+// FEATURED_PROJECTS is pre-sorted by resume index (01 Currency Exchange, 02 insure-bazarpolicies,
 // 03 Cloud Claims API, 04 Satya's Education, 05 AI Voice Task Planner, 06 Alex AI).
 const SHOWCASE_PROJECTS = FEATURED_PROJECTS;
 
@@ -249,7 +249,7 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
             <p className="mt-6 text-[#35423C] font-medium text-base md:text-lg max-w-2xl mx-auto">
               Six full-stack, cloud, and AI engineering case studies by Tarun
               Pediredla — featuring the live Currency Exchange Rate Tracker,
-              InsureSphere AI (140+ tests passing), Cloud Claims API (FastAPI + AWS),
+              insure-bazarpolicies (140+ tests passing), Cloud Claims API (FastAPI + AWS),
               Satya&apos;s Education, AI Voice Task Planner, and Alex AI.
             </p>
           </motion.div>
@@ -426,7 +426,7 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                         <div>
                           <div className="flex items-center justify-between mb-2">
                             <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#5E1726]">
-                              {isFlagship ? 'InsureSphere AI — Tech Stack' : 'Technologies & Tools'}
+                              {isFlagship ? 'insure-bazarpolicies — Tech Stack' : 'Technologies & Tools'}
                             </span>
                             <span className="text-[10.5px] font-mono text-[#35423C]">
                               {project.technologies.length} Technologies

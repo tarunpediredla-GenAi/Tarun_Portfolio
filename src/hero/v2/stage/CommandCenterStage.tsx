@@ -491,7 +491,7 @@ export const CommandCenterStage: React.FC = () => {
 
     const codeCardConfigs = [
       {
-        title: 'insuresphere_treaty.py',
+        title: 'insure_bazarpolicies_treaty.py',
         lines: [
           'class QuotaShareTreaty(models.Model):',
           '  net_loss = max(0, gross - deductible)',

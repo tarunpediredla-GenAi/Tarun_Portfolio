@@ -1537,7 +1537,7 @@ export const BuiltDifferentAndFlowSection: React.FC<
                 </AnimatePresence>
               </motion.div>
 
-              {/* Flagship InsureSphere AI Tech Stack & Core Engineering Directory */}
+              {/* Flagship insure-bazarpolicies Tech Stack & Core Engineering Directory */}
               <div className="mt-8 rounded-2xl border border-[#687A70]/40 bg-[#FAF7F2] p-5 sm:p-6 shadow-sm space-y-4">
                 <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#687A70]/30 pb-3">
                   <div>
@@ -1545,7 +1545,7 @@ export const BuiltDifferentAndFlowSection: React.FC<
                       Flagship Production Architecture
                     </span>
                     <h4 className="text-base sm:text-lg font-bold text-[#232B27]">
-                      InsureSphere AI — Tech Stack &amp; Engineering Foundation
+                      insure-bazarpolicies — Tech Stack &amp; Engineering Foundation
                     </h4>
                   </div>
                   <span className="text-[11px] font-mono font-semibold px-2.5 py-1 rounded-full bg-[#EFE8DA] border border-[#687A70]/40 text-[#232B27]">

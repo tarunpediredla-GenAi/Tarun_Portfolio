@@ -33,7 +33,7 @@ export const RESUME_PROFILE = {
 } as const;
 
 export const RESUME_SUMMARY_PARAGRAPHS = [
-  'Full Stack Python Developer with 4+ years building web and SaaS applications in Python, Django, FastAPI, React and TypeScript. Skilled in REST APIs, AWS, Generative AI, LLMs, RAG, agentic workflows and multi-agent systems, and AI-powered IDEs, CLI tools and coding agents. Builder of InsureSphere AI, an insurance and reinsurance platform.',
+  'Full Stack Python Developer with 4+ years building web and SaaS applications in Python, Django, FastAPI, React and TypeScript. Skilled in REST APIs, AWS, Generative AI, LLMs, RAG, agentic workflows and multi-agent systems, and AI-powered IDEs, CLI tools and coding agents. Builder of insure-bazarpolicies, an insurance and reinsurance platform.',
   'Across roles at Saras India Systems Private Limited, CP Academy, and Finite HR & IT Solution, I have progressed from responsive React frontend engineering to end-to-end Python full-stack systems, REST APIs, PostgreSQL/MySQL data modeling, self-hosted n8n workflow architecture on AWS EC2, Docker containerization, and CI/CD delivery.',
   'My engineering focus combines deterministic backend invariants—JWT/RBAC security, server-side payment and stock validation, automated Pytest and Vitest suites—with grounded Generative AI, Agentic RAG, multi-agent orchestration, and human-in-the-loop review.',
 ];
@@ -440,7 +440,7 @@ export const RESUME_PROJECTS_META = [
   {
     id: 'insuresphere-ai',
     index: '02',
-    title: 'InsureSphere AI',
+    title: 'insure-bazarpolicies',
     subtitle: 'Enterprise Insurance & Reinsurance Platform',
     statusLabel: '140+ Tests Passing',
     technologies: [

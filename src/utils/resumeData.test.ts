@@ -41,7 +41,7 @@ test('filterCommandItems performs case-insensitive, trimmed multi-field matching
       category: 'Featured Project',
     },
     {
-      label: 'InsureSphere AI',
+      label: 'insure-bazarpolicies',
       description: 'Django REST Framework · PostgreSQL · RAG',
       category: 'Featured Project',
     },
@@ -55,7 +55,7 @@ test('filterCommandItems performs case-insensitive, trimmed multi-field matching
   assert.equal(filterCommandItems(items, '   ').length, 3);
   assert.equal(filterCommandItems(items, '  fastapi ').length, 1);
   assert.equal(filterCommandItems(items, 'external').length, 1);
-  assert.equal(filterCommandItems(items, 'INSURESPHERE')[0].label, 'InsureSphere AI');
+  assert.equal(filterCommandItems(items, 'BAZARPOLICIES')[0].label, 'insure-bazarpolicies');
   assert.equal(filterCommandItems(items, 'no-match-xyz').length, 0);
 });
 
@@ -118,7 +118,7 @@ test('buildResumeMarkdown includes verified profile, links, skills, experience, 
   assert.match(md, /Cloud Claims API/);
   assert.match(md, /In Development, Nov 2026/);
   assert.match(md, /Currency Exchange Rate Tracker/);
-  assert.match(md, /InsureSphere AI/);
+  assert.match(md, /insure-bazarpolicies/);
   assert.match(md, /140\+ Tests Passing/);
   assert.match(md, /B\.Sc\. Computer Science/);
   for (const cat of RESUME_SKILL_CATEGORIES) {
