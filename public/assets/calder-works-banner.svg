@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" fill="none">
+  <defs>
+    <linearGradient id="cw-bg" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B0F17"/>
+      <stop offset="50%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#090D14"/>
+    </linearGradient>
+    <radialGradient id="cw-glow-left" cx="280" cy="180" r="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#0B0F17" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cw-glow-right" cx="960" cy="500" r="380" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#0B0F17" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cw-panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#161F30" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#0D1320" stop-opacity="0.96"/>
+    </linearGradient>
+    <linearGradient id="cw-accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#818CF8"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base Canvas -->
+  <rect width="1200" height="675" fill="url(#cw-bg)"/>
+  <rect width="1200" height="675" fill="url(#cw-glow-left)"/>
+  <rect width="1200" height="675" fill="url(#cw-glow-right)"/>
+
+  <!-- Blueprint Grid -->
+  <g stroke="#818CF8" stroke-opacity="0.06" stroke-width="1">
+    <path d="M0 90 H1200 M0 180 H1200 M0 270 H1200 M0 360 H1200 M0 450 H1200 M0 540 H1200 M0 630 H1200"/>
+    <path d="M100 0 V675 M250 0 V675 M400 0 V675 M550 0 V675 M700 0 V675 M850 0 V675 M1000 0 V675 M1100 0 V675"/>
+  </g>
+
+  <!-- Top Workspace Chrome -->
+  <g transform="translate(52, 36)">
+    <rect width="1096" height="56" rx="14" fill="#121A2B" stroke="#6366F1" stroke-opacity="0.4" stroke-width="1.2"/>
+    <circle cx="28" cy="28" r="6" fill="#EF4444"/>
+    <circle cx="48" cy="28" r="6" fill="#F59E0B"/>
+    <circle cx="68" cy="28" r="6" fill="#10B981"/>
+    <text x="98" y="33" fill="#F8FAFC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="15" font-weight="700" letter-spacing="0.8">
+      CALDER WORKS
+    </text>
+    <text x="236" y="33" fill="#94A3B8" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11.5" font-weight="500">
+      / Multi-Agent Software Delivery Workspace
+    </text>
+    <rect x="698" y="13" width="188" height="30" rx="15" fill="#312E81" fill-opacity="0.55" stroke="#818CF8" stroke-width="1"/>
+    <circle cx="716" cy="28" r="3.5" fill="#A5B4FC"/>
+    <text x="728" y="32" fill="#C7D2FE" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700" letter-spacing="0.8">
+      8-AGENT LANGGRAPH
+    </text>
+    <rect x="898" y="13" width="180" height="30" rx="15" fill="#064E3B" fill-opacity="0.45" stroke="#34D399" stroke-width="1"/>
+    <text x="988" y="32" text-anchor="middle" fill="#6EE7B7" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">
+      DOCKER SANDBOX
+    </text>
+  </g>
+
+  <!-- Left Panel: Eight-Agent LangGraph StateGraph -->
+  <g transform="translate(52, 114)">
+    <rect width="548" height="498" rx="18" fill="url(#cw-panel)" stroke="#6366F1" stroke-opacity="0.32" stroke-width="1.2"/>
+    <rect width="548" height="48" rx="18" fill="#182238" stroke="#334155" stroke-width="0.8"/>
+    <text x="22" y="30" fill="#F8FAFC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="12" font-weight="700" letter-spacing="0.8">
+      LANGGRAPH 8-AGENT DELIVERY PIPELINE
+    </text>
+    <rect x="396" y="12" width="132" height="24" rx="12" fill="#10B981" fill-opacity="0.16" stroke="#10B981" stroke-width="0.8"/>
+    <text x="462" y="28" text-anchor="middle" fill="#6EE7B7" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9.5" font-weight="700">
+      HUMAN-GATED FLOW
+    </text>
+
+    <!-- Step 1: Requirements Analyst + Human Gate -->
+    <rect x="22" y="66" width="504" height="52" rx="11" fill="#0D1526" stroke="#818CF8" stroke-opacity="0.5"/>
+    <text x="38" y="88" fill="#A5B4FC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" font-weight="700">01 · REQUIREMENTS ANALYST</text>
+    <text x="38" y="106" fill="#CBD5E1" font-family="'DM Sans', system-ui, sans-serif" font-size="11.5">Drafts testable acceptance criteria → Human Plan Gate (interrupt_before)</text>
+
+    <!-- Connector -->
+    <line x1="274" y1="118" x2="274" y2="136" stroke="#818CF8" stroke-width="2" stroke-dasharray="3 3"/>
+
+    <!-- Step 2: Architect -->
+    <rect x="22" y="136" width="504" height="52" rx="11" fill="#0D1526" stroke="#38BDF8" stroke-opacity="0.5"/>
+    <text x="38" y="158" fill="#7DD3FC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" font-weight="700">02 · ARCHITECT AGENT</text>
+    <text x="38" y="176" fill="#CBD5E1" font-family="'DM Sans', system-ui, sans-serif" font-size="11.5">Defines PostgreSQL schema, FastAPI contract &amp; authorized file change plan</text>
+
+    <!-- Parallel Branch Connectors -->
+    <path d="M274 188 V200 M144 200 H404 M144 200 V210 M404 200 V210" stroke="#38BDF8" stroke-width="1.8"/>
+
+    <!-- Step 3a & 3b: Parallel Python + React Engineers -->
+    <rect x="22" y="210" width="244" height="66" rx="11" fill="#0F1B33" stroke="#34D399" stroke-opacity="0.55"/>
+    <text x="36" y="232" fill="#6EE7B7" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">03A · PYTHON ENGINEER</text>
+    <text x="36" y="250" fill="#E2E8F0" font-family="'DM Sans', system-ui, sans-serif" font-size="11">FastAPI routes, Pydantic</text>
+    <text x="36" y="265" fill="#94A3B8" font-family="'DM Sans', system-ui, sans-serif" font-size="10.5">&amp; SQLAlchemy models (parallel)</text>
+
+    <rect x="282" y="210" width="244" height="66" rx="11" fill="#0F1B33" stroke="#38BDF8" stroke-opacity="0.55"/>
+    <text x="296" y="232" fill="#7DD3FC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">03B · REACT ENGINEER</text>
+    <text x="296" y="250" fill="#E2E8F0" font-family="'DM Sans', system-ui, sans-serif" font-size="11">React 19 + TypeScript UI</text>
+    <text x="296" y="265" fill="#94A3B8" font-family="'DM Sans', system-ui, sans-serif" font-size="10.5">against shared API contract</text>
+
+    <!-- Rejoin Connector -->
+    <path d="M144 276 V288 M404 276 V288 M144 288 H404 M274 288 V298" stroke="#34D399" stroke-width="1.8"/>
+
+    <!-- Step 4: Test Engineer + Docker Sandbox -->
+    <rect x="22" y="298" width="504" height="58" rx="11" fill="#0B1829" stroke="#F59E0B" stroke-opacity="0.55"/>
+    <text x="38" y="320" fill="#FCD34D" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" font-weight="700">04 · TEST ENGINEER &amp; ISOLATED DOCKER SANDBOX</text>
+    <text x="38" y="340" fill="#CBD5E1" font-family="'DM Sans', system-ui, sans-serif" font-size="11.5">Runs pytest + UI checks in non-root --network=none container</text>
+
+    <!-- Connector -->
+    <line x1="274" y1="356" x2="274" y2="372" stroke="#F59E0B" stroke-width="2" stroke-dasharray="3 3"/>
+
+    <!-- Step 5: Bug Detection Agent -->
+    <rect x="22" y="372" width="504" height="48" rx="11" fill="#0D1526" stroke="#FB7185" stroke-opacity="0.45"/>
+    <text x="38" y="393" fill="#FDA4AF" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">05 · BUG DETECTION AGENT (MAX 2 AUTO-CORRECTIONS)</text>
+    <text x="38" y="410" fill="#CBD5E1" font-family="'DM Sans', system-ui, sans-serif" font-size="11">Dispatches focused fixes or pauses cleanly for human decision</text>
+
+    <!-- Connector -->
+    <line x1="274" y1="420" x2="274" y2="434" stroke="#818CF8" stroke-width="2" stroke-dasharray="3 3"/>
+
+    <!-- Step 6 & 7: Code Reviewer + Docs Writer -->
+    <rect x="22" y="434" width="244" height="46" rx="10" fill="#0D1526" stroke="#A78BFA" stroke-opacity="0.5"/>
+    <text x="36" y="454" fill="#C4B5FD" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">06 · CODE REVIEWER</text>
+    <text x="36" y="470" fill="#94A3B8" font-family="'DM Sans', system-ui, sans-serif" font-size="10.5">File &amp; line-scoped diff audit</text>
+
+    <rect x="282" y="434" width="244" height="46" rx="10" fill="#0D1526" stroke="#34D399" stroke-opacity="0.5"/>
+    <text x="296" y="454" fill="#6EE7B7" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">07 · DOCS WRITER</text>
+    <text x="296" y="470" fill="#94A3B8" font-family="'DM Sans', system-ui, sans-serif" font-size="10.5">Release notes &amp; setup guide</text>
+  </g>
+
+  <!-- Right Panel: Three-Column Review & SHA-Bound Governance -->
+  <g transform="translate(620, 114)">
+    <rect width="528" height="498" rx="18" fill="url(#cw-panel)" stroke="#10B981" stroke-opacity="0.32" stroke-width="1.2"/>
+    <rect width="528" height="48" rx="18" fill="#182238" stroke="#334155" stroke-width="0.8"/>
+    <text x="22" y="30" fill="#F8FAFC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="12" font-weight="700" letter-spacing="0.8">
+      ENGINEERING REVIEW &amp; SHA-BOUND MERGE GATE
+    </text>
+
+    <!-- Changed Files Strip -->
+    <g transform="translate(20, 66)">
+      <rect width="488" height="86" rx="12" fill="#0B1324" stroke="#334155" stroke-width="1"/>
+      <text x="16" y="24" fill="#94A3B8" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="700" letter-spacing="0.8">
+        CHANGED FILES · REV-2 (SHA 72addaf)
+      </text>
+      <text x="16" y="46" fill="#7DD3FC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11">M  backend/app/routers/students.py</text>
+      <text x="310" y="46" fill="#6EE7B7" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11">+42  -6</text>
+      <text x="16" y="68" fill="#A5B4FC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11">M  frontend/src/pages/StudentRegisterPage.tsx</text>
+      <text x="356" y="68" fill="#6EE7B7" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11">+64  -4</text>
+    </g>
+
+    <!-- Unified Diff Box -->
+    <g transform="translate(20, 166)">
+      <rect width="488" height="136" rx="12" fill="#09101E" stroke="#6366F1" stroke-opacity="0.38"/>
+      <text x="16" y="24" fill="#A5B4FC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="700">
+        UNIFIED DIFF · ROLL NUMBER NORMALIZATION &amp; 409 CONFLICT
+      </text>
+      <rect x="12" y="34" width="464" height="22" rx="4" fill="#EF4444" fill-opacity="0.14"/>
+      <text x="20" y="49" fill="#FCA5A5" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5">-  roll_number = payload.roll_number</text>
+      <rect x="12" y="60" width="464" height="22" rx="4" fill="#10B981" fill-opacity="0.16"/>
+      <text x="20" y="75" fill="#6EE7B7" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5">+  roll_number = payload.roll_number.strip().upper()</text>
+      <rect x="12" y="86" width="464" height="22" rx="4" fill="#10B981" fill-opacity="0.16"/>
+      <text x="20" y="101" fill="#6EE7B7" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5">+  if db.get_student_by_roll(roll_number):</text>
+      <text x="20" y="123" fill="#6EE7B7" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5">+      raise HTTPException(status_code=409, detail="Exists")</text>
+    </g>
+
+    <!-- Pytest Sandbox Result -->
+    <g transform="translate(20, 316)">
+      <rect width="488" height="84" rx="12" fill="#07171B" stroke="#10B981" stroke-opacity="0.45"/>
+      <text x="16" y="24" fill="#34D399" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">
+        DOCKER SANDBOX (--network=none) · PYTEST VERIFIED
+      </text>
+      <text x="16" y="47" fill="#E2E8F0" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11">
+        ✓ test_create_student_duplicate_roll_number_returns_409
+      </text>
+      <text x="16" y="68" fill="#6EE7B7" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11">
+        ✓ 6 passed in 0.84s · Prior rev-1 approval invalidated
+      </text>
+    </g>
+
+    <!-- Two-Step Governance Actions -->
+    <g transform="translate(20, 416)">
+      <rect x="0" y="0" width="234" height="60" rx="12" fill="#1E293B" stroke="#818CF8" stroke-width="1.2"/>
+      <text x="117" y="25" text-anchor="middle" fill="#C7D2FE" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">STEP 1 · APPROVE REVISION</text>
+      <text x="117" y="44" text-anchor="middle" fill="#94A3B8" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10">Bound to exact SHA 72addaf</text>
+
+      <rect x="254" y="0" width="234" height="60" rx="12" fill="#065F46" fill-opacity="0.65" stroke="#34D399" stroke-width="1.2"/>
+      <text x="371" y="25" text-anchor="middle" fill="#ECFDF5" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">STEP 2 · GATED PR MERGE</text>
+      <text x="371" y="44" text-anchor="middle" fill="#A7F3D0" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10">Tests passed + SHA matched</text>
+    </g>
+  </g>
+
+  <!-- Footer Strip -->
+  <g transform="translate(52, 634)">
+    <text x="0" y="16" fill="#94A3B8" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="600">
+      REACT 19 · TYPESCRIPT · FASTAPI · LANGGRAPH · POSTGRESQL · DOCKER SANDBOX · GEMINI
+    </text>
+    <text x="1096" y="16" text-anchor="end" fill="#818CF8" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">
+      github.com/tarunpediredla-GenAi/calder-work
+    </text>
+  </g>
+</svg>

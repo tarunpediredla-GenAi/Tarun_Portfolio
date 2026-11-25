@@ -472,9 +472,6 @@ export const ProfileCardAndFooter: React.FC<ProfileCardAndFooterProps> = ({
                 <a className="hover:text-[#DCE3DF] duration-300" href="#gallery">
                   Gallery
                 </a>
-                <a className="hover:text-[#DCE3DF] duration-300" href="#flagship">
-                  Flagship
-                </a>
                 <a className="hover:text-[#DCE3DF] duration-300" href="#contact">
                   Contact
                 </a>

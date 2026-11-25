@@ -119,6 +119,8 @@ test('buildResumeMarkdown includes verified profile, links, skills, experience, 
   assert.match(md, /In Development, Nov 2026/);
   assert.match(md, /Currency Exchange Rate Tracker/);
   assert.match(md, /insure-bazarpolicies/);
+  assert.match(md, /Calder Works/);
+  assert.match(md, /github\.com\/tarunpediredla-GenAi\/calder-work/);
   assert.match(md, /140\+ Tests Passing/);
   assert.match(md, /B\.Sc\. Computer Science/);
   for (const cat of RESUME_SKILL_CATEGORIES) {
@@ -129,7 +131,7 @@ test('buildResumeMarkdown includes verified profile, links, skills, experience, 
 test('resumeCatalog entries have unique IDs and valid non-empty content', () => {
   const projectIds = new Set(RESUME_PROJECTS_META.map((p) => p.id));
   assert.equal(projectIds.size, RESUME_PROJECTS_META.length);
-  assert.equal(RESUME_PROJECTS_META.length, 5);
+  assert.equal(RESUME_PROJECTS_META.length, 6);
 
   const experienceIds = new Set(RESUME_EXPERIENCE.map((e) => e.id));
   assert.equal(experienceIds.size, RESUME_EXPERIENCE.length);

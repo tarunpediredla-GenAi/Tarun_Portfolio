@@ -7,7 +7,6 @@ import {
   COMMAND_BACKDROP_IMAGE,
   FEATURED_PROJECTS,
   FeaturedProject,
-  KINETIC_ROLES,
 } from '../data/content';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -15,8 +14,6 @@ gsap.registerPlugin(ScrollTrigger);
 interface StillsAndOutlastSectionProps {
   onSelectProject: (project: FeaturedProject) => void;
 }
-
-const INDEX_PROJECTS = FEATURED_PROJECTS;
 
 function getProjectById(id: string): FeaturedProject {
   return FEATURED_PROJECTS.find((p) => p.id === id) || FEATURED_PROJECTS[0];
@@ -48,14 +45,9 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isHoveringCarousel, setIsHoveringCarousel] = useState(false);
 
-  // Flagship Projects hover preview state
-  const [hoveredFlagship, setHoveredFlagship] =
-    useState<FeaturedProject | null>(null);
-  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-  const flagshipListRef = useRef<HTMLDivElement>(null);
-
   const currencyProj = getProjectById('currency-exchange-tracker');
   const insureProj = getProjectById('insuresphere-ai');
+  const calderProj = getProjectById('calder-works');
   const cloudClaimsProj = getProjectById('cloud-claims-api');
   const satyaProj = getProjectById('satya-education');
   const voiceProj = getProjectById('voice-task-planner');
@@ -80,10 +72,10 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
     },
     {
       num: '03',
-      title: cloudClaimsProj.title,
-      tag: 'FastAPI · SQLAlchemy · Docker · AWS S3 & RDS',
-      image: cloudClaimsProj.image,
-      project: cloudClaimsProj,
+      title: calderProj.title,
+      tag: 'LangGraph · FastAPI · React · Docker Sandbox',
+      image: calderProj.image,
+      project: calderProj,
       side: 'left' as const,
     },
     {
@@ -106,6 +98,11 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
       project: insureProj,
       badge: 'Enterprise SaaS · 140+ Tests',
       caption: 'Underwriting, claims FNOL, reinsurance treaties & Policy RAG Studio',
+    },
+    {
+      project: calderProj,
+      badge: '8-Agent LangGraph · Docker',
+      caption: 'Human-gated multi-agent delivery workspace with SHA-bound diff review',
     },
     {
       project: cloudClaimsProj,
@@ -202,15 +199,6 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
 
     return () => ctx.revert();
   }, []);
-
-  const handleFlagshipMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!flagshipListRef.current) return;
-    const rect = flagshipListRef.current.getBoundingClientRect();
-    setCursorPos({
-      x: e.clientX - rect.left + 24,
-      y: e.clientY - rect.top - 90,
-    });
-  };
 
   return (
     <>
@@ -885,141 +873,6 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
               </div>
             );
           })}
-        </div>
-      </div>
-
-      {/* =====================================================================
-          SECTION 7C — #flagship ("Flagship Projects" + Kinetic Role List on Warm Cream Beige)
-         ===================================================================== */}
-      <div id="flagship" className="bg-[#F6F1E7] py-20">
-        <section
-          ref={flagshipListRef}
-          onMouseMove={handleFlagshipMouseMove}
-          className="relative w-full mx-auto max-w-5xl px-6 py-12"
-        >
-          <p className="text-xs uppercase tracking-[0.35em] text-[#5E1726] font-bold mb-3 font-mono">
-            Quick Index · Featured Project Case Studies
-          </p>
-          <h2 className="text-3xl md:text-5xl font-bold text-[#232B27] mb-12 tracking-tight">
-            Flagship Projects
-          </h2>
-
-          <div className="divide-y divide-[#687A70]/35 border-y border-[#687A70]/35">
-            {INDEX_PROJECTS.map((proj) => {
-              return (
-                <button
-                  type="button"
-                  key={proj.id}
-                  onMouseEnter={() => setHoveredFlagship(proj)}
-                  onMouseLeave={() => setHoveredFlagship(null)}
-                  onClick={() => onSelectProject(proj)}
-                  className="group relative block w-full text-left py-8 px-4 -mx-4 rounded-2xl transition-all duration-300 cursor-pointer hover:bg-[#EFE8DA]"
-                >
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div className="flex items-baseline gap-6">
-                      <span className="text-xs font-mono font-bold text-[#5E1726]">
-                        {proj.number}
-                      </span>
-                      <div>
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="text-2xl md:text-4xl font-bold tracking-tight transition-all duration-300 text-[#232B27] group-hover:text-[#5E1726] group-hover:translate-x-2">
-                            {proj.title}
-                          </h3>
-                          {proj.id === 'currency-exchange-tracker' && (
-                            <span className="rounded-full bg-emerald-100 text-emerald-800 border border-emerald-400/40 px-2.5 py-1 text-[10px] font-mono font-bold tracking-wider uppercase">
-                              Live Demo
-                            </span>
-                          )}
-                          {proj.id === 'cloud-claims-api' && (
-                            <span className="rounded-full bg-sky-100 text-sky-900 border border-sky-400/40 px-2.5 py-1 text-[10px] font-mono font-bold tracking-wider uppercase">
-                              In Development · Nov 2026
-                            </span>
-                          )}
-                          {proj.id === 'insuresphere-ai' && (
-                            <span className="rounded-full bg-[#EFE8DA] text-[#5E1726] border border-[#5E1726]/35 px-2.5 py-1 text-[10px] font-mono font-bold tracking-wider uppercase">
-                              140+ Tests Passing
-                            </span>
-                          )}
-                        </div>
-                        <p className="text-xs md:text-sm text-[#35423C] font-medium mt-1">
-                          {proj.subtitle}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4 self-end md:self-center">
-                      <span className="text-xs font-mono font-bold tracking-wider uppercase transition-colors duration-300 text-[#35423C] group-hover:text-[#5E1726]">
-                        {proj.technologies.slice(0, 4).join(' · ')}
-                      </span>
-                      <span className="group-hover:translate-x-1.5 transition-all duration-300 text-lg font-bold text-[#5E1726]">
-                        →
-                      </span>
-                    </div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Floating Cursor Preview Card */}
-          <div
-            className={`pointer-events-none hidden md:block absolute z-50 overflow-hidden rounded-xl shadow-2xl transition-opacity duration-200 ${
-              hoveredFlagship ? 'opacity-100' : 'opacity-0'
-            }`}
-            style={{
-              width: 320,
-              height: 200,
-              left: cursorPos.x,
-              top: cursorPos.y,
-            }}
-          >
-            {hoveredFlagship && (
-              <div className="relative w-full h-full bg-[#232B27] border-2 border-[#5E1726] rounded-xl overflow-hidden">
-                <img
-                  src={hoveredFlagship.image}
-                  alt={hoveredFlagship.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#5E1726]/95 to-transparent p-3">
-                  <p className="text-xs font-bold text-[#F6F1E7]">
-                    {hoveredFlagship.title}
-                  </p>
-                  <p className="text-[10px] font-mono text-[#EFE8DA]">
-                    Click to open case study
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-        </section>
-
-        {/* Kinetic Typography Roles List (ENGINEER, DESIGNER, BUILDER...) with Burgundy Sweep Fill */}
-        <div className="min-h-[60vh] w-full flex items-center justify-center bg-[#F6F1E7] text-[#232B27] py-16 px-6 md:px-16 overflow-hidden">
-          <div className="w-full max-w-6xl">
-            <p className="text-xs font-mono font-bold uppercase tracking-[0.35em] text-[#5E1726] mb-6">
-              Identity · Disciplines (Hover to activate)
-            </p>
-            <ul className="flex flex-col border-t border-[#687A70]/35">
-              {KINETIC_ROLES.map((item) => (
-                <li
-                  key={item.role}
-                  className="group relative overflow-hidden border-b border-[#687A70]/35 py-4 px-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 cursor-default"
-                >
-                  {/* Animated Deep Burgundy Sweep Background */}
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-[#5E1726] scale-y-0 group-hover:scale-y-100 origin-bottom transition-transform duration-300 ease-out z-0"
-                  />
-
-                  <span className="relative z-10 text-3xl sm:text-5xl md:text-7xl font-black tracking-tight text-[#232B27] group-hover:text-[#F6F1E7] group-hover:translate-x-4 transition-all duration-300">
-                    {item.role}
-                  </span>
-                  <span className="relative z-10 text-xs md:text-sm font-mono font-bold uppercase tracking-[0.2em] text-[#5E1726] group-hover:text-[#EFE8DA] group-hover:-translate-x-2 transition-all duration-300">
-                    {item.caption}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </div>
     </>

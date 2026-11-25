@@ -13,7 +13,7 @@ interface ShowcaseAndArcSectionProps {
 const WARP_FRAMES = [0, 1, 2, 3, 4, 5, 6];
 
 // FEATURED_PROJECTS is pre-sorted by resume index (01 Currency Exchange, 02 insure-bazarpolicies,
-// 03 Cloud Claims API, 04 Satya's Education, 05 AI Voice Task Planner, 06 Alex AI).
+// 03 Calder Works, 04 Cloud Claims API, 05 Satya's Education, 06 AI Voice Task Planner, 07 Alex AI).
 const SHOWCASE_PROJECTS = FEATURED_PROJECTS;
 
 export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
@@ -247,9 +247,10 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
               </span>
             </h2>
             <p className="mt-6 text-[#35423C] font-medium text-base md:text-lg max-w-2xl mx-auto">
-              Six full-stack, cloud, and AI engineering case studies by Tarun
+              Seven full-stack, cloud, and AI engineering case studies by Tarun
               Pediredla — featuring the live Currency Exchange Rate Tracker,
-              insure-bazarpolicies (140+ tests passing), Cloud Claims API (FastAPI + AWS),
+              insure-bazarpolicies (140+ tests passing), Calder Works (8-agent
+              LangGraph workspace), Cloud Claims API (FastAPI + AWS),
               Satya&apos;s Education, AI Voice Task Planner, and Alex AI.
             </p>
           </motion.div>
@@ -289,6 +290,11 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                       {project.id === 'currency-exchange-tracker' && (
                         <span className="hidden sm:inline-flex items-center rounded-full border border-emerald-200/60 bg-emerald-400/20 px-3 py-0.5 text-[11px] font-bold uppercase tracking-widest text-emerald-100">
                           LIVE DASHBOARD
+                        </span>
+                      )}
+                      {project.id === 'calder-works' && (
+                        <span className="hidden sm:inline-flex items-center rounded-full border border-indigo-200/60 bg-indigo-400/20 px-3 py-0.5 text-[11px] font-bold uppercase tracking-widest text-indigo-100">
+                          8-AGENT LANGGRAPH · DOCKER SANDBOX
                         </span>
                       )}
                       {project.id === 'cloud-claims-api' && (

@@ -1081,7 +1081,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'satya-education',
-      index: '04',
+      index: '05',
       title: "Satya's Education",
       subtitle: 'E-Commerce & Learning Platform with Cashfree HMAC Webhook Verification',
       statusBadge: 'Live on Vercel',
@@ -1163,7 +1163,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'alex-interviewer',
-      index: '06',
+      index: '07',
       title: 'Alex AI Mock Technical Interviewer',
       subtitle: 'Conversational Voice & Text AI Technical Interview Practice Platform',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/hiringmanager',
@@ -1241,7 +1241,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'voice-task-planner',
-      index: '05',
+      index: '06',
       title: 'AI Voice Task Planner',
       subtitle: 'Self-Hosted n8n Voice Automation Pipeline on AWS EC2',
       statusBadge: 'Self-Hosted on AWS EC2',
@@ -1386,7 +1386,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'cloud-claims-api',
-      index: '03',
+      index: '04',
       title: 'Cloud Claims API',
       subtitle: 'FastAPI & AWS — FNOL Claims Microservice with S3 Presigned Uploads & RDS',
       statusBadge: 'In Development · Nov 2026',
@@ -1468,6 +1468,124 @@ export const portfolioContent: PortfolioContent = {
           caption: 'Automated API contract and FNOL state-machine test coverage running before container builds.',
           type: 'interface',
           highlights: ['FNOL Persistence Tests', 'State Machine Guard Tests', 'Presigned Upload Contract Tests'],
+        },
+      ],
+    },
+    {
+      id: 'calder-works',
+      index: '03',
+      title: 'Calder Works',
+      subtitle:
+        'Multi-Agent Software Delivery Workspace · 8-Agent LangGraph Pipeline & SHA-Bound Review',
+      statusBadge: '8-Agent LangGraph · Docker Sandbox',
+      githubUrl: 'https://github.com/tarunpediredla-GenAi/calder-work',
+      liveUrlNote:
+        'Dual-Mode Workspace — Instant Demo Preview + Local FastAPI, LangGraph, PostgreSQL & Docker Sandbox',
+      heroImage: '/assets/calder-works-banner.svg',
+      technologies: [
+        'React',
+        'TypeScript',
+        'FastAPI',
+        'LangGraph',
+        'PostgreSQL',
+        'Docker',
+        'Gemini',
+        'Pytest',
+        'GitHub API',
+      ],
+      description:
+        'Calder Works is a software delivery workspace built for engineering consultancies maintaining multiple client applications. Engineering managers and technical leads submit feature requests, approve acceptance criteria before code generation, monitor an eight-agent LangGraph delivery pipeline, inspect diffs alongside isolated Docker pytest logs, approve exact commit SHAs, and merge verified pull requests.',
+      problemStatement:
+        'Engineering consultancies operating across multiple client codebases face unstructured feature intake, unreviewed AI code generation, and risky pull-request merges where approvals drift from the final tested commit SHA.',
+      architectureOverview:
+        'Pairs a five-screen React 19 + TypeScript + Tailwind CSS v4 workspace (Projects, Work item, Run details, Review, Connections) with a dual-mode backend: an Express + Vite preview server (`server.ts`) backed by atomic JSON persistence (`data/calder-store.json`) and server-side Gemini criteria drafting, plus a local Connected Mode FastAPI + LangGraph `StateGraph` + SQLAlchemy + PostgreSQL 16 backend (`backend/app/main.py`) that runs pytest in a non-root, network-disabled Docker sandbox (`--network=none`) and performs SHA-verified GitHub branch and PR operations.',
+      architectureFlow: [
+        {
+          step: '01',
+          node: 'Work Item & Plan Gate',
+          detail:
+            'Requirements analyst drafts testable acceptance criteria and flags ambiguities; human manager explicitly approves (`interrupt_before=["architect"]`) before code generation begins.',
+        },
+        {
+          step: '02',
+          node: 'Architect Agent',
+          detail:
+            'Reads authorized repository files and defines the PostgreSQL data model, FastAPI contract, and file change plan.',
+        },
+        {
+          step: '03',
+          node: 'Parallel Python & React Agents',
+          detail:
+            'Python engineer (FastAPI, Pydantic, SQLAlchemy) and React engineer (TypeScript UI) implement against the exact same API contract in parallel.',
+        },
+        {
+          step: '04',
+          node: 'Test Engineer & Docker Sandbox',
+          detail:
+            'Writes pytest and UI tests covering every acceptance criterion and executes them inside a non-root, `--network=none` Docker sandbox recording exact exit codes and logs.',
+        },
+        {
+          step: '05',
+          node: 'Bug Detection & Code Reviewer',
+          detail:
+            'Inspects real test failures for up to 2 automatic correction attempts before pausing for human decision, followed by line-scoped code review and documentation generation.',
+        },
+        {
+          step: '06',
+          node: 'SHA-Bound Approval & PR Merge',
+          detail:
+            'Three-column diff & test review; Request Changes generates a new revision SHA invalidating prior approval; Merge requires passing tests and exact commit SHA match.',
+        },
+      ],
+      implementationExplanation:
+        'Engineered clean separation between pure workflow governance rules (`src/lib/workflow.ts` with unit tests in `workflow.test.ts`), the Express preview demo engine, and the full FastAPI + LangGraph + PostgreSQL + Docker Compose connected stack. Includes pre-seeded consultancy workspaces (`Campus Operations`, `Harbour Freight Portal`, `Northfield Clinic API`) including a paused-run example (`CW-112`) demonstrating safe human handoff after exhausting both auto-correction attempts.',
+      implementedFeatures: [
+        'Eight-agent LangGraph StateGraph (Requirements Analyst, Architect, parallel Python & React Engineers, Test Engineer, Bug Detection, Code Reviewer, Documentation Writer)',
+        'Explicit human-in-the-loop plan approval gate (`interrupt_before=["architect"]`) before any code generation runs',
+        'Three-column engineering Review workspace showing changed files, readable unified diffs, pytest output, and full audit log',
+        'Exact commit-SHA approval binding with automatic approval invalidation on requested changes and separate two-step gated PR merge',
+        'Isolated non-root, network-disabled Docker pytest sandbox (`backend/Dockerfile.sandbox`) and GitHub REST branch/PR client',
+        'Dual-mode runtime: instant zero-credential Demo workspace (`data/calder-store.json`) and local Connected Mode with FastAPI + PostgreSQL 16',
+      ],
+      plannedOrPartialFeatures: [
+        'Demo workspace mode runs out-of-the-box with durable JSON persistence and optional server-side `GEMINI_API_KEY`; live FastAPI, PostgreSQL 16, Docker `--network=none` sandbox, and GitHub PR writes run locally via Docker Compose (`docker compose up --build`).',
+      ],
+      screens: [
+        {
+          id: 'calder-pipeline',
+          title: 'Eight-Agent LangGraph Delivery Pipeline',
+          caption:
+            'Live orchestration across Requirements Analyst, Architect, parallel Python & React Engineers, Test Engineer, Bug Detection (2-attempt cap), Code Reviewer, and Documentation Writer.',
+          type: 'showcase',
+          highlights: [
+            'Human Plan Gate (interrupt_before)',
+            'Parallel Python & React Tracks',
+            '2-Attempt Auto-Fix & Safe Pause',
+          ],
+        },
+        {
+          id: 'calder-review',
+          title: 'Three-Column Diff & SHA-Bound Merge Review',
+          caption:
+            'Changed files, readable unified diffs, recorded pytest logs, change-request revisioning, and exact-SHA merge gating.',
+          type: 'interface',
+          highlights: [
+            'Unified Diff + Pytest Results',
+            'SHA-Bound Approval Invalidation',
+            'Two-Step Gated PR Merge',
+          ],
+        },
+        {
+          id: 'calder-architecture',
+          title: 'Dual-Mode FastAPI, PostgreSQL & Docker Sandbox',
+          caption:
+            'Express + Vite Demo workspace paired with full local FastAPI + LangGraph + PostgreSQL 16 + `--network=none` Docker test runner.',
+          type: 'architecture',
+          highlights: [
+            'FastAPI + LangGraph StateGraph',
+            'Non-Root --network=none Sandbox',
+            'GitHub REST Branch & PR Client',
+          ],
         },
       ],
     },
@@ -1706,6 +1824,7 @@ export interface FeaturedProject {
 const PROJECT_CATEGORY_BY_ID: Record<string, string> = {
   'currency-exchange-tracker': 'Live Forex & Crypto Analytics',
   'insuresphere-ai': 'Full-Stack Python & Enterprise SaaS',
+  'calder-works': 'Multi-Agent AI & DevOps Workspace',
   'cloud-claims-api': 'FastAPI · AWS Cloud Microservice',
   'satya-education': 'Full Stack EdTech & E-Commerce',
   'voice-task-planner': 'Self-Hosted n8n Voice Automation',
@@ -1715,6 +1834,7 @@ const PROJECT_CATEGORY_BY_ID: Record<string, string> = {
 const PROJECT_ACCENT_BY_ID: Record<string, string> = {
   'currency-exchange-tracker': '#0F766E',
   'insuresphere-ai': '#38BDF8',
+  'calder-works': '#6366F1',
   'cloud-claims-api': '#0284C7',
   'satya-education': '#D8CBB8',
   'voice-task-planner': '#B6C2BB',

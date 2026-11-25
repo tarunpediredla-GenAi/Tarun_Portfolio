@@ -158,15 +158,6 @@ export const GlobalOverlays: React.FC<GlobalOverlaysProps> = ({
       },
     },
     {
-      label: 'Flagship Projects Directory',
-      description: 'Interactive hover-preview project index',
-      category: 'Navigation',
-      action: () => {
-        setSearchOpen(false);
-        document.getElementById('flagship')?.scrollIntoView({ behavior: 'smooth' });
-      },
-    },
-    {
       label: 'View & Download Resume (CV)',
       description: `${profile.name} — ${profile.professionalTitle}`,
       category: 'Action',

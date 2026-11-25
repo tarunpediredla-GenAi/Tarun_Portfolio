@@ -61,7 +61,7 @@ export default function App() {
         onSelectProject={handleSelectFeaturedProject}
       />
 
-      {/* Section 6 & 7: PageFoldTransition + #gallery Field of Stills + Coverflow + Zoom Portal + Cyan Lamp + Flagship Projects + Kinetic Roles */}
+      {/* Section 6 & 7: PageFoldTransition + #gallery Field of Stills + Coverflow + Zoom Portal */}
       <StillsAndOutlastSection
         onSelectProject={handleSelectFeaturedProject}
       />
