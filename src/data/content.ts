@@ -1081,7 +1081,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'satya-education',
-      index: '05',
+      index: '06',
       title: "Satya's Education",
       subtitle: 'E-Commerce & Learning Platform with Cashfree HMAC Webhook Verification',
       statusBadge: 'Live on Vercel',
@@ -1163,7 +1163,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'alex-interviewer',
-      index: '07',
+      index: '08',
       title: 'Alex AI Mock Technical Interviewer',
       subtitle: 'Conversational Voice & Text AI Technical Interview Practice Platform',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/hiringmanager',
@@ -1241,7 +1241,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'voice-task-planner',
-      index: '06',
+      index: '07',
       title: 'AI Voice Task Planner',
       subtitle: 'Self-Hosted n8n Voice Automation Pipeline on AWS EC2',
       statusBadge: 'Self-Hosted on AWS EC2',
@@ -1386,7 +1386,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'cloud-claims-api',
-      index: '04',
+      index: '05',
       title: 'Cloud Claims API',
       subtitle: 'FastAPI & AWS — FNOL Claims Microservice with S3 Presigned Uploads & RDS',
       statusBadge: 'In Development · Nov 2026',
@@ -1585,6 +1585,123 @@ export const portfolioContent: PortfolioContent = {
             'FastAPI + LangGraph StateGraph',
             'Non-Root --network=none Sandbox',
             'GitHub REST Branch & PR Client',
+          ],
+        },
+      ],
+    },
+    {
+      id: 'panel-desk',
+      index: '04',
+      title: 'PanelDesk',
+      subtitle:
+        'Voice & Text Interview PDF Q&A · Private Client-Side Indexing & Clickable Page Citations',
+      statusBadge: 'Voice + PDF RAG · Page Citations',
+      githubUrl: 'https://github.com/tarunpediredla-GenAi/Panel-desk',
+      liveUrlNote:
+        'Full-Stack React 19 + Express + Gemini Workspace — Private In-Browser PDF.js Indexing & IndexedDB Persistence',
+      heroImage: '/assets/panel-desk-banner.svg',
+      technologies: [
+        'React',
+        'TypeScript',
+        'Express',
+        'Gemini',
+        'PDF.js',
+        'IndexedDB',
+        'Web Speech API',
+        'Tailwind CSS',
+      ],
+      description:
+        'PanelDesk is a private voice-and-text interview preparation workspace where candidates upload their own interview Q&A PDF, index structured questions and multi-page answers entirely in the browser via PDF.js and IndexedDB, ask questions by voice or text, get concise spoken-English answers strictly grounded in matched passages, and click inline citations to open the exact rendered PDF page.',
+      problemStatement:
+        'Engineers reviewing large personal interview-prep PDFs during practice struggle to locate specific answers quickly by voice or natural phrasing without uploading private notes to third-party cloud storage or receiving hallucinated LLM answers detached from their actual study guide.',
+      architectureOverview:
+        'Combines a React 19 + TypeScript + Tailwind CSS v4 frontend (`TopBar`, `ChatThread`, `ComposerBar`, `PdfViewerDrawer`) with a browser-side PDF parsing and retrieval engine (`pdfClient.ts`, `pdfParser.ts`, `searchIndex.ts`) backed by private `IndexedDB` caching (`paneldesk_private_pdf_store`) and a lightweight Express server (`server.ts`) hosting `POST /api/answer` with the official `@google/genai` SDK for grounded spoken-English synthesis, follow-ups, and strict off-topic refusal.',
+      architectureFlow: [
+        {
+          step: '01',
+          node: 'PDF.js Client Parser',
+          detail:
+            'Extracts coordinate-ordered lines in a web worker, strips repeated headers/footers while preserving question IDs (B3, I88, A413), and stitches multi-page answers.',
+        },
+        {
+          step: '02',
+          node: 'Private IndexedDB Cache',
+          detail:
+            'Stores both the parsed question index and raw PDF ArrayBuffer locally in the browser so private interview notes never leave the client for storage.',
+        },
+        {
+          step: '03',
+          node: 'Local ID & Bigram Search',
+          detail:
+            'Resolves exact question IDs instantaneously and ranks natural-language queries with normalized token/bigram scoring and follow-up intent detection.',
+        },
+        {
+          step: '04',
+          node: 'Web Speech Voice Controller',
+          detail:
+            'Captures spoken interview questions with live interim transcripts via SpeechRecognition and reads grounded responses aloud via SpeechSynthesis TTS.',
+        },
+        {
+          step: '05',
+          node: 'Express + Gemini Grounded API',
+          detail:
+            'POST /api/answer handles simplify, search, and followup modes against matched PDF candidates only—returning an exact refusal when a topic is absent.',
+        },
+        {
+          step: '06',
+          node: 'Slide-Over PDF Citation Drawer',
+          detail:
+            'Clicking any citation badge opens the exact referenced page rendered on a DPR-aware pdf.js canvas with zoom, page stepping, and original passage view.',
+        },
+      ],
+      implementationExplanation:
+        'Decoupled pure PDF layout parsing (`src/utils/pdfParser.ts`) and hybrid ranking/spoken-answer extraction (`src/utils/searchIndex.ts`) from React rendering, verifying both modules with dedicated `node:test` suites (`pdfParser.test.ts` and `searchIndex.test.ts`). Built a resilient `useVoiceController` hook for microphone capture and per-message TTS playback, plus an Express server supporting automatic retry logic and strict relevance enforcement.',
+      implementedFeatures: [
+        'Client-side PDF.js parsing with coordinate line reconstruction, repeated header/footer stripping, and multi-page question-answer stitching',
+        'Private browser-local IndexedDB persistence storing the parsed question index and raw PDF buffer with one-click cache reset',
+        'Instant exact question-ID lookup plus token/bigram natural-language ranking, follow-up detection, and direct spoken-answer extraction',
+        'Voice-first microphone capture (SpeechRecognition with interim transcript) and per-message SpeechSynthesis TTS playback',
+        'Server-side Express `/api/answer` proxy using `@google/genai` across `simplify`, `search`, and `followup` modes with strict off-topic refusal',
+        'Interactive slide-over PDF citation drawer (`PdfViewerDrawer.tsx`) rendering exact cited pages to DPR-scaled canvas with zoom and original passage toggle',
+      ],
+      plannedOrPartialFeatures: [
+        'Requires a server-side `GEMINI_API_KEY` environment variable in `server.ts` for AI simplification, semantic reranking, and follow-up modes; local PDF parsing, exact ID lookup, and concise direct spoken extraction also run deterministically on the client.',
+      ],
+      screens: [
+        {
+          id: 'paneldesk-qa',
+          title: 'Voice & Text Grounded Interview Q&A',
+          caption:
+            'Conversational chat workspace supporting spoken microphone input, typed queries, spoken-English responses, TTS playback, and clickable page citations.',
+          type: 'showcase',
+          highlights: [
+            'Web Speech Voice + Text Input',
+            'Concise 2–3 Sentence Spoken Answers',
+            'Strict Off-Topic Refusal Guardrail',
+          ],
+        },
+        {
+          id: 'paneldesk-drawer',
+          title: 'PDF.js Slide-Over Citation Drawer',
+          caption:
+            'Clicking any inline citation opens the exact PDF page rendered on a DPR-aware canvas with zoom controls, page navigation, and original passage view.',
+          type: 'interface',
+          highlights: [
+            'Exact Page Citation Jump',
+            'DPR-Aware PDF.js Canvas Zoom',
+            'Expandable Original PDF Passage',
+          ],
+        },
+        {
+          id: 'paneldesk-architecture',
+          title: 'Private IndexedDB & Hybrid Search Pipeline',
+          caption:
+            'Client-side PDF.js parsing and IndexedDB storage paired with unit-tested local ranking and server-side Express + Gemini `/api/answer` grounding.',
+          type: 'architecture',
+          highlights: [
+            'Zero Cloud PDF Storage (IndexedDB)',
+            'node:test Verified Parser & Search',
+            'Express + @google/genai Proxy',
           ],
         },
       ],
@@ -1825,6 +1942,7 @@ const PROJECT_CATEGORY_BY_ID: Record<string, string> = {
   'currency-exchange-tracker': 'Live Forex & Crypto Analytics',
   'insuresphere-ai': 'Full-Stack Python & Enterprise SaaS',
   'calder-works': 'Multi-Agent AI & DevOps Workspace',
+  'panel-desk': 'Voice & PDF RAG Workspace',
   'cloud-claims-api': 'FastAPI · AWS Cloud Microservice',
   'satya-education': 'Full Stack EdTech & E-Commerce',
   'voice-task-planner': 'Self-Hosted n8n Voice Automation',
@@ -1835,6 +1953,7 @@ const PROJECT_ACCENT_BY_ID: Record<string, string> = {
   'currency-exchange-tracker': '#0F766E',
   'insuresphere-ai': '#38BDF8',
   'calder-works': '#6366F1',
+  'panel-desk': '#0EA5E9',
   'cloud-claims-api': '#0284C7',
   'satya-education': '#D8CBB8',
   'voice-task-planner': '#B6C2BB',

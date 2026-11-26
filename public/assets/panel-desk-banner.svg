@@ -1,0 +1,245 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" fill="none">
+  <defs>
+    <linearGradient id="pd-bg" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#09111B"/>
+      <stop offset="50%" stop-color="#0F1B2B"/>
+      <stop offset="100%" stop-color="#081019"/>
+    </linearGradient>
+    <radialGradient id="pd-glow-left" cx="270" cy="190" r="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0EA5E9" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#09111B" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="pd-glow-right" cx="950" cy="490" r="390" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#14B8A6" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#09111B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pd-panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#132236" stop-opacity="0.94"/>
+      <stop offset="100%" stop-color="#0C1624" stop-opacity="0.97"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base Canvas -->
+  <rect width="1200" height="675" fill="url(#pd-bg)"/>
+  <rect width="1200" height="675" fill="url(#pd-glow-left)"/>
+  <rect width="1200" height="675" fill="url(#pd-glow-right)"/>
+
+  <!-- Subtle Blueprint Grid -->
+  <g stroke="#38BDF8" stroke-opacity="0.06" stroke-width="1">
+    <path d="M0 90 H1200 M0 180 H1200 M0 270 H1200 M0 360 H1200 M0 450 H1200 M0 540 H1200 M0 630 H1200"/>
+    <path d="M100 0 V675 M250 0 V675 M400 0 V675 M550 0 V675 M700 0 V675 M850 0 V675 M1000 0 V675 M1100 0 V675"/>
+  </g>
+
+  <!-- Top Application Chrome -->
+  <g transform="translate(52, 36)">
+    <rect width="1096" height="56" rx="14" fill="#101D2F" stroke="#0EA5E9" stroke-opacity="0.42" stroke-width="1.2"/>
+    <circle cx="28" cy="28" r="6" fill="#EF4444"/>
+    <circle cx="48" cy="28" r="6" fill="#F59E0B"/>
+    <circle cx="68" cy="28" r="6" fill="#10B981"/>
+    <text x="98" y="33" fill="#F8FAFC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="15" font-weight="700" letter-spacing="0.8">
+      PANELDESK
+    </text>
+    <text x="206" y="33" fill="#94A3B8" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11.5" font-weight="500">
+      / Voice &amp; Text Interview PDF Q&amp;A Workspace
+    </text>
+    <rect x="692" y="13" width="194" height="30" rx="15" fill="#0C4A6E" fill-opacity="0.55" stroke="#38BDF8" stroke-width="1"/>
+    <circle cx="710" cy="28" r="3.5" fill="#7DD3FC"/>
+    <text x="722" y="32" fill="#E0F2FE" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700" letter-spacing="0.7">
+      PRIVATE INDEXEDDB
+    </text>
+    <rect x="898" y="13" width="180" height="30" rx="15" fill="#115E59" fill-opacity="0.5" stroke="#2DD4BF" stroke-width="1"/>
+    <text x="988" y="32" text-anchor="middle" fill="#99F6E4" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">
+      VOICE + PAGE CITATIONS
+    </text>
+  </g>
+
+  <!-- Left Panel: Voice & Text Grounded Interview Q&A Thread -->
+  <g transform="translate(52, 114)">
+    <rect width="560" height="498" rx="18" fill="url(#pd-panel)" stroke="#0EA5E9" stroke-opacity="0.34" stroke-width="1.2"/>
+    <rect width="560" height="48" rx="18" fill="#14263D" stroke="#334155" stroke-width="0.8"/>
+    <text x="22" y="30" fill="#F8FAFC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="12" font-weight="700" letter-spacing="0.7">
+      CONVERSATIONAL Q&amp;A THREAD
+    </text>
+    <rect x="406" y="12" width="134" height="24" rx="12" fill="#0EA5E9" fill-opacity="0.18" stroke="#38BDF8" stroke-width="0.8"/>
+    <text x="473" y="28" text-anchor="middle" fill="#7DD3FC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9.5" font-weight="700">
+      STRICTLY GROUNDED
+    </text>
+
+    <!-- User Voice Question Bubble -->
+    <g transform="translate(76, 68)">
+      <rect width="462" height="66" rx="14" fill="#0C4A6E" fill-opacity="0.55" stroke="#38BDF8" stroke-opacity="0.55"/>
+      <text x="18" y="24" fill="#7DD3FC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="700">
+        VOICE INPUT · WEB SPEECH API
+      </text>
+      <text x="18" y="47" fill="#F8FAFC" font-family="'DM Sans', system-ui, sans-serif" font-size="13" font-weight="500">
+        "How does Django QuerySet lazy evaluation work in production?"
+      </text>
+    </g>
+
+    <!-- Grounded Spoken-English Assistant Answer -->
+    <g transform="translate(22, 152)">
+      <rect width="516" height="160" rx="14" fill="#0B1726" stroke="#2DD4BF" stroke-opacity="0.48"/>
+      <text x="18" y="26" fill="#5EEAD4" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="700">
+        SPOKEN-ENGLISH ANSWER · MATCHED PASSAGE I88
+      </text>
+      <text x="18" y="52" fill="#E2E8F0" font-family="'DM Sans', system-ui, sans-serif" font-size="12.5">
+        Django QuerySets are lazy, meaning creating or chaining filters does not
+      </text>
+      <text x="18" y="72" fill="#E2E8F0" font-family="'DM Sans', system-ui, sans-serif" font-size="12.5">
+        hit the database immediately. SQL executes only when you evaluate the
+      </text>
+      <text x="18" y="92" fill="#E2E8F0" font-family="'DM Sans', system-ui, sans-serif" font-size="12.5">
+        QuerySet—such as iterating, slicing, calling list(), or counting rows.
+      </text>
+
+      <!-- Citation Pill + TTS Pill -->
+      <rect x="18" y="112" width="184" height="30" rx="15" fill="#115E59" fill-opacity="0.65" stroke="#2DD4BF" stroke-width="1"/>
+      <text x="110" y="131" text-anchor="middle" fill="#CCFBF1" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">
+        OPEN CITATION · I88 · P.71
+      </text>
+
+      <rect x="214" y="112" width="136" height="30" rx="15" fill="#1E293B" stroke="#38BDF8" stroke-opacity="0.6" stroke-width="1"/>
+      <text x="282" y="131" text-anchor="middle" fill="#BAE6FD" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">
+        SPEAK TTS AUDIO
+      </text>
+
+      <rect x="362" y="112" width="136" height="30" rx="15" fill="#0F172A" stroke="#64748B" stroke-width="1"/>
+      <text x="430" y="131" text-anchor="middle" fill="#CBD5E1" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="600">
+        SIMPLIFY / EXAMPLE
+      </text>
+    </g>
+
+    <!-- Strict Refusal Guardrail Callout -->
+    <g transform="translate(22, 328)">
+      <rect width="516" height="72" rx="12" fill="#111C2D" stroke="#F59E0B" stroke-opacity="0.42"/>
+      <text x="18" y="25" fill="#FCD34D" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="700">
+        ZERO-HALLUCINATION REFUSAL GUARDRAIL
+      </text>
+      <text x="18" y="46" fill="#CBD5E1" font-family="'DM Sans', system-ui, sans-serif" font-size="11.5">
+        Off-topic queries return exact refusal: "I couldn't find that answer in your PDF."
+      </text>
+      <text x="18" y="62" fill="#94A3B8" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10">
+        Modes: simplify · search · followup  |  Server route: POST /api/answer
+      </text>
+    </g>
+
+    <!-- Composer Bar -->
+    <g transform="translate(22, 418)">
+      <rect width="516" height="58" rx="14" fill="#0A1422" stroke="#38BDF8" stroke-opacity="0.45"/>
+      <circle cx="32" cy="29" r="16" fill="#0EA5E9" fill-opacity="0.22" stroke="#38BDF8" stroke-width="1.2"/>
+      <rect x="29" y="21" width="6" height="11" rx="3" fill="#7DD3FC"/>
+      <path d="M25 29 C25 34 39 34 39 29 M32 34 V38" stroke="#7DD3FC" stroke-width="1.5" stroke-linecap="round"/>
+
+      <!-- Waveform Bars -->
+      <rect x="64" y="22" width="3" height="14" rx="1.5" fill="#38BDF8"/>
+      <rect x="72" y="17" width="3" height="24" rx="1.5" fill="#2DD4BF"/>
+      <rect x="80" y="20" width="3" height="18" rx="1.5" fill="#38BDF8"/>
+      <rect x="88" y="14" width="3" height="30" rx="1.5" fill="#7DD3FC"/>
+      <rect x="96" y="21" width="3" height="16" rx="1.5" fill="#2DD4BF"/>
+
+      <text x="116" y="33" fill="#94A3B8" font-family="'DM Sans', system-ui, sans-serif" font-size="12.5">
+        Ask by voice or type a question ID (B3, I88, A413)...
+      </text>
+      <rect x="424" y="13" width="76" height="32" rx="10" fill="#0284C7"/>
+      <text x="462" y="33" text-anchor="middle" fill="#F8FAFC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" font-weight="700">
+        ASK
+      </text>
+    </g>
+  </g>
+
+  <!-- Right Panel: PDF.js Slide-Over Citation Drawer & Local Engine -->
+  <g transform="translate(632, 114)">
+    <rect width="516" height="498" rx="18" fill="url(#pd-panel)" stroke="#14B8A6" stroke-opacity="0.34" stroke-width="1.2"/>
+    <rect width="516" height="48" rx="18" fill="#14263D" stroke="#334155" stroke-width="0.8"/>
+    <text x="22" y="30" fill="#F8FAFC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="12" font-weight="700" letter-spacing="0.7">
+      PDF.JS CITATION DRAWER &amp; LOCAL INDEX
+    </text>
+    <text x="494" y="30" text-anchor="end" fill="#5EEAD4" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">
+      PAGE 71 / 142
+    </text>
+
+    <!-- Rendered PDF Page Card -->
+    <g transform="translate(20, 66)">
+      <rect width="476" height="206" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+      <rect x="0" y="0" width="476" height="32" rx="12" fill="#E2E8F0"/>
+      <text x="16" y="20" fill="#334155" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="700">
+        interview-prep-private.pdf  ·  DPR CANVAS RENDER  ·  ZOOM 100%
+      </text>
+
+      <!-- Highlighted Question Passage -->
+      <rect x="16" y="46" width="444" height="106" rx="8" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.2"/>
+      <text x="28" y="68" fill="#92400E" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" font-weight="700">
+        I88. Explain Django QuerySet lazy evaluation &amp; caching.
+      </text>
+      <text x="28" y="90" fill="#1E293B" font-family="'DM Sans', system-ui, sans-serif" font-size="11.5">
+        A QuerySet can be constructed, filtered, sliced, and passed around
+      </text>
+      <text x="28" y="108" fill="#1E293B" font-family="'DM Sans', system-ui, sans-serif" font-size="11.5">
+        without executing any SQL. Database queries trigger only upon
+      </text>
+      <text x="28" y="126" fill="#1E293B" font-family="'DM Sans', system-ui, sans-serif" font-size="11.5">
+        iteration, slicing with step, repr(), len(), list(), or bool() evaluation.
+      </text>
+      <text x="28" y="144" fill="#0F766E" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9.5" font-weight="700">
+        Matched via local token/bigram index → exact page anchor p.71
+      </text>
+
+      <!-- Simulated remaining PDF lines -->
+      <rect x="16" y="166" width="310" height="8" rx="4" fill="#CBD5E1"/>
+      <rect x="16" y="182" width="405" height="8" rx="4" fill="#E2E8F0"/>
+    </g>
+
+    <!-- Local Retrieval Architecture Strip -->
+    <g transform="translate(20, 290)">
+      <rect width="476" height="96" rx="12" fill="#0A1624" stroke="#38BDF8" stroke-opacity="0.38"/>
+      <text x="16" y="24" fill="#7DD3FC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">
+        CLIENT-SIDE PRIVACY &amp; HYBRID RETRIEVAL PIPELINE
+      </text>
+      <rect x="16" y="38" width="102" height="42" rx="8" fill="#13263E" stroke="#38BDF8" stroke-opacity="0.45"/>
+      <text x="67" y="57" text-anchor="middle" fill="#E0F2FE" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9.5" font-weight="700">PDF.JS</text>
+      <text x="67" y="71" text-anchor="middle" fill="#94A3B8" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5">Coord Parser</text>
+
+      <text x="128" y="63" fill="#38BDF8" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="12" font-weight="700">→</text>
+
+      <rect x="144" y="38" width="102" height="42" rx="8" fill="#13263E" stroke="#2DD4BF" stroke-opacity="0.45"/>
+      <text x="195" y="57" text-anchor="middle" fill="#CCFBF1" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9.5" font-weight="700">INDEXEDDB</text>
+      <text x="195" y="71" text-anchor="middle" fill="#94A3B8" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5">Local Cache</text>
+
+      <text x="256" y="63" fill="#2DD4BF" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="12" font-weight="700">→</text>
+
+      <rect x="272" y="38" width="94" height="42" rx="8" fill="#13263E" stroke="#A78BFA" stroke-opacity="0.45"/>
+      <text x="319" y="57" text-anchor="middle" fill="#EDE9FE" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9.5" font-weight="700">SEARCH</text>
+      <text x="319" y="71" text-anchor="middle" fill="#94A3B8" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5">ID + Bigram</text>
+
+      <text x="374" y="63" fill="#A78BFA" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="12" font-weight="700">→</text>
+
+      <rect x="388" y="38" width="74" height="42" rx="8" fill="#0F3A4A" stroke="#38BDF8" stroke-opacity="0.6"/>
+      <text x="425" y="57" text-anchor="middle" fill="#F0F9FF" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9.5" font-weight="700">GEMINI</text>
+      <text x="425" y="71" text-anchor="middle" fill="#7DD3FC" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5">/api/answer</text>
+    </g>
+
+    <!-- Unit-Tested Pure Modules Box -->
+    <g transform="translate(20, 402)">
+      <rect width="476" height="74" rx="12" fill="#071B1E" stroke="#14B8A6" stroke-opacity="0.48"/>
+      <text x="16" y="24" fill="#2DD4BF" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">
+        UNIT-TESTED PARSER &amp; SEARCH ENGINE (node:test)
+      </text>
+      <text x="16" y="45" fill="#E2E8F0" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5">
+        ✓ pdfParser.test.ts · multi-page Q&amp;A + header/footer stripping
+      </text>
+      <text x="16" y="63" fill="#99F6E4" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5">
+        ✓ searchIndex.test.ts · exact IDs, follow-ups &amp; off-topic refusal
+      </text>
+    </g>
+  </g>
+
+  <!-- Footer Strip -->
+  <g transform="translate(52, 634)">
+    <text x="0" y="16" fill="#94A3B8" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="600">
+      REACT 19 · TYPESCRIPT · EXPRESS · GEMINI · PDF.JS · INDEXEDDB · WEB SPEECH API
+    </text>
+    <text x="1096" y="16" text-anchor="end" fill="#38BDF8" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10.5" font-weight="700">
+      github.com/tarunpediredla-GenAi/Panel-desk
+    </text>
+  </g>
+</svg>

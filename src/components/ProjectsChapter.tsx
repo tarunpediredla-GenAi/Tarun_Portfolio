@@ -18,6 +18,7 @@ export const ProjectsChapter: React.FC = () => {
   const [activeTabByProject, setActiveTabByProject] = useState<Record<string, number>>({
     'insuresphere-ai': 0,
     'calder-works': 0,
+    'panel-desk': 0,
     'satya-education': 0,
     'alex-interviewer': 0,
     'voice-task-planner': 0,

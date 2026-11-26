@@ -48,6 +48,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
   const currencyProj = getProjectById('currency-exchange-tracker');
   const insureProj = getProjectById('insuresphere-ai');
   const calderProj = getProjectById('calder-works');
+  const panelDeskProj = getProjectById('panel-desk');
   const cloudClaimsProj = getProjectById('cloud-claims-api');
   const satyaProj = getProjectById('satya-education');
   const voiceProj = getProjectById('voice-task-planner');
@@ -80,10 +81,10 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
     },
     {
       num: '04',
-      title: satyaProj.title,
-      tag: 'React · TypeScript · Django · Cashfree HMAC',
-      image: satyaProj.image,
-      project: satyaProj,
+      title: panelDeskProj.title,
+      tag: 'React · PDF.js · IndexedDB · Gemini · Web Speech',
+      image: panelDeskProj.image,
+      project: panelDeskProj,
       side: 'right' as const,
     },
   ];
@@ -103,6 +104,11 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
       project: calderProj,
       badge: '8-Agent LangGraph · Docker',
       caption: 'Human-gated multi-agent delivery workspace with SHA-bound diff review',
+    },
+    {
+      project: panelDeskProj,
+      badge: 'Voice + PDF RAG · Page Citations',
+      caption: 'Private in-browser PDF.js indexing, Web Speech Q&A & clickable page drawer',
     },
     {
       project: cloudClaimsProj,
@@ -521,7 +527,7 @@ export const StillsAndOutlastSection: React.FC<StillsAndOutlastSectionProps> = (
                 color: '#232B27',
               }}
             >
-              04 <span style={{ color: '#5E1726' }}>/</span> 07
+              04 <span style={{ color: '#5E1726' }}>/</span> 08
             </span>
           </div>
 
