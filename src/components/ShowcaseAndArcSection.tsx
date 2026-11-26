@@ -13,7 +13,7 @@ interface ShowcaseAndArcSectionProps {
 const WARP_FRAMES = [0, 1, 2, 3, 4, 5, 6];
 
 // FEATURED_PROJECTS is pre-sorted by resume index (01 Currency Exchange, 02 insure-bazarpolicies,
-// 03 Calder Works, 04 PanelDesk, 05 Cloud Claims API, 06 Satya's Education, 07 AI Voice Task Planner, 08 Alex AI).
+// 03 Calder Works, 04 PanelDesk, 05 ReleaseDesk, 06 Cloud Claims API, 07 Satya's Education, 08 AI Voice Task Planner, 09 Alex AI).
 const SHOWCASE_PROJECTS = FEATURED_PROJECTS;
 
 export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
@@ -247,12 +247,13 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
               </span>
             </h2>
             <p className="mt-6 text-[#35423C] font-medium text-base md:text-lg max-w-2xl mx-auto">
-              Eight full-stack, cloud, and AI engineering case studies by Tarun
+              Nine full-stack, cloud, and AI engineering case studies by Tarun
               Pediredla — featuring the live Currency Exchange Rate Tracker,
               insure-bazarpolicies (140+ tests passing), Calder Works (8-agent
-              LangGraph workspace), PanelDesk (voice &amp; PDF RAG), Cloud
-              Claims API (FastAPI + AWS), Satya&apos;s Education, AI Voice Task
-              Planner, and Alex AI.
+              LangGraph workspace), PanelDesk (voice &amp; PDF RAG),
+              ReleaseDesk (API contract &amp; debugging), Cloud Claims API
+              (FastAPI + AWS), Satya&apos;s Education, AI Voice Task Planner,
+              and Alex AI.
             </p>
           </motion.div>
 
@@ -301,6 +302,11 @@ export const ShowcaseAndArcSection: React.FC<ShowcaseAndArcSectionProps> = ({
                       {project.id === 'panel-desk' && (
                         <span className="hidden sm:inline-flex items-center rounded-full border border-teal-200/60 bg-teal-400/20 px-3 py-0.5 text-[11px] font-bold uppercase tracking-widest text-teal-100">
                           VOICE + PDF RAG · PAGE CITATIONS
+                        </span>
+                      )}
+                      {project.id === 'release-desk' && (
+                        <span className="hidden sm:inline-flex items-center rounded-full border border-amber-200/60 bg-amber-400/20 px-3 py-0.5 text-[11px] font-bold uppercase tracking-widest text-amber-100">
+                          CONTRACT ENGINE · JWT + GEMINI
                         </span>
                       )}
                       {project.id === 'cloud-claims-api' && (

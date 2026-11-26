@@ -1081,7 +1081,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'satya-education',
-      index: '06',
+      index: '07',
       title: "Satya's Education",
       subtitle: 'E-Commerce & Learning Platform with Cashfree HMAC Webhook Verification',
       statusBadge: 'Live on Vercel',
@@ -1163,7 +1163,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'alex-interviewer',
-      index: '08',
+      index: '09',
       title: 'Alex AI Mock Technical Interviewer',
       subtitle: 'Conversational Voice & Text AI Technical Interview Practice Platform',
       githubUrl: 'https://github.com/tarunpediredla-GenAi/hiringmanager',
@@ -1241,7 +1241,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'voice-task-planner',
-      index: '07',
+      index: '08',
       title: 'AI Voice Task Planner',
       subtitle: 'Self-Hosted n8n Voice Automation Pipeline on AWS EC2',
       statusBadge: 'Self-Hosted on AWS EC2',
@@ -1386,7 +1386,7 @@ export const portfolioContent: PortfolioContent = {
     },
     {
       id: 'cloud-claims-api',
-      index: '05',
+      index: '06',
       title: 'Cloud Claims API',
       subtitle: 'FastAPI & AWS — FNOL Claims Microservice with S3 Presigned Uploads & RDS',
       statusBadge: 'In Development · Nov 2026',
@@ -1706,6 +1706,123 @@ export const portfolioContent: PortfolioContent = {
         },
       ],
     },
+    {
+      id: 'release-desk',
+      index: '05',
+      title: 'ReleaseDesk',
+      subtitle:
+        'API Testing, Contract Validation & Failure Debugging Workspace for Backend Teams',
+      statusBadge: 'Contract Engine · JWT + Gemini',
+      githubUrl: 'https://github.com/tarunpediredla-GenAi/Release-desk',
+      liveUrlNote:
+        'Full-Stack React 19 + Express + HS256 JWT + Gemini Workspace — Versioned v1/v2 Orders Suite & Correlated Log Debugging',
+      heroImage: '/assets/release-desk-banner.svg',
+      technologies: [
+        'React',
+        'TypeScript',
+        'Express',
+        'REST APIs',
+        'JSONPath',
+        'JWT (HS256)',
+        'Gemini',
+        'Tailwind CSS',
+      ],
+      description:
+        'ReleaseDesk is an API testing, contract validation, and failure debugging workspace for backend engineering teams. It runs deterministic HTTP contract suites against versioned APIs (v1/v2) with server-managed HS256 JWT fixtures, links failed JSONPath assertions via correlation IDs to server logs, code excerpts, and stack traces, provides sanitized Gemini root-cause analysis, and generates credential-free Markdown bug reports with linked passing retests.',
+      problemStatement:
+        'Backend teams shipping API changes often discover silent contract regressions—like a numeric field serialized as a string—only after release, while debugging failures requires manually piecing together HTTP payloads, masked auth headers, correlated server logs, stack traces, and reproducible bug reports.',
+      architectureOverview:
+        'Unites a multi-view React 19 + TypeScript + Tailwind CSS v4 workspace (`CollectionsView`, `RunDetailView`, `RunsHistoryView`, `ReportsView`, `InstantQnaDrawer`) with an Express test-execution backend (`server.ts`) hosting a versioned sample wholesale Orders API (`server/ordersApi.ts` with v1 contract bug, v2 fix, and 500 stack-trace endpoint), HS256 JWT fixture signing/verification (`server/jwt.ts`), JSON store persistence (`server/store.ts`), and sanitized server-side Gemini debugging (`server/gemini.ts`).',
+      architectureFlow: [
+        {
+          step: '01',
+          node: 'Endpoint & Contract Registry',
+          detail:
+            'Registers named endpoints with HTTP methods, default payloads, expected status/content-type, and strict JSONPath response schemas.',
+        },
+        {
+          step: '02',
+          node: 'HS256 JWT Auth Fixtures',
+          detail:
+            'Server signs and verifies real HS256 tokens across four selectable fixtures: valid admin (200/201), expired (401), missing (401), and viewer scope (403).',
+        },
+        {
+          step: '03',
+          node: 'Deterministic Assertion Engine',
+          detail:
+            'Executes real HTTP requests and validates status, headers, required keys, exact JSONPath types, and values while preserving expected 4xx/5xx tests.',
+        },
+        {
+          step: '04',
+          node: 'Correlation IDs & Log Trace',
+          detail:
+            'Links each request ID directly to masked headers, matching server log lines, serializer/handler code excerpts, and captured 500 stack traces.',
+        },
+        {
+          step: '05',
+          node: 'Sanitized Gemini Debugger',
+          detail:
+            'Sends only redacted evidence to server-side Gemini for 4-section root-cause analysis and editable JSON test proposals with graceful manual fallback.',
+        },
+        {
+          step: '06',
+          node: 'Markdown Reports & v1→v2 Diff',
+          detail:
+            'Exports credential-free Markdown bug reports (.md), compares Version A vs Version B runs side by side, tracks latency trends, and links passing retests.',
+        },
+      ],
+      implementationExplanation:
+        'Architected pure shared domain modules (`src/shared/assertions.ts`, `sanitizer.ts`, `bugReport.ts`, `qnaSearch.ts`) verified by dedicated `node:test` suites (`*.test.ts`). Built a realistic two-version Orders API demo so engineers can trigger the v1 `$.total_amount` type regression (`"1250.00"` vs `1250`), inspect correlated logs and Gemini diagnostics, generate a sanitized bug report, switch to Version B (`7/7` passing), and link the passing retest.',
+      implementedFeatures: [
+        'Deterministic JSONPath contract assertion engine validating HTTP status, content type, required fields, exact field types, and values over real HTTP calls',
+        'Server-managed HS256 JWT authentication fixtures testing valid admin (200/201), expired token (401), missing token (401), and insufficient permissions (403)',
+        'Request / Correlation ID linking from failed assertions straight to redacted request headers, matching server logs, code excerpts, and 500 stack traces',
+        'Sanitized server-side Gemini (`@google/genai`) root-cause explainer (What failed, Evidence, Likely cause, Suggested fix) and editable JSON test proposals',
+        'Credential-free Markdown bug report generator (copy & download `.md`), side-by-side `Version A → Version B` run comparisons, latency trends, and passing retest linking',
+        'Unit-tested core modules (`assertions.test.ts`, `sanitizer.test.ts`, `bugReport.test.ts`, `qnaSearch.test.ts`) plus an instant 2,195-question PDF Q&A lookup drawer',
+      ],
+      plannedOrPartialFeatures: [
+        'Runs out of the box with local JSON persistence (`./data/releasedesk-store.json`) and full manual contract testing, JWT fixtures, logs, run diffs, and Markdown export; AI failure explanations and test proposals activate when `GEMINI_API_KEY` is configured on the Express server.',
+      ],
+      screens: [
+        {
+          id: 'releasedesk-collections',
+          title: 'Orders Suite & Contract Assertions',
+          caption:
+            'Endpoint contract registry and Version A/B test runner surfacing exact JSONPath type regressions alongside passing auth and validation checks.',
+          type: 'showcase',
+          highlights: [
+            'JSONPath Type & Schema Contracts',
+            '4 Real HS256 JWT Auth Fixtures',
+            'Version A (v1) → Version B (v2) Retest',
+          ],
+        },
+        {
+          id: 'releasedesk-debug',
+          title: 'Correlated Logs, Stack Traces & Gemini Debugger',
+          caption:
+            'Three-column failure workbench linking correlation IDs to masked headers, server logs, serializer code excerpts, stack traces, and 4-section root-cause analysis.',
+          type: 'interface',
+          highlights: [
+            'Click Request ID → Server Log & Code',
+            'Sanitized 4-Section AI Root Cause',
+            'Captured 500 TypeError Stack Traces',
+          ],
+        },
+        {
+          id: 'releasedesk-reports',
+          title: 'Run History, Latency Trends & Markdown Reports',
+          caption:
+            'Side-by-side run diff (`FIXED`), real latency trend charts, and editable credential-free Markdown bug reports with linked passing retests.',
+          type: 'architecture',
+          highlights: [
+            'Side-by-Side v1 → v2 Run Diff',
+            'Credential-Free Markdown (.md) Export',
+            'node:test Verified Shared Engine',
+          ],
+        },
+      ],
+    },
   ],
 
   education: RESUME_EDUCATION.map((edu) => ({ ...edu })),
@@ -1943,6 +2060,7 @@ const PROJECT_CATEGORY_BY_ID: Record<string, string> = {
   'insuresphere-ai': 'Full-Stack Python & Enterprise SaaS',
   'calder-works': 'Multi-Agent AI & DevOps Workspace',
   'panel-desk': 'Voice & PDF RAG Workspace',
+  'release-desk': 'API Testing & Debugging Workspace',
   'cloud-claims-api': 'FastAPI · AWS Cloud Microservice',
   'satya-education': 'Full Stack EdTech & E-Commerce',
   'voice-task-planner': 'Self-Hosted n8n Voice Automation',
@@ -1954,6 +2072,7 @@ const PROJECT_ACCENT_BY_ID: Record<string, string> = {
   'insuresphere-ai': '#38BDF8',
   'calder-works': '#6366F1',
   'panel-desk': '#0EA5E9',
+  'release-desk': '#F59E0B',
   'cloud-claims-api': '#0284C7',
   'satya-education': '#D8CBB8',
   'voice-task-planner': '#B6C2BB',
